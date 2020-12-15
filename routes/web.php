@@ -16,3 +16,12 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('layouts.app');
 });
+// waarmaking
+Route::name('waarmeking')->prefix('/waarmekings')->group(function () {
+    Route::get('/', 'WaarmekingController@index');
+    Route::post('/', 'WaarmekingController@store');
+    Route::put('/', 'WaarmekingController@update');
+    Route::delete('/', 'WaarmekingController@destroy');
+    
+    Route::get('/data', 'WaarmekingController@data')->name('.data');
+});

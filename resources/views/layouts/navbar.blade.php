@@ -10,7 +10,7 @@
           </a>
           <ul class="treeview-menu">
             <li><a href="pages/UI/general.html"><i class="fa fa-circle-o"></i> Buat</a></li>
-            <li><a href="pages/UI/icons.html"><i class="fa fa-circle-o"></i>Data</a></li>
+            <li><a href="{{route('waarmeking')}}"><i class="fa fa-circle-o"></i>Data</a></li>
           </ul>
         </li>
         <li class="treeview">

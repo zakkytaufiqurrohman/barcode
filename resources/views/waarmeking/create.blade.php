@@ -16,6 +16,15 @@
             </div>
             <!-- /.box-header -->
             <div class="box-body">
+              @if (count($errors) > 0)
+              <div class="alert alert-danger">
+                  <ul>
+                      @foreach ($errors->all() as $error)
+                          <li>{{ $error }}</li>
+                      @endforeach
+                  </ul>
+              </div>
+              @endif
                 <form action="{{route('waarmeking')}}" method="POST">
                     @csrf
                     <div class="form-group">
@@ -24,7 +33,7 @@
                     </div>
                     <div class="form-group">
                         <label for="exampleFormControlInput1">Tanggal</label>
-                        <input type="text" name="tanggal" class="form-control" id="exampleFormControlInput1" placeholder="Tanggal">
+                        <input type="text" name="tanggal" class="form-control" id="datepicker" placeholder="Tanggal">
                     </div>
                     <div class="form-group">
                         <label for="exampleFormControlInput1">Pihak 1</label>
@@ -38,6 +47,12 @@
                       <label for="exampleFormControlTextarea1">Isi</label>
                       {{-- <textarea class="ckeditor form-control" name="description"></textarea> --}}
                       <textarea class="ckeditor form-control" name="isi"></textarea>
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" value="1" name="password" id="">
+                      <label class="form-check-label" for="">
+                        Password Dokumen
+                      </label>
                     </div>
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </form>
@@ -57,5 +72,8 @@
         $(document).ready(function() {
         $('.ckeditor').ckeditor();
         });
+        $( function() {
+          $( "#datepicker" ).datepicker();
+        } );
     </script>
 @endsection

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Waarmeking;
+use App\Models\Berkas;
 use Yajra\DataTables\Facades\DataTables;
 use App\Http\Controllers\Controller;
 use App\Models\FinanceSatu;
@@ -25,15 +26,46 @@ class WaarmekingController extends Controller
 
     public function store(Request $request)
     {
+        date_default_timezone_set('Asia/Jakarta');
+        
+       $this->validate($request,[
+            'nomor' => 'required|min:3|max:255',
+            'tanggal' => 'required',
+            'pihak1' => 'required|min:3',
+            'pihak2' => 'required|min:3',
+            'isi' =>'required|min:3',
+       ],[
+            'nomor.required'=>'Nomor Tidak Boleh Kosong',
+            'tanggal.required'=>'Tanggal Tidak Boleh Kosong',
+            'pihak1.required'=>'Pihak 1 Tidak Boleh Kosong',
+            'pihak2.required'=>'Pihak 2 Tidak Boleh Kosong',
+            'isi.required'=>'Isi Tidak Boleh Kosong',
+            ]);
+        $passwordStatus = 'OFF';
+        if($request->has('password')){
+            $passwordStatus= 'ON';
+        }
+        $berkas = Berkas::create([
+            'tipe_berkas' => 'waarmeking',
+            'id_user' => '1',
+            'tanggal' => \Carbon\Carbon::parse($request->tanggal)->format('Y-m-d'),
+            'waktu' => date('H:i:s'),
+            'kode_berkas' => bcrypt(12345678),
+            'password_berkas' => bcrypt(12345678),
 
+            'password' => $passwordStatus,
+        ]);
+        // $berkas = Berkas::where('tipeBerkas','Waarmeking')->where('id_user','1')->orderBy
+        
         $data = Waarmeking::create([
             'nomor' => $request->nomor,
             'tanggal' => $request->tanggal,
             'pihak1' => $request->pihak1,
             'pihak2' => $request->pihak2,
             'isi' => $request->isi,
-            'id_berkas' => ('123456789'),
+            'id_berkas' => $berkas->id,
             ]);
+
         // dd($data);
         return redirect('waarmekings');
     }

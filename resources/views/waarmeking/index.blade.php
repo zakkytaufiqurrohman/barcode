@@ -83,7 +83,7 @@
                 { data: 'isi',"width": "20%" },
                 { data: 'nomor',"width": "20%" },
                 { data: 'nomor',"width": "20%" },
-                { data: 'nomor',"width": "20%" },
+                { data: 'action',"width": "20%" },
             ],
             fixedColumns: true,
             order: [

@@ -19,6 +19,7 @@ Route::get('/', function () {
 // waarmaking
 Route::name('waarmeking')->prefix('/waarmekings')->group(function () {
     Route::get('/', 'WaarmekingController@index');
+    Route::get('/create-waarmeking', 'WaarmekingController@create')->name('create-waarmeking');
     Route::post('/', 'WaarmekingController@store');
     Route::put('/', 'WaarmekingController@update');
     Route::delete('/', 'WaarmekingController@destroy');

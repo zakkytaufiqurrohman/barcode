@@ -60,6 +60,11 @@
 <script>
     $(function () {
         getWaarmeking();
+        $.ajaxSetup({
+          headers: {
+              'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+          }
+    });
     })
 </script>
 <script>
@@ -91,5 +96,27 @@
             ]
         });
     }
+    function deleteCorpu(object)
+        {
+            var SITEURL = '{{URL::to('')}}/';
+            var id = $(object).data('id');
+            $.ajax({
+                                url: SITEURL + "waarmekings",
+                                type: "POST",
+                                dataType: "json",
+                                data: {
+                                    "id": id,
+                                    "_method": "DELETE",
+                                    "_token": "{{ csrf_token() }}"
+                                },
+                                success(result) {
+                                    if(result['status'] == 'success'){
+                                        getWaarmeking();
+                                    }
+                                }
+                            });
+
+                }
+            
 </script>
 @endsection

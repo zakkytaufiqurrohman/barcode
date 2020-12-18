@@ -20,9 +20,10 @@ Route::get('/', function () {
 Route::name('waarmeking')->prefix('/waarmekings')->group(function () {
     Route::get('/', 'WaarmekingController@index');
     Route::get('/create-waarmeking', 'WaarmekingController@create')->name('create-waarmeking');
+    Route::get('{id}/edit-waarmeking', 'WaarmekingController@edit')->name('.edit-waarmeking');
     Route::post('/', 'WaarmekingController@store');
-    Route::put('/', 'WaarmekingController@update');
-    Route::delete('/', 'WaarmekingController@destroy');
+    Route::put('/update-waarmeking/{id}', 'WaarmekingController@update')->name('.update-waarmeking');
+    Route::delete('/', 'WaarmekingController@destroy')->name('.delete-waarmeking');
     
     Route::get('/data', 'WaarmekingController@data')->name('.data');
 });

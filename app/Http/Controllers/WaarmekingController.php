@@ -4,9 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Waarmeking;
+use App\Models\Berkas;
 use Yajra\DataTables\Facades\DataTables;
 use App\Http\Controllers\Controller;
-use App\Models\FinanceSatu;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 
@@ -18,19 +18,175 @@ class WaarmekingController extends Controller
         return view('waarmeking.index');
     }
 
+    public function show(Request $request)
+    {
+        $waarmeking = Waarmeking::find($request->id);
+        $id_berkas = $waarmeking->id_berkas;
+        $berkas = Berkas::where('id_berkas',$id_berkas)->first()->attributesToArray();
+        $datas = array_merge($waarmeking->attributesToArray(),$berkas);
+        if (!$waarmeking) {
+            return response()->json(['status' => 'error', 'message' => 'Waarmeking tidak ditemukan', 'data' => '']);
+        }
+
+        return response()->json(['status' => 'success', 'message' => 'Berhasil mengambil data daftar Waarmeking', 'data' => $datas]);
+    }
+
     public function data(Request $request)
     {
 
         $data = Waarmeking::query();
-        // return $data;
         return DataTables::eloquent($data)
-            // ->addColumn('realisasi',function ($data) {
-            //     $realisasi = '';
-            //     $realisasi = $data->nomor;
-            //     return $realisasi;
-            // })
+            ->addColumn('barcode',function ($data) {
+                $realisasi = '';
+                $realisasi = \DNS2D::getBarcodeHTML(strval($data->id_berkas), 'QRCODE',5,5);
+                return $realisasi;
+            })
+            ->addColumn('action', function ($data) {
+               
+                $action = '';
+                $action .= "<a href='javascript:void(0)' class='btn btn-icon btn-primary' data-id='{$data->id_waarmeking}' onclick='showWaarmeking(this);'><i class='fa fa-edit'></i></a>&nbsp;";
+                $action .= "<a href='javascript:void(0)' class='btn btn-icon btn-danger'  data-id='{$data->id_waarmeking}' onclick='deleteWaarmeking(this);'><i class='fa fa-trash'></i></a>&nbsp;";
+
+                return $action;
+            })
             ->escapeColumns([])
             ->addIndexColumn()
             ->make(true);
+    }
+
+    public function store(Request $request)
+    {
+
+        date_default_timezone_set('Asia/Jakarta');
+        $this->validate($request,[
+             'nomor' => 'required|min:3|max:255',
+             'tanggal' => 'required',
+             'pihak1' => 'required|min:3',
+             'pihak2' => 'required|min:3',
+             'isi' =>'required|min:3',
+        ],[
+            'nomor.required'=>'Nomor Tidak Boleh Kosong',
+            'tanggal.required'=>'Tanggal Tidak Boleh Kosong',
+            'pihak1.required'=>'Pihak 1 Tidak Boleh Kosong',
+            'pihak2.required'=>'Pihak 2 Tidak Boleh Kosong',
+            'isi.required'=>'Isi Tidak Boleh Kosong',
+            'isi.min'=>'Isi minimal 3 character',
+            ]);
+         $passwordStatus = 'OFF';
+         if($request->has('password')){
+                $passwordStatus= 'ON';
+         }
+        DB::beginTransaction();
+        try{
+            $berkas = Berkas::create([
+                'tipe_berkas' => 'waarmeking',
+                'id_user' => '1',
+                'tanggal' => \Carbon\Carbon::parse($request->tanggal)->format('Y-m-d'),
+                'waktu' => date('H:i:s'),
+                'kode_berkas' => bcrypt(12345678),
+                'password_berkas' => bcrypt(12345678),
+                'password' => $passwordStatus,
+            ]);
+            DB::commit();
+            if($berkas->id < 0){
+                DB::rollback();
+                return response()->json(['status' => 'error', 'message' => 'Gagal simpan ke tabel berkas']);
+            }
+            $data = Waarmeking::create([
+                'nomor' => $request->nomor,
+                'tanggal' => $request->tanggal,
+                'pihak1' => $request->pihak1,
+                'pihak2' => $request->pihak2,
+                'isi' => $request->isi,
+                'id_berkas' => $berkas->id,
+            ]);
+            DB::commit();
+            return response()->json(['status' => 'success', 'message' => 'Berhasil menambahkan Waarmeking']);
+        } catch(Exception $e){
+            DB::rollback();
+            return response()->json(['status' => 'error', 'message' => $e->getMessage()]);
+        }
+    }
+
+    public function update(Request $request)
+    {
+        date_default_timezone_set('Asia/Jakarta');
+        $this->validate($request,[
+             'nomor' => 'required|min:3|max:255',
+             'tanggal' => 'required',
+             'pihak1' => 'required|min:3',
+             'pihak2' => 'required|min:3',
+             'isi' =>'required|min:3',
+        ],[
+            'nomor.required'=>'Nomor Tidak Boleh Kosong',
+            'tanggal.required'=>'Tanggal Tidak Boleh Kosong',
+            'pihak1.required'=>'Pihak 1 Tidak Boleh Kosong',
+            'pihak2.required'=>'Pihak 2 Tidak Boleh Kosong',
+            'isi.required'=>'Isi Tidak Boleh Kosong',
+            'isi.min'=>'Isi minimal 3 character',
+            ]);
+
+        DB::beginTransaction();
+        try{
+            
+            $data = Waarmeking::find($request->id);
+            $data->update([
+                'nomor' => $request->nomor,
+                'tanggal' => $request->tanggal,
+                'pihak1' => $request->pihak1,
+                'pihak2' => $request->pihak2,
+                'isi' => $request->isi,
+            ]);
+            DB::commit();
+
+            $id_berkas = $data->id_berkas;
+            if($id_berkas == null || empty($id_berkas)){
+                DB::rollback();
+                return response()->json(['status' => 'error', 'message' => "gagal mendapatkan id"]);
+            }
+            // update ke berkas jika user update password
+            if($request->password == 1) {
+                $passwordStatus= 'ON';
+            }
+            else {
+                $passwordStatus= 'OFF';
+            }
+
+            $berkas = Berkas::find($id_berkas);
+            $berkas->update([
+                'id_user' => '1',
+                'password' => $passwordStatus,
+            ]);
+            DB::commit();
+            return response()->json(['status' => 'success', 'message' => 'Berhasil menambahkan Waarmeking']);
+        } catch(Exception $e){
+            DB::rollback();
+            return response()->json(['status' => 'error', 'message' => $e->getMessage()]);
+        }
+    }
+
+    public function destroy(Request $request)
+    {
+        DB::beginTransaction();
+        try {
+            $waarmeking = Waarmeking::find($request->id);
+            $berkas = Berkas::find($waarmeking->id_berkas);
+            if (!$berkas) {
+                DB::rollback();
+                return response()->json(['status' => 'error', 'message' => 'Berkas tidak ditemukan.']);
+            }
+            if (!$waarmeking) {
+                DB::rollback();
+                return response()->json(['status' => 'error', 'message' => 'Waarmeking tidak ditemukan.']);
+            }
+            $berkas->delete();
+            $waarmeking->delete();
+
+            DB::commit();
+            return response()->json(['status' => 'success', 'message' => 'Berhasil menghapus Waarmeking']);
+        } catch (Exception $e) {
+            DB::rollback();
+            return response()->json(['status' => 'error', 'message' => $e->getMessage()]);
+        }
     }
 }

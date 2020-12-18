@@ -22,6 +22,7 @@ Route::name('waarmeking')->prefix('/waarmekings')->group(function () {
     Route::post('/', 'WaarmekingController@store');
     Route::put('/', 'WaarmekingController@update');
     Route::delete('/', 'WaarmekingController@destroy');
+    Route::get('/show', 'WaarmekingController@show')->name('.show');
     
     Route::get('/data', 'WaarmekingController@data')->name('.data');
 });

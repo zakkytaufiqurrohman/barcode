@@ -597,6 +597,12 @@
 <script src="{{ url('') }}/dist/js/pages/dashboard.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="{{ url('') }}/dist/js/demo.js"></script>
+<!-- jquery -->
+<script src="{{ url('') }}/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
+<script src="{{ url('') }}/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+<!-- toast -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
 @yield('js')
 </body>
 </html>

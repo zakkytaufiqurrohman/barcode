@@ -88,7 +88,7 @@ class WaarmekingController extends Controller
                 'password' => $passwordStatus,
             ]);
             DB::commit();
-            if($berkas->id < 0){
+            if($berkas->id_berkas < 0 || empty($berkas->id_berkas)){
                 DB::rollback();
                 return response()->json(['status' => 'error', 'message' => 'Gagal simpan ke tabel berkas']);
             }
@@ -98,7 +98,7 @@ class WaarmekingController extends Controller
                 'pihak1' => $request->pihak1,
                 'pihak2' => $request->pihak2,
                 'isi' => $request->isi,
-                'id_berkas' => $berkas->id,
+                'id_berkas' => $berkas->id_berkas,
             ]);
             DB::commit();
             return response()->json(['status' => 'success', 'message' => 'Berhasil menambahkan Waarmeking']);

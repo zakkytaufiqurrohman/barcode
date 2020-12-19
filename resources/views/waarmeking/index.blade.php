@@ -90,8 +90,8 @@
                       <textarea class="ckeditor form-control" name="isi" id="add-isi"></textarea>
                     </div>
                     <div class="form-check">
-                      <input class="form-check-input" type="checkbox" value="1" name="password" id="password">
-                      <label class="form-check-label" for="password">
+                      <input class="form-check-input" type="checkbox" value="1" name="password" id="add-password">
+                      <label class="form-check-label" for="add-password">
                         Password Dokumen
                       </label>
                     </div>
@@ -142,8 +142,8 @@
                       <textarea class="ckeditor form-control" name="isi" id="updateisi"></textarea>
                     </div>
                     <div class="form-check">
-                      <input class="form-check-input" type="checkbox" value="1" name="password" id="password">
-                      <label class="form-check-label" for="password">
+                      <input class="form-check-input" type="checkbox" value="1" name="password" id="update-password">
+                      <label class="form-check-label" for="update-password">
                         Password Dokumen
                       </label>
                     </div>
@@ -324,7 +324,7 @@
     function deleteWaarmeking(object)
     {
         var id = $(object).data('id');
-        if (confirm("Press a button!")) {
+        if (confirm("Apakah Anda Yakin ?")) {
             $.ajax({
                 url: "{{route('waarmeking')}}",
                 type: "POST",

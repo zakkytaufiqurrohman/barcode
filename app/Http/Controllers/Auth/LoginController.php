@@ -56,7 +56,8 @@ class LoginController extends Controller
 
     protected function credentials(Request $request)
     {
-        return $request->only('username_user', 'password_user');
+        $data = ['username_user' => $request->username_user,'password' => $request->password];
+        return $data;
     }
 
     protected function guard($guard = 'web')
@@ -68,7 +69,7 @@ class LoginController extends Controller
     {
         $rules = [
             'username_user' => ['required', 'string'],
-            'password_user' => ['required', 'string'],
+            'password' => ['required', 'string'],
         ];
 
         $messages = [

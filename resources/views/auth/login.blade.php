@@ -43,7 +43,7 @@
         <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback">
-        <input id="password_user" type="password" class="form-control" name="password_user" placeholder="Password">
+        <input id="password_user" type="password" class="form-control" name="password" placeholder="Password">
         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
       </div>
       <div class="row">
@@ -74,6 +74,9 @@
 <script src="{{ url('') }}/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <!-- iCheck -->
 <script src="{{ url('') }}/plugins/iCheck/icheck.min.js"></script>
+<!-- toast -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
 {{-- <script>
   $(function () {
     $('input').iCheck({
@@ -119,19 +122,14 @@
               $("button").removeAttr("disabled", "disabled");
           },
           success(result) {
-              notification(result['status'], result['message']);
-              focusable('#username_user');
-              $("#username_user").focus();
-
-              if(result['status'] == 'success'){
-                  window.location = "@route('dashboard')";
-              }
+            toastr.success(result.message);
+            if(result['status'] == 'success'){
+                window.location = "{{route('waarmeking')}}";    
+            }
           },
           error(xhr, status, error) {
               var err = eval('(' + xhr.responseText + ')');
-              notification(status, err.message);
-              checkCSRFToken(err.message);
-              focusable('#username_user');
+              toastr.success(err.message);
           }
       });
   }

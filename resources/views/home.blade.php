@@ -1,3 +1,6 @@
+@extends('layouts.master')
+@section('content')
+<!-- Main content -->
 <section class="content">
       <!-- Small boxes (Stat box) -->
       <div class="row">
@@ -62,11 +65,5 @@
         </div>
         <!-- ./col -->
       </div>
-      <!-- /.row -->
-      <!-- Main row -->
-      <div class="row">
-        @yield('content')
-      </div>
-      <!-- /.row (main row) -->
-
-    </section>
+</section>
+@endsection

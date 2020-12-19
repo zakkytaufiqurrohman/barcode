@@ -17,6 +17,7 @@ class User extends Authenticatable
      */
     protected $table = 'tbl_user';
     protected $guarded = [];
+    protected $primaryKey = 'id_user';  
     protected $fillable = [
         'nama_user', 'email_user' ,'username_user', 'password_user', 'level_user', 'tanggal_user' ,'waktu_user'
     ];
@@ -38,4 +39,8 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function getAuthPassword() {
+        return $this->password_user;
+    }
 }

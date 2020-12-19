@@ -83,7 +83,7 @@ class WaarmekingController extends Controller
                 'id_user' => '1',
                 'tanggal' => \Carbon\Carbon::parse($request->tanggal)->format('Y-m-d'),
                 'waktu' => date('H:i:s'),
-                'kode_berkas' => bcrypt(12345678),
+                'kode_berkas' => bcrypt(date("Y-m-d h:i:sa").rand(10,100)),
                 'password_berkas' => bcrypt(12345678),
                 'password' => $passwordStatus,
             ]);

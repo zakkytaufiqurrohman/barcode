@@ -15,8 +15,10 @@ class User extends Authenticatable
      *
      * @var array
      */
+    protected $table = 'tbl_user';
+    protected $guarded = [];
     protected $fillable = [
-        'name', 'email', 'password',
+        'nama_user', 'email_user' ,'username_user', 'password_user', 'level_user', 'tanggal_user' ,'waktu_user'
     ];
 
     /**
@@ -25,7 +27,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'password_user', 'remember_token',
     ];
 
     /**

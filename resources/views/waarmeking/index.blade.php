@@ -378,5 +378,6 @@
             ]
         });
     }
+            
 </script>
 @endsection

@@ -27,3 +27,6 @@ Route::name('waarmeking')->prefix('/waarmekings')->group(function () {
     
     Route::get('/data', 'WaarmekingController@data')->name('.data');
 });
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

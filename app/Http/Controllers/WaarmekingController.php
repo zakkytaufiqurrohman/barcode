@@ -9,6 +9,7 @@ use Yajra\DataTables\Facades\DataTables;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Auth;
 
 
 class WaarmekingController extends Controller
@@ -108,7 +109,7 @@ class WaarmekingController extends Controller
         try{
             $berkas = Berkas::create([
                 'tipe_berkas' => 'waarmeking',
-                'id_user' => '1',
+                'id_user' => Auth::user()->id_user,
                 'tanggal' => \Carbon\Carbon::parse($request->tanggal)->format('Y-m-d'),
                 'waktu' => date('H:i:s'),
                 'kode_berkas' => bcrypt(date("Y-m-d h:i:sa").rand(10,100)),

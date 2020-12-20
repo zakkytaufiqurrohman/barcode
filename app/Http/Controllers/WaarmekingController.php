@@ -80,8 +80,13 @@ class WaarmekingController extends Controller
 
                 $dibuat = $data->berkas->id_user;
                 $user = User::where('id_user',$dibuat)->first();
-                $dibuat = $user->nama_user;
-                return $dibuat;
+                if(empty($user)){
+                    return '';
+                }
+                else{
+                    $dibuat = $user->nama_user;  
+                    return $dibuat;
+                }
             })
             ->escapeColumns([])
             ->addIndexColumn()

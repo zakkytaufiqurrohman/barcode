@@ -38,5 +38,8 @@ Route::middleware('auth')->group(function () {
         Route::get('/show', 'WaarmekingController@show')->name('.show');
         
         Route::get('/data', 'WaarmekingController@data')->name('.data');
+
+        Route::get('/download/{id}', 'WaarmekingController@download')->name('.download');
+
     });
 });

@@ -31,14 +31,33 @@ class WaarmekingController extends Controller
         return response()->json(['status' => 'success', 'message' => 'Berhasil mengambil data daftar Waarmeking', 'data' => $datas]);
     }
 
+    public function download($filepath)
+    {
+        $url=  public_path(). '/barcode/'. $filepath;
+        return \Response::download($url);
+    }
+
     public function data(Request $request)
     {
 
         $data = Waarmeking::query();
         return DataTables::eloquent($data)
             ->addColumn('barcode',function ($data) {
+                // get kode berkas from table berkas
+                $kode = $data->berkas->kode_berkas;
+                $kode =  config('app.url').'/'.$kode;
+                // generate barcode
+                $images = \DNS2D::getBarcodePNGPath(strval($kode), 'QRCODE',5,5);
+                // get image patch
+                $nameImage = str_replace("\\", "", $images);
+                $nameImage = str_replace("/barcode", "", $nameImage);
+                $url= asset("barcode/$nameImage");
+
                 $realisasi = '';
-                $realisasi = \DNS2D::getBarcodeHTML(strval($data->id_berkas), 'QRCODE',5,5);
+                // $realisasi .= '<img src='.$url.' border="0" width="100" class="img" align="center" />';
+                $realisasi .= "<a href='waarmekings/download/$nameImage'><img src=".$url." border='0' width='100' class='img' align='center' />'</a>" ;
+                // $realisasi .= "<a href='' ><i class='fa fa-edit'></i></a>&nbsp;";
+
                 return $realisasi;
             })
             ->addColumn('action', function ($data) {
@@ -48,6 +67,12 @@ class WaarmekingController extends Controller
                 $action .= "<a href='javascript:void(0)' class='btn btn-icon btn-danger'  data-id='{$data->id_waarmeking}' onclick='deleteWaarmeking(this);'><i class='fa fa-trash'></i></a>&nbsp;";
 
                 return $action;
+            })
+            ->addColumn('dibuat', function ($data) {
+               
+                $dibuat = "";
+                $dibuat = $data->berkas->id_berkas;
+                return $dibuat;
             })
             ->escapeColumns([])
             ->addIndexColumn()

@@ -200,7 +200,7 @@ class WaarmekingController extends Controller
 
             $berkas = Berkas::find($id_berkas);
             $berkas->update([
-                'id_user' => '1',
+                'id_user' => Auth::user()->id_user,
                 'password' => $passwordStatus,
             ]);
             DB::commit();

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Waarmeking;
 use App\Models\Berkas;
+use App\User;
 use Yajra\DataTables\Facades\DataTables;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
@@ -53,12 +54,10 @@ class WaarmekingController extends Controller
                 $nameImage = str_replace("/barcode", "", $nameImage);
                 $url= asset("barcode/$nameImage");
 
-                $realisasi = '';
-                // $realisasi .= '<img src='.$url.' border="0" width="100" class="img" align="center" />';
-                $realisasi .= "<a href='waarmekings/download/$nameImage'><img src=".$url." border='0' width='100' class='img' align='center' />'</a>" ;
-                // $realisasi .= "<a href='' ><i class='fa fa-edit'></i></a>&nbsp;";
+                $barcode = '';
+                $barcode .= "<a href='waarmekings/download/$nameImage'><img src=".$url." border='0' width='100' class='img' align='center' />'</a>" ;
 
-                return $realisasi;
+                return $barcode;
             })
             ->addColumn('action', function ($data) {
                
@@ -68,10 +67,20 @@ class WaarmekingController extends Controller
 
                 return $action;
             })
+            ->addColumn('tanggal', function ($data) {
+               
+                $tanggal = '';
+                $tanggal = \Carbon\Carbon::parse($data->tanggal)->isoFormat('D MMMM Y');
+
+                return $tanggal;
+            })
             ->addColumn('dibuat', function ($data) {
                
                 $dibuat = "";
-                $dibuat = $data->berkas->id_berkas;
+
+                $dibuat = $data->berkas->id_user;
+                $user = User::where('id_user',$dibuat)->first();
+                $dibuat = $user->nama_user;
                 return $dibuat;
             })
             ->escapeColumns([])

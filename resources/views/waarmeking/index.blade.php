@@ -185,6 +185,16 @@
                 updateWaarmeking();
         });
     })
+    $('#modal-add-waarmeking').on('hidden.bs.modal', function () {
+    var form=$("body");
+            form.find('.help-block').remove();
+            form.find('.form-group').removeClass('has-error');
+    })
+    $('#modal-update-waarmeking').on('hidden.bs.modal', function () {
+    var form=$("body");
+            form.find('.help-block').remove();
+            form.find('.form-group').removeClass('has-error');
+    })
     // open modal
     function openModalAdd()
     {
@@ -200,6 +210,9 @@
             CKEDITOR.instances[i].updateElement();
         };
         var formData = $("#form-add-waarmeking").serialize();
+        var form=$("body");
+                form.find('.help-block').remove();
+                form.find('.form-group').removeClass('has-error');
         $.ajax({
             url: "{{route('waarmeking')}}",
             type: "POST",
@@ -228,6 +241,18 @@
             error(xhr, status, error) {
                 var err = eval('(' + xhr.responseText + ')');
                 toastr.error(err.message);
+            },
+            error:function (response){
+                $.each(response.responseJSON.errors,function(key,value){
+                    $("input[name="+key+"]")
+                        .closest('.form-group')
+                        .addClass('has-error')
+                        .append('<span class="help-block"><strong>'+value+'</strong></span>');
+                    $("textarea[name="+key+"]")
+                        .closest('.form-group')
+                        .addClass('has-error')
+                        .append('<span class="help-block"><strong>'+value+'</strong></span>');
+                })
             }
         });
     }
@@ -316,6 +341,18 @@
             error(xhr, status, error) {
                 var err = eval('(' + xhr.responseText + ')');
                 toastr.error(err.message);
+            },
+            error:function (response){
+                $.each(response.responseJSON.errors,function(key,value){
+                    $("input[name="+key+"]")
+                        .closest('.form-group')
+                        .addClass('has-error')
+                        .append('<span class="help-block"><strong>'+value+'</strong></span>');
+                    $("textarea[name="+key+"]")
+                        .closest('.form-group')
+                        .addClass('has-error')
+                        .append('<span class="help-block"><strong>'+value+'</strong></span>');
+                })
             }
         });
     }

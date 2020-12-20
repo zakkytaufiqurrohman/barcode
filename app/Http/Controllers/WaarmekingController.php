@@ -95,6 +95,9 @@ class WaarmekingController extends Controller
             'pihak1.required'=>'Pihak 1 Tidak Boleh Kosong',
             'pihak2.required'=>'Pihak 2 Tidak Boleh Kosong',
             'isi.required'=>'Isi Tidak Boleh Kosong',
+            'nomor.min'=>'Nomor minimal 3 character',
+            'pihak1.min'=>'Pihak 1 minimal 3 character',
+            'pihak2.min'=>'Pihak 2 minimal 3 character',
             'isi.min'=>'Isi minimal 3 character',
             ]);
          $passwordStatus = 'OFF';
@@ -148,6 +151,9 @@ class WaarmekingController extends Controller
             'pihak1.required'=>'Pihak 1 Tidak Boleh Kosong',
             'pihak2.required'=>'Pihak 2 Tidak Boleh Kosong',
             'isi.required'=>'Isi Tidak Boleh Kosong',
+            'nomor.min'=>'Nomor minimal 3 character',
+            'pihak1.min'=>'Pihak 1 minimal 3 character',
+            'pihak2.min'=>'Pihak 2 minimal 3 character',
             'isi.min'=>'Isi minimal 3 character',
             ]);
 

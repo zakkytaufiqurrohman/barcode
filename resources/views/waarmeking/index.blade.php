@@ -86,8 +86,8 @@
                         <input type="text" name="pihak2" class="form-control" id="add-pihak2" placeholder="Pihak 2">
                     </div>
                     <div class="form-group">
-                      <label for="add-isi">Isi</label>  
-                      <textarea class="ckeditor form-control" name="isi" id="add-isi"></textarea>
+                      <label for="addisi">Isi</label>  
+                      <textarea class="ckeditor form-control" name="isi" id="addisi"></textarea>
                     </div>
                     <div class="form-check">
                       <input class="form-check-input" type="checkbox" value="1" name="password" id="add-password">
@@ -231,6 +231,7 @@
             },
             success(result) {
                 if(result['status'] == 'success'){
+                    CKEDITOR.instances.addisi.setData('');
                     $("#form-add-waarmeking")[0].reset();
                     $('#modal-add-waarmeking').modal('hide');
                     getWaarmeking();

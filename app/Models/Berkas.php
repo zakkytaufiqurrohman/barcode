@@ -19,4 +19,9 @@ class Berkas extends Model
     {
         return $this->belongsTo('App\User','id_user','id_user');
     }
+
+    public function waarmeking()
+    {
+        return $this->hasOne(waarmeking::class,'id_berkas','id_berkas');
+    }
 }

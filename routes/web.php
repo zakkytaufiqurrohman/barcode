@@ -42,4 +42,12 @@ Route::middleware('auth')->group(function () {
         Route::get('/download/{id}', 'WaarmekingController@download')->name('.download');
 
     });
+
+    /*
+        baca qr code
+    */
+    //qr web lama
+    Route::get('/{id}', 'ReadQrController@readQR');
+    // qr web baru
+    Route::get('/berkas/{nama}/{id}', 'ReadQrController@readQROld');
 });

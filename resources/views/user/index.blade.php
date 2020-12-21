@@ -205,7 +205,7 @@
                 $("#btn-add-user").addClass('btn-progress');
                 $("input").attr('disabled', 'disabled');
                 $("button").attr('disabled', 'disabled');
-                $("select").attr('disabled', 'disabled');
+                // $("select").attr('disabled', 'disabled');
             },
             complete() {
                 $("#btn-add-user").removeClass('btn-progress');
@@ -231,7 +231,7 @@
                         .closest('.form-group')
                         .addClass('has-error')
                         .append('<span class="help-block"><strong>'+value+'</strong></span>');
-                    $("textarea[name="+key+"]")
+                    $("select[name="+key+"]")
                         .closest('.form-group')
                         .addClass('has-error')
                         .append('<span class="help-block"><strong>'+value+'</strong></span>');
@@ -320,7 +320,7 @@
                         .closest('.form-group')
                         .addClass('has-error')
                         .append('<span class="help-block"><strong>'+value+'</strong></span>');
-                    $("textarea[name="+key+"]")
+                    $("select[name="+key+"]")
                         .closest('.form-group')
                         .addClass('has-error')
                         .append('<span class="help-block"><strong>'+value+'</strong></span>');

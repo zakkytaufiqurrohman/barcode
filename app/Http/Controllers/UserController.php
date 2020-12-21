@@ -131,7 +131,17 @@ class UserController extends Controller
     }
     public function data(Request $request)
     {
-        $data = User::query();
+        // $data = User::query();
+        $data= User::select(
+            'nama_user',
+            'email_user',
+            'username_user',
+            'password_user',
+            'level_user',
+            'tanggal_user',
+            'waktu_user',
+            'reset'           
+        )->where('level_user','=', 'Admin')->orWhere('level_user','=', 'User');
         return DataTables::eloquent($data)
             ->addColumn('action', function ($data) {
                

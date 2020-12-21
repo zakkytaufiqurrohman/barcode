@@ -1,17 +1,18 @@
 <ul class="sidebar-menu" data-widget="tree">
         <li class="header">Admin</li>
-        <li class="treeview">
-          <a href="#">
-            <i class="fa fa-laptop"></i>
-            <span>WAARMEKING</span>
+        <li>
+          <a href="{{route('waarmeking')}}">
+            <i class="fa fa-calendar"></i> <span>WAARMEKING</span>
             <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a>
-          <ul class="treeview-menu">
-            <li><a href="{{route('waarmeking')}}/create-waarmeking"><i class="fa fa-circle-o"></i> Buat</a></li>
-            <li><a href="{{route('waarmeking')}}"><i class="fa fa-circle-o"></i>Data</a></li>
-          </ul>
+        </li>
+        <li>
+          <a href="{{route('user')}}">
+            <i class="fa fa-calendar"></i> <span>User</span>
+            <span class="pull-right-container">
+            </span>
+          </a>
         </li>
         <li class="treeview">
           <a href="#">
@@ -42,8 +43,6 @@
           <a href="pages/calendar.html">
             <i class="fa fa-calendar"></i> <span>Calendar</span>
             <span class="pull-right-container">
-              <small class="label pull-right bg-red">3</small>
-              <small class="label pull-right bg-blue">17</small>
             </span>
           </a>
         </li>

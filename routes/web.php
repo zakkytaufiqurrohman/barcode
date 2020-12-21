@@ -42,4 +42,16 @@ Route::middleware('auth')->group(function () {
         Route::get('/download/{id}', 'WaarmekingController@download')->name('.download');
 
     });
+
+    // user
+    Route::name('user')->prefix('/users')->group(function () {
+        Route::get('/', 'UserController@index');
+        Route::post('/', 'UserController@store');
+        Route::get('/show', 'UserController@show')->name('.show');
+        Route::put('/', 'UserController@update');
+        Route::delete('/', 'UserController@destroy');
+        
+        Route::get('/data', 'UserController@data')->name('.data');
+
+    });
 });

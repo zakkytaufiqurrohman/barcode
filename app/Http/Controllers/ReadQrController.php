@@ -10,6 +10,8 @@ class ReadQrController extends Controller
 {
     public function readQR($id)
     {
+
+        return $id;
         $berkas = Berkas::with('waarmeking')->where('kode_berkas',$id)->first();
 
         return $berkas->waarmeking->nomor;
@@ -17,6 +19,7 @@ class ReadQrController extends Controller
 
     public function readQROld($nama,$id)
     {
+        return $id;
         $berkas = Berkas::with('waarmeking')->where('kode_berkas',$id)->first();
 
         return $berkas->waarmeking->nomor;

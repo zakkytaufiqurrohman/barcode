@@ -84,6 +84,10 @@
                         <input type="password" name="password_user" class="form-control" id="add-password_user" placeholder="Password">
                     </div>
                     <div class="form-group">
+                        <label for="add-password_user1">Konfirmasi Password</label>
+                        <input type="password" name="password_user1" class="form-control" id="add-password_user1" placeholder="Konfirmasi Password">
+                    </div>
+                    <div class="form-group">
                         <label for="add-level_user">Level User</label>
                         <select class="form-control" name="level_user" id="add-level_user" aria-label="Default select example">
                             <option selected>-- Pilih Level User --</option>

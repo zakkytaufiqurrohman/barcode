@@ -75,21 +75,22 @@ class UserController extends Controller
         return response()->json(['status' => 'success', 'message' => 'Berhasil mengambil data daftar Waarmeking', 'data' => $datas]);
     }
 
-    public function update(Request $request,$id)
+    public function update(Request $request)
     {
         date_default_timezone_set('Asia/Jakarta');
         $this->validate($request,[
             'nama_user' => 'required|min:3|max:255',
-            // 'email_user' => 'required'|'unique:tbl_user,email_user,'.$id.'id_user',
-            'email_user' => 'required|email|unique:user,email,_user'.$id.',id_user'
-            // 'username_user' => 'required'|'min:3'|'unique:tbl_user,username_user,'.$id.'id_user',
-       ],[
+            'email_user' => 'required|email|unique:tbl_user,email_user,'.$request->id.',id_user',
+            'username_user' => 'required|min:3|unique:tbl_user,username_user,'.$request->id.',id_user',
+        ],[
            'nama_user.required'=>'Nama Tidak Boleh Kosong',
            'email_user.required'=>'Email Tidak Boleh Kosong',
            'username_user.required'=>'Username Tidak Boleh Kosong',
            'nama_user.min'=>'Nama minimal 3 character',
            'username_user.min'=>'Username minimal 3 character',
-           ]);
+           'username_user.unique'=>'Username Sudah Ada',
+           'email_user.unique'=>'Email Sudah Ada',
+        ]);
         DB::beginTransaction();
         try{
             

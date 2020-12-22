@@ -43,11 +43,24 @@ Route::middleware('auth')->group(function () {
 
     });
 
+    
+    // user
+    Route::name('user')->prefix('/users')->group(function () {
+        Route::get('/', 'UserController@index');
+        Route::post('/', 'UserController@store');
+        Route::get('/show', 'UserController@show')->name('.show');
+        Route::put('/', 'UserController@update');
+        Route::delete('/', 'UserController@destroy');
+        
+        Route::get('/data', 'UserController@data')->name('.data');
+
+    });
+
     /*
         baca qr code
     */
     //qr web lama
-    Route::get('/{id}', 'ReadQrController@readQR');
+    // Route::get('/berkas/{id}', 'ReadQrController@readQR');
     // qr web baru
     Route::get('/berkas/{nama}/{id}', 'ReadQrController@readQROld');
 });

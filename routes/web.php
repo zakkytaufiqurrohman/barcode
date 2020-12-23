@@ -64,6 +64,11 @@ Route::middleware('auth')->group(function () {
         Route::get('/show', 'UserController@show')->name('.show');
         Route::put('/', 'UserController@update');
         Route::delete('/', 'UserController@destroy');
+        Route::get('/edit-profile', 'UserController@profile')->name('.profile');
+        Route::get('/edit-password', 'UserController@password')->name('.password');
+        Route::patch('/', 'UserController@edit');
+        Route::patch('/update-password', 'UserController@updatePassword')->name('.update-password');
+
         
         Route::get('/data', 'UserController@data')->name('.data');
 

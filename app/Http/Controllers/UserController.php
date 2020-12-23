@@ -18,6 +18,18 @@ class UserController extends Controller
     {
         return view('user.index');
     }
+    public function profile(Request $request)
+    {
+        return view('user.profile',[
+            'user' => $request->user()
+        ]);
+    }
+    public function password(Request $request)
+    {
+        return view('user.password',[
+            'user' => $request->user()
+        ]);
+    }
     public function store(Request $request)
     {
         date_default_timezone_set('Asia/Jakarta');
@@ -187,5 +199,54 @@ class UserController extends Controller
         ];
 
         return Validator::make($data, $rules, $messages);
+    }
+    public function edit(Request $request)
+    {
+        // dd($request->all());
+        $this->validate($request,[
+            'nama_user' => 'required|min:3|max:255',
+            'email_user' => 'required|email|unique:tbl_user,email_user,'.$request->id.',id_user',
+            'username_user' => 'required|min:3|unique:tbl_user,username_user,'.$request->id.',id_user',
+        ],[
+           'nama_user.required'=>'Nama Tidak Boleh Kosong',
+           'email_user.required'=>'Email Tidak Boleh Kosong',
+           'username_user.required'=>'Username Tidak Boleh Kosong',
+           'nama_user.min'=>'Nama minimal 3 character',
+           'username_user.min'=>'Username minimal 3 character',
+           'username_user.unique'=>'Username Sudah Ada',
+           'email_user.unique'=>'Email Sudah Ada',
+        ]);
+        $request->user()->update(
+            $request->all()
+        );
+    
+        return redirect()->route('user.profile');
+    }
+    public function updatePassword(Request $request)
+    {
+        $validatedData = $request->validate([
+            'oldpass' => 'required|min:6',
+            'password' => 'required|string|min:6',
+            'password_confirmation' => 'required|same:password',
+        ],[
+            'oldpass.required' => 'Password lama Tidak Boleh Kosong',
+            'oldpass.min' => 'password lama minimal 6 character',
+            'password.required' => 'Password Tidak Boleh Kosong',
+            'password.min' => 'Password minimal 6 character',
+            'password_confirmation.required' => 'Konfirmasi password tidak sama dengan password'
+        ]);
+
+        $current_password = \Auth::User()->password_user;           
+        if(\Hash::check($request->input('oldpass'), $current_password))
+        {          
+          $user_id = \Auth::User()->id_user;                       
+          $obj_user = User::find($user_id);
+          $obj_user->password_user = \Hash::make($request->input('password'));
+          $obj_user->save(); 
+          return view('user.password');
+        }
+        else
+        {           
+            return back()->withErrors(['Password yang anda input salah!', 'The Message']);        }  
     }
 }

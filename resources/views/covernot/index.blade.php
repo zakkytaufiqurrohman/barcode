@@ -1,9 +1,9 @@
 @extends('layouts.master')
 
-@section('title','Waarmeking')
+@section('title','Tanda Terima')
 @section('breadcrumb')
     <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-    <li class="active">Waarmeking</li>
+    <li class="active">Tanda Terima</li>
 @endsection
 @section('content')
 <!-- Main content -->
@@ -20,14 +20,12 @@
             </div>
             <!-- /.box-header -->
             <div class="box-body">
-              <table id="waarmeking-table" class="table table-bordered table-hover">
+              <table id="covernot-table" class="table table-bordered table-hover">
                 <thead>
                     <tr>
                         <th class="text-center" width="10">No</th>
                         <th>Nomor</th>
                         <th>Tanggal</th>
-                        <th>Pihak 1</th>
-                        <th>Pihak 2</th>
                         <th>Isi </th>
                         <th>Barcode</th>
                         <th>Di buat</th>
@@ -39,8 +37,6 @@
                         <th>No</th>
                         <th>Nomor</th>
                         <th>Tanggal</th>
-                        <th>Pihak 1</th>
-                        <th>Pihak 2</th>
                         <th>Isi </th>
                         <th>Barcode</th>
                         <th>Di buat</th>
@@ -57,16 +53,16 @@
     <!-- /.row -->
 </section>
 <!-- modal add -->
-<div class="modal fade" role="dialog" id="modal-add-waarmeking">
+<div class="modal fade" role="dialog" id="modal-add-covernot">
     <div class="modal-dialog modal-dialog-centered modal-md" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Tambah Waarmeking</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Tambah Covernot</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form method="POST" action="javascript:void(0)" id="form-add-waarmeking">
+            <form method="POST" action="javascript:void(0)" id="form-add-covernot">
                 @csrf
                 <div class="modal-body">
                     <div class="form-group">
@@ -76,14 +72,6 @@
                     <div class="form-group">
                         <label for="exampleFormControlInput1">Tanggal</label>
                         <input type="text" name="tanggal" class="form-control datepicker" placeholder="Tanggal">
-                    </div>
-                    <div class="form-group">
-                        <label for="add-pihak1">Pihak 1</label>
-                        <input type="text" name="pihak1" class="form-control" id="add-pihak1" placeholder="Pihak 1">
-                    </div>
-                    <div class="form-group">
-                        <label for="add-pihak2">Pihak 2</label>
-                        <input type="text" name="pihak2" class="form-control" id="add-pihak2" placeholder="Pihak 2">
                     </div>
                     <div class="form-group">
                       <label for="addisi">Isi</label>  
@@ -107,16 +95,16 @@
 <!-- end modal add -->
 
 <!-- modal edit -->
-<div class="modal fade" role="dialog" id="modal-update-waarmeking">
+<div class="modal fade" role="dialog" id="modal-update-covernot">
     <div class="modal-dialog modal-dialog-centered modal-md" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Update Waarmeking</h5>
+                <h5 class="modal-title">Update Covernot</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form method="POST" action="javascript:void(0)" id="form-update-waarmeking">
+            <form method="POST" action="javascript:void(0)" id="form-update-covernot">
                 @csrf
                 @method('PUT')
                 <input type="hidden" name="id" value="">
@@ -130,15 +118,7 @@
                         <input type="text" name="tanggal" class="form-control datepicker" placeholder="Tanggal">
                     </div>
                     <div class="form-group">
-                        <label for="update-pihak1">Pihak 1</label>
-                        <input type="text" name="pihak1" class="form-control" id="update-pihak1" placeholder="Pihak 1">
-                    </div>
-                    <div class="form-group">
-                        <label for="update-pihak2">Pihak 2</label>
-                        <input type="text" name="pihak2" class="form-control" id="update-pihak2" placeholder="Pihak 2">
-                    </div>
-                    <div class="form-group">
-                      <label for="update-isi">Isi</label>  
+                      <label for="updateisi">Isi</label>  
                       <textarea class="ckeditor form-control" name="isi" id="updateisi"></textarea>
                     </div>
                     <div class="form-check">
@@ -172,25 +152,25 @@
 </script>
 <script>
     $(function () {
-        getWaarmeking();
+        getCovernot();
         // prevent submit add
-        $("#form-add-waarmeking").on("submit", function(e) {
+        $("#form-add-covernot").on("submit", function(e) {
                 e.preventDefault();
-                addWaarmeking();
+                addCovernote();
         });
 
         // preven update
-        $("#form-update-waarmeking").on("submit", function(e) {
+        $("#form-update-covernot").on("submit", function(e) {
                 e.preventDefault();
-                updateWaarmeking();
+                updateCovernot();
         });
     })
-    $('#modal-add-waarmeking').on('hidden.bs.modal', function () {
+    $('#modal-add-covernot').on('hidden.bs.modal', function () {
     var form=$("body");
             form.find('.help-block').remove();
             form.find('.form-group').removeClass('has-error');
     })
-    $('#modal-update-waarmeking').on('hidden.bs.modal', function () {
+    $('#modal-update-covernot').on('hidden.bs.modal', function () {
     var form=$("body");
             form.find('.help-block').remove();
             form.find('.form-group').removeClass('has-error');
@@ -198,43 +178,44 @@
     // open modal
     function openModalAdd()
     {
-        $('#modal-add-waarmeking').modal('show');
+        $('#modal-add-covernot').modal('show');
         setTimeout(() => {
-            $('#add-nomor').focus();
+            $('#add-judul').focus();
         }, 500);
     }
-    // add /simpan
-    function addWaarmeking()
+
+      // add /simpan
+      function addCovernote()
     {
         for (var i in CKEDITOR.instances) {
             CKEDITOR.instances[i].updateElement();
         };
-        var formData = $("#form-add-waarmeking").serialize();
+        var formData = $("#form-add-covernot").serialize();
         var form=$("body");
                 form.find('.help-block').remove();
                 form.find('.form-group').removeClass('has-error');
         $.ajax({
-            url: "{{route('waarmeking')}}",
+            url: "{{route('covernot')}}",
             type: "POST",
             dataType: "json",
             data: formData,
             beforeSend() {
-                $("#btn-add-waarmeking").addClass('btn-progress');
+                $("#btn-add-covernot").addClass('btn-progress');
                 $("input").attr('disabled', 'disabled');
                 $("button").attr('disabled', 'disabled');
                 $("select").attr('disabled', 'disabled');
             },
             complete() {
-                $("#btn-add-waarmeking").removeClass('btn-progress');
+                $("#btn-add-covernot").removeClass('btn-progress');
                 $("input").removeAttr('disabled', 'disabled');
                 $("button").removeAttr('disabled', 'disabled');
             },
             success(result) {
                 if(result['status'] == 'success'){
                     CKEDITOR.instances.addisi.setData('');
-                    $("#form-add-waarmeking")[0].reset();
-                    $('#modal-add-waarmeking').modal('hide');
-                    getWaarmeking();
+                    $("#form-add-covernot")[0].reset();
+                    $('#modal-add-covernot').modal('hide');
+                    getCovernot();
                 }
 
                 toastr.success(result.message);
@@ -258,45 +239,43 @@
         });
     }
 
+    
     // edit show/asign data
-    function showWaarmeking(object)
+    function showCovernot(object)
     {
         var id = $(object).data('id');
 
-        $('#modal-update-waarmeking').modal('show');
-        $('#form-update-waarmeking')[0].reset();
+        $('#modal-update-covernot').modal('show');
+        $('#form-update-covernot')[0].reset();
         $.ajax({
-            url: "{{route('waarmeking.show')}}",
+            url: "{{route('covernot.show')}}",
             type: "GET",
             dataType: "json",
             data: {
                 "id": id,
             },
             beforeSend() {
-                $("#btn-update-waarmeking").addClass('btn-progress');
+                $("#btn-update-covernot").addClass('btn-progress');
                 $("input").attr('disabled', 'disabled');
                 $("button").attr('disabled', 'disabled');
             },
             complete() {
-                $("#btn-update-waarmeking").removeClass('btn-progress');
+                $("#btn-update-covernot").removeClass('btn-progress');
                 $("input").removeAttr('disabled', 'disabled');
                 $("button").removeAttr('disabled', 'disabled');
                 $("select").removeAttr('disabled', 'disabled');
             },
             success(result) {
-                $('#modal-update-waarmeking').find("input[name='id']").val(result['data']['id_waarmeking']);
-                $('#modal-update-waarmeking').find("input[name='nomor']").val(result['data']['nomor']);
-                $('#modal-update-waarmeking').find("input[name='tanggal']").val(result['data']['tanggal']);
-                $('#modal-update-waarmeking').find("input[name='pihak1']").val(result['data']['pihak1']);
-                $('#modal-update-waarmeking').find("input[name='pihak2']").val(result['data']['pihak2']);
+                $('#modal-update-covernot').find("input[name='id']").val(result['data']['id_covernot']);
+                $('#modal-update-covernot').find("input[name='nomor']").val(result['data']['nomor']);
+                $('#modal-update-covernot').find("input[name='tanggal']").val(result['data']['tanggal']);
                 CKEDITOR.instances.updateisi.setData(result['data']['isi']);
                 if (result['data']['password'] == 'ON'){
-                    $('#modal-update-waarmeking').find("input[name='password']").prop('checked', true);
+                    $('#modal-update-covernot').find("input[name='password']").prop('checked', true);
                 }
                 else{
-                    $('#modal-update-waarmeking').find("input[name='password']").prop('checked', false);
-                }
-               
+                    $('#modal-update-covernot').find("input[name='password']").prop('checked', false);
+                }               
             },
             error(xhr, status, error) {
                 var err = eval('(' + xhr.responseText + ')');
@@ -307,35 +286,37 @@
     }
 
     // proses update
-    function updateWaarmeking()
+    function updateCovernot()
     {
         for (var i in CKEDITOR.instances) {
             CKEDITOR.instances[i].updateElement();
         };
-        var formData = $("#form-update-waarmeking").serialize();
-
+        var formData = $("#form-update-covernot").serialize();
+        var form=$("body");
+                form.find('.help-block').remove();
+                form.find('.form-group').removeClass('has-error');
         $.ajax({
-            url: "{{route('waarmeking')}}",
+            url: "{{route('covernot')}}",
             type: "POST",
             dataType: "json",
             data: formData,
             beforeSend() {
-                $("#btn-update-waarmeking").addClass('btn-progress');
+                $("#btn-update-covernot").addClass('btn-progress');
                 $("input").attr('disabled', 'disabled');
                 $("button").attr('disabled', 'disabled');
                 $("select").attr('disabled', 'disabled');
             },
             complete() {
-                $("#btn-update-waarmeking").removeClass('btn-progress');
+                $("#btn-update-covernot").removeClass('btn-progress');
                 $("input").removeAttr('disabled', 'disabled');
                 $("button").removeAttr('disabled', 'disabled');
                 $("select").removeAttr('disabled', 'disabled');
             },
             success(result) {
                 if(result['status'] == 'success'){
-                    $("#form-update-waarmeking")[0].reset();
-                    $('#modal-update-waarmeking').modal('hide');
-                    getWaarmeking();
+                    $("#form-update-covernot")[0].reset();
+                    $('#modal-update-covernot').modal('hide');
+                    getCovernot();
                 }
                 toastr.success(result.message);
             },
@@ -359,12 +340,12 @@
     }
 
     // delete
-    function deleteWaarmeking(object)
+    function deleteCovernot(object)
     {
         var id = $(object).data('id');
         if (confirm("Apakah Anda Yakin ?")) {
             $.ajax({
-                url: "{{route('waarmeking')}}",
+                url: "{{route('covernot')}}",
                 type: "POST",
                 dataType: "json",
                 data: {
@@ -374,7 +355,7 @@
                 },
                 success(result) {
                     if(result['status'] == 'success'){
-                        getWaarmeking();
+                        getCovernot();
                     }
                     toastr.success(result.message);
                 },
@@ -385,16 +366,17 @@
             });
         }     
     }
+
     
     // get data
-    function getWaarmeking()
+    function getCovernot()
     {   
         var SITEURL = '{{URL::to('')}}/';
-        $("#waarmeking-table").removeAttr('width').dataTable({
+        $("#covernot-table").removeAttr('width').dataTable({
             processing: true,
             serverSide: true,
             ajax: {
-                url: SITEURL + "waarmekings/data",
+                url: SITEURL + "covernots/data",
             },
             destroy: true,
             scrollX: true,
@@ -403,8 +385,6 @@
                 { data: 'DT_RowIndex', orderable: false, searchable:false },
                 { data: 'nomor',"width": "20%" },
                 { data: 'tanggal',"width": "20%" },
-                { data: 'pihak1',"width": "20%" },
-                { data: 'pihak2',"width": "20%" },
                 { data: 'isi',"width": "20%" },
                 { data: 'barcode',"width": "10%" },
                 { data: 'dibuat',"width": "20%" },

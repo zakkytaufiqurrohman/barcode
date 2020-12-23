@@ -30,8 +30,6 @@ Route::middleware('auth')->group(function () {
     // waarmeking
     Route::name('waarmeking')->prefix('/waarmekings')->group(function () {
         Route::get('/', 'WaarmekingController@index');
-        Route::get('/create-waarmeking', 'WaarmekingController@create')->name('create-waarmeking');
-        Route::get('{id}/edit-waarmeking', 'WaarmekingController@edit')->name('.edit-waarmeking');
         Route::post('/', 'WaarmekingController@store');
         Route::put('/', 'WaarmekingController@update');
         Route::delete('/', 'WaarmekingController@destroy');
@@ -42,6 +40,21 @@ Route::middleware('auth')->group(function () {
         Route::get('/download/{id}', 'WaarmekingController@download')->name('.download');
 
     });
+
+     // covernot
+     Route::name('covernot')->prefix('/covernots')->group(function () {
+        Route::get('/', 'CovernotController@index');
+        Route::post('/', 'CovernotController@store');
+        Route::put('/', 'CovernotController@update');
+        Route::delete('/', 'CovernotController@destroy');
+        Route::get('/show', 'CovernotController@show')->name('.show');
+        
+        Route::get('/data', 'CovernotController@data')->name('.data');
+
+        Route::get('/download/{id}', 'CovernotController@download')->name('.download');
+
+    });
+
 
     
     // user

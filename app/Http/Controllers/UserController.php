@@ -202,7 +202,6 @@ class UserController extends Controller
     }
     public function edit(Request $request)
     {
-        // dd($request->all());
         $this->validate($request,[
             'nama_user' => 'required|min:3|max:255',
             'email_user' => 'required|email|unique:tbl_user,email_user,'.$request->id.',id_user',
@@ -247,6 +246,7 @@ class UserController extends Controller
         }
         else
         {           
-            return back()->withErrors(['Password yang anda input salah!', 'The Message']);        }  
+            return back()->withErrors(['Password yang anda input salah!', 'The Message']);        
+        }  
     }
 }

@@ -146,7 +146,7 @@ class WaarmekingController extends Controller
             }
             $data = Waarmeking::create([
                 'nomor' => $request->nomor,
-                'tanggal' => $request->tanggal,
+                'tanggal' => \Carbon\Carbon::parse($request->tanggal)->format('Y-m-d'),
                 'pihak1' => $request->pihak1,
                 'pihak2' => $request->pihak2,
                 'isi' => $request->isi,
@@ -187,7 +187,7 @@ class WaarmekingController extends Controller
             $data = Waarmeking::find($request->id);
             $data->update([
                 'nomor' => $request->nomor,
-                'tanggal' => $request->tanggal,
+                'tanggal' =>  \Carbon\Carbon::parse($request->tanggal)->format('Y-m-d'),
                 'pihak1' => $request->pihak1,
                 'pihak2' => $request->pihak2,
                 'isi' => $request->isi,
@@ -210,6 +210,7 @@ class WaarmekingController extends Controller
             $berkas = Berkas::find($id_berkas);
             $berkas->update([
                 'id_user' => Auth::user()->id_user,
+                'tanggal' =>  \Carbon\Carbon::parse($request->tanggal)->format('Y-m-d'),
                 'password' => $passwordStatus,
             ]);
             DB::commit();

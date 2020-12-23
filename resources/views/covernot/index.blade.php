@@ -1,9 +1,9 @@
 @extends('layouts.master')
 
-@section('title','Tanda Terima')
+@section('title','Covernot')
 @section('breadcrumb')
     <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-    <li class="active">Tanda Terima</li>
+    <li class="active">Covernot</li>
 @endsection
 @section('content')
 <!-- Main content -->

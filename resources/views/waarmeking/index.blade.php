@@ -167,7 +167,7 @@
         $('.ckeditor').ckeditor();
     });
     $( function() {
-        $( ".datepicker" ).datepicker({  format: 'yyyy-dd-mm'});
+        $( ".datepicker" ).datepicker({  format: 'yyyy-mm-dd'});
     } );
 </script>
 <script>

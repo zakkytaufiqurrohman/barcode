@@ -39,6 +39,9 @@ class UserController extends Controller
            'username_user.min'=>'Username minimal 3 character',
            'password_user.min'=>'Password minimal 3 character',
            'password_user1.min'=>'Password minimal 3 character',
+           'password_user1.same'=>'Konfirmasi password harus sama dengan password',
+           'username_user.unique'=>'Username Sudah Ada',
+           'email_user.unique'=>'Email Sudah Ada',
            ]);
         DB::beginTransaction();
         try{

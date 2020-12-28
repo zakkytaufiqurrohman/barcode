@@ -83,6 +83,20 @@ Route::middleware('auth')->group(function () {
 
     });
 
+    // Akta Notaris
+    Route::name('akta-notaris')->prefix('/akta-notariss')->group(function () {
+        Route::get('/', 'AktaNotarisController@index');
+        Route::post('/', 'AktaNotarisController@store');
+        Route::put('/', 'AktaNotarisController@update');
+        Route::delete('/', 'AktaNotarisController@destroy');
+        Route::get('/show', 'AktaNotarisController@show')->name('.show');
+        
+        Route::get('/data', 'AktaNotarisController@data')->name('.data');
+
+        Route::get('/download/{id}', 'AktaNotarisController@download')->name('.download');
+
+    });
+
 
     
     // user

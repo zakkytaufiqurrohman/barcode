@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Legalisasi;
+use App\Models\AktaNotaris;
 use App\Models\Berkas;
 use App\User;
 use Yajra\DataTables\Facades\DataTables;
@@ -12,22 +12,21 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
 
-class LegalisasiController extends Controller
+class AktaNotarisController extends Controller
 {
     public function index()
     {
-        return view('legalisasi.index');
+        return view('akta-notaris.index');
     }
     public function data(Request $request)
     {
-
-        $data = Legalisasi::query();
+        $data = AktaNotaris::query();
         return DataTables::eloquent($data)
             ->addColumn('barcode',function ($data) {
                 // get kode berkas from table berkas
                 $kode = $data->berkas->kode_berkas;
                 $kode = str_replace("/", "", $kode);
-                $kode =  config('app.url').'/berkas/legalisasi/'.$kode;
+                $kode =  config('app.url').'/berkas/akta-notaris/'.$kode;
                 // generate barcode
                 $images = \DNS2D::getBarcodePNGPath(strval($kode), 'QRCODE',5,5);
                 // get image patch
@@ -36,15 +35,15 @@ class LegalisasiController extends Controller
                 $url= asset("barcode/$nameImage");
 
                 $barcode = '';
-                $barcode .= "<a href='legalisasis/download/$nameImage'><img src=".$url." border='0' width='100' class='img' align='center' />'</a>" ;
+                $barcode .= "<a href='akta-notariss/download/$nameImage'><img src=".$url." border='0' width='100' class='img' align='center' />'</a>" ;
 
                 return $barcode;
             })
             ->addColumn('action', function ($data) {
                
                 $action = '';
-                $action .= "<a href='javascript:void(0)' class='btn btn-icon btn-primary' data-id='{$data->id_legalisasi}' onclick='showLegalisasi(this);'><i class='fa fa-edit'></i></a>&nbsp;";
-                $action .= "<a href='javascript:void(0)' class='btn btn-icon btn-danger'  data-id='{$data->id_legalisasi}' onclick='deleteLegalisasi(this);'><i class='fa fa-trash'></i></a>&nbsp;";
+                $action .= "<a href='javascript:void(0)' class='btn btn-icon btn-primary' data-id='{$data->id_aktanotaris}' onclick='showAktaNotaris(this);'><i class='fa fa-edit'></i></a>&nbsp;";
+                $action .= "<a href='javascript:void(0)' class='btn btn-icon btn-danger'  data-id='{$data->id_aktanotaris}' onclick='deleteAktaNotaris(this);'><i class='fa fa-trash'></i></a>&nbsp;";
 
                 return $action;
             })
@@ -82,39 +81,28 @@ class LegalisasiController extends Controller
             ->make(true);
     }
 
-    public function show(Request $request)
-    {
-        $legalisasi = Legalisasi::find($request->id);
-        $id_berkas = $legalisasi->id_berkas;
-        $berkas = Berkas::where('id_berkas',$id_berkas)->first()->attributesToArray();
-        $datas = array_merge($legalisasi->attributesToArray(),$berkas);
-        if (!$legalisasi) {
-            return response()->json(['status' => 'error', 'message' => 'Legalisasi tidak ditemukan', 'data' => '']);
-        }
-
-        return response()->json(['status' => 'success', 'message' => 'Berhasil mengambil data daftar Legalisasi', 'data' => $datas]);
-    }
-
     public function store(Request $request)
     {
-
         date_default_timezone_set('Asia/Jakarta');
         $this->validate($request,[
+            'judul' => 'required|min:3',
              'nomor' => 'required|min:3|max:255',
              'tanggal' => 'required',
              'pihak1' => 'required|min:3',
              'pihak2' => 'required|min:3',
              'isi' =>'required|min:3',
         ],[
+            'judul.required'=>'Judul Tidak Boleh Kosong',
             'nomor.required'=>'Nomor Tidak Boleh Kosong',
             'tanggal.required'=>'Tanggal Tidak Boleh Kosong',
             'pihak1.required'=>'Pihak 1 Tidak Boleh Kosong',
             'pihak2.required'=>'Pihak 2 Tidak Boleh Kosong',
-            'isi.required'=>'Isi Tidak Boleh Kosong',
+            'isi.required'=>'isi Tidak Boleh Kosong',
+            'judul.min'=>'Judul minimal 3 character',
             'nomor.min'=>'Nomor minimal 3 character',
             'pihak1.min'=>'Pihak 1 minimal 3 character',
             'pihak2.min'=>'Pihak 2 minimal 3 character',
-            'isi.min'=>'Isi minimal 3 character',
+            'isi.min'=>'isi minimal 3 character',
             ]);
          $passwordStatus = 'OFF';
          if($request->has('password')){
@@ -123,7 +111,7 @@ class LegalisasiController extends Controller
         DB::beginTransaction();
         try{
             $berkas = Berkas::create([
-                'tipe_berkas' => 'legalisasi',
+                'tipe_berkas' => 'aktanotaris',
                 'id_user' => Auth::user()->id_user,
                 'tanggal' => \Carbon\Carbon::parse($request->tanggal)->format('Y-m-d'),
                 'waktu' => date('H:i:s'),
@@ -136,7 +124,8 @@ class LegalisasiController extends Controller
                 DB::rollback();
                 return response()->json(['status' => 'error', 'message' => 'Gagal simpan ke tabel berkas']);
             }
-            $data = Legalisasi::create([
+            $data = AktaNotaris::create([
+                'judul' => $request->judul,
                 'nomor' => $request->nomor,
                 'tanggal' => \Carbon\Carbon::parse($request->tanggal)->format('Y-m-d'),
                 'pihak1' => $request->pihak1,
@@ -145,39 +134,55 @@ class LegalisasiController extends Controller
                 'id_berkas' => $berkas->id_berkas,
             ]);
             DB::commit();
-            return response()->json(['status' => 'success', 'message' => 'Berhasil menambahkan Legalisasi']);
+            return response()->json(['status' => 'success', 'message' => 'Berhasil menambahkan Akta Notaris']);
         } catch(Exception $e){
             DB::rollback();
             return response()->json(['status' => 'error', 'message' => $e->getMessage()]);
         }
+        
     }
+    public function show(Request $request)
+    {
+        $aktanotaris = AktaNotaris::find($request->id);
+        $id_berkas = $aktanotaris->id_berkas;
+        $berkas = Berkas::where('id_berkas',$id_berkas)->first()->attributesToArray();
+        $datas = array_merge($aktanotaris->attributesToArray(),$berkas);
+        if (!$aktanotaris) {
+            return response()->json(['status' => 'error', 'message' => 'Akta Notaris tidak ditemukan', 'data' => '']);
+        }
 
+        return response()->json(['status' => 'success', 'message' => 'Berhasil mengambil data daftar Akta Notaris', 'data' => $datas]);
+    }
     public function update(Request $request)
     {
         date_default_timezone_set('Asia/Jakarta');
         $this->validate($request,[
-             'nomor' => 'required|min:3|max:255',
-             'tanggal' => 'required',
-             'pihak1' => 'required|min:3',
-             'pihak2' => 'required|min:3',
-             'isi' =>'required|min:3',
+            'judul' => 'required|min:3',
+            'nomor' => 'required|min:3|max:255',
+            'tanggal' => 'required',
+            'pihak1' => 'required|min:3',
+            'pihak2' => 'required|min:3',
+            'isi' =>'required|min:3',
         ],[
+            'judul.required'=>'Judul Tidak Boleh Kosong',
             'nomor.required'=>'Nomor Tidak Boleh Kosong',
             'tanggal.required'=>'Tanggal Tidak Boleh Kosong',
             'pihak1.required'=>'Pihak 1 Tidak Boleh Kosong',
             'pihak2.required'=>'Pihak 2 Tidak Boleh Kosong',
-            'isi.required'=>'Isi Tidak Boleh Kosong',
+            'isi.required'=>'isi Tidak Boleh Kosong',
+            'judul.min'=>'Judul minimal 3 character',
             'nomor.min'=>'Nomor minimal 3 character',
             'pihak1.min'=>'Pihak 1 minimal 3 character',
             'pihak2.min'=>'Pihak 2 minimal 3 character',
-            'isi.min'=>'Isi minimal 3 character',
+            'isi.min'=>'isi minimal 3 character',
             ]);
 
         DB::beginTransaction();
         try{
             
-            $data = Legalisasi::find($request->id);
+            $data = AktaNotaris::find($request->id);
             $data->update([
+                'judul' => $request->judul,
                 'nomor' => $request->nomor,
                 'tanggal' =>  \Carbon\Carbon::parse($request->tanggal)->format('Y-m-d'),
                 'pihak1' => $request->pihak1,
@@ -206,7 +211,7 @@ class LegalisasiController extends Controller
                 'password' => $passwordStatus,
             ]);
             DB::commit();
-            return response()->json(['status' => 'success', 'message' => 'Berhasil menambahkan Legalisasi']);
+            return response()->json(['status' => 'success', 'message' => 'Berhasil menambahkan Akta PPAT']);
         } catch(Exception $e){
             DB::rollback();
             return response()->json(['status' => 'error', 'message' => $e->getMessage()]);
@@ -216,29 +221,24 @@ class LegalisasiController extends Controller
     {
         DB::beginTransaction();
         try {
-            $legalisasi = Legalisasi::find($request->id);
-            $berkas = Berkas::find($legalisasi->id_berkas);
+            $aktanotaris = AktaNotaris::find($request->id);
+            $berkas = Berkas::find($aktanotaris->id_berkas);
             if (!$berkas) {
                 DB::rollback();
                 return response()->json(['status' => 'error', 'message' => 'Berkas tidak ditemukan.']);
             }
-            if (!$legalisasi) {
+            if (!$aktanotaris) {
                 DB::rollback();
-                return response()->json(['status' => 'error', 'message' => 'Legalisasi tidak ditemukan.']);
+                return response()->json(['status' => 'error', 'message' => 'Akta Notaris tidak ditemukan.']);
             }
             $berkas->delete();
-            $legalisasi->delete();
+            $aktanotaris->delete();
 
             DB::commit();
-            return response()->json(['status' => 'success', 'message' => 'Berhasil menghapus Legalisasi']);
+            return response()->json(['status' => 'success', 'message' => 'Berhasil menghapus Akta Notaris']);
         } catch (Exception $e) {
             DB::rollback();
             return response()->json(['status' => 'error', 'message' => $e->getMessage()]);
         }
-    }
-    public function download($filepath)
-    {
-        $url=  public_path(). '/barcode/'. $filepath;
-        return \Response::download($url);
     }
 }

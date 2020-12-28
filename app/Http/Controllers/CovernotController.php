@@ -60,7 +60,7 @@ class CovernotController extends Controller
                 'id_berkas' => $berkas->id_berkas,
             ]);
             DB::commit();
-            return response()->json(['status' => 'success', 'message' => 'Berhasil menambahkan Waarmeking']);
+            return response()->json(['status' => 'success', 'message' => 'Berhasil menambahkan Covernot']);
         } catch(Exception $e){
             DB::rollback();
             return response()->json(['status' => 'error', 'message' => $e->getMessage()]);
@@ -113,7 +113,7 @@ class CovernotController extends Controller
                 'password' => $passwordStatus,
             ]);
             DB::commit();
-            return response()->json(['status' => 'success', 'message' => 'Berhasil menambahkan Waarmeking']);
+            return response()->json(['status' => 'success', 'message' => 'Berhasil menambahkan Covernot']);
         } catch(Exception $e){
             DB::rollback();
             return response()->json(['status' => 'error', 'message' => $e->getMessage()]);

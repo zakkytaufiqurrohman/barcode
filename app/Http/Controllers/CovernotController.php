@@ -221,4 +221,10 @@ class CovernotController extends Controller
             ->addIndexColumn()
             ->make(true);
     }
+
+    public function download($filepath)
+    {
+        $url=  public_path(). '/barcode/'. $filepath;
+        return \Response::download($url);
+    }
 }

@@ -55,6 +55,20 @@ Route::middleware('auth')->group(function () {
 
     });
 
+     // Legalisasi
+     Route::name('legalisasi')->prefix('/legalisasis')->group(function () {
+        Route::get('/', 'LegalisasiController@index');
+        Route::post('/', 'LegalisasiController@store');
+        Route::put('/', 'LegalisasiController@update');
+        Route::delete('/', 'LegalisasiController@destroy');
+        Route::get('/show', 'LegalisasiController@show')->name('.show');
+        
+        Route::get('/data', 'LegalisasiController@data')->name('.data');
+
+        Route::get('/download/{id}', 'LegalisasiController@download')->name('.download');
+
+    });
+
 
     
     // user

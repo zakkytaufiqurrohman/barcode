@@ -1,5 +1,5 @@
 <ul class="sidebar-menu" data-widget="tree">
-        <li class="header">Berkas</li>
+        <li class="header">Admin</li>
         <li>
           <a href="{{route('user')}}">
             <i class="fa fa-calendar"></i> <span>User</span>
@@ -7,7 +7,7 @@
             </span>
           </a>
         </li>
-        <li class="header">Admin</li>
+        <li class="header">Berkas</li>
         <li>
           <a href="{{route('waarmeking')}}">
             <i class="fa fa-calendar"></i> <span>WAARMEKING</span>
@@ -18,6 +18,13 @@
         <li>
           <a href="{{route('covernot')}}">
             <i class="fa fa-calendar"></i> <span>COVERNOT</span>
+            <span class="pull-right-container">
+            </span>
+          </a>
+        </li>
+        <li>
+          <a href="{{route('legalisasi')}}">
+            <i class="fa fa-calendar"></i> <span>LEGALISASI</span>
             <span class="pull-right-container">
             </span>
           </a>

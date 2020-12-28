@@ -1,9 +1,9 @@
 @extends('layouts.master')
 
-@section('title','Akta Notaris')
+@section('title','Akta Jaminan Fidusia')
 @section('breadcrumb')
     <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-    <li class="active">Akta Notaris</li>
+    <li class="active">Akta Jaminan Fidusia</li>
 @endsection
 @section('content')
 <!-- Main content -->
@@ -20,7 +20,7 @@
             </div>
             <!-- /.box-header -->
             <div class="box-body">
-              <table id="aktappat-table" class="table table-bordered table-hover">
+              <table id="aktajaminanfidusia-table" class="table table-bordered table-hover">
                 <thead>
                     <tr>
                         <th class="text-center" width="10">No</th>
@@ -59,7 +59,7 @@
     <!-- /.row -->
 </section>
 <!-- modal add -->
-<div class="modal fade" role="dialog" id="modal-add-aktanotaris">
+<div class="modal fade" role="dialog" id="modal-add-aktajaminanfidusia">
     <div class="modal-dialog modal-dialog-centered modal-md" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -68,7 +68,7 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form method="POST" action="javascript:void(0)" id="form-add-aktanotaris">
+            <form method="POST" action="javascript:void(0)" id="form-add-aktajaminanfidusia">
                 @csrf
                 <div class="modal-body">
                     <div class="form-group">
@@ -113,7 +113,7 @@
 <!-- end modal add -->
 
 <!-- modal edit -->
-<div class="modal fade" role="dialog" id="modal-update-aktanotaris">
+<div class="modal fade" role="dialog" id="modal-update-aktajaminanfidusia">
     <div class="modal-dialog modal-dialog-centered modal-md" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -122,7 +122,7 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form method="POST" action="javascript:void(0)" id="form-update-aktanotaris">
+            <form method="POST" action="javascript:void(0)" id="form-update-aktajaminanfidusia">
                 @csrf
                 @method('PUT')
                 <input type="hidden" name="id" value="">
@@ -182,25 +182,25 @@
 </script>
 <script>
     $(function () {
-        getAktaNotaris();
+        getAktaJaminanFidusia();
         // prevent submit add
-        $("#form-add-aktanotaris").on("submit", function(e) {
+        $("#form-add-aktajaminanfidusia").on("submit", function(e) {
                 e.preventDefault();
-                addAktaNotaris();
+                addAktaJaminanFidusia();
         });
 
         // preven update
-        $("#form-update-aktanotaris").on("submit", function(e) {
+        $("#form-update-aktajaminanfidusia").on("submit", function(e) {
                 e.preventDefault();
-                updateAktaNotaris();
+                updateAktaJaminanFidusia();
         });
     })
-    $('#modal-add-aktanotaris').on('hidden.bs.modal', function () {
+    $('#modal-add-aktajaminanfidusia').on('hidden.bs.modal', function () {
     var form=$("body");
             form.find('.help-block').remove();
             form.find('.form-group').removeClass('has-error');
     })
-    $('#modal-update-aktanotaris').on('hidden.bs.modal', function () {
+    $('#modal-update-aktajaminanfidusia').on('hidden.bs.modal', function () {
     var form=$("body");
             form.find('.help-block').remove();
             form.find('.form-group').removeClass('has-error');
@@ -208,43 +208,43 @@
     // open modal
     function openModalAdd()
     {
-        $('#modal-add-aktanotaris').modal('show');
+        $('#modal-add-aktajaminanfidusia').modal('show');
         setTimeout(() => {
             $('#add-judul').focus();
         }, 500);
     }
     // add /simpan
-    function addAktaNotaris()
+    function addAktaJaminanFidusia()
     {
         for (var i in CKEDITOR.instances) {
             CKEDITOR.instances[i].updateElement();
         };
-        var formData = $("#form-add-aktanotaris").serialize();
+        var formData = $("#form-add-aktajaminanfidusia").serialize();
         var form=$("body");
                 form.find('.help-block').remove();
                 form.find('.form-group').removeClass('has-error');
         $.ajax({
-            url: "{{route('akta-notaris')}}",
+            url: "{{route('akta-jaminan-fidusia')}}",
             type: "POST",
             dataType: "json",
             data: formData,
             beforeSend() {
-                $("#btn-add-akta-notaris").addClass('btn-progress');
+                $("#btn-add-akta-jaminan-fidusia").addClass('btn-progress');
                 $("input").attr('disabled', 'disabled');
                 $("button").attr('disabled', 'disabled');
                 $("select").attr('disabled', 'disabled');
             },
             complete() {
-                $("#btn-add-akta-notaris").removeClass('btn-progress');
+                $("#btn-add-akta-jaminan-fidusia").removeClass('btn-progress');
                 $("input").removeAttr('disabled', 'disabled');
                 $("button").removeAttr('disabled', 'disabled');
             },
             success(result) {
                 if(result['status'] == 'success'){
                     CKEDITOR.instances.addisi.setData('');
-                    $("#form-add-aktanotaris")[0].reset();
-                    $('#modal-add-aktanotaris').modal('hide');
-                    getAktaNotaris();
+                    $("#form-add-aktajaminanfidusia")[0].reset();
+                    $('#modal-add-aktajaminanfidusia').modal('hide');
+                    getAktaJaminanFidusia();
                 }
 
                 toastr.success(result.message);
@@ -269,43 +269,43 @@
     }
 
     // edit show/asign data
-    function showAktaNotaris(object)
+    function showAktaJaminanFidusia(object)
     {
         var id = $(object).data('id');
 
-        $('#modal-update-aktanotaris').modal('show');
-        $('#form-update-aktanotaris')[0].reset();
+        $('#modal-update-aktajaminanfidusia').modal('show');
+        $('#form-update-aktajaminanfidusia')[0].reset();
         $.ajax({
-            url: "{{route('akta-notaris.show')}}",
+            url: "{{route('akta-jaminan-fidusia.show')}}",
             type: "GET",
             dataType: "json",
             data: {
                 "id": id,
             },
             beforeSend() {
-                $("#btn-update-akta-notaris").addClass('btn-progress');
+                $("#btn-update-akta-jaminan-fidusia").addClass('btn-progress');
                 $("input").attr('disabled', 'disabled');
                 $("button").attr('disabled', 'disabled');
             },
             complete() {
-                $("#btn-update-akta-notaris").removeClass('btn-progress');
+                $("#btn-update-akta-jaminan-fidusia").removeClass('btn-progress');
                 $("input").removeAttr('disabled', 'disabled');
                 $("button").removeAttr('disabled', 'disabled');
                 $("select").removeAttr('disabled', 'disabled');
             },
             success(result) {
-                $('#modal-update-aktanotaris').find("input[name='id']").val(result['data']['id_aktanotaris']);
-                $('#modal-update-aktanotaris').find("input[name='judul']").val(result['data']['judul']);
-                $('#modal-update-aktanotaris').find("input[name='nomor']").val(result['data']['nomor']);
-                $('#modal-update-aktanotaris').find("input[name='tanggal']").datepicker("setDate",result['data']['tanggal']);
-                $('#modal-update-aktanotaris').find("input[name='pihak1']").val(result['data']['pihak1']);
-                $('#modal-update-aktanotaris').find("input[name='pihak2']").val(result['data']['pihak2']);
+                $('#modal-update-aktajaminanfidusia').find("input[name='id']").val(result['data']['id_aktajaminanfidusia']);
+                $('#modal-update-aktajaminanfidusia').find("input[name='judul']").val(result['data']['judul']);
+                $('#modal-update-aktajaminanfidusia').find("input[name='nomor']").val(result['data']['nomor']);
+                $('#modal-update-aktajaminanfidusia').find("input[name='tanggal']").datepicker("setDate",result['data']['tanggal']);
+                $('#modal-update-aktajaminanfidusia').find("input[name='pihak1']").val(result['data']['pihak1']);
+                $('#modal-update-aktajaminanfidusia').find("input[name='pihak2']").val(result['data']['pihak2']);
                 CKEDITOR.instances.updateisi.setData(result['data']['isi']);
                 if (result['data']['password'] == 'ON'){
-                    $('#modal-update-aktanotaris').find("input[name='password']").prop('checked', true);
+                    $('#modal-update-aktajaminanfidusia').find("input[name='password']").prop('checked', true);
                 }
                 else{
-                    $('#modal-update-aktanotaris').find("input[name='password']").prop('checked', false);
+                    $('#modal-update-aktajaminanfidusia').find("input[name='password']").prop('checked', false);
                 }
                
             },
@@ -318,35 +318,35 @@
     }
 
     // proses update
-    function updateAktaNotaris()
+    function updateAktaJaminanFidusia()
     {
         for (var i in CKEDITOR.instances) {
             CKEDITOR.instances[i].updateElement();
         };
-        var formData = $("#form-update-aktanotaris").serialize();
+        var formData = $("#form-update-aktajaminanfidusia").serialize();
 
         $.ajax({
-            url: "{{route('akta-notaris')}}",
+            url: "{{route('akta-jaminan-fidusia')}}",
             type: "POST",
             dataType: "json",
             data: formData,
             beforeSend() {
-                $("#btn-update-akta-notaris").addClass('btn-progress');
+                $("#btn-update-akta-jaminan-fidusia").addClass('btn-progress');
                 $("input").attr('disabled', 'disabled');
                 $("button").attr('disabled', 'disabled');
                 $("select").attr('disabled', 'disabled');
             },
             complete() {
-                $("#btn-update-akta-notaris").removeClass('btn-progress');
+                $("#btn-update-akta-jaminan-fidusia").removeClass('btn-progress');
                 $("input").removeAttr('disabled', 'disabled');
                 $("button").removeAttr('disabled', 'disabled');
                 $("select").removeAttr('disabled', 'disabled');
             },
             success(result) {
                 if(result['status'] == 'success'){
-                    $("#form-update-aktanotaris")[0].reset();
-                    $('#modal-update-aktanotaris').modal('hide');
-                    getAktaNotaris();
+                    $("#form-update-aktajaminanfidusia")[0].reset();
+                    $('#modal-update-aktajaminanfidusia').modal('hide');
+                    getAktaJaminanFidusia();
                 }
                 toastr.success(result.message);
             },
@@ -370,12 +370,12 @@
     }
 
     // delete
-    function deleteAktaNotaris(object)
+    function deleteAktaJaminanFidusia(object)
     {
         var id = $(object).data('id');
         if (confirm("Apakah Anda Yakin ?")) {
             $.ajax({
-                url: "{{route('akta-notaris')}}",
+                url: "{{route('akta-jaminan-fidusia')}}",
                 type: "POST",
                 dataType: "json",
                 data: {
@@ -385,7 +385,7 @@
                 },
                 success(result) {
                     if(result['status'] == 'success'){
-                        getAktaNotaris();
+                        getAktaJaminanFidusia();
                     }
                     toastr.success(result.message);
                 },
@@ -398,14 +398,14 @@
     }
     
     // get data
-    function getAktaNotaris()
+    function getAktaJaminanFidusia()
     {   
         var SITEURL = '{{URL::to('')}}/';
-        $("#aktappat-table").removeAttr('width').dataTable({
+        $("#aktajaminanfidusia-table").removeAttr('width').dataTable({
             processing: true,
             serverSide: true,
             ajax: {
-                url: SITEURL + "akta-notariss/data",
+                url: SITEURL + "akta-jaminan-fidusias/data",
             },
             destroy: true,
             scrollX: true,

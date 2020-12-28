@@ -43,6 +43,13 @@
             </span>
           </a>
         </li>
+        <li>
+          <a href="{{route('akta-jaminan-fidusia')}}">
+            <i class="fa fa-calendar"></i> <span>AKTA JAMINAN FIDUSIA</span>
+            <span class="pull-right-container">
+            </span>
+          </a>
+        </li>
         <li class="header">Lainnya</li>
         <li class="treeview">
           <a href="#">

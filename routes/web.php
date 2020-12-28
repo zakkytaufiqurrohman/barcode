@@ -97,6 +97,20 @@ Route::middleware('auth')->group(function () {
 
     });
 
+    // Akta Jaminan Fidusia
+    Route::name('akta-jaminan-fidusia')->prefix('/akta-jaminan-fidusias')->group(function () {
+        Route::get('/', 'AktaJaminanFidusiaController@index');
+        Route::post('/', 'AktaJaminanFidusiaController@store');
+        Route::put('/', 'AktaJaminanFidusiaController@update');
+        Route::delete('/', 'AktaJaminanFidusiaController@destroy');
+        Route::get('/show', 'AktaJaminanFidusiaController@show')->name('.show');
+        
+        Route::get('/data', 'AktaJaminanFidusiaController@data')->name('.data');
+
+        Route::get('/download/{id}', 'AktaJaminanFidusiaController@download')->name('.download');
+
+    });
+
 
     
     // user

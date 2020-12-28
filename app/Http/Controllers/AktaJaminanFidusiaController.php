@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\AktaNotaris;
+use App\Models\AktaJaminanFidusia;
 use App\Models\Berkas;
 use App\User;
 use Yajra\DataTables\Facades\DataTables;
@@ -12,21 +12,21 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
 
-class AktaNotarisController extends Controller
+class AktaJaminanFidusiaController extends Controller
 {
     public function index()
     {
-        return view('akta-notaris.index');
+        return view('akta-jaminan-fidusia.index');
     }
     public function data(Request $request)
     {
-        $data = AktaNotaris::query();
+        $data = AktaJaminanFidusia::query();
         return DataTables::eloquent($data)
             ->addColumn('barcode',function ($data) {
                 // get kode berkas from table berkas
                 $kode = $data->berkas->kode_berkas;
                 $kode = str_replace("/", "", $kode);
-                $kode =  config('app.url').'/berkas/akta-notaris/'.$kode;
+                $kode =  config('app.url').'/berkas/akta-jaminan-fidusia/'.$kode;
                 // generate barcode
                 $images = \DNS2D::getBarcodePNGPath(strval($kode), 'QRCODE',5,5);
                 // get image patch
@@ -35,15 +35,15 @@ class AktaNotarisController extends Controller
                 $url= asset("barcode/$nameImage");
 
                 $barcode = '';
-                $barcode .= "<a href='akta-notariss/download/$nameImage'><img src=".$url." border='0' width='100' class='img' align='center' />'</a>" ;
+                $barcode .= "<a href='akta-jaminan-fidusias/download/$nameImage'><img src=".$url." border='0' width='100' class='img' align='center' />'</a>" ;
 
                 return $barcode;
             })
             ->addColumn('action', function ($data) {
                
                 $action = '';
-                $action .= "<a href='javascript:void(0)' class='btn btn-icon btn-primary' data-id='{$data->id_aktanotaris}' onclick='showAktaNotaris(this);'><i class='fa fa-edit'></i></a>&nbsp;";
-                $action .= "<a href='javascript:void(0)' class='btn btn-icon btn-danger'  data-id='{$data->id_aktanotaris}' onclick='deleteAktaNotaris(this);'><i class='fa fa-trash'></i></a>&nbsp;";
+                $action .= "<a href='javascript:void(0)' class='btn btn-icon btn-primary' data-id='{$data->id_aktajaminanfidusia}' onclick='showAktaJaminanFidusia(this);'><i class='fa fa-edit'></i></a>&nbsp;";
+                $action .= "<a href='javascript:void(0)' class='btn btn-icon btn-danger'  data-id='{$data->id_aktajaminanfidusia}' onclick='deleteAktaJaminanFidusia(this);'><i class='fa fa-trash'></i></a>&nbsp;";
 
                 return $action;
             })
@@ -80,7 +80,6 @@ class AktaNotarisController extends Controller
             ->addIndexColumn()
             ->make(true);
     }
-
     public function store(Request $request)
     {
         date_default_timezone_set('Asia/Jakarta');
@@ -111,7 +110,7 @@ class AktaNotarisController extends Controller
         DB::beginTransaction();
         try{
             $berkas = Berkas::create([
-                'tipe_berkas' => 'aktanotaris',
+                'tipe_berkas' => 'aktajaminanfidusia',
                 'id_user' => Auth::user()->id_user,
                 'tanggal' => \Carbon\Carbon::parse($request->tanggal)->format('Y-m-d'),
                 'waktu' => date('H:i:s'),
@@ -124,7 +123,7 @@ class AktaNotarisController extends Controller
                 DB::rollback();
                 return response()->json(['status' => 'error', 'message' => 'Gagal simpan ke tabel berkas']);
             }
-            $data = AktaNotaris::create([
+            $data = AktaJaminanFidusia::create([
                 'judul' => $request->judul,
                 'nomor' => $request->nomor,
                 'tanggal' => \Carbon\Carbon::parse($request->tanggal)->format('Y-m-d'),
@@ -134,7 +133,7 @@ class AktaNotarisController extends Controller
                 'id_berkas' => $berkas->id_berkas,
             ]);
             DB::commit();
-            return response()->json(['status' => 'success', 'message' => 'Berhasil menambahkan Akta Notaris']);
+            return response()->json(['status' => 'success', 'message' => 'Berhasil menambahkan Akta Jaminan Fidusia']);
         } catch(Exception $e){
             DB::rollback();
             return response()->json(['status' => 'error', 'message' => $e->getMessage()]);
@@ -143,15 +142,15 @@ class AktaNotarisController extends Controller
     }
     public function show(Request $request)
     {
-        $aktanotaris = AktaNotaris::find($request->id);
-        $id_berkas = $aktanotaris->id_berkas;
+        $aktajaminanfidusia = AktaJaminanFidusia::find($request->id);
+        $id_berkas = $aktajaminanfidusia->id_berkas;
         $berkas = Berkas::where('id_berkas',$id_berkas)->first()->attributesToArray();
-        $datas = array_merge($aktanotaris->attributesToArray(),$berkas);
-        if (!$aktanotaris) {
-            return response()->json(['status' => 'error', 'message' => 'Akta Notaris tidak ditemukan', 'data' => '']);
+        $datas = array_merge($aktajaminanfidusia->attributesToArray(),$berkas);
+        if (!$aktajaminanfidusia) {
+            return response()->json(['status' => 'error', 'message' => 'Akta Jaminan Fidusia tidak ditemukan', 'data' => '']);
         }
 
-        return response()->json(['status' => 'success', 'message' => 'Berhasil mengambil data daftar Akta Notaris', 'data' => $datas]);
+        return response()->json(['status' => 'success', 'message' => 'Berhasil mengambil data daftar Akta Jaminan Fidusia', 'data' => $datas]);
     }
     public function update(Request $request)
     {
@@ -180,7 +179,7 @@ class AktaNotarisController extends Controller
         DB::beginTransaction();
         try{
             
-            $data = AktaNotaris::find($request->id);
+            $data = AktaJaminanFidusia::find($request->id);
             $data->update([
                 'judul' => $request->judul,
                 'nomor' => $request->nomor,
@@ -221,21 +220,21 @@ class AktaNotarisController extends Controller
     {
         DB::beginTransaction();
         try {
-            $aktanotaris = AktaNotaris::find($request->id);
-            $berkas = Berkas::find($aktanotaris->id_berkas);
+            $aktajaminanfidusia = AktaJaminanFidusia::find($request->id);
+            $berkas = Berkas::find($aktajaminanfidusia->id_berkas);
             if (!$berkas) {
                 DB::rollback();
                 return response()->json(['status' => 'error', 'message' => 'Berkas tidak ditemukan.']);
             }
-            if (!$aktanotaris) {
+            if (!$aktajaminanfidusia) {
                 DB::rollback();
-                return response()->json(['status' => 'error', 'message' => 'Akta Notaris tidak ditemukan.']);
+                return response()->json(['status' => 'error', 'message' => 'Akta Jaminan Fidusia tidak ditemukan.']);
             }
             $berkas->delete();
-            $aktanotaris->delete();
+            $aktajaminanfidusia->delete();
 
             DB::commit();
-            return response()->json(['status' => 'success', 'message' => 'Berhasil menghapus Akta Notaris']);
+            return response()->json(['status' => 'success', 'message' => 'Berhasil menghapus Akta Jaminan Fidusia']);
         } catch (Exception $e) {
             DB::rollback();
             return response()->json(['status' => 'error', 'message' => $e->getMessage()]);

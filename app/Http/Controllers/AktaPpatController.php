@@ -244,4 +244,9 @@ class AktaPpatController extends Controller
             return response()->json(['status' => 'error', 'message' => $e->getMessage()]);
         }
     }
+    public function download($filepath)
+    {
+        $url=  public_path(). '/barcode/'. $filepath;
+        return \Response::download($url);
+    }
 }

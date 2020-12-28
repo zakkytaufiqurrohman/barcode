@@ -29,6 +29,13 @@
             </span>
           </a>
         </li>
+        <li>
+          <a href="{{route('akta-ppat')}}">
+            <i class="fa fa-calendar"></i> <span>AKTA PPAT</span>
+            <span class="pull-right-container">
+            </span>
+          </a>
+        </li>
         <li class="header">Lainnya</li>
         <li class="treeview">
           <a href="#">

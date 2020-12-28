@@ -69,6 +69,20 @@ Route::middleware('auth')->group(function () {
 
     });
 
+    // Akta PPAT
+    Route::name('akta-ppat')->prefix('/akta-ppats')->group(function () {
+        Route::get('/', 'AktaPpatController@index');
+        Route::post('/', 'AktaPpatController@store');
+        Route::put('/', 'AktaPpatController@update');
+        Route::delete('/', 'AktaPpatController@destroy');
+        Route::get('/show', 'AktaPpatController@show')->name('.show');
+        
+        Route::get('/data', 'AktaPpatController@data')->name('.data');
+
+        Route::get('/download/{id}', 'AktaPpatController@download')->name('.download');
+
+    });
+
 
     
     // user

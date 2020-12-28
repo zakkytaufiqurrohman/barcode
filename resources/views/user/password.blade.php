@@ -40,7 +40,7 @@
                     </div>
                     <div class="form-group">
                         <label for="add-password_user1">Ulangi Password Baru</label>
-                        <input type="password" name="password_confirmation" class="form-control @error('password_confirmation') is-invalid @enderror" id="add-password_confirmation" placeholder="Ulangi Password Password">
+                        <input type="password" name="password_confirmation" class="form-control @error('password_confirmation') is-invalid @enderror" id="add-password_confirmation" placeholder="Ulangi Password Baru">
                          @error('password_confirmation')
                             <span style="color:red" class="help-block">
                                 <strong>{{ $message }}</strong>

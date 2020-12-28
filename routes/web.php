@@ -111,6 +111,20 @@ Route::middleware('auth')->group(function () {
 
     });
 
+    // Tanda Terima
+    Route::name('tanda-terima')->prefix('/tanda-terimas')->group(function () {
+        Route::get('/', 'TandaTerimaController@index');
+        Route::post('/', 'TandaTerimaController@store');
+        Route::put('/', 'TandaTerimaController@update');
+        Route::delete('/', 'TandaTerimaController@destroy');
+        Route::get('/show', 'TandaTerimaController@show')->name('.show');
+        
+        Route::get('/data', 'TandaTerimaController@data')->name('.data');
+
+        Route::get('/download/{id}', 'TandaTerimaController@download')->name('.download');
+
+    });
+
 
     
     // user

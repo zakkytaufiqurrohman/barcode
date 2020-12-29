@@ -125,6 +125,20 @@ Route::middleware('auth')->group(function () {
 
     });
 
+    // PPAT
+    Route::name('ppat')->prefix('/ppats')->group(function () {
+        Route::get('/', 'PpatController@index');
+        Route::post('/', 'PpatController@store');
+        Route::put('/', 'PpatController@update');
+        Route::delete('/', 'PpatController@destroy');
+        Route::get('/show', 'PpatController@show')->name('.show');
+        
+        Route::get('/data', 'PpatController@data')->name('.data');
+
+        Route::get('/download/{id}', 'PpatController@download')->name('.download');
+
+    });
+
 
     
     // user

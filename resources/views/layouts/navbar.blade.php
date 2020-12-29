@@ -2,11 +2,19 @@
         <li class="header">Admin</li>
         <li>
           <a href="{{route('user')}}">
-            <i class="fa fa-calendar"></i> <span>User</span>
+            <i class="fa fa-user-plus"></i> <span>User</span>
             <span class="pull-right-container">
             </span>
           </a>
         </li>
+        <li>
+          <a href="{{route('password_berkas')}}">
+            <i class="fa fa-key"></i> <span>Password Berkas</span>
+            <span class="pull-right-container">
+            </span>
+          </a>
+        </li>
+        <!--  -->
         <li class="header">Berkas</li>
         <li>
           <a href="{{route('waarmeking')}}">
@@ -60,7 +68,7 @@
         <li class="header">Lainnya</li>
         <li class="treeview">
           <a href="#">
-            <i class="fa fa-edit"></i> <span>Pengaturan</span>
+            <i class="fa  fa-gears"></i> <span>Pengaturan</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>

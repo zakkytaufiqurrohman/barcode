@@ -158,6 +158,9 @@ Route::middleware('auth')->group(function () {
 
     });
 
+    // password berkas
+    Route::get('/password_berkas', 'PasswordBerkasController@index')->name('password_berkas');
+    Route::put('/update_pw_berkas', 'PasswordBerkasController@update')->name('update_berkas');
     /*
         baca qr code
     */

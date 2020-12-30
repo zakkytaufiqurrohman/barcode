@@ -77,64 +77,64 @@
                         <div class="row">
                           <div class="col-md-6">
                             <div class="form-group">
-                                <label for="add-no_urut">no_urut</label>
-                                <input type="text" name="no_urut" class="form-control" id="add-no_urut" placeholder="no_urut">
+                                <label for="add-no_urut">No Urut</label>
+                                <input type="text" name="no_urut" class="form-control" id="add-no_urut" placeholder="No Urut">
                             </div>
                             <div class="form-group">
-                                <label for="add-no_akta">no_akta</label>
-                                <input type="text" name="no_akta" class="form-control" id="add-no_akta" placeholder="no_akta">
+                                <label for="add-no_akta">No Akta</label>
+                                <input type="text" name="no_akta" class="form-control" id="add-no_akta" placeholder="No Akta">
                             </div>
                             <div class="form-group">
-                                <label for="add-tanggal_akta">tanggal_akta</label>
-                                <input type="text" name="tanggal_akta" class="form-control datepicker" placeholder="tanggal_akta">
+                                <label for="add-tanggal_akta">Tanggal Akta</label>
+                                <input type="text" name="tanggal_akta" class="form-control datepicker" placeholder="Tanggal Akta">
                             </div>
                             <div class="form-group">
-                                <label for="add-bentuk_hukum">bentuk_hukum</label>
-                                <input type="text" name="bentuk_hukum" class="form-control" id="add-bentuk_hukum" placeholder="bentuk_hukum">
+                                <label for="add-bentuk_hukum">Bentuk Perbuatan Hukum</label>
+                                <input type="text" name="bentuk_hukum" class="form-control" id="add-bentuk_hukum" placeholder="Bentuk Perbuatan Hukum">
                             </div>
                             <div class="form-group">
-                                <label for="add-pihak1">pihak1</label>
-                                <input type="text" name="pihak1" class="form-control" id="add-pihak1" placeholder="pihak1">
+                                <label for="add-pihak1">Pihak Yang Memberikan</label>
+                                <input type="text" name="pihak1" class="form-control" id="add-pihak1" placeholder="Pihak Yang Memberikan">
                             </div>
                             <div class="form-group">
-                                <label for="add-pihak2">pihak2</label>
-                                <input type="text" name="pihak2" class="form-control" id="add-pihak2" placeholder="pihak2">
+                                <label for="add-pihak2">Pihak Yang Menerima</label>
+                                <input type="text" name="pihak2" class="form-control" id="add-pihak2" placeholder="Pihak Yang Menerima">
                             </div>
                             <div class="form-group">
-                                <label for="add-nomor_hak">nomor_hak</label>
-                                <input type="text" name="nomor_hak" class="form-control" id="add-nomor_hak" placeholder="nomor_hak">
+                                <label for="add-nomor_hak">Nomor Hak</label>
+                                <input type="text" name="nomor_hak" class="form-control" id="add-nomor_hak" placeholder="Nomor Hak">
                             </div>
                             <div class="form-group">
-                                <label for="add-letak_bangunan">letak_bangunan</label>
-                                <input type="text" name="letak_bangunan" class="form-control" id="add-letak_bangunan" placeholder="letak_bangunan">
+                                <label for="add-letak_bangunan">Letak Tanah Dan Bangunan</label>
+                                <input type="text" name="letak_bangunan" class="form-control" id="add-letak_bangunan" placeholder="Letak Tanah Dan Bangunan">
                             </div>
                             <div class="form-group">
-                                <label for="add-luas_tanah">luas_tanah</label>
-                                <input type="text" name="luas_tanah" class="form-control" id="add-luas_tanah" placeholder="luas_tanah">
+                                <label for="add-luas_tanah">Luas Tanah</label>
+                                <input type="text" name="luas_tanah" class="form-control" id="add-luas_tanah" placeholder="Luas Tanah">
                             </div>
                             <div class="form-group">
-                                <label for="add-luas_bangunan">luas_bangunan</label>
-                                <input type="text" name="luas_bangunan" class="form-control" id="add-luas_bangunan" placeholder="luas_bangunan">
+                                <label for="add-luas_bangunan">Luas Bangunan</label>
+                                <input type="text" name="luas_bangunan" class="form-control" id="add-luas_bangunan" placeholder="Luas Bangunan">
                             </div>
                             <div class="form-group">
-                                <label for="add-harga_transaksi">harga_transaksi</label>
-                                <input type="text" name="harga_transaksi" class="form-control" id="add-harga_transaksi" placeholder="harga_transaksi">
+                                <label for="add-harga_transaksi">Harga Transaksi</label>
+                                <input type="text" name="harga_transaksi" class="form-control" id="add-harga_transaksi" placeholder="Harga Transaksi">
                             </div>
                             <div class="form-group">
-                                <label for="add-nop_tahun">nop_tahun</label>
-                                <input type="text" name="nop_tahun" class="form-control" id="add-nop_tahun" placeholder="nop_tahun">
+                                <label for="add-nop_tahun">NOP/Tahun</label>
+                                <input type="text" name="nop_tahun" class="form-control" id="add-nop_tahun" placeholder="NOP/Tahun">
                             </div>
                             <div class="form-group">
-                                <label for="add-nilai_njop">nilai_njop</label>
-                                <input type="text" name="nilai_njop" class="form-control" id="add-nilai_njop" placeholder="nilai_njop">
+                                <label for="add-nilai_njop">Nilai NJOP</label>
+                                <input type="text" name="nilai_njop" class="form-control" id="add-nilai_njop" placeholder="Nilai NJOP">
                             </div>
                             <div class="form-group">
-                                <label for="add-tanggal_ssp">tanggal_ssp</label>
-                                <input type="text" name="tanggal_ssp" class="form-control datepicker" placeholder="tanggal_ssp">
+                                <label for="add-tanggal_ssp">Tanggal SSP</label>
+                                <input type="text" name="tanggal_ssp" class="form-control datepicker" placeholder="Tanggal SSP">
                             </div>
                             <div class="form-group">
-                                <label for="add-nilai_ssp">nilai_ssp</label>
-                                <input type="text" name="nilai_ssp" class="form-control" id="add-nilai_ssp" placeholder="nilai_ssp">
+                                <label for="add-nilai_ssp">Nilai SSP</label>
+                                <input type="text" name="nilai_ssp" class="form-control" id="add-nilai_ssp" placeholder="Nilai SSP">
                             </div>
                             
                           </div>
@@ -142,48 +142,44 @@
                           <div class="col-md-6">
                             
                             <div class="form-group">
-                                <label for="add-tanggal_ssb">tanggal_ssb</label>
-                                <input type="text" name="tanggal_ssb" class="form-control datepicker" placeholder="tanggal_ssb">
+                                <label for="add-tanggal_ssb">Tanggal SSB</label>
+                                <input type="text" name="tanggal_ssb" class="form-control datepicker" placeholder="Tanggal SSB">
                             </div>
                             <div class="form-group">
-                                <label for="add-nilai_ssb">nilai_ssb</label>
-                                <input type="text" name="nilai_ssb" class="form-control" id="add-nilai_ssb" placeholder="nilai_ssb">
+                                <label for="add-nilai_ssb">Nilai SSB</label>
+                                <input type="text" name="nilai_ssb" class="form-control" id="add-nilai_ssb" placeholder="Nilai SSB">
                             </div>
                             <div class="form-group">
-                                <label for="addketerangan">keterangan</label>  
+                                <label for="addketerangan">Keterangan</label>  
                                 <textarea class="ckeditor form-control" name="keterangan" id="addketerangan"></textarea>
                             </div>
                             <div class="form-group">
-                                <label for="add-tgl_masuk_bpn">tgl_masuk_bpn</label>
-                                <input type="text" name="tgl_masuk_bpn" class="form-control datepicker" placeholder="tgl_masuk_bpn">
+                                <label for="add-tgl_masuk_bpn">Tanggal Masuk BPN</label>
+                                <input type="text" name="tgl_masuk_bpn" class="form-control datepicker" placeholder="Tanggal Masuk BPN">
                             </div>
                             <div class="form-group">
-                                <label for="add-tgl_selesai_bpn">tgl_selesai_bpn</label>
-                                <input type="text" name="tgl_selesai_bpn" class="form-control datepicker" placeholder="tgl_selesai_bpn">
+                                <label for="add-tgl_selesai_bpn">Tanggal Selesai BPN</label>
+                                <input type="text" name="tgl_selesai_bpn" class="form-control datepicker" placeholder="Tanggal Selesai BPN">
                             </div>
                             <div class="form-group">
-                                <label for="add-tgl_penyerahan_clien">tgl_penyerahan_clien</label>
-                                <input type="text" name="tgl_penyerahan_clien" class="form-control datepicker" placeholder="tgl_penyerahan_clien">
+                                <label for="add-tgl_penyerahan_clien">Tanggal Penyerahan Clien</label>
+                                <input type="text" name="tgl_penyerahan_clien" class="form-control datepicker" placeholder="Tanggal Penyerahan Clien">
                             </div>
                             <div class="form-group">
-                                <label for="add-no_ktp">no_ktp</label>
-                                <input type="text" name="no_ktp" class="form-control" id="add-no_ktp" placeholder="no_ktp">
+                                <label for="add-no_ktp">No KTP</label>
+                                <input type="text" name="no_ktp" class="form-control" id="add-no_ktp" placeholder="No KTP">
                             </div>
                             <div class="form-group">
-                                <label for="add-alamat">alamat</label>
-                                <input type="text" name="alamat" class="form-control" id="add-alamat" placeholder="alamat">
+                                <label for="add-alamat">Alamat</label>
+                                <input type="text" name="alamat" class="form-control" id="add-alamat" placeholder="Alamat">
                             </div>
                             <div class="form-group">
                                 <label for="add-pas_foto">Pas Foto</label>
                                 <input type="file" name="pas_foto" class="form-control" id="add-pas_foto" accept="image/*">
-              
-                                <p class="help-block">Example block-level help text here.</p>
                             </div>
                             <div class="form-group">
                                 <label for="add-foto_akad">Fota Akad</label>
                                 <input type="file" name="foto_akad" class="form-control" id="add-foto_akad" accept="image/*">
-                
-                                <p class="help-block">Example block-level help text here.</p>
                             </div>
 
                             <div class="form-check">
@@ -228,64 +224,64 @@
                         <div class="row">
                           <div class="col-md-6">
                             <div class="form-group">
-                                <label for="update-no_urut">no_urut</label>
-                                <input type="text" name="no_urut" class="form-control" id="update-no_urut" placeholder="no_urut">
+                                <label for="update-no_urut">No Urut</label>
+                                <input type="text" name="no_urut" class="form-control" id="update-no_urut" placeholder="No Urut">
                             </div>
                             <div class="form-group">
-                                <label for="update-no_akta">no_akta</label>
-                                <input type="text" name="no_akta" class="form-control" id="update-no_akta" placeholder="no_akta">
+                                <label for="update-no_akta">No Akta</label>
+                                <input type="text" name="no_akta" class="form-control" id="update-no_akta" placeholder="No Akta">
                             </div>
                             <div class="form-group">
-                                <label for="exampleFormControlInput1">tanggal_akta</label>
-                                <input type="text" name="tanggal_akta" class="form-control datepicker" placeholder="tanggal_akta">
+                                <label for="exampleFormControlInput1">Tanggal Akta</label>
+                                <input type="text" name="tanggal_akta" class="form-control datepicker" placeholder="Tanggal Akta">
                             </div>
                             <div class="form-group">
-                                <label for="update-bentuk_hukum">bentuk_hukum</label>
-                                <input type="text" name="bentuk_hukum" class="form-control" id="update-bentuk_hukum" placeholder="bentuk_hukum">
+                                <label for="update-bentuk_hukum">Bentuk Perbuatan Hukum</label>
+                                <input type="text" name="bentuk_hukum" class="form-control" id="update-bentuk_hukum" placeholder="Bentuk Perbuatan Hukum">
                             </div>
                             <div class="form-group">
-                                <label for="update-pihak1">pihak1</label>
-                                <input type="text" name="pihak1" class="form-control" id="update-pihak1" placeholder="pihak1">
+                                <label for="update-pihak1">Pihak Yang Memberikan</label>
+                                <input type="text" name="pihak1" class="form-control" id="update-pihak1" placeholder="Pihak Yang Memberikan">
                             </div>
                             <div class="form-group">
-                                <label for="update-pihak2">pihak2</label>
-                                <input type="text" name="pihak2" class="form-control" id="update-pihak2" placeholder="pihak2">
+                                <label for="update-pihak2">Pihak Yang Menerima</label>
+                                <input type="text" name="pihak2" class="form-control" id="update-pihak2" placeholder="Pihak Yang Menerima">
                             </div>
                             <div class="form-group">
-                                <label for="update-nomor_hak">nomor_hak</label>
-                                <input type="text" name="nomor_hak" class="form-control" id="update-nomor_hak" placeholder="nomor_hak">
+                                <label for="update-nomor_hak">Nomor Hak</label>
+                                <input type="text" name="nomor_hak" class="form-control" id="update-nomor_hak" placeholder="Nomor Hak">
                             </div>
                             <div class="form-group">
-                                <label for="update-letak_bangunan">letak_bangunan</label>
-                                <input type="text" name="letak_bangunan" class="form-control" id="update-letak_bangunan" placeholder="letak_bangunan">
+                                <label for="update-letak_bangunan">Letak Tanah Dan Bangunan</label>
+                                <input type="text" name="letak_bangunan" class="form-control" id="update-letak_bangunan" placeholder="Letak Tanah Dan Bangunan">
                             </div>
                             <div class="form-group">
-                                <label for="update-luas_tanah">luas_tanah</label>
-                                <input type="text" name="luas_tanah" class="form-control" id="update-luas_tanah" placeholder="luas_tanah">
+                                <label for="update-luas_tanah">Luas Tanah</label>
+                                <input type="text" name="luas_tanah" class="form-control" id="update-luas_tanah" placeholder="Luas Tanah">
                             </div>
                             <div class="form-group">
-                                <label for="update-luas_bangunan">luas_bangunan</label>
-                                <input type="text" name="luas_bangunan" class="form-control" id="update-luas_bangunan" placeholder="luas_bangunan">
+                                <label for="update-luas_bangunan">Luas Bangunan</label>
+                                <input type="text" name="luas_bangunan" class="form-control" id="update-luas_bangunan" placeholder="Luas Bangunan">
                             </div>
                             <div class="form-group">
-                                <label for="update-harga_transaksi">harga_transaksi</label>
-                                <input type="text" name="harga_transaksi" class="form-control" id="update-harga_transaksi" placeholder="harga_transaksi">
+                                <label for="update-harga_transaksi">Harga Transaksi</label>
+                                <input type="text" name="harga_transaksi" class="form-control" id="update-harga_transaksi" placeholder="Harga Transaksi">
                             </div>
                             <div class="form-group">
-                                <label for="update-nop_tahun">nop_tahun</label>
-                                <input type="text" name="nop_tahun" class="form-control" id="update-nop_tahun" placeholder="nop_tahun">
+                                <label for="update-nop_tahun">NOP/Tahun</label>
+                                <input type="text" name="nop_tahun" class="form-control" id="update-nop_tahun" placeholder="NOP/Tahun">
                             </div>
                             <div class="form-group">
-                                <label for="update-nilai_njop">nilai_njop</label>
-                                <input type="text" name="nilai_njop" class="form-control" id="update-nilai_njop" placeholder="nilai_njop">
+                                <label for="update-nilai_njop">Nilai NJOP</label>
+                                <input type="text" name="nilai_njop" class="form-control" id="update-nilai_njop" placeholder="Nilai NJOP">
                             </div>
                             <div class="form-group">
-                                <label for="exampleFormControlInput1">tanggal_ssp</label>
-                                <input type="text" name="tanggal_ssp" class="form-control datepicker" placeholder="tanggal_ssp">
+                                <label for="exampleFormControlInput1">Tanggal SSP</label>
+                                <input type="text" name="tanggal_ssp" class="form-control datepicker" placeholder="Tanggal SSP">
                             </div>
                             <div class="form-group">
-                                <label for="update-nilai_ssp">nilai_ssp</label>
-                                <input type="text" name="nilai_ssp" class="form-control" id="update-nilai_ssp" placeholder="nilai_ssp">
+                                <label for="update-nilai_ssp">Nilai SSP</label>
+                                <input type="text" name="nilai_ssp" class="form-control" id="update-nilai_ssp" placeholder="Nilai SSP">
                             </div>
                             
                           </div>
@@ -293,36 +289,36 @@
                           <div class="col-md-6">
                             
                             <div class="form-group">
-                                <label for="exampleFormControlInput1">tanggal_ssb</label>
-                                <input type="text" name="tanggal_ssb" class="form-control datepicker" placeholder="tanggal_ssb">
+                                <label for="exampleFormControlInput1">Tanggal SSB</label>
+                                <input type="text" name="tanggal_ssb" class="form-control datepicker" placeholder="Tanggal SSB">
                             </div>
                             <div class="form-group">
-                                <label for="update-nilai_ssb">nilai_ssb</label>
-                                <input type="text" name="nilai_ssb" class="form-control" id="update-nilai_ssb" placeholder="nilai_ssb">
+                                <label for="update-nilai_ssb">Nilai SSB</label>
+                                <input type="text" name="nilai_ssb" class="form-control" id="update-nilai_ssb" placeholder="Nilai SSB">
                             </div>
                             <div class="form-group">
-                                <label for="updateketerangan">keterangan</label>  
+                                <label for="updateketerangan">Keterangan</label>  
                                 <textarea class="ckeditor form-control" name="keterangan" id="updateketerangan"></textarea>
                             </div>
                             <div class="form-group">
-                                <label for="exampleFormControlInput1">tgl_masuk_bpn</label>
-                                <input type="text" name="tgl_masuk_bpn" class="form-control datepicker" placeholder="tgl_masuk_bpn">
+                                <label for="exampleFormControlInput1">Tanggal Masuk BPN</label>
+                                <input type="text" name="tgl_masuk_bpn" class="form-control datepicker" placeholder="Tanggal Masuk BPN">
                             </div>
                             <div class="form-group">
-                                <label for="exampleFormControlInput1">tgl_selesai_bpn</label>
-                                <input type="text" name="tgl_selesai_bpn" class="form-control datepicker" placeholder="tgl_selesai_bpn">
+                                <label for="exampleFormControlInput1">Tanggal Selesai BPN</label>
+                                <input type="text" name="tgl_selesai_bpn" class="form-control datepicker" placeholder="Tanggal Selesai BPN">
                             </div>
                             <div class="form-group">
-                                <label for="exampleFormControlInput1">tgl_penyerahan_clien</label>
-                                <input type="text" name="tgl_penyerahan_clien" class="form-control datepicker" placeholder="tgl_penyerahan_clien">
+                                <label for="exampleFormControlInput1">Tanggal Penyerahan Clien</label>
+                                <input type="text" name="tgl_penyerahan_clien" class="form-control datepicker" placeholder="Tanggal Penyerahan Clien">
                             </div>
                             <div class="form-group">
-                                <label for="update-no_ktp">no_ktp</label>
-                                <input type="text" name="no_ktp" class="form-control" id="update-no_ktp" placeholder="no_ktp">
+                                <label for="update-no_ktp">No KTP</label>
+                                <input type="text" name="no_ktp" class="form-control" id="update-no_ktp" placeholder="No KTP">
                             </div>
                             <div class="form-group">
-                                <label for="update-alamat">alamat</label>
-                                <input type="text" name="alamat" class="form-control" id="update-alamat" placeholder="alamat">
+                                <label for="update-alamat">Alamat</label>
+                                <input type="text" name="alamat" class="form-control" id="update-alamat" placeholder="Alamat">
                             </div>
                             <div class="form-group">
                                 <label for="update-pas_foto">Pas Foto</label>

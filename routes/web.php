@@ -161,6 +161,12 @@ Route::middleware('auth')->group(function () {
     // password berkas
     Route::get('/password_berkas', 'PasswordBerkasController@index')->name('password_berkas');
     Route::put('/update_pw_berkas', 'PasswordBerkasController@update')->name('update_berkas');
+
+    // setting header logo
+    Route::get('/setting', 'SettingController@index')->name('setting');
+    Route::post('/setting_insert', 'SettingController@store')->name('setting_store');
+
+
     /*
         baca qr code
     */

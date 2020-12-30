@@ -265,7 +265,6 @@ class PpatController extends Controller
 
     public function update(Request $request)
     {
-        // dd($request->all());
         date_default_timezone_set('Asia/Jakarta');
         // $this->validate($request,[
         //     'judul' => 'required|min:3',
@@ -291,93 +290,76 @@ class PpatController extends Controller
         DB::beginTransaction();
         try{
             $ppat=Ppat::findOrFail($request->id);
-            if(empty($request->file(['pas_foto','foto_akad']))){
-                $nama_file_pas_foto=$ppat->pas_foto;
-                $nama_file_foto_akad=$ppat->foto_akad;
-            }else{
 
+            if(empty($request->file(['pas_foto']))){
+                $nama_file_pas_foto = $ppat->pas_foto;
+            }
+            else {
                 $file_pas_foto = $request->pas_foto;
-                $file_foto_akad = $request->foto_akad;
-    
+
                 $text_pas_foto = str_replace(' ', '',$file_pas_foto->getClientOriginalName());
-                $text_foto_akad = str_replace(' ', '',$file_foto_akad->getClientOriginalName());
-    
-                $nama_file_pas_foto = time()."_".$text_pas_foto;
-                $nama_file_foto_akad = time()."_".$text_foto_akad;
-                //hapus file lama
+
+                $nama_file_pas_foto = time()."_".$text_pas_foto;                
                 
                 $file_pas_foto->move(public_path('GambarFotoAkad'),$nama_file_pas_foto);
+
+                //hapus file lama
+                if (file_exists(public_path('GambarFotoAkad/').$ppat->pas_foto))
+                {
+                    $image_path_pas_foto = public_path('GambarFotoAkad/').$ppat->pas_foto;
+
+                    unlink($image_path_pas_foto);
+                }
+            }
+            if (empty($request->file(['foto_akad']))){
+                $nama_file_foto_akad = $ppat->foto_akad;
+            }
+            else{
+                $file_foto_akad = $request->foto_akad;
+    
+                $text_foto_akad = str_replace(' ', '',$file_foto_akad->getClientOriginalName());
+    
+                $nama_file_foto_akad = time()."_".$text_foto_akad;
+
                 $file_foto_akad->move(public_path('GambarPasFoto'),$nama_file_foto_akad);
+
+                if (file_exists(public_path('GambarFotoAkad/').$ppat->foto_akad))
+                {
+                    $image_path_pas_foto = public_path('GambarFotoAkad/').$ppat->foto_akad;
+
+                    unlink($image_path_pas_foto);
+                }
             }
 
             $update = Ppat::find($request->id);
-            if(empty($update)){
-                Ppat::create([
-                    'pas_foto' => $nama_file_pas_foto,
-                    'foto_akad' => $nama_file_foto_akad,
-                    'no_urut' => $request->no_urut,
-                    'no_akta' => $request->no_akta,
-                    'tanggal_akta' => \Carbon\Carbon::parse($request->tanggal_akta)->format('Y-m-d'),
-                    'bentuk_hukum' => $request->bentuk_hukum,
-                    'pihak1' => $request->pihak1,
-                    'pihak2' => $request->pihak2,
-                    'nomor_hak' => $request->nomor_hak,
-                    'letak_bangunan' => $request->letak_bangunan,
-                    'luas_tanah' => $request->luas_tanah,
-                    'luas_bangunan' => $request->luas_bangunan,
-                    'harga_transaksi' => $request->harga_transaksi,
-                    'nop_tahun' => $request->nop_tahun,
-                    'nilai_njop' => $request->nilai_njop,
-                    'tanggal_ssp' => \Carbon\Carbon::parse($request->tanggal_ssp)->format('Y-m-d'),
-                    'nilai_ssp' => $request->nilai_ssp,
-                    'tanggal_ssb' => \Carbon\Carbon::parse($request->tanggal_ssb)->format('Y-m-d'),
-                    'nilai_ssb' => $request->nilai_ssb,
-                    'keterangan' => $request->keterangan,
-                    'tgl_masuk_bpn' => \Carbon\Carbon::parse($request->tgl_masuk_bpn)->format('Y-m-d'),
-                    'tgl_selesai_bpn' => \Carbon\Carbon::parse($request->tgl_selesai_bpn)->format('Y-m-d'),
-                    'tgl_penyerahan_clien' => \Carbon\Carbon::parse($request->tgl_penyerahan_clien)->format('Y-m-d'),
-                    'no_ktp' => $request->no_ktp,
-                    'alamat' => $request->alamat,
-                ]);
-            }
-            else {
-                // if (file_exists(public_path('settings/').$update->header))
-                // {
-                    $image_path_pas_foto = public_path('GambarFotoAkad/').$update->pas_foto;
-                    $image_path_foto_akad = public_path('GambarPasFoto/').$update->foto_akad;
-
-                    unlink($image_path_pas_foto);
-                    unlink($image_path_foto_akad);
-                // }
-                $update->update([
-                    'pas_foto' => $nama_file_pas_foto,
-                    'foto_akad' => $nama_file_foto_akad,
-                    'no_urut' => $request->no_urut,
-                    'no_akta' => $request->no_akta,
-                    'tanggal_akta' => \Carbon\Carbon::parse($request->tanggal_akta)->format('Y-m-d'),
-                    'bentuk_hukum' => $request->bentuk_hukum,
-                    'pihak1' => $request->pihak1,
-                    'pihak2' => $request->pihak2,
-                    'nomor_hak' => $request->nomor_hak,
-                    'letak_bangunan' => $request->letak_bangunan,
-                    'luas_tanah' => $request->luas_tanah,
-                    'luas_bangunan' => $request->luas_bangunan,
-                    'harga_transaksi' => $request->harga_transaksi,
-                    'nop_tahun' => $request->nop_tahun,
-                    'nilai_njop' => $request->nilai_njop,
-                    'tanggal_ssp' => \Carbon\Carbon::parse($request->tanggal_ssp)->format('Y-m-d'),
-                    'nilai_ssp' => $request->nilai_ssp,
-                    'tanggal_ssb' => \Carbon\Carbon::parse($request->tanggal_ssb)->format('Y-m-d'),
-                    'nilai_ssb' => $request->nilai_ssb,
-                    'keterangan' => $request->keterangan,
-                    'tgl_masuk_bpn' => \Carbon\Carbon::parse($request->tgl_masuk_bpn)->format('Y-m-d'),
-                    'tgl_selesai_bpn' => \Carbon\Carbon::parse($request->tgl_selesai_bpn)->format('Y-m-d'),
-                    'tgl_penyerahan_clien' => \Carbon\Carbon::parse($request->tgl_penyerahan_clien)->format('Y-m-d'),
-                    'no_ktp' => $request->no_ktp,
-                    'alamat' => $request->alamat,
-                ]);
-               
-            }
+            $update->update([
+                'pas_foto' => $nama_file_pas_foto,
+                'foto_akad' => $nama_file_foto_akad,
+                'no_urut' => $request->no_urut,
+                'no_akta' => $request->no_akta,
+                'tanggal_akta' => \Carbon\Carbon::parse($request->tanggal_akta)->format('Y-m-d'),
+                'bentuk_hukum' => $request->bentuk_hukum,
+                'pihak1' => $request->pihak1,
+                'pihak2' => $request->pihak2,
+                'nomor_hak' => $request->nomor_hak,
+                'letak_bangunan' => $request->letak_bangunan,
+                'luas_tanah' => $request->luas_tanah,
+                'luas_bangunan' => $request->luas_bangunan,
+                'harga_transaksi' => $request->harga_transaksi,
+                'nop_tahun' => $request->nop_tahun,
+                'nilai_njop' => $request->nilai_njop,
+                'tanggal_ssp' => \Carbon\Carbon::parse($request->tanggal_ssp)->format('Y-m-d'),
+                'nilai_ssp' => $request->nilai_ssp,
+                'tanggal_ssb' => \Carbon\Carbon::parse($request->tanggal_ssb)->format('Y-m-d'),
+                'nilai_ssb' => $request->nilai_ssb,
+                'keterangan' => $request->keterangan,
+                'tgl_masuk_bpn' => \Carbon\Carbon::parse($request->tgl_masuk_bpn)->format('Y-m-d'),
+                'tgl_selesai_bpn' => \Carbon\Carbon::parse($request->tgl_selesai_bpn)->format('Y-m-d'),
+                'tgl_penyerahan_clien' => \Carbon\Carbon::parse($request->tgl_penyerahan_clien)->format('Y-m-d'),
+                'no_ktp' => $request->no_ktp,
+                'alamat' => $request->alamat,
+            ]);
+            
             DB::commit();
 
             $id_berkas = $update->id_berkas;
@@ -400,7 +382,7 @@ class PpatController extends Controller
                 'password' => $passwordStatus,
             ]);
             DB::commit();
-            return response()->json(['status' => 'success', 'message' => 'Berhasil menambahkan Akta PPAT']);
+            return response()->json(['status' => 'success', 'message' => 'Berhasil Update Akta PPAT']);
         } catch(Exception $e){
             DB::rollback();
             return response()->json(['status' => 'error', 'message' => $e->getMessage()]);

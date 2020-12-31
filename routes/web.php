@@ -132,7 +132,8 @@ Route::middleware('auth')->group(function () {
         Route::put('/', 'PpatController@update');
         Route::delete('/', 'PpatController@destroy');
         Route::get('/show', 'PpatController@show')->name('.show');
-        
+        Route::get('/detail/{id}', 'PpatController@detail')->name('.detail');
+
         Route::get('/data', 'PpatController@data')->name('.data');
 
         Route::get('/download/{id}', 'PpatController@download')->name('.download');

@@ -43,6 +43,7 @@ class PpatController extends Controller
             ->addColumn('action', function ($data) {
                
                 $action = '';
+                $action .= "<a href='" . route('ppat.detail', $data->id_ppat) ."' class='btn btn-icon btn-success'><i class='fa fa-eye'></i></a>&nbsp;";
                 $action .= "<a href='javascript:void(0)' class='btn btn-icon btn-primary' data-id='{$data->id_ppat}' onclick='showPpat(this);'><i class='fa fa-edit'></i></a>&nbsp;";
                 $action .= "<a href='javascript:void(0)' class='btn btn-icon btn-danger'  data-id='{$data->id_ppat}' onclick='deletePpat(this);'><i class='fa fa-trash'></i></a>&nbsp;";
 
@@ -509,5 +510,11 @@ class PpatController extends Controller
     {
         $url=  public_path(). '/barcode/'. $filepath;
         return \Response::download($url);
+    }
+    public function detail(Request $request)
+    {
+        $ppat = Ppat::find($request->id);
+        // dd($ppat);
+        return view('ppat.detail',compact('ppat'));
     }
 }

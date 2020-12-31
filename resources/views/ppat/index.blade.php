@@ -7,7 +7,7 @@
 @endsection
 @section('content')
 <!-- Main content -->
-<section class="content">
+<section class="content" id="content">
     <div class="row">
         <div class="col-xs-12">
           <div class="box">
@@ -449,7 +449,7 @@
     });        
 
 });
-    
+
     // edit show/asign data
     function showPpat(object)
     {
@@ -630,7 +630,7 @@
                 { data: 'tanggal_ssp',"width": "20%" },
                 { data: 'pihak1',"width": "20%" },
                 { data: 'pihak2',"width": "20%" },
-                { data: 'foto_akad',"width": "20%" },
+                { data: 'keterangan',"width": "20%" },
                 { data: 'barcode',"width": "10%" },
                 { data: 'dibuat',"width": "20%" },
                 { data: 'action',"width": "20%" },

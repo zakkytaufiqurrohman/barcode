@@ -28,7 +28,7 @@ class PasswordBerkasController extends Controller
         ]);        
         $data = PasswordBerkas::first();
         $data->update([
-            'password' => $request->password,
+            'password' => bcrypt($request->password),
         ]);
 
         return response()->json(['status' => 'success', 'message' => 'Berhasil', 'data' => $data]);

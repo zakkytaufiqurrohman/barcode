@@ -26,7 +26,7 @@ class AktaNotarisController extends Controller
                 // get kode berkas from table berkas
                 $kode = $data->berkas->kode_berkas;
                 $kode = str_replace("/", "", $kode);
-                $kode =  config('app.url').'/berkas/akta-notaris/'.$kode;
+                $kode =  config('app.url').'/berkas/aktaNotaris/'.$kode;
                 // generate barcode
                 $images = \DNS2D::getBarcodePNGPath(strval($kode), 'QRCODE',5,5);
                 // get image patch
@@ -115,7 +115,7 @@ class AktaNotarisController extends Controller
                 'id_user' => Auth::user()->id_user,
                 'tanggal' => \Carbon\Carbon::parse($request->tanggal)->format('Y-m-d'),
                 'waktu' => date('H:i:s'),
-                'kode_berkas' => bcrypt(date("Y-m-d h:i:sa").rand(10,100)),
+                'kode_berkas' => str_replace("/", "", bcrypt(date("Y-m-d h:i:sa").rand(10,100))),
                 'password_berkas' => bcrypt(12345678),
                 'password' => $passwordStatus,
             ]);

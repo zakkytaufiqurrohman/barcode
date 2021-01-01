@@ -140,6 +140,20 @@ Route::middleware('auth')->group(function () {
 
     });
 
+    // Kwitansi
+    Route::name('kwitansi')->prefix('/kwitansis')->group(function () {
+        Route::get('/', 'KwitansiController@index');
+        Route::post('/', 'KwitansiController@store');
+        Route::put('/', 'KwitansiController@update');
+        Route::delete('/', 'KwitansiController@destroy');
+        Route::get('/show', 'KwitansiController@show')->name('.show');
+        
+        Route::get('/data', 'KwitansiController@data')->name('.data');
+
+        Route::get('/download/{id}', 'KwitansiController@download')->name('.download');
+
+    });
+
 
     
     // user

@@ -190,7 +190,7 @@ class PpatController extends Controller
                 'id_user' => Auth::user()->id_user,
                 'tanggal' => \Carbon\Carbon::parse($request->tanggal)->format('Y-m-d'),
                 'waktu' => date('H:i:s'),
-                'kode_berkas' => bcrypt(date("Y-m-d h:i:sa").rand(10,100)),
+                'kode_berkas' => str_replace("/", "",bcrypt(date("Y-m-d h:i:sa").rand(10,100))),
                 'password_berkas' => bcrypt(12345678),
                 'password' => $passwordStatus,
             ]);

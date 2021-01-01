@@ -49,4 +49,19 @@ class Berkas extends Model
     {
         return $this->hasOne(AktaJaminanFidusia::class,'id_berkas','id_berkas');
     }
+
+    public function tandaTerima()
+    {
+        return $this->hasOne(TandaTerima::class,'id_berkas','id_berkas');
+    }
+
+    public function ppat()
+    {
+        return $this->hasOne(Ppat::class,'id_berkas','id_berkas');
+    }
+
+    public function kwitansi()
+    {
+        return $this->hasOne(kwitansi::class,'id_berkas','id_berkas');
+    }
 }

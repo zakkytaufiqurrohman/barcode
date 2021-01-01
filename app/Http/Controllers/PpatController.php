@@ -43,6 +43,7 @@ class PpatController extends Controller
             ->addColumn('action', function ($data) {
                
                 $action = '';
+                $action .= "<a href='" . route('ppat.detail', $data->id_ppat) ."' class='btn btn-icon btn-success'><i class='fa fa-eye'></i></a>&nbsp;";
                 $action .= "<a href='javascript:void(0)' class='btn btn-icon btn-primary' data-id='{$data->id_ppat}' onclick='showPpat(this);'><i class='fa fa-edit'></i></a>&nbsp;";
                 $action .= "<a href='javascript:void(0)' class='btn btn-icon btn-danger'  data-id='{$data->id_ppat}' onclick='deletePpat(this);'><i class='fa fa-trash'></i></a>&nbsp;";
 
@@ -102,43 +103,81 @@ class PpatController extends Controller
         // dd($request->all());
         date_default_timezone_set('Asia/Jakarta');
         $this->validate($request,[
-            'no_urut' => 'required',
-            'no_akta' => 'required',
+            'no_urut' => 'required|min:3',
+            'no_akta' => 'required|min:3',
             'tanggal_akta' => 'required',
-            'bentuk_hukum' =>'required',
-            'pihak1' => 'required',
-            'pihak2' => 'required',
-            'nomor_hak' => 'required',
-            'letak_bangunan' => 'required',
-            'luas_tanah' => 'required',
-            'luas_bangunan' => 'required',
-            'harga_transaksi' => 'required',
-            'nop_tahun' =>'required',
-            'nilai_njop' => 'required',
+            'bentuk_hukum' =>'required|min:3',
+            'pihak1' => 'required|min:3',
+            'pihak2' => 'required|min:3',
+            'nomor_hak' => 'required|min:3',
+            'letak_bangunan' => 'required|min:3',
+            'luas_tanah' => 'required|min:3',
+            'luas_bangunan' => 'required|min:3',
+            'harga_transaksi' => 'required|min:3',
+            'nop_tahun' =>'required|min:3',
+            'nilai_njop' => 'required|min:3',
             'tanggal_ssp' => 'required',
-            'nilai_ssp' => 'required',
+            'nilai_ssp' => 'required|min:3',
             'tanggal_ssb' => 'required',
-            'nilai_ssb' => 'required',
-            'keterangan' =>'required',
+            'nilai_ssb' => 'required|min:3',
+            'keterangan' =>'required|min:3',
             'tgl_masuk_bpn' => 'required',
             'tgl_selesai_bpn' => 'required',
             'tgl_penyerahan_clien' => 'required',
-            'no_ktp' => 'required',
-            'alamat' => 'required',
-            'pas_foto' =>'required|mimes:jpg,png',
-            'foto_akad' =>'required|mimes:jpg,png',
+            'no_ktp' => 'required|min:3',
+            'alamat' => 'required|min:3',
+            'pas_foto' =>'required|file|image|mimes:jpeg,png,jpg|max:2048',
+            'foto_akad' =>'required|file|image|mimes:jpeg,png,jpg|max:2048',
         ],[
-            // 'judul.required'=>'Judul Tidak Boleh Kosong',
-            // 'nomor.required'=>'Nomor Tidak Boleh Kosong',
-            // 'tanggal.required'=>'Tanggal Tidak Boleh Kosong',
-            // 'pihak1.required'=>'Pihak 1 Tidak Boleh Kosong',
-            // 'pihak2.required'=>'Pihak 2 Tidak Boleh Kosong',
-            // 'objek.required'=>'objek Tidak Boleh Kosong',
-            // 'judul.min'=>'Judul minimal 3 character',
-            // 'nomor.min'=>'Nomor minimal 3 character',
-            // 'pihak1.min'=>'Pihak 1 minimal 3 character',
-            // 'pihak2.min'=>'Pihak 2 minimal 3 character',
-            // 'objek.min'=>'objek minimal 3 character',
+            'no_urut.required'=>'No Urut Tidak Boleh Kosong',
+            'no_akta.required'=>'No Akta Tidak Boleh Kosong',
+            'tanggal_akta.required'=>'Tanggal Akta Tidak Boleh Kosong',
+            'bentuk_hukum.required'=>'Bentuk Perbuatan Hukum Tidak Boleh Kosong',
+            'pihak1.required'=>'Pihak Yang Memberikan Tidak Boleh Kosong',
+            'pihak2.required'=>'Pihak Yang Menerima Tidak Boleh Kosong',
+            'nomor_hak.required'=>'Nomor Hak Tidak Boleh Kosong',
+            'letak_bangunan.required'=>'Letak Tanah Dan Bangunan Tidak Boleh Kosong',
+            'luas_tanah.required'=>'Luas Tanah Tidak Boleh Kosong',
+            'luas_bangunan.required'=>'Luas Bangunan Tidak Boleh Kosong',
+            'harga_transaksi.required'=>'Harga Transaksi Tidak Boleh Kosong',
+            'nop_tahun.required'=>'NOP/Tahun Tidak Boleh Kosong',
+            'nilai_njop.required'=>'Nilai NJOP Tidak Boleh Kosong',
+            'tanggal_ssp.required'=>'Tanggal SSP Tidak Boleh Kosong',
+            'nilai_ssp.required'=>'Nilai SSP Tidak Boleh Kosong',
+            'tanggal_ssb.required'=>'Tanggal SSB Tidak Boleh Kosong',
+            'nilai_ssb.required'=>'Nilai SSB Tidak Boleh Kosong',
+            'keterangan.required'=>'Keterangan Tidak Boleh Kosong',
+            'tgl_masuk_bpn.required'=>'Tanggal Masuk BPN Tidak Boleh Kosong',
+            'tgl_selesai_bpn.required'=>'Tanggal Selesai BPN Tidak Boleh Kosong',
+            'tgl_penyerahan_clien.required'=>'Tanggal Penyerahan Clien Tidak Boleh Kosong',
+            'no_ktp.required'=>'No KTP Tidak Boleh Kosong',
+            'alamat.required'=>'Alamat Tidak Boleh Kosong',
+            'pas_foto.required'=>'Pas Foto Tidak Boleh Kosong',
+            'foto_akad.required'=>'Fota Akad Tidak Boleh Kosong',
+
+            'no_urut.min'=>'No Urut minimal 3 character',
+            'no_akta.min'=>'No Akta minimal 3 character',
+            'bentuk_hukum.min'=>'Bentuk Perbuatan Hukum minimal 3 character',
+            'pihak1.min'=>'Pihak Yang Memberikan minimal 3 character',
+            'pihak2.min'=>'Pihak Yang Menerima minimal 3 character',
+            'nomor_hak.min'=>'Nomor Hak minimal 3 character',
+            'letak_bangunan.min'=>'Letak Tanah Dan Bangunan minimal 3 character',
+            'luas_tanah.min'=>'Luas Tanah minimal 3 character',
+            'luas_bangunan.min'=>'Luas Bangunan minimal 3 character',
+            'harga_transaksi.min'=>'Harga Transaksi minimal 3 character',
+            'nop_tahun.min'=>'NOP/Tahun minimal 3 character',
+            'nilai_njop.min'=>'Nilai NJOP minimal 3 character',
+            'nilai_ssp.min'=>'Nilai SSP minimal 3 character',
+            'nilai_ssb.min'=>'Nilai SSB minimal 3 character',
+            'keterangan.min'=>'Keterangan minimal 3 character',
+            'no_ktp.min'=>'No KTP minimal 3 character',
+            'alamat.min'=>'Alamat minimal 3 character',
+
+            'pas_foto.mimes'=>'Format File Harus Jpg/png',
+            'foto_akad.mimes'=>'Format File Harus Jpg/png',
+
+            'pas_foto.max'=>'File Max 2048',
+            'foto_akad.max'=>'File Max 2048',
             ]);
          $passwordStatus = 'OFF';
          if($request->has('password')){
@@ -147,7 +186,7 @@ class PpatController extends Controller
         DB::beginTransaction();
         try{
             $berkas = Berkas::create([
-                'tipe_berkas' => 'aktappat',
+                'tipe_berkas' => 'ppat',
                 'id_user' => Auth::user()->id_user,
                 'tanggal' => \Carbon\Carbon::parse($request->tanggal)->format('Y-m-d'),
                 'waktu' => date('H:i:s'),
@@ -266,26 +305,81 @@ class PpatController extends Controller
     public function update(Request $request)
     {
         date_default_timezone_set('Asia/Jakarta');
-        // $this->validate($request,[
-        //     'judul' => 'required|min:3',
-        //     'nomor' => 'required|min:3|max:255',
-        //     'tanggal' => 'required',
-        //     'pihak1' => 'required|min:3',
-        //     'pihak2' => 'required|min:3',
-        //     'objek' =>'required|min:3',
-        // ],[
-        //     'judul.required'=>'Judul Tidak Boleh Kosong',
-        //     'nomor.required'=>'Nomor Tidak Boleh Kosong',
-        //     'tanggal.required'=>'Tanggal Tidak Boleh Kosong',
-        //     'pihak1.required'=>'Pihak 1 Tidak Boleh Kosong',
-        //     'pihak2.required'=>'Pihak 2 Tidak Boleh Kosong',
-        //     'objek.required'=>'objek Tidak Boleh Kosong',
-        //     'judul.min'=>'Judul minimal 3 character',
-        //     'nomor.min'=>'Nomor minimal 3 character',
-        //     'pihak1.min'=>'Pihak 1 minimal 3 character',
-        //     'pihak2.min'=>'Pihak 2 minimal 3 character',
-        //     'objek.min'=>'objek minimal 3 character',
-        //     ]);
+        $this->validate($request,[
+            'no_urut' => 'required|min:3',
+            'no_akta' => 'required|min:3',
+            'tanggal_akta' => 'required',
+            'bentuk_hukum' =>'required|min:3',
+            'pihak1' => 'required|min:3',
+            'pihak2' => 'required|min:3',
+            'nomor_hak' => 'required|min:3',
+            'letak_bangunan' => 'required|min:3',
+            'luas_tanah' => 'required|min:3',
+            'luas_bangunan' => 'required|min:3',
+            'harga_transaksi' => 'required|min:3',
+            'nop_tahun' =>'required|min:3',
+            'nilai_njop' => 'required|min:3',
+            'tanggal_ssp' => 'required',
+            'nilai_ssp' => 'required|min:3',
+            'tanggal_ssb' => 'required',
+            'nilai_ssb' => 'required|min:3',
+            'keterangan' =>'required|min:3',
+            'tgl_masuk_bpn' => 'required',
+            'tgl_selesai_bpn' => 'required',
+            'tgl_penyerahan_clien' => 'required',
+            'no_ktp' => 'required|min:3',
+            'alamat' => 'required|min:3',
+            'pas_foto' =>'file|image|mimes:jpeg,png,jpg|max:2048',
+            'foto_akad' =>'file|image|mimes:jpeg,png,jpg|max:2048',
+        ],[
+            'no_urut.required'=>'No Urut Tidak Boleh Kosong',
+            'no_akta.required'=>'No Akta Tidak Boleh Kosong',
+            'tanggal_akta.required'=>'Tanggal Akta Tidak Boleh Kosong',
+            'bentuk_hukum.required'=>'Bentuk Perbuatan Hukum Tidak Boleh Kosong',
+            'pihak1.required'=>'Pihak Yang Memberikan Tidak Boleh Kosong',
+            'pihak2.required'=>'Pihak Yang Menerima Tidak Boleh Kosong',
+            'nomor_hak.required'=>'Nomor Hak Tidak Boleh Kosong',
+            'letak_bangunan.required'=>'Letak Tanah Dan Bangunan Tidak Boleh Kosong',
+            'luas_tanah.required'=>'Luas Tanah Tidak Boleh Kosong',
+            'luas_bangunan.required'=>'Luas Bangunan Tidak Boleh Kosong',
+            'harga_transaksi.required'=>'Harga Transaksi Tidak Boleh Kosong',
+            'nop_tahun.required'=>'NOP/Tahun Tidak Boleh Kosong',
+            'nilai_njop.required'=>'Nilai NJOP Tidak Boleh Kosong',
+            'tanggal_ssp.required'=>'Tanggal SSP Tidak Boleh Kosong',
+            'nilai_ssp.required'=>'Nilai SSP Tidak Boleh Kosong',
+            'tanggal_ssb.required'=>'Tanggal SSB Tidak Boleh Kosong',
+            'nilai_ssb.required'=>'Nilai SSB Tidak Boleh Kosong',
+            'keterangan.required'=>'Keterangan Tidak Boleh Kosong',
+            'tgl_masuk_bpn.required'=>'Tanggal Masuk BPN Tidak Boleh Kosong',
+            'tgl_selesai_bpn.required'=>'Tanggal Selesai BPN Tidak Boleh Kosong',
+            'tgl_penyerahan_clien.required'=>'Tanggal Penyerahan Clien Tidak Boleh Kosong',
+            'no_ktp.required'=>'No KTP Tidak Boleh Kosong',
+            'alamat.required'=>'Alamat Tidak Boleh Kosong',
+
+            'no_urut.min'=>'No Urut minimal 3 character',
+            'no_akta.min'=>'No Akta minimal 3 character',
+            'bentuk_hukum.min'=>'Bentuk Perbuatan Hukum minimal 3 character',
+            'pihak1.min'=>'Pihak Yang Memberikan minimal 3 character',
+            'pihak2.min'=>'Pihak Yang Menerima minimal 3 character',
+            'nomor_hak.min'=>'Nomor Hak minimal 3 character',
+            'letak_bangunan.min'=>'Letak Tanah Dan Bangunan minimal 3 character',
+            'luas_tanah.min'=>'Luas Tanah minimal 3 character',
+            'luas_bangunan.min'=>'Luas Bangunan minimal 3 character',
+            'harga_transaksi.min'=>'Harga Transaksi minimal 3 character',
+            'nop_tahun.min'=>'NOP/Tahun minimal 3 character',
+            'nilai_njop.min'=>'Nilai NJOP minimal 3 character',
+            'nilai_ssp.min'=>'Nilai SSP minimal 3 character',
+            'nilai_ssb.min'=>'Nilai SSB minimal 3 character',
+            'keterangan.min'=>'Keterangan minimal 3 character',
+            'no_ktp.min'=>'No KTP minimal 3 character',
+            'alamat.min'=>'Alamat minimal 3 character',
+
+            'pas_foto.mimes'=>'Format File Harus Jpg/png',
+            'foto_akad.mimes'=>'Format File Harus Jpg/png',
+
+            'pas_foto.max'=>'File Max 2048',
+            'foto_akad.max'=>'File Max 2048',
+            ]);
 
         DB::beginTransaction();
         try{
@@ -301,12 +395,12 @@ class PpatController extends Controller
 
                 $nama_file_pas_foto = time()."_".$text_pas_foto;                
                 
-                $file_pas_foto->move(public_path('GambarFotoAkad'),$nama_file_pas_foto);
+                $file_pas_foto->move(public_path('GambarPasFoto'),$nama_file_pas_foto);
 
                 //hapus file lama
-                if (file_exists(public_path('GambarFotoAkad/').$ppat->pas_foto))
+                if (file_exists(public_path('GambarPasFoto/').$ppat->pas_foto))
                 {
-                    $image_path_pas_foto = public_path('GambarFotoAkad/').$ppat->pas_foto;
+                    $image_path_pas_foto = public_path('GambarPasFoto/').$ppat->pas_foto;
 
                     unlink($image_path_pas_foto);
                 }
@@ -321,7 +415,7 @@ class PpatController extends Controller
     
                 $nama_file_foto_akad = time()."_".$text_foto_akad;
 
-                $file_foto_akad->move(public_path('GambarPasFoto'),$nama_file_foto_akad);
+                $file_foto_akad->move(public_path('GambarFotoAkad'),$nama_file_foto_akad);
 
                 if (file_exists(public_path('GambarFotoAkad/').$ppat->foto_akad))
                 {
@@ -416,5 +510,11 @@ class PpatController extends Controller
     {
         $url=  public_path(). '/barcode/'. $filepath;
         return \Response::download($url);
+    }
+    public function detail(Request $request)
+    {
+        $ppat = Ppat::find($request->id);
+        // dd($ppat);
+        return view('ppat.detail',compact('ppat'));
     }
 }

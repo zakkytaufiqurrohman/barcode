@@ -72,6 +72,13 @@
             </span>
           </a>
         </li>
+        <li>
+          <a href="{{route('kwitansi')}}">
+            <i class="fa fa-calendar"></i> <span>KWITANSI</span>
+            <span class="pull-right-container">
+            </span>
+          </a>
+        </li>
         <li class="header">Lainnya</li>
         <li class="treeview">
           <a href="#">

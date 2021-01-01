@@ -132,10 +132,25 @@ Route::middleware('auth')->group(function () {
         Route::put('/', 'PpatController@update');
         Route::delete('/', 'PpatController@destroy');
         Route::get('/show', 'PpatController@show')->name('.show');
-        
+        Route::get('/detail/{id}', 'PpatController@detail')->name('.detail');
+
         Route::get('/data', 'PpatController@data')->name('.data');
 
         Route::get('/download/{id}', 'PpatController@download')->name('.download');
+
+    });
+
+    // Kwitansi
+    Route::name('kwitansi')->prefix('/kwitansis')->group(function () {
+        Route::get('/', 'KwitansiController@index');
+        Route::post('/', 'KwitansiController@store');
+        Route::put('/', 'KwitansiController@update');
+        Route::delete('/', 'KwitansiController@destroy');
+        Route::get('/show', 'KwitansiController@show')->name('.show');
+        
+        Route::get('/data', 'KwitansiController@data')->name('.data');
+
+        Route::get('/download/{id}', 'KwitansiController@download')->name('.download');
 
     });
 

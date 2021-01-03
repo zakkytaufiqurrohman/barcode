@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Kwitansi extends Model
 {
-    use SoftDeletes;
+    // use SoftDeletes;
 
     protected $table = 'tbl_kwitansi';
     protected $primaryKey = 'id_kwitansi';
@@ -27,5 +27,10 @@ class Kwitansi extends Model
     public function users()
     {
         return $this->belongsTo('App\User','id_user','id_user');
+    }
+
+    public function urai()
+    {
+        return $this->hasMany(Uraian::class,'id_kwitansi','id_kwitansi');
     }
 }

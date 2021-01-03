@@ -12,6 +12,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
+use PDF;
 
 
 class KwitansiController extends Controller
@@ -45,6 +46,7 @@ class KwitansiController extends Controller
             ->addColumn('action', function ($data) {
                
                 $action = '';
+                $action .= "<a href='" . route('kwitansi.print',$data->id_kwitansi) . "' class='btn btn-icon btn-success'><i class='fa fa-print'></i></a>&nbsp;"; 
                 $action .= "<a href='javascript:void(0)' class='btn btn-icon btn-primary' data-id='{$data->id_kwitansi}' onclick='showKwitansi(this);'><i class='fa fa-edit'></i></a>&nbsp;";
                 $action .= "<a href='javascript:void(0)' class='btn btn-icon btn-danger'  data-id='{$data->id_kwitansi}' onclick='deleteKwitansi(this);'><i class='fa fa-trash'></i></a>&nbsp;";
 
@@ -292,5 +294,12 @@ class KwitansiController extends Controller
             DB::rollback();
             return response()->json(['status' => 'error', 'message' => $e->getMessage()]);
         }
+    }
+
+    public function print($id)
+    {
+        $data = Kwitansi::with('urai','berkas')->find($id);
+        $pdf = PDF::loadview('kwitansi.print',['data'=>$data]);
+        return $pdf->stream('kwitansi.pdf');
     }
 }

@@ -147,6 +147,7 @@ Route::middleware('auth')->group(function () {
         Route::put('/', 'KwitansiController@update');
         Route::delete('/', 'KwitansiController@destroy');
         Route::get('/show', 'KwitansiController@show')->name('.show');
+        Route::get('/print/{id}', 'KwitansiController@print')->name('.print');
         
         Route::get('/data', 'KwitansiController@data')->name('.data');
 

@@ -71,7 +71,7 @@
                 <div class="modal-body">
                     <div class="box-body">
                         <div class="row">
-                          <div class="col-md-6">
+                            <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="add-nomor">Nomor</label>
                                     <input type="text" name="nomor" class="form-control" id="add-nomor" placeholder="Nomor">
@@ -104,37 +104,16 @@
                                 </div>
                             </div>
                             <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="add-uraian">Uraian</label>
-                                    <input type="text" name="uraian[]" class="form-control" id="add-uraian" placeholder="Uraian">
-                                </div>
-                                <div class="form-group" id="inputFormRow">
-                                    <div class="input-group mb-3">
-                                        <input type="text" name="uraian[]" class="form-control m-input" placeholder="Tambah Uraian" autocomplete="off">
-                                        <div class="form-group input-group-append">                
-                                            <button id="removeRow" type="button" class="btn btn-danger">Remove</button>
-                                        </div>
+                                    <div class="form-group">
+                                        <label for="add-uraian">Uraian & jumlah</label>
+                                        <input type="text" name="uraian[]" class="form-control" id="add-uraian" placeholder="Uraian">
+                                        <input type="text" name="jumlah[]" class="form-control" id="add-pihak1" placeholder="Jumlah">
                                     </div>
-                                </div>
-                    
-                                <div id="newRowUraian"></div>
-                                <button id="addRowUraian" type="button" class="btn btn-info">Add Row</button>
+                                
 
-                                <div class="form-group">
-                                    <label for="add-jumlah">Jumlah</label>
-                                    <input type="text" name="jumlah[]" class="form-control" id="add-pihak1" placeholder="Jumlah">
+                                <div class="newRowJumlah">
                                 </div>
-                               <div class="form-group" id="inputFormRow">
-                                    <div class="input-group mb-3">
-                                        <input type="text" name="jumlah[]" class="form-control m-input" placeholder="Tambah Jumlah" autocomplete="off">
-                                        <div class="form-group input-group-append">                
-                                            <button id="removeRow" type="button" class="btn btn-danger">Remove</button>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            <div id="newRowJumlah"></div>
-                            <button id="addRowJumlah" type="button" class="btn btn-info">Add Row</button>
+                                <button class="addRowJumlah btn btn-info" type="button">Add Row</button>
                                 
                                 <div class="form-check">
                                     <input class="form-check-input" type="checkbox" value="1" name="password" id="add-password">
@@ -142,6 +121,7 @@
                                         Password Dokumen
                                     </label>
                                 </div>
+                            
                             </div>
                             <!-- /.col -->
                           </div>
@@ -208,37 +188,10 @@
                                 </div>
                             </div>
                             <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="update-uraian">Uraian</label>
-                                    <input type="text" name="uraian[]" class="form-control" id="update-uraian" placeholder="Uraian">
-                                </div>
-                                <div class="form-group" id="inputFormRow">
-                                    <div class="input-group mb-3">
-                                        <input type="text" name="uraian[]" class="form-control m-input" placeholder="Tambah Uraian" autocomplete="off">
-                                        <div class="form-group input-group-append">                
-                                            <button id="removeRow" type="button" class="btn btn-danger">Remove</button>
-                                        </div>
-                                    </div>
-                                </div>
-                    
-                                <div id="newRowUraian"></div>
-                                <button id="addRowUraian" type="button" class="btn btn-info">Add Row</button>
-
-                                <div class="form-group">
-                                    <label for="update-jumlah">Jumlah</label>
-                                    <input type="text" name="jumlah[]" class="form-control" id="update-pihak1" placeholder="Jumlah">
-                                </div>
-                               <div class="form-group" id="inputFormRow">
-                                    <div class="input-group mb-3">
-                                        <input type="text" name="jumlah[]" class="form-control m-input" placeholder="Tambah Jumlah" autocomplete="off">
-                                        <div class="form-group input-group-append">                
-                                            <button id="removeRow" type="button" class="btn btn-danger">Remove</button>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            <div id="newRowJumlah"></div>
-                            <button id="addRowJumlah" type="button" class="btn btn-info">Add Row</button>
+                                <label for="update-penerima">Uraian & jumlah</label>
+                                <div class="newRowJumlahs"></div>
+                                <div class="newRowJumlah"></div>
+                            <button class="addRowJumlah btn btn-info" type="button">Add Row</button>
                                 
                                 <div class="form-check">
                                     <input class="form-check-input" type="checkbox" value="1" name="password" id="add-password">
@@ -254,7 +207,7 @@
                 </div>
                 <div class="modal-footer bg-whitesmoke br">
                     <button type="button" class="btn btn-danger" data-dismiss="modal">Batal</button>
-                    <button type="submit" class="btn btn-primary" id="btn-update-agenda">Simpan Perubahan</button>
+                    <button type="submit" class="btn btn-primary" id="btn-update-kwintansi">Simpan Perubahan</button>
                 </div>
             </form>
         </div>
@@ -267,9 +220,6 @@
 <!-- ckeditor -->
 <script src="//cdn.ckeditor.com/4.14.0/standard/ckeditor.js"></script>
 <script type="text/javascript">
-    $(document).ready(function() {
-        $('.ckeditor').ckeditor();
-    });
     $( function() {
         $( ".datepicker" ).datepicker({  format: 'yyyy-mm-dd'});
     } );
@@ -286,18 +236,19 @@
         // preven update
         $("#form-update-kwitansi").on("submit", function(e) {
                 e.preventDefault();
-                updateWaarmeking();
+                updateKwitansi();
         });
     })
     $('#modal-add-kwitansi').on('hidden.bs.modal', function () {
-    var form=$("body");
-            form.find('.help-block').remove();
-            form.find('.form-group').removeClass('has-error');
+        var form=$("body");
+        form.find('.help-block').remove();
+        form.find('.form-group').removeClass('has-error');
     })
     $('#modal-update-kwitansi').on('hidden.bs.modal', function () {
-    var form=$("body");
-            form.find('.help-block').remove();
-            form.find('.form-group').removeClass('has-error');
+        $(".kotak").remove();
+        var form=$("body");
+        form.find('.help-block').remove();
+        form.find('.form-group').removeClass('has-error');
     })
     // open modal
     function openModalAdd()
@@ -384,6 +335,7 @@
                 $("select").removeAttr('disabled', 'disabled');
             },
             success(result) {
+
                 $('#modal-update-kwitansi').find("input[name='id']").val(result['data']['id_kwitansi']);
                 $('#modal-update-kwitansi').find("input[name='nomor']").val(result['data']['nomor']);
                 $('#modal-update-kwitansi').find("input[name='tanggal']").datepicker("setDate",result['data']['tanggal']);
@@ -392,45 +344,64 @@
                 $('#modal-update-kwitansi').find("input[name='penyetor']").val(result['data']['penyetor']);
                 $('#modal-update-kwitansi').find("input[name='mengetahui']").val(result['data']['mengetahui']);
                 $('#modal-update-kwitansi').find("input[name='penerima']").val(result['data']['penerima']);
-                $('#modal-update-kwitansi').find("input[name='uraian[]']").val(result['data']['uraian[]']);
-                $('#modal-update-kwitansi').find("input[name='jumlah[]']").val(result['data']['jumlah[]']);
                 if (result['data']['password'] == 'ON'){
                     $('#modal-update-kwitansi').find("input[name='password']").prop('checked', true);
                 }
                 else{
                     $('#modal-update-kwitansi').find("input[name='password']").prop('checked', false);
                 }
+                $.each( result['data']['urai'], function( key, value ) {
+                    var jumlah = value.jumlah
+                    var uraian = value.uraian
+                    var html = '';
+                    // uraian
+                    html += '<div class="kotak">'
+                    html += '<input type="hidden" name="id_uraian" value='+value.id_uraian+'>';
+                    html += '<div class="form-group">'
+                    html += '<div class="inputFormRow">';
+                    html += '<input type="text" name="uraian[]" value="'+uraian+'" class="form-control m-input" placeholder="Tambah Uraian" autocomplete="off">';
+                    html += '<div class="input-group-append">';
+                    html += '</div>';
+                    // jumlah
+                    html += '<div class="form-group">'
+                    html += '<input type="text" name="jumlah[]" value='+jumlah+' class="form-control m-input" placeholder="Tambah Jumlah" autocomplete="off">';
+                    html += '<div class="input-group-append">';
+                    html += '<button id="removeRow" type="button" class="btn btn-danger "><span class="fa fa-trash"></span></button>';
+                    html += '</div>';
+                    html += '</div>';
+                    html += '</div>';
+
+                    
+                    $('.newRowJumlahs').append(html);
+                });
                
             },
             error(xhr, status, error) {
                 var err = eval('(' + xhr.responseText + ')');
-                notification(status, err.message);
+                // notification(status, err.message);
                 checkCSRFToken(err.message);
             }
         });
     }
 
     // proses update
-    function updateWaarmeking()
+    function updateKwitansi()
     {
-        for (var i in CKEDITOR.instances) {
-            CKEDITOR.instances[i].updateElement();
-        };
         var formData = $("#form-update-kwitansi").serialize();
 
         $.ajax({
-            url: "{{route('waarmeking')}}",
+            url: "{{route('kwitansi')}}",
             type: "POST",
             dataType: "json",
             data: formData,
             beforeSend() {
-                $("#btn-update-waarmeking").addClass('btn-progress');
+                $("#btn-update-kwintansi").addClass('btn-progress');
                 $("input").attr('disabled', 'disabled');
                 $("button").attr('disabled', 'disabled');
                 $("select").attr('disabled', 'disabled');
             },
             complete() {
-                $("#btn-update-waarmeking").removeClass('btn-progress');
+                $("#btn-update-kwintansi").removeClass('btn-progress');
                 $("input").removeAttr('disabled', 'disabled');
                 $("button").removeAttr('disabled', 'disabled');
                 $("select").removeAttr('disabled', 'disabled');
@@ -521,36 +492,30 @@
         });
     }
 
-    $("#addRowUraian").click(function () {
-            var html = '';
-            html += '<div id="inputFormRow">';
-            html += '<div class="input-group mb-6">';
-            html += '<input type="text" name="uraian[]" class="form-control m-input" placeholder="Tambah Uraian" autocomplete="off">';
-            html += '<div class="input-group-append">';
-            html += '<button id="removeRow" type="button" class="btn btn-danger">Remove</button>';
-            html += '</div>';
-            html += '</div>';
+    $(".addRowJumlah").click(function () {
+        var html = '';
+        // uraian
+        
+        html += '<div class="form-group">'
+        html += '<div class="inputFormRow">';
+        html += '<input type="text" name="uraian[]" class="form-control m-input" placeholder="Tambah Uraian" autocomplete="off">';
+        html += '<div class="input-group-append">';
+        html += '</div>';
+        // jumlah
+        html += '<div class="form-group">'
+        html += '<input type="text" name="jumlah[]" class="form-control m-input" placeholder="Tambah Jumlah" autocomplete="off">';
+        html += '<div class="input-group-append">';
+        html += '<button id="removeRow" type="button" class="btn btn-danger"><span class="fa fa-trash"></span></button>';
+        html += '</div>';
+        html += '</div>';
+        
+        $('.newRowJumlah').append(html);
+    });
 
-            $('#newRowUraian').append(html);
-        });
-
-        $("#addRowJumlah").click(function () {
-            var html = '';
-            html += '<div id="inputFormRow">';
-            html += '<div class="input-group mb-6">';
-            html += '<input type="text" name="jumlah[]" class="form-control m-input" placeholder="Tambah Jumlah" autocomplete="off">';
-            html += '<div class="input-group-append">';
-            html += '<button id="removeRow" type="button" class="btn btn-danger">Remove</button>';
-            html += '</div>';
-            html += '</div>';
-
-            $('#newRowJumlah').append(html);
-        });
-
-        // remove row
-        $(document).on('click', '#removeRow', function () {
-            $(this).closest('#inputFormRow').remove();
-        });
+    // remove row
+    $(document).on('click', '#removeRow', function () {
+        $(this).closest('.inputFormRow').remove();
+    });
             
 </script>
 @endsection

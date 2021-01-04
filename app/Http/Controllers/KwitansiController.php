@@ -12,6 +12,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
+use PDF;
 
 
 class KwitansiController extends Controller
@@ -45,6 +46,7 @@ class KwitansiController extends Controller
             ->addColumn('action', function ($data) {
                
                 $action = '';
+                $action .= "<a href='" . route('kwitansi.print',$data->id_kwitansi) . "' class='btn btn-icon btn-success'><i class='fa fa-print'></i></a>&nbsp;"; 
                 $action .= "<a href='javascript:void(0)' class='btn btn-icon btn-primary' data-id='{$data->id_kwitansi}' onclick='showKwitansi(this);'><i class='fa fa-edit'></i></a>&nbsp;";
                 $action .= "<a href='javascript:void(0)' class='btn btn-icon btn-danger'  data-id='{$data->id_kwitansi}' onclick='deleteKwitansi(this);'><i class='fa fa-trash'></i></a>&nbsp;";
 
@@ -171,18 +173,19 @@ class KwitansiController extends Controller
 
     public function show(Request $request)
     {
-        $kwitansi = Kwitansi::find($request->id);
-        $uraian = Uraian::find($kwitansi->id_kwitansi);
-        $id_berkas = $kwitansi->id_berkas;
-        // $id_uraian = $uraian->id_kwitansi;
-        $berkas = Berkas::where('id_berkas',$id_berkas)->first()->attributesToArray();
-        $uraian = Uraian::where('id_kwitansi',$uraian)->first()->attributesToArray();
-        $datas = array_merge($kwitansi->attributesToArray(),$berkas,$uraian);
+        $kwitansi = Kwitansi::with('urai')->find($request->id);
+        // dd($kwitansi);
+        // $uraian = Uraian::find($kwitansi->id_kwitansi);
+        // $id_berkas = $kwitansi->id_berkas;
+        // // $id_uraian = $uraian->id_kwitansi;
+        // $berkas = Berkas::where('id_berkas',$id_berkas)->first()->attributesToArray();
+        // $uraian = Uraian::where('id_kwitansi',$uraian)->first()->attributesToArray();
+        // $datas = array_merge($kwitansi->attributesToArray(),$berkas,$uraian);
         if (!$kwitansi) {
             return response()->json(['status' => 'error', 'message' => 'kwitansi tidak ditemukan', 'data' => '']);
         }
 
-        return response()->json(['status' => 'success', 'message' => 'Berhasil mengambil data daftar kwitansi', 'data' => $datas]);
+        return response()->json(['status' => 'success', 'message' => 'Berhasil mengambil data daftar kwitansi', 'data' => $kwitansi]);
     }
 
     public function destroy(Request $request)
@@ -214,5 +217,89 @@ class KwitansiController extends Controller
             DB::rollback();
             return response()->json(['status' => 'error', 'message' => $e->getMessage()]);
         }
+    }
+
+    public function update(Request $request)
+    {
+        date_default_timezone_set('Asia/Jakarta');
+    
+        DB::beginTransaction();
+        try{
+            
+            $data = Kwitansi::find($request->id);
+            $data->update([
+                'nomor' => $request->nomor,
+                'tanggal' => \Carbon\Carbon::parse($request->tanggal)->format('Y-m-d'),
+                'terima' => $request->terima,
+                'catatan' => $request->catatan,
+                'penyetor' => $request->penyetor,
+                'mengetahui' => $request->mengetahui,
+                'penerima' => $request->penerima,
+            ]);
+            DB::commit();
+
+            $id_berkas = $data->id_berkas;
+            if($id_berkas == null || empty($id_berkas)){
+                DB::rollback();
+                return response()->json(['status' => 'error', 'message' => "gagal mendapatkan id"]);
+            }
+            // update ke berkas jika user update password
+            if($request->password == 1) {
+                $passwordStatus= 'ON';
+            }
+            else {
+                $passwordStatus= 'OFF';
+            }
+
+            $berkas = Berkas::find($id_berkas);
+            $berkas->update([
+                'id_user' => Auth::user()->id_user,
+                'tanggal' => \Carbon\Carbon::parse($request->tanggal)->format('Y-m-d'),
+                'password' => $passwordStatus,
+            ]);
+            DB::commit();
+            
+            // uraian
+            $uraian = $request->uraian;
+            $jumlah = $request->jumlah;
+            if(empty($uraian)){
+                return response()->json(['status' => 'error', 'message' => 'uraian tidak boleh kosong']);
+            }
+            
+            // delete all 
+            $uraians = Uraian::where('id_kwitansi',$request->id);
+            if (!empty($uraians)){
+                $uraians->delete();
+            }
+            foreach(array_combine($uraian,$jumlah) as $urai => $jml)
+            {
+                $uraian_record = [];
+                $now = \Carbon\Carbon::now();
+                if(! empty([$urai,$jml]))
+                {
+                    $uraian_record[] = [
+                        'id_kwitansi' => $request->id,
+                        'uraian' => $urai,
+                        'jumlah' => $jml,
+                        'updated_at' => $now,  // remove if not using timestamps
+                        'created_at' => $now   // remove if not using timestamps
+                    ];
+                    Uraian::insert($uraian_record);
+                    
+                }
+                
+            }
+            return response()->json(['status' => 'success', 'message' => 'Berhasil menambahkan kwintansi']);
+        } catch(Exception $e){
+            DB::rollback();
+            return response()->json(['status' => 'error', 'message' => $e->getMessage()]);
+        }
+    }
+
+    public function print($id)
+    {
+        $data = Kwitansi::with('urai','berkas')->find($id);
+        $pdf = PDF::loadview('kwitansi.print',['data'=>$data]);
+        return $pdf->stream('kwitansi.pdf');
     }
 }

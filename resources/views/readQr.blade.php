@@ -22,7 +22,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title><?php ?></title>
+  <title>{{strtoupper($nama)}}</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- Font Awesome -->
@@ -30,7 +30,7 @@
   <!-- Ionicons -->
   <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
   <!-- Theme style -->
-  <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
+  <link rel="stylesheet" href="{{ url('') }}/dist/js/plugins/adminlte/css/adminlte.min.css">
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 </head>
@@ -46,7 +46,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>{{$nama}}</h1>
+            <h1>{{strtoupper($nama)}}</h1>
           </div>
         </div>
       </div><!-- /.container-fluid -->
@@ -64,9 +64,33 @@
                  	<center><img src="{{asset('settings/'.$setting->header)}}" width="100%" alt="image"></center>
                 </div>
                 <!-- /.col -->
+            </div>
+            <div class="row" style="margin-top: 10px">
+              <div class="col-12 table-responsive">
+                <table class="table table-striped">
+                  <tbody>
+                    <tr>
+                      <td width="20%">Nomor</td>
+                      <td width="20%">:</td>
+                      <td>{{$berkas->$nama->nomor}}</td>
+                    </tr>
+                    <tr>
+                      <td width="20%">Tanggal</td>
+                      <td width="20%">:</td>
+                      <td>{{ \Carbon\Carbon::parse($berkas->tanggal)->isoFormat('D MMMM Y') }}</td>
+                    </tr>
+                    <tr>
+                      <td width="20%">Isi</td>
+                      <td width="20%">:</td>
+                      <td>{!! $berkas->$nama->isi !!}</td>
+                    </tr>
+                  </tbody>
+                </table>
               </div>
-              <p>Nomor:{{$berkas->$nama->nomor}}</p>
-              <p>isi:{!! $berkas->$nama->isi !!}</p>  
+
+            </div>
+              {{-- <p>Nomor:{{$berkas->$nama->nomor}}</p>
+              <p>isi:{!! $berkas->$nama->isi !!}</p>   --}}
               <div class="row">
               	<div class="col-12">
               		<p class="">Info : Info : Kantor Jl. Sesama No.1 Kepanjen Kab. Malang
@@ -86,15 +110,15 @@
 <!-- ./wrapper -->
 
 <!-- jQuery -->
-<script src="../../plugins/jquery/jquery.min.js"></script>
+<script src="{{ url('') }}/dist/js/plugins/jquery/jquery.min.js"></script>
 <!-- Bootstrap 4 -->
-<script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="{{ url('') }}/dist/js/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- FastClick -->
-<script src="../../plugins/fastclick/fastclick.js"></script>
+<script src="{{ url('') }}/dist/js/plugins/fastclick/fastclick.js"></script>
 <!-- AdminLTE App -->
-<script src="../../dist/js/adminlte.min.js"></script>
+<script src="{{ url('') }}/dist/js/plugins/adminlte/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->
-<script src="../../dist/js/demo.js"></script>
+<script src="{{ url('') }}/dist/js/plugins/adminlte/demo.js"></script>
 </body>
 
 @else
@@ -102,7 +126,7 @@
 <!-- Automatic element centering -->
 <div class="lockscreen-wrapper">
   <div class="lockscreen-logo">
-    <a href="../../index2.html"><b>Ber</b>kas</a>
+    <a href="{{ url('') }}/dist/js/index2.html"><b>Ber</b>kas</a>
   </div>
   <!-- User name -->
   <div class="lockscreen-name">Masukkan Password</div>
@@ -134,9 +158,9 @@
 <!-- /.center -->
 
 <!-- jQuery -->
-<script src="../../plugins/jquery/jquery.min.js"></script>
+<script src="{{ url('') }}/dist/js/plugins/jquery/jquery.min.js"></script>
 <!-- Bootstrap 4 -->
-<script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="{{ url('') }}/dist/js/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 </body>
 @endif
 </html>

@@ -34,6 +34,12 @@
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 </head>
+@if ($alert = Session::get('error'))
+	<div class="alert alert-danger alert-dismissible">
+		<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+		<h4><i class="icon fa fa-ban"></i>{{$alert}}</h4>
+    </div>
+@endif
 
 @if($data != 1 || !empty($_SESSION['username']))
 

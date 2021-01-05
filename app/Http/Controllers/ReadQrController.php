@@ -26,9 +26,9 @@ class ReadQrController extends Controller
                 return view('readQr',compact('id','nama'));
             }
             else {
-                return 'gagal';
+                return redirect()->back()->with('error','Password Salah');
             }
         }
-        return 'gagals';
+        return redirect()->back()->with('error','Password Salah');
     }
 }

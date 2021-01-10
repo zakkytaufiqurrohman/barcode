@@ -155,6 +155,20 @@ Route::middleware('auth')->group(function () {
 
     });
 
+    // tanda terima baru
+    Route::name('tandaterima')->prefix('/tandaterimas')->group(function () {
+        Route::get('/', 'TandaTerimav2Controller@index');
+        Route::post('/', 'TandaTerimav2Controller@store');
+        Route::put('/', 'TandaTerimav2Controller@update');
+        Route::delete('/', 'TandaTerimav2Controller@destroy');
+        Route::get('/show', 'TandaTerimav2Controller@show')->name('.show');
+        Route::get('/print/{id}', 'TandaTerimav2Controller@print')->name('.print');
+        
+        Route::get('/data', 'TandaTerimav2Controller@data')->name('.data');
+
+        Route::get('/download/{id}', 'TandaTerimav2Controller@download')->name('.download');
+
+    });
 
     
     // user

@@ -39,7 +39,7 @@
         </li>
         <li>
           <a href="{{route('akta-ppat')}}">
-            <i class="fa fa-calendar"></i> <span>AKTA PPAT</span>
+            <i class="fa fa-calendar"></i> <span>AKTA PPAT Lama</span>
             <span class="pull-right-container">
             </span>
           </a>
@@ -60,6 +60,13 @@
         </li>
         <li>
           <a href="{{route('tanda-terima')}}">
+            <i class="fa fa-calendar"></i> <span>TANDA TERIMA LAMA</span>
+            <span class="pull-right-container">
+            </span>
+          </a>
+        </li>
+        <li>
+          <a href="{{route('tandaterima')}}">
             <i class="fa fa-calendar"></i> <span>TANDA TERIMA</span>
             <span class="pull-right-container">
             </span>

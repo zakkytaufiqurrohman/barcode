@@ -158,11 +158,8 @@ class KwitansiController extends Controller
                         'created_at' => $now   // remove if not using timestamps
                     ];
                 }
-            }
-
-           
+            }           
             Uraian::insert($uraian_records);
-
             DB::commit();
             return response()->json(['status' => 'success', 'message' => 'Berhasil menambahkan kwitansi']);
         } catch(Exception $e){

@@ -170,7 +170,21 @@ Route::middleware('auth')->group(function () {
 
     });
 
-    
+    // reporforium
+    Route::name('reporforium')->prefix('/reporforiums')->group(function () {
+        Route::get('/', 'ReporforiumController@index');
+        Route::post('/', 'ReporforiumController@store');
+        Route::put('/', 'ReporforiumController@update');
+        Route::delete('/', 'ReporforiumController@destroy');
+        Route::get('/show', 'ReporforiumController@show')->name('.show');
+        Route::get('/print/{id}', 'ReporforiumController@print')->name('.print');
+        
+        Route::get('/data', 'ReporforiumController@data')->name('.data');
+
+        Route::get('/download/{id}', 'ReporforiumController@download')->name('.download');
+
+    });
+
     // user
     Route::name('user')->prefix('/users')->group(function () {
         Route::get('/', 'UserController@index');

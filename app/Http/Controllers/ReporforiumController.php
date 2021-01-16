@@ -22,7 +22,11 @@ class ReporforiumController extends Controller
 
     public function store(Request $request)
     {
-        //validasi 
+        //validasi
+        // untuk foto img / untuk berkas pdf
+        $this->validate($request,[
+            'foto.*' => 'required|max:2048|mimes:jpeg,jpg,png'
+        ]); 
         // untuk foto img / untuk berkas pdf
         $this->validate($request,[
             'berkas' => 'required|max:10000|mimes:pdf'

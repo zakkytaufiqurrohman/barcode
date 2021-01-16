@@ -266,7 +266,6 @@
                 $("#btn-add-reporforium").addClass('btn-progress');
                 $("input").attr('disabled', 'disabled');
                 $("button").attr('disabled', 'disabled');
-                $("select").attr('disabled', 'disabled');
             },
             complete() {
                 $("#btn-add-reporforium").removeClass('btn-progress');

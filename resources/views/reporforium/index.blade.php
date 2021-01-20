@@ -28,10 +28,10 @@
                         <th>No Bulanan</th>
                         <th>Tanggal</th>
                         <th>Sifat Akta</th>
-                        <th>Nama Penghadap</th>
+                        {{-- <th>Nama Penghadap</th> --}}
                         <th>SK Kemenkumham</th>
-                        <th>Barcode</th>
-                        <th>Di buat</th>
+                        {{-- <th>Barcode</th> --}}
+                        {{-- <th>Di buat</th> --}}
                         <th>Action</th>                                    
                     </tr>
                 </thead>
@@ -42,10 +42,10 @@
                         <th>No Bulanan</th>
                         <th>Tanggal</th>
                         <th>Sifat Akta</th>
-                        <th>Nama Penghadap</th>
+                        {{-- <th>Nama Penghadap</th> --}}
                         <th>SK Kemenkumham</th>
-                        <th>Barcode</th>
-                        <th>Di buat</th>
+                        {{-- <th>Barcode</th> --}}
+                        {{-- <th>Di buat</th> --}}
                         <th>Action</th>
                     </tr>
                 </tfoot>
@@ -158,34 +158,28 @@
                                     <input type="text" name="nomor" class="form-control" id="update-nomor" placeholder="Nomor">
                                 </div>
                                 <div class="form-group">
+                                    <label for="update-no_bulanan">No Bulanan</label>
+                                    <input type="text" name="no_bulanan" class="form-control" id="update-no_bulanan" placeholder="No Bulanan">
+                                </div>
+                                <div class="form-group">
                                     <label for="exampleFormControlInput1">Tanggal</label>
                                     <input type="text" name="tanggal" class="form-control datepicker" placeholder="Tanggal">
                                 </div>
                                 <div class="form-group">
-                                    <label for="update-terima">Terima</label>
-                                    <input type="text" name="terima" class="form-control" id="update-terima" placeholder="Terima">
+                                    <label for="update-sifat_akta">sifat_akta</label>
+                                    <input type="text" name="sifat_akta" class="form-control" id="update-sifat_akta" placeholder="sifat_akta">
                                 </div>
                                 <div class="form-group">
-                                    <label for="update-catatan">Catatan</label>
-                                    <input type="text" name="catatan" class="form-control" id="update-catatan" placeholder="Catatan">
+                                    <label for="update-sk_kemenhumkam">sk_kemenhumkam</label>
+                                    <input type="text" name="sk_kemenhumkam" class="form-control" id="update-sk_kemenhumkam" placeholder="sk_kemenhumkam">
                                 </div>
                                 <div class="form-group">
-                                    <label for="update-penyetor">Penyetor</label>
-                                    <input type="text" name="penyetor" class="form-control" id="update-penyetor" placeholder="Penyetor">
-                                </div>
-                                
-                                <div class="form-group">
-                                    <label for="update-mengetahui">Mengetahui</label>
-                                    <input type="text" name="mengetahui" class="form-control" id="update-mengetahui" placeholder="Mengetahui">
-                                </div>
-                                
-                                <div class="form-group">
-                                    <label for="update-penerima">Penerima</label>
-                                    <input type="text" name="penerima" class="form-control" id="update-penerima" placeholder="Penerima">
+                                    <label for="update-berkas">berkas</label>
+                                    <input type="file" name="berkas" class="form-control" id="update-berkas" placeholder="Penyetor">
                                 </div>
                             </div>
                             <div class="col-md-6">
-                                <label for="update-penerima">Uraian & jumlah</label>
+                                <label for="update-penerima">Nama Penghadap, NIK & FOTO</label>
                                 <div class="newRowJumlahs"></div>
                                 <div class="newRowJumlah"></div>
                             <button class="addRowJumlah btn btn-info" type="button">Add Row</button>
@@ -297,7 +291,7 @@
     });
 
     // edit show/asign data
-    function showreporforium(object)
+    function showReporforium(object)
     {
         var id = $(object).data('id');
 
@@ -325,36 +319,42 @@
 
                 $('#modal-update-reporforium').find("input[name='id']").val(result['data']['id_reporforium']);
                 $('#modal-update-reporforium').find("input[name='nomor']").val(result['data']['nomor']);
+                $('#modal-update-reporforium').find("input[name='no_bulanan']").val(result['data']['no_bulanan']);
                 $('#modal-update-reporforium').find("input[name='tanggal']").datepicker("setDate",result['data']['tanggal']);
-                $('#modal-update-reporforium').find("input[name='terima']").val(result['data']['terima']);
-                $('#modal-update-reporforium').find("input[name='catatan']").val(result['data']['catatan']);
-                $('#modal-update-reporforium').find("input[name='penyetor']").val(result['data']['penyetor']);
-                $('#modal-update-reporforium').find("input[name='mengetahui']").val(result['data']['mengetahui']);
-                $('#modal-update-reporforium').find("input[name='penerima']").val(result['data']['penerima']);
+                $('#modal-update-reporforium').find("input[name='sifat_akta']").val(result['data']['sifat_akta']);
+                // $('#modal-update-reporforium').find("input[name='penyetor']").val(result['data']['berkas']);
+                $('#modal-update-reporforium').find("input[name='sk_kemenhumkam']").val(result['data']['sk_kemenhumkam']);
+                // $('#modal-update-reporforium').find("input[name='penerima']").val(result['data']['penerima']);
                 if (result['data']['password'] == 'ON'){
                     $('#modal-update-reporforium').find("input[name='password']").prop('checked', true);
                 }
                 else{
                     $('#modal-update-reporforium').find("input[name='password']").prop('checked', false);
                 }
-                $.each( result['data']['urai'], function( key, value ) {
-                    var jumlah = value.jumlah
-                    var uraian = value.uraian
+                $.each( result['data']['detailrepo'], function( key, value ) {
+                    var nama = value.nama
+                    var nik = value.nik
                     var html = '';
-                    // uraian
+                    // nik
                     html += '<div class="kotak">'
-                    html += '<input type="hidden" name="id_uraian" value='+value.id_uraian+'>';
+                    html += '<input type="hidden" name="id_detail_reporforium" value='+value.id_detail_reporforium+'>';
+                    html += '<div class="form-group">'
+                    html += '<input type="text" name="nik[]" value="'+nik+'" class="form-control m-input" placeholder="Tambah nik" autocomplete="off">';
+                    html += '<div class="input-group-append">';
+                    html += '</div>';
+                    // nama
                     html += '<div class="form-group">'
                     html += '<div class="inputFormRow">';
-                    html += '<input type="text" name="uraian[]" value="'+uraian+'" class="form-control m-input" placeholder="Tambah Uraian" autocomplete="off">';
+                    html += '<input type="text" name="nama[]" value='+nama+' class="form-control m-input" placeholder="Tambah nama" autocomplete="off">';
                     html += '<div class="input-group-append">';
                     html += '</div>';
-                    // jumlah
+                    html += '</div>';
+                    html += '</div>';
+                    //foto
                     html += '<div class="form-group">'
-                    html += '<input type="text" name="jumlah[]" value='+jumlah+' class="form-control m-input" placeholder="Tambah Jumlah" autocomplete="off">';
+                    html += '<input type="file" name="foto[]" class="form-control m-input" placeholder="foto" autocomplete="off">';
                     html += '<div class="input-group-append">';
-                    html += '<button id="removeRow" type="button" class="btn btn-danger "><span class="fa fa-trash"></span></button>';
-                    html += '</div>';
+                    html += '<button id="removeRow" type="button" class="btn btn-danger"><span class="fa fa-trash"></span></button>';
                     html += '</div>';
                     html += '</div>';
 
@@ -421,7 +421,7 @@
     }
 
     // delete
-    function deletereporforium(object)
+    function deleteReporforium(object)
     {
         var id = $(object).data('id');
         if (confirm("Apakah Anda Yakin ?")) {
@@ -464,12 +464,12 @@
             columns: [   
                 { data: 'DT_RowIndex', orderable: false, searchable:false },
                 { data: 'nomor',"width": "20%" },
+                { data: 'no_bulanan',"width": "20%" },
                 { data: 'tanggal',"width": "20%" },
-                { data: 'terima',"width": "20%" },
-                { data: 'catatan',"width": "20%" },
-                { data: 'penyetor',"width": "20%" },
-                { data: 'barcode',"width": "10%" },
-                { data: 'dibuat',"width": "20%" },
+                { data: 'sifat_akta',"width": "20%" },
+                { data: 'sk_kemenhumkam',"width": "20%" },
+                // { data: 'barcode',"width": "10%" },
+                // { data: 'dibuat',"width": "20%" },
                 { data: 'action',"width": "20%" },
             ],
             fixedColumns: true,
@@ -490,7 +490,7 @@
         html += '</div>';
         // nik
         html += '<div class="form-group">'
-        html += '<div class="inputFormRow">';
+        // html += '<div class="inputFormRow">';
         html += '<input type="text" name="nik[]" class="form-control m-input" placeholder="Nik" autocomplete="off">';
         html += '<div class="input-group-append">';
         html += '</div>';

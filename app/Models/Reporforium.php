@@ -10,21 +10,9 @@ class Reporforium extends Model
     protected $primaryKey = 'id_reporforium';
     protected $fillable = ['nomor','no_bulanan','tanggal','sifat_akta','sk_kemenhumkam','berkas','id_berkas', 'created_at', 'updated_at'];
 
-    public function berkas()
+    public function berka()
     {
         return $this->belongsTo(Berkas::class,'id_berkas','id_berkas');
-    }
-    public function detailreporforium()
-    {
-        return $this->belongsTo(DetailReporforium::class,'id_reporforium','id_reporforium');
-    }
-    public function users()
-    {
-        return $this->belongsTo('App\User','id_user','id_user');
-    }
-    public function detailrepo()
-    {
-        return $this->hasMany(DetailReporforium::class,'id_reporforium','id_reporforium');
     }
 
 }

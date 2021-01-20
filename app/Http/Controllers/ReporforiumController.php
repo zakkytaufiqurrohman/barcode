@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\DetailReporforium;
 use App\Models\Reporforium;
+use App\Models\DetailReporforium;
 use App\Models\Berkas;
 use App\User;
 use Yajra\DataTables\Facades\DataTables;
@@ -25,23 +25,23 @@ class ReporforiumController extends Controller
 
         $data = Reporforium::query();
         return DataTables::eloquent($data)
-            // ->addColumn('barcode',function ($data) {
-            //     // get kode berkas from table berkas
-            //     $kode = $data->berkas->kode_berkas;
-            //     $kode = str_replace("/", "", $kode);
-            //     $kode =  config('app.url').'/berkas/reporforium/'.$kode;
-            //     // generate barcode
-            //     $images = \DNS2D::getBarcodePNGPath(strval($kode), 'QRCODE',5,5);
-            //     // get image patch
-            //     $nameImage = str_replace("\\", "", $images);
-            //     $nameImage = str_replace("/barcode", "", $nameImage);
-            //     $url= asset("barcode/$nameImage");
+            ->addColumn('barcode',function ($data) {
+                // get kode berkas from table berkas
+                $kode = $data->berka->kode_berkas;
+                $kode = str_replace("/", "", $kode);
+                $kode =  config('app.url').'/berkas/reporforium/'.$kode;
+                // generate barcode
+                $images = \DNS2D::getBarcodePNGPath(strval($kode), 'QRCODE',5,5);
+                // get image patch
+                $nameImage = str_replace("\\", "", $images);
+                $nameImage = str_replace("/barcode", "", $nameImage);
+                $url= asset("barcode/$nameImage");
 
-            //     $barcode = '';
-            //     $barcode .= "<a href='reporforiums/download/$nameImage'><img src=".$url." border='0' width='100' class='img' align='center' />'</a>" ;
+                $barcode = '';
+                $barcode .= "<a href='reporforiums/download/$nameImage'><img src=".$url." border='0' width='100' class='img' align='center' />'</a>" ;
 
-            //     return $barcode;
-            // })
+                return $barcode;
+            })
             ->addColumn('action', function ($data) {
                
                 $action = '';
@@ -152,7 +152,7 @@ class ReporforiumController extends Controller
                     
                     $foto->move(public_path('Reporforium/foto'),$nama_file_foto);
                     $temp[] = [
-                        'id_reporforium' => $reporforium->id,
+                        'id_reporforium' => $reporforium->id_reporforium,
                         'foto' => $nama_file_foto,
                         'nik' => $niks,
                         'nama' => $name,
@@ -165,7 +165,7 @@ class ReporforiumController extends Controller
 
             DB::commit();
             $scan->move(public_path('Reporforium/file'),$nama_file_scan);
-            return response()->json(['status' => 'success', 'message' => 'Berhasil menambahkan Akta PPAT']);
+            return response()->json(['status' => 'success', 'message' => 'Berhasil menambahkan Reporforium']);
         } catch(Exception $e){
             DB::rollback();
             return response()->json(['status' => 'error', 'message' => $e->getMessage()]);

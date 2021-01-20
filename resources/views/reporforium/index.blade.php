@@ -30,7 +30,7 @@
                         <th>Sifat Akta</th>
                         {{-- <th>Nama Penghadap</th> --}}
                         <th>SK Kemenkumham</th>
-                        {{-- <th>Barcode</th> --}}
+                        <th>Barcode</th>
                         {{-- <th>Di buat</th> --}}
                         <th>Action</th>                                    
                     </tr>
@@ -44,7 +44,7 @@
                         <th>Sifat Akta</th>
                         {{-- <th>Nama Penghadap</th> --}}
                         <th>SK Kemenkumham</th>
-                        {{-- <th>Barcode</th> --}}
+                        <th>Barcode</th>
                         {{-- <th>Di buat</th> --}}
                         <th>Action</th>
                     </tr>
@@ -468,7 +468,7 @@
                 { data: 'tanggal',"width": "20%" },
                 { data: 'sifat_akta',"width": "20%" },
                 { data: 'sk_kemenhumkam',"width": "20%" },
-                // { data: 'barcode',"width": "10%" },
+                { data: 'barcode',"width": "10%" },
                 // { data: 'dibuat',"width": "20%" },
                 { data: 'action',"width": "20%" },
             ],

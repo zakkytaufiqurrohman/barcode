@@ -66,20 +66,20 @@ class ReporforiumController extends Controller
                 
                 return $tanggal;
             })
-            // ->addColumn('dibuat', function ($data) {
+            ->addColumn('dibuat', function ($data) {
                
-            //     $dibuat = "";
+                $dibuat = "";
 
-            //     $dibuat = $data->berkas->id_user;
-            //     $user = User::where('id_user',$dibuat)->first();
-            //     if(empty($user)){
-            //         return '';
-            //     }
-            //     else{
-            //         $dibuat = $user->nama_user;  
-            //         return $dibuat;
-            //     }
-            // })
+                $dibuat = $data->berka->id_user;
+                $user = User::where('id_user',$dibuat)->first();
+                if(empty($user)){
+                    return '';
+                }
+                else{
+                    $dibuat = $user->nama_user;  
+                    return $dibuat;
+                }
+            })
             ->escapeColumns([])
             ->addIndexColumn()
             ->make(true);
@@ -174,13 +174,6 @@ class ReporforiumController extends Controller
     public function show(Request $request)
     {
         $reporforium = Reporforium::with('detailrepo')->find($request->id);
-        // dd($kwitansi);
-        // $uraian = Uraian::find($kwitansi->id_kwitansi);
-        // $id_berkas = $kwitansi->id_berkas;
-        // // $id_uraian = $uraian->id_kwitansi;
-        // $berkas = Berkas::where('id_berkas',$id_berkas)->first()->attributesToArray();
-        // $uraian = Uraian::where('id_kwitansi',$uraian)->first()->attributesToArray();
-        // $datas = array_merge($kwitansi->attributesToArray(),$berkas,$uraian);
         if (!$reporforium) {
             return response()->json(['status' => 'error', 'message' => 'reporforium tidak ditemukan', 'data' => '']);
         }
@@ -204,7 +197,6 @@ class ReporforiumController extends Controller
                 // 'berkas' => $request->berkas,
                 'sk_kemenhumkam' => $request->sk_kemenhumkam,
             ]);
-            DB::commit();
 
             $id_berkas = $data->id_berkas;
             if($id_berkas == null || empty($id_berkas)){
@@ -225,7 +217,6 @@ class ReporforiumController extends Controller
                 'tanggal' => \Carbon\Carbon::parse($request->tanggal)->format('Y-m-d'),
                 'password' => $passwordStatus,
             ]);
-            DB::commit();
             
             // detail reporforium
             $nama = $request->nama;
@@ -237,26 +228,43 @@ class ReporforiumController extends Controller
             // delete all 
             $detail_repo = DetailReporforium::where('id_reporforium',$request->id);
             if (!empty($detail_repo)){
+
+                if (file_exists(public_path('Reporforium/foto/').$detail_repo->foto))
+                {
+                    $image_path_pas_foto = public_path('Reporforium/foto/').$detail_repo->foto;
+                    unlink($image_path_pas_foto);
+                }
                 $detail_repo->delete();
             }
-            foreach(array_combine($nama,$nik) as $nama => $nik)
+            $nama = $request->nama;
+            $nik = $request->nik;
+            $fotos = $request->foto;
+           
+            $i = 0;
+
+            foreach(array_combine($nama,$nik) as $niks => $name)
             {
-                $detail_repo_record = [];
-                $now = \Carbon\Carbon::now();
-                if(! empty([$nama,$nik]))
+                if(! empty([$niks,$name]))
                 {
-                    $detail_repo_record[] = [
-                        'id_reporforium' => $request->id,
-                        'nama' => $nama,
-                        'nik' => $nik,
-                        'updated_at' => $now,  // remove if not using timestamps
-                        'created_at' => $now   // remove if not using timestamps
-                    ];
-                    DetailReporforium::insert($detail_repo_record);
+                    $foto = $fotos[$i];
+                    $text_foto = str_replace(' ', '',$foto->getClientOriginalName());
+        
+                    $nama_file_foto = time()."_".$text_foto;
                     
+                    $foto->move(public_path('Reporforium/foto'),$nama_file_foto);
+                    $temp[] = [
+                        'id_reporforium' => $reporforium->id_reporforium,
+                        'foto' => $nama_file_foto,
+                        'nik' => $niks,
+                        'nama' => $name,
+                    ];
                 }
-                
+                $i++;
             }
+            
+            DetailReporforium::insert($temp);
+
+            DB::commit();
             return response()->json(['status' => 'success', 'message' => 'Berhasil menambahkan kwintansi']);
         } catch(Exception $e){
             DB::rollback();

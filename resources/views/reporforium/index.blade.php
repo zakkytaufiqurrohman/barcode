@@ -28,10 +28,9 @@
                         <th>No Bulanan</th>
                         <th>Tanggal</th>
                         <th>Sifat Akta</th>
-                        {{-- <th>Nama Penghadap</th> --}}
                         <th>SK Kemenkumham</th>
                         <th>Barcode</th>
-                        {{-- <th>Di buat</th> --}}
+                        <th>Di buat</th>
                         <th>Action</th>                                    
                     </tr>
                 </thead>
@@ -42,10 +41,9 @@
                         <th>No Bulanan</th>
                         <th>Tanggal</th>
                         <th>Sifat Akta</th>
-                        {{-- <th>Nama Penghadap</th> --}}
                         <th>SK Kemenkumham</th>
                         <th>Barcode</th>
-                        {{-- <th>Di buat</th> --}}
+                        <th>Di buat</th>
                         <th>Action</th>
                     </tr>
                 </tfoot>
@@ -76,7 +74,7 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="add-nomor">Nomor</label>
-                                    <input type="text" name="nomor" class="form-control" id="add-nomor" placeholder="Nomor">
+                                    <input type="number" name="nomor" class="form-control" id="add-nomor" placeholder="Nomor">
                                 </div>
                                 <div class="form-group">
                                     <label for="add-no_bulanan">No Bulanan</label>
@@ -145,7 +143,7 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form method="POST" action="javascript:void(0)" id="form-update-reporforium">
+            <form method="POST" action="javascript:void(0)" id="form-update-reporforium" enctype="multipart/form-data>
                 @csrf
                 @method('PUT')
                 <input type="hidden" name="id" value="">
@@ -337,6 +335,7 @@
                     var html = '';
                     // nik
                     html += '<div class="kotak">'
+                    html += '<div class="inputFormRow">';
                     html += '<input type="hidden" name="id_detail_reporforium" value='+value.id_detail_reporforium+'>';
                     html += '<div class="form-group">'
                     html += '<input type="text" name="nik[]" value="'+nik+'" class="form-control m-input" placeholder="Tambah nik" autocomplete="off">';
@@ -344,14 +343,14 @@
                     html += '</div>';
                     // nama
                     html += '<div class="form-group">'
-                    html += '<div class="inputFormRow">';
+                    
                     html += '<input type="text" name="nama[]" value='+nama+' class="form-control m-input" placeholder="Tambah nama" autocomplete="off">';
                     html += '<div class="input-group-append">';
                     html += '</div>';
                     html += '</div>';
-                    html += '</div>';
                     //foto
                     html += '<div class="form-group">'
+                    html += '<img src="+Reporforium/foto/value.foto+">'
                     html += '<input type="file" name="foto[]" class="form-control m-input" placeholder="foto" autocomplete="off">';
                     html += '<div class="input-group-append">';
                     html += '<button id="removeRow" type="button" class="btn btn-danger"><span class="fa fa-trash"></span></button>';
@@ -469,7 +468,7 @@
                 { data: 'sifat_akta',"width": "20%" },
                 { data: 'sk_kemenhumkam',"width": "20%" },
                 { data: 'barcode',"width": "10%" },
-                // { data: 'dibuat',"width": "20%" },
+                { data: 'dibuat',"width": "20%" },
                 { data: 'action',"width": "20%" },
             ],
             fixedColumns: true,

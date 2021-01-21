@@ -185,6 +185,21 @@ Route::middleware('auth')->group(function () {
 
     });
 
+    // klaper
+    Route::name('klaper')->prefix('/klapers')->group(function () {
+        Route::get('/', 'klaperController@index');
+        Route::post('/', 'klaperController@store');
+        Route::put('/', 'klaperController@update');
+        Route::delete('/', 'klaperController@destroy');
+        Route::get('/show', 'klaperController@show')->name('.show');
+        Route::get('/detail/{id}', 'klaperController@detail')->name('.detail');
+        
+        Route::get('/data', 'klaperController@data')->name('.data');
+
+        Route::get('/download/{id}', 'klaperController@download')->name('.download');
+
+    });
+
     // user
     Route::name('user')->prefix('/users')->group(function () {
         Route::get('/', 'UserController@index');

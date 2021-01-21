@@ -115,14 +115,17 @@
               $("button").removeAttr("disabled", "disabled");
           },
           success(result) {
-            toastr.success(result.message);
             if(result['status'] == 'success'){
+                toastr.success(result.message);
                 window.location = "{{route('waarmeking')}}";    
+            }
+            else {
+              toastr.error(result.message);
             }
           },
           error(xhr, status, error) {
               var err = eval('(' + xhr.responseText + ')');
-              toastr.success(err.message);
+              toastr.error(err.message);
           }
       });
   }

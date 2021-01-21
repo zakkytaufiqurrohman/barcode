@@ -45,7 +45,7 @@ class ReporforiumController extends Controller
             ->addColumn('action', function ($data) {
                
                 $action = '';
-                $action .= "<a href='" . route('reporforium.print',$data->id_reporforium) . "' class='btn btn-icon btn-success'><i class='fa fa-print'></i></a>&nbsp;"; 
+                $action .= "<a href='" . route('reporforium.detail',$data->id_reporforium) . "' class='btn btn-icon btn-success'><i class='fa fa-info'></i></a>&nbsp;"; 
                 $action .= "<a href='javascript:void(0)' class='btn btn-icon btn-primary' data-id='{$data->id_reporforium}' onclick='showReporforium(this);'><i class='fa fa-edit'></i></a>&nbsp;";
                 $action .= "<a href='javascript:void(0)' class='btn btn-icon btn-danger'  data-id='{$data->id_reporforium}' onclick='deleteReporforium(this);'><i class='fa fa-trash'></i></a>&nbsp;";
 
@@ -300,6 +300,18 @@ class ReporforiumController extends Controller
         } catch (Exception $e) {
             DB::rollback();
             return response()->json(['status' => 'error', 'message' => $e->getMessage()]);
+        }
+    }
+
+    public function detail($id)
+    {
+        $reporforium = Reporforium::with('detailrepo')->find($id);
+        // return $reporforium;
+        if (empty($reporforium)){
+            return 'Reporforium not found';
+        }
+        else {
+            return view('reporforium.detail',compact('reporforium'));
         }
     }
 }

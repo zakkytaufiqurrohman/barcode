@@ -177,7 +177,7 @@ Route::middleware('auth')->group(function () {
         Route::put('/', 'ReporforiumController@update');
         Route::delete('/', 'ReporforiumController@destroy');
         Route::get('/show', 'ReporforiumController@show')->name('.show');
-        Route::get('/print/{id}', 'ReporforiumController@print')->name('.print');
+        Route::get('/detail/{id}', 'ReporforiumController@detail')->name('.detail');
         
         Route::get('/data', 'ReporforiumController@data')->name('.data');
 

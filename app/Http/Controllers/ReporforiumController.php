@@ -269,8 +269,7 @@ class ReporforiumController extends Controller
         DB::beginTransaction();
         try {
             $reporforium = Reporforium::find($request->id);
-            $detailreporforium = DetailReporforium::find($reporforium->id_reporforium);
-            // dd($detailreporforium);
+            $detailreporforium = DetailReporforium::where('id_reporforium',$reporforium->id_reporforium);
             $berkas = Berkas::find($reporforium->id_berkas);
             if (!$berkas) {
                 DB::rollback();

@@ -75,7 +75,7 @@
                     </div>
                     <div class="form-group">
                         <label for="exampleFormControlInput1">Tanggal</label>
-                        <input type="text" name="tanggal" class="form-control" id="datepicker" placeholder="Tanggal">
+                        <input type="text" name="tanggal" class="form-control datepicker" placeholder="Tanggal">
                     </div>
                     <div class="form-group">
                         <label for="add-pihak1">Pihak 1</label>
@@ -127,7 +127,7 @@
                     </div>
                     <div class="form-group">
                         <label for="exampleFormControlInput1">Tanggal</label>
-                        <input type="text" name="tanggal" class="form-control" id="datepicker" placeholder="Tanggal">
+                        <input type="text" name="tanggal" class="form-control datepicker" placeholder="Tanggal">
                     </div>
                     <div class="form-group">
                         <label for="update-pihak1">Pihak 1</label>
@@ -167,7 +167,7 @@
         $('.ckeditor').ckeditor();
     });
     $( function() {
-        $( "#datepicker" ).datepicker();
+        $( ".datepicker" ).datepicker({  format: 'yyyy-mm-dd'});
     } );
 </script>
 <script>
@@ -286,7 +286,7 @@
             success(result) {
                 $('#modal-update-waarmeking').find("input[name='id']").val(result['data']['id_waarmeking']);
                 $('#modal-update-waarmeking').find("input[name='nomor']").val(result['data']['nomor']);
-                $('#modal-update-waarmeking').find("input[name='tanggal']").val(result['data']['tanggal']);
+                $('#modal-update-waarmeking').find("input[name='tanggal']").datepicker("setDate",result['data']['tanggal']);
                 $('#modal-update-waarmeking').find("input[name='pihak1']").val(result['data']['pihak1']);
                 $('#modal-update-waarmeking').find("input[name='pihak2']").val(result['data']['pihak2']);
                 CKEDITOR.instances.updateisi.setData(result['data']['isi']);

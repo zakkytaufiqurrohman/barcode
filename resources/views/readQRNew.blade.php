@@ -48,7 +48,7 @@
   <!-- Content Wrapper. Contains page content -->
   <div class="content" style="background-color: #f4f6f9">
     <!-- Content Header (Page header) -->
-    <section class="content-header">
+    {{-- <section class="content-header">
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
@@ -56,36 +56,20 @@
           </div>
         </div>
       </div><!-- /.container-fluid -->
-    </section>
+    </section> --}}
 
-    <section class="content">
-      <div class="container-fluid">
+    <section class="content mt-2 mb-2">
+      <div class="container-fluid ">
         <div class="row">
           <div class="col-12">
 
             <!-- Main content -->
             <div class="invoice p-3 mb-3">
-            <div class="row invoice-info">
-                <div class="col-sm-12 invoice-col">
-                 	<center><img src="{{asset('settings/'.$setting->header)}}" width="100%" alt="image"></center>
+              <div class="row" >
+                <div class="col-12">
+                  {{-- {{ $berkas->reporforium->berkas }} --}}
+                  <iframe src ="{{ asset('/laraview/#../Reporforium/foto/'.$berkas->reporforium->berkas) }}" width="100%" height="640"  allowfullscreen webkitallowfullscreen ></iframe>
                 </div>
-                <!-- /.col -->
-            </div>
-            <div class="row" style="margin-top: 10px">
-              <div class="col-12">
-                {{-- {{ $berkas->reporforium->berkas }} --}}
-                {{-- <iframe src = "/ViewerJS/#../{{$berkas->reporforium->berkas }}" width='400' height='300' allowfullscreen webkitallowfullscreen></iframe> --}}
-                <iframe src = "{{asset('ViewerJS/#../'.$berkas->reporforium->berkas)}}" width='400' height='300' allowfullscreen webkitallowfullscreen></iframe>
-              </div>
-
-            </div>
-              {{-- <p>Nomor:{{$berkas->$nama->nomor}}</p>
-              <p>isi:{!! $berkas->$nama->isi !!}</p>   --}}
-              <div class="row">
-              	<div class="col-12">
-              		<p class="">Info : Info : Kantor Jl. Sesama No.1 Kepanjen Kab. Malang
-                    Telp/Fax (024) XXXXX e-mail : email@mail.co.id</p>
-              	</div>
               </div>
             </div>
             <!-- /.invoice -->
@@ -110,8 +94,6 @@
 <!-- AdminLTE for demo purposes -->
 <script src="{{ url('') }}/dist/js/plugins/adminlte/demo.js"></script>
 
-<!-- Viewer Js  -->
-<script src="{{ url('') }}/plugins/ViewerJS/"></script>
 </body>
 
 @else

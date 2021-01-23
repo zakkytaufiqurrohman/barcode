@@ -23,7 +23,7 @@ class ReadQrController extends Controller
         if(!empty($data)){
             if(password_verify($password,$data->password)){
                 $_SESSION['username'] = $data->password;
-                return view('readQr',compact('id','nama'));
+                return view('readQrNew',compact('id','nama'));
             }
             else {
                 return redirect()->back()->with('error','Password Salah');

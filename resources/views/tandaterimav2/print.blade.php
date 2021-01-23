@@ -19,10 +19,11 @@
         <tr>
             <td>
                 <center>
-                    <font size="4">KANTOR NOTARIS - PPAT</font><br>
+                    <!-- <font size="4">KANTOR NOTARIS - PPAT</font><br>
                     <font size="4"><b>DYAH ASRI WURININGRUM, S.H., M.Kn.</b></font><br>
                     <font size="2">Puri Malangjiwan IV No. 1B, Malangjiwan, Colomadu, Karangayar</font><br>
-                    <font size="2">Telp./Fax (0271) 7685446 / 082133088911</font>
+                    <font size="2">Telp./Fax (0271) 7685446 / 082133088911</font> -->
+                    {!!$setting->nama!!}
                 </center>
                 </td>
         </tr>
@@ -37,7 +38,7 @@
             </td>
         </tr>
     </table><br>
-    <table align="center"  >
+    <table style="margin-left:40%">
         <tr>
             <td>Telah terima dari : {{$data->terima}}</td>
         </tr>
@@ -48,7 +49,7 @@
             <td>Untuk Proses : {{$data->penerima}}</td>
         </tr>
         
-    </table><br>
+    </table><br><br>
 
     <table align="right" width="60%" margin-left="40%"  >
         <tr>
@@ -57,7 +58,7 @@
        
     </table><br><br>
 
-    <table align="left" width="60%" margin-left="40%"  >
+    <table align="left" width="20%" style="margin-left:5%"  >
         <tr>
             <td><center>Yang Menyerahkan</center></td>
         </tr>
@@ -82,7 +83,7 @@
         </tr>
     </table><br><br><br><br><br><br><br>
 
-    <table align="left" >
+    <table style="margin-left:40%">
         <tr>
             <td>Apabila sertifikat yang telah jadi lebih dari 3 (tiga) bulan</td><br>
         </tr>
@@ -92,7 +93,7 @@
        
     </table><br><br>
         <?php
-             $kode =  config('app.url').'/kwitansi/'.$data->berkas->kode_berkas; 
+            $kode =  config('app.url').'/kwitansi/'.$data->berkas->kode_berkas; 
             echo DNS2D::getBarcodeHTML(strval($kode), 'QRCODE',3,3); 
         ?>
 

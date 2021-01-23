@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Berkas;
+use App\Models\Setting;
 use App\Models\TandaTerimaV2;
 use App\User;
 use Yajra\DataTables\Facades\DataTables;
@@ -247,7 +248,8 @@ class TandaTerimav2Controller extends Controller
     public function print($id)
     {
         $data = TandaTerimav2::find($id);
-        $pdf = PDF::loadview('tandaterimav2.print',['data'=>$data]);
+        $setting = Setting::first();
+        $pdf = PDF::loadview('tandaterimav2.print',['data'=>$data,'setting'=>$setting]);
         return $pdf->stream('tandaterima.pdf');
     }
 }

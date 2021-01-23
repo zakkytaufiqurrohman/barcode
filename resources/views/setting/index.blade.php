@@ -25,12 +25,12 @@
                             <img src="{{asset('settings/'.$data->header)}}" alt="logo" width=200px heigth=200px>
                         @endif
                        <br>
-                        <input type="file" class="form-control" name="header" required="">
+                        <input type="file" class="form-control" name="header">
                     </div>
-					<!-- <div class="form-group">
-                        <label>Masukkan Ulang Password</label>
-                        <input type="password" class="form-control" name="password_ulang" placeholder="Masukkan Ulang Password" required="">
-					</div> -->
+					<div class="form-group">
+                      <label for="addheader">Nama Header</label>  
+                      <textarea class="ckeditor form-control" name="nama" id="addheader">{!! $data->nama !!}</textarea>
+                    </div>
 
                 </div>
                 <div class="box-footer">
@@ -44,10 +44,13 @@
 </section>
 @endsection
 @section('js')
+<script src="//cdn.ckeditor.com/4.14.0/standard/ckeditor.js"></script>
 <script>
     // proses update
     $("#form-update").on("submit", function(e) {
-    
+        for (var i in CKEDITOR.instances) {
+            CKEDITOR.instances[i].updateElement();
+        };
         $.ajax({
             url: "{{route('setting_store')}}",
             type: "POST",

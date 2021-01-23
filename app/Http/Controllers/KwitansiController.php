@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Kwitansi;
 use App\Models\Berkas;
+use App\Models\Setting;
 use App\Models\Uraian;
 use App\User;
 use Yajra\DataTables\Facades\DataTables;
@@ -296,7 +297,8 @@ class KwitansiController extends Controller
     public function print($id)
     {
         $data = Kwitansi::with('urai','berkas')->find($id);
-        $pdf = PDF::loadview('kwitansi.print',['data'=>$data]);
+        $setting = Setting::first();
+        $pdf = PDF::loadview('kwitansi.print',['data'=>$data,'setting'=>$setting]);
         return $pdf->stream('kwitansi.pdf');
     }
 }

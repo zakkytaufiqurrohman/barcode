@@ -54,13 +54,12 @@
     ?>
     <table class='table table-bordered'>
         <tr>
-            <td rowspan = 2 colspan="3">image</td>
+            <td rowspan = 2 colspan="3"><p>{!! $setting->nama !!}</p></td>
             <td rowspan = 2 colspan="1"><h5><b>BUKTI PEMBAYARAN</b></h5></td>
             <td>nomor : {{$data->nomor}}</td>
         </tr>
         <tr>
             <td>tanggal : {{$data->tanggal}}</td>
-           
         </tr>
         <tr>
            <?php $row = count($data->urai) + 1?>
@@ -95,8 +94,8 @@
             <td>{{$data->penerima}}</td>
         </tr>
         <?php
-             $kode =  config('app.url').'/kwitansi/'.$data->berkas->kode_berkas; 
-            echo DNS2D::getBarcodeHTML(strval($kode), 'QRCODE',3,3); 
+            // $kode =  config('app.url').'/kwitansi/'.$data->berkas->kode_berkas; 
+            // echo DNS2D::getBarcodeHTML(strval($kode), 'QRCODE',3,3); 
         ?>
     </table>
 </body>

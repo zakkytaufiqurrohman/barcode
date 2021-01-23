@@ -1,9 +1,9 @@
 @extends('layouts.master')
 
-@section('title','Tanda Terima')
+@section('title','Klaper')
 @section('breadcrumb')
     <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-    <li class="active">Tanda Terima</li>
+    <li class="active">Klaper</li>
 @endsection
 @section('content')
 <!-- Main content -->
@@ -11,13 +11,6 @@
     <div class="row">
         <div class="col-xs-12">
           <div class="box">
-            <div class="box-header">
-                <div class="card-header">
-                    <div class="card-header-action">
-                        <a href="javascript:void(0)" onclick="openModalAdd();" class="btn btn-primary"><i class="fa fa-plus"></i> Tambah</a>
-                    </div>
-                </div>
-            </div>
             <!-- /.box-header -->
             <div class="box-body">
               <table id="tandaterima-table" class="table table-bordered table-hover">
@@ -26,7 +19,8 @@
                         <th class="text-center" width="10">No</th>
                         <th>No Bulanan</th>
                         <th>Tanggal Akta</th>
-                        <th>Sifat Akta</th>                       
+                        <th>Sifat Akta</th>                 
+                        <th>Nama Penghadap</th>
                     </tr>
                 </thead>
                 <tfoot>
@@ -35,6 +29,7 @@
                         <th>No Bulanan</th>
                         <th>Tanggal Akta</th>
                         <th>Sifat Akta</th>  
+                        <th>Nama Penghadap</th>
                     </tr>
                 </tfoot>
               </table>
@@ -61,7 +56,7 @@
             processing: true,
             serverSide: true,
             ajax: {
-                url: SITEURL + "reporforiums/data",
+                url: SITEURL + "klapers/data",
             },
             destroy: true,
             scrollX: true,
@@ -71,6 +66,7 @@
                 { data: 'no_bulanan',"width": "20%" },
                 { data: 'tanggal',"width": "20%" },
                 { data: 'sifat_akta',"width": "20%" },
+                { data: 'nama',"width": "50%" },
             ],
             fixedColumns: true,
             order: [

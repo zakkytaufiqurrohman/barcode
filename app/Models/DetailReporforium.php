@@ -20,4 +20,9 @@ class DetailReporforium extends Model
     {
         return $this->hasOne(Reporforium::class,'id_reporforium','id_reporforium');
     }
+
+    // public function reporforiums()
+    // {
+    //     return $this->belongsToMany(Reporforium::class,'id_reporforium','id_reporforium');
+    // }
 }

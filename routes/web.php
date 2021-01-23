@@ -234,5 +234,6 @@ Route::middleware('auth')->group(function () {
     // qr web baru
    
 });
-Route::get('/berkas/{nama}/{id}', 'ReadQrController@readQROld');
+// Route::get('/berkas/{nama}/{id}', 'ReadQrController@readQROld');
 Route::post('/login_berkas', 'ReadQrController@login')->name('login_berkas');
+Route::get('/berkas/{nama}/{id}', 'ReadQrController@readQRNew');

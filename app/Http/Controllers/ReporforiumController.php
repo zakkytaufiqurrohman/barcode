@@ -22,8 +22,13 @@ class ReporforiumController extends Controller
 
     public function data(Request $request)
     {
+        $startDate = request()->get('startDate') ?? null;
+        $endDate = request()->get('endDate') ?? null;
 
         $data = Reporforium::query();
+
+        $data = $data->whereBetween('tanggal',[$startDate,$endDate]);
+        
         return DataTables::eloquent($data)
             ->addColumn('barcode',function ($data) {
                 // get kode berkas from table berkas

@@ -15,6 +15,11 @@
     }
     // setting
     $setting = Setting::first();
+    $file = $berkas->reporforium->berkas;
+    $folder = '/Reporforium/file/';
+    $dir = $folder.$file;
+    // $dir = str_replace('/','%2F',$dir);
+    $url = urlencode($dir);
 
 ?>
 <!DOCTYPE html>
@@ -67,8 +72,13 @@
             <div class="invoice p-3 mb-3">
               <div class="row" >
                 <div class="col-12">
-                  {{-- {{ $berkas->reporforium->berkas }} --}}
-                  <iframe src ="{{ asset('/laraview/#../Reporforium/foto/'.$berkas->reporforium->berkas) }}" width="100%" height="640"  allowfullscreen webkitallowfullscreen ></iframe>
+                  {{ 'pdfjs/viewer.html?file='.$url }}
+                  {{-- <iframe src ="{{ asset('/laraview/#../Reporforium/file/'.$berkas->reporforium->berkas) }}" width="100%" height="640"  allowfullscreen webkitallowfullscreen ></iframe> --}}
+                  <iframe 
+                    src="{{ asset('pdfjs/viewer.html?file='.$url)}}"
+                      width="100%" height="640"
+                      frameborder="0">
+                  </iframe>
                 </div>
               </div>
             </div>

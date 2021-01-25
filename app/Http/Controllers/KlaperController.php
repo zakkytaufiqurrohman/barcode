@@ -23,9 +23,12 @@ class KlaperController extends Controller
         // $data = DetailReporforium::query();
         $data = DB::table('detail_reporforium')
                 ->join('tbl_reporforium','detail_reporforium.id_reporforium','=','tbl_reporforium.id_reporforium')
-                ->whereBetween('tbl_reporforium.tanggal',[$startDate,$endDate])
-                ->orderBy('nama','ASC')
-                ->get();
+                ->orderBy('nama','ASC');
+
+        if($startDate!=null&&$endDate!=null)    
+            $data = $data->whereBetween('tbl_reporforium.tanggal',[$startDate,$endDate]);
+
+        $data = $data->get();
         // return var_dump($data);
         // $data->orderBy('nama','ASC');
         return DataTables::of($data)

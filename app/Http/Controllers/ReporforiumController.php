@@ -27,7 +27,8 @@ class ReporforiumController extends Controller
 
         $data = Reporforium::query();
 
-        $data = $data->whereBetween('tanggal',[$startDate,$endDate]);
+        if(!empty($startDate)&&!empty($endDate))
+            $data = $data->whereBetween('tanggal',[$startDate,$endDate]);
         
         return DataTables::eloquent($data)
             ->addColumn('barcode',function ($data) {

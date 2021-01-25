@@ -16,7 +16,7 @@
                     <div class="card-header-action">
                         <div class="form-group col-xs-12 col-sm-6 col-md-6 col-lg-6">
                             <div class="input-group">
-                                <input type="text" class="form-control" name="date" id="date" placeholder="Tanggal">
+                                <input type="text" class="form-control" name="date" id="date" placeholder="Tanggal" autocomplete="off">
                                 <div class="input-group-btn">
                                     <button class="btn btn-primary" id="btnSearchDate"><i class="fa fa-search"></i></button>
                                 </div>
@@ -62,22 +62,32 @@
     $(function () {
         $('#date').daterangepicker({
             autoclose: true,
-            startDate: moment().startOf('month'),
-            endDate: moment().endOf('month'),
+            autoUpdateInput: false,
+            drops: 'down',
+            opens: 'right',
             locale: {
                 format: 'YYYY-MM-DD'
             }
         });
+        $('#date').on('apply.daterangepicker', function(ev, picker) {
+            $(this).val(picker.startDate.format('MM/DD/YYYY') + ' - ' + picker.endDate.format('MM/DD/YYYY'));
+        });
+
+        $('#date').on('cancel.daterangepicker', function(ev, picker) {
+            $(this).val('');
+        });
         getKlaper();
     }) 
     $('#btnSearchDate').on('click', function(){
-      getKlaper();
+        var start = $('#date').data('daterangepicker').startDate.format('YYYY-MM-DD');
+        var end = $('#date').data('daterangepicker').endDate.format('YYYY-MM-DD');
+        getKlaper();
     });
     // get data
     function getKlaper()
     {   
-        let startDate = $('#date').data('daterangepicker').startDate.format('YYYY-MM-DD');
-        let endDate = $('#date').data('daterangepicker').endDate.format('YYYY-MM-DD');
+        var startDate = $('#date').data('daterangepicker').startDate.format('YYYY-MM-DD');
+        var endDate = $('#date').data('daterangepicker').endDate.format('YYYY-MM-DD');
         var SITEURL = '{{URL::to('')}}/';
         $("#tandaterima-table").removeAttr('width').dataTable({
             processing: true,

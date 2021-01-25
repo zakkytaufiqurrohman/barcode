@@ -14,7 +14,17 @@
             <div class="box-header">
                 <div class="card-header">
                     <div class="card-header-action">
-                        <a href="javascript:void(0)" onclick="openModalAdd();" class="btn btn-primary"><i class="fa fa-plus"></i> Tambah</a>
+                        <div class="col-xs-4 col-sm-6 col-md-6 col-lg-6">
+                            <a href="javascript:void(0)" onclick="openModalAdd();" class="btn btn-primary"><i class="fa fa-plus"></i> Tambah</a>
+                        </div>
+                        <div class="form-group col-xs-8 col-sm-6 col-md-6 col-lg-6">
+                            <div class="input-group">
+                                <input type="text" class="form-control" name="date" id="date" placeholder="Tanggal">
+                                <div class="input-group-btn">
+                                    <button class="btn btn-primary" id="btnSearchDate"><i class="fa fa-search"></i></button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -215,6 +225,15 @@
 </script>
 <script>
     $(function () {
+        $('#date').daterangepicker({
+            autoclose: true,
+            startDate: moment().startOf('month'),
+            endDate: moment().endOf('month'),
+            locale: {
+                format: 'YYYY-MM-DD'
+            }
+        });
+        
         getreporforium();
         // preven update
         $("#form-update-reporforium").on("submit", function(e) {
@@ -222,6 +241,9 @@
                 updatereporforium();
         });
     })
+    $('#btnSearchDate').on('click', function(){
+      getreporforium();
+    });
     $('#modal-add-reporforium').on('hidden.bs.modal', function () {
         var form=$("body");
         form.find('.help-block').remove();
@@ -450,12 +472,18 @@
     // get data
     function getreporforium()
     {   
+        let startDate = $('#date').data('daterangepicker').startDate.format('YYYY-MM-DD');
+        let endDate = $('#date').data('daterangepicker').endDate.format('YYYY-MM-DD');
         var SITEURL = '{{URL::to('')}}/';
         $("#reporforium-table").removeAttr('width').dataTable({
             processing: true,
             serverSide: true,
             ajax: {
                 url: SITEURL + "reporforiums/data",
+                data: {
+                    startDate: startDate,
+                    endDate: endDate
+                }
             },
             destroy: true,
             scrollX: true,

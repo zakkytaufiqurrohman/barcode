@@ -22,13 +22,14 @@ class ReporforiumController extends Controller
 
     public function data(Request $request)
     {
-        $startDate = request()->get('startDate') ?? null;
-        $endDate = request()->get('endDate') ?? null;
+        $dates = request()->get('date') ?? null;
+
+        $date = explode(' - ',$dates);
 
         $data = Reporforium::query();
 
-        if(!empty($startDate)&&!empty($endDate))
-            $data = $data->whereBetween('tanggal',[$startDate,$endDate]);
+        if($dates!=null)
+            $data = $data->whereBetween('tanggal',$date);
         
         return DataTables::eloquent($data)
             ->addColumn('barcode',function ($data) {

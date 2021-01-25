@@ -70,7 +70,8 @@
             }
         });
         $('#date').on('apply.daterangepicker', function(ev, picker) {
-            $(this).val(picker.startDate.format('MM/DD/YYYY') + ' - ' + picker.endDate.format('MM/DD/YYYY'));
+            $(this).val(picker.startDate.format('YYYY/MM/DD') + ' - ' + picker.endDate.format('YYYY/MM/DD'));
+            getKlaper();
         });
 
         $('#date').on('cancel.daterangepicker', function(ev, picker) {
@@ -86,8 +87,7 @@
     // get data
     function getKlaper()
     {   
-        var startDate = $('#date').data('daterangepicker').startDate.format('YYYY-MM-DD');
-        var endDate = $('#date').data('daterangepicker').endDate.format('YYYY-MM-DD');
+        var date = $('#date').val();
         var SITEURL = '{{URL::to('')}}/';
         $("#tandaterima-table").removeAttr('width').dataTable({
             processing: true,
@@ -95,8 +95,7 @@
             ajax: {
                 url: SITEURL + "klapers/data",
                 data: {
-                    startDate: startDate,
-                    endDate: endDate
+                    date: date
                 }
             },
             destroy: true,

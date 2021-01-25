@@ -19,7 +19,7 @@
                         </div>
                         <div class="form-group col-xs-8 col-sm-6 col-md-6 col-lg-6">
                             <div class="input-group">
-                                <input type="text" class="form-control" name="date" id="date" placeholder="Tanggal">
+                                <input type="text" class="form-control" name="date" id="date" placeholder="Tanggal" autocomplete="off">
                                 <div class="input-group-btn">
                                     <button class="btn btn-primary" id="btnSearchDate"><i class="fa fa-search"></i></button>
                                 </div>
@@ -227,11 +227,20 @@
     $(function () {
         $('#date').daterangepicker({
             autoclose: true,
-            startDate: moment().startOf('month'),
-            endDate: moment().endOf('month'),
+            autoUpdateInput: false,
+            drops: 'down',
+            opens: 'right',
             locale: {
                 format: 'YYYY-MM-DD'
             }
+        });
+        $('#date').on('apply.daterangepicker', function(ev, picker) {
+            $(this).val(picker.startDate.format('YYYY/MM/DD') + ' - ' + picker.endDate.format('YYYY/MM/DD'));
+            getreporforium();
+        });
+
+        $('#date').on('cancel.daterangepicker', function(ev, picker) {
+            $(this).val('');
         });
         
         getreporforium();
@@ -472,8 +481,7 @@
     // get data
     function getreporforium()
     {   
-        let startDate = $('#date').data('daterangepicker').startDate.format('YYYY-MM-DD');
-        let endDate = $('#date').data('daterangepicker').endDate.format('YYYY-MM-DD');
+        var date = $('#date').val();
         var SITEURL = '{{URL::to('')}}/';
         $("#reporforium-table").removeAttr('width').dataTable({
             processing: true,
@@ -481,8 +489,7 @@
             ajax: {
                 url: SITEURL + "reporforiums/data",
                 data: {
-                    startDate: startDate,
-                    endDate: endDate
+                    date: date
                 }
             },
             destroy: true,

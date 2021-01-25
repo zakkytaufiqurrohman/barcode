@@ -301,4 +301,10 @@ class KwitansiController extends Controller
         $pdf = PDF::loadview('kwitansi.print',['data'=>$data,'setting'=>$setting]);
         return $pdf->stream('kwitansi.pdf');
     }
+
+    public function download($filepath)
+    {   
+        $url=  public_path(). '/barcode/'. $filepath;
+        return \Response::download($url);
+    }
 }

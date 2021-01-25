@@ -72,13 +72,12 @@
             <div class="invoice p-3 mb-3">
               <div class="row" >
                 <div class="col-12">
-                  {{ 'pdfjs/viewer.html?file='.$url }}
-                  {{-- <iframe src ="{{ asset('/laraview/#../Reporforium/file/'.$berkas->reporforium->berkas) }}" width="100%" height="640"  allowfullscreen webkitallowfullscreen ></iframe> --}}
-                  <iframe 
+                  <iframe src ="{{ asset('/laraview/#../Reporforium/file/'.$berkas->reporforium->berkas) }}" width="100%" height="640"  allowfullscreen webkitallowfullscreen ></iframe>
+                  {{-- <iframe 
                     src="{{ asset('pdfjs/viewer.html?file='.$url)}}"
                       width="100%" height="640"
                       frameborder="0">
-                  </iframe>
+                  </iframe> --}}
                 </div>
               </div>
             </div>

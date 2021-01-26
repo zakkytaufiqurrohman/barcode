@@ -34,29 +34,27 @@
   </div>
   <!-- /.login-logo -->
   <div class="login-box-body">
-    <p class="login-box-msg">Login</p>
-
-    <form action="javascript:void(0);" class="needs-validation" novalidate="" method="post" id="form-login">
+    <p class="login-box-msg">Reset Password</p>
+    @if (session('status'))
+        <div class="alert alert-success" role="alert">
+            {{ session('status') }}
+        </div>
+    @endif
+    <form action="{{ route('password.email') }}" class="needs-validation" novalidate="" method="post" id="form-login">
         @csrf
       <div class="form-group has-feedback">
-        <input id="username_user" type="text" class="form-control" name="username_user" placeholder="Username">
+        <input id="email" placeholder="Email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
         <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
-      </div>
-      <div class="form-group has-feedback">
-        <input id="password_user" type="password" class="form-control" name="password" placeholder="Password">
-        <span class="glyphicon glyphicon-lock form-control-feedback"></span>
-      </div>
-      <div class="form-group has-feedback">
-        <!-- /.col -->
-        <div class="col-12">
-          <button type="submit" class="btn btn-primary btn-block btn-flat">Masuk</button>
-        </div>
-        <!-- /.col -->
+        @error('email')
+        <span class="invalid-feedback" role="alert">
+            <strong>{{ $message }}</strong>
+        </span>
+        @enderror
       </div>
       <div class="form-group has-feedback">
         <!-- /.col -->
         <div class="col-12">
-          <a href="{{ route('password.request')}}">Lupa Password</a>
+          <button type="submit" class="btn btn-primary btn-block btn-flat">Kirim Link Reset Password</button>
         </div>
         <!-- /.col -->
       </div>
@@ -90,7 +88,7 @@
   $(function () {
       "use strict";
 
-      $("#form-login").on("submit", function (e) {
+      /*$("#form-login").on("submit", function (e) {
           e.preventDefault();
 
           if($("#username_user").val().length == 0 || $("#password_user").val().length == 0) {
@@ -98,8 +96,8 @@
               return false;
           }
 
-          login();
-      });
+          //login();
+      });*/
   });
 
   function login()
@@ -107,7 +105,7 @@
       var formData = $("#form-login").serialize();
 
       $.ajax({
-          url: "{{route('login')}}",
+          url: "{{route('password.email')}}",
           type: "POST",
           dataType: "json",
           data: formData,

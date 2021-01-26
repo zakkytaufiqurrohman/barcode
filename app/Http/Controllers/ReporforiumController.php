@@ -314,4 +314,10 @@ class ReporforiumController extends Controller
             return view('reporforium.detail',compact('reporforium'));
         }
     }
+
+    public function download($filepath)
+    {   
+        $url=  public_path(). '/barcode/'. $filepath;
+        return \Response::download($url);
+    }
 }

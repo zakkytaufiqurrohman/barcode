@@ -17,12 +17,19 @@ class KlaperController extends Controller
 
     public function data(Request $request)
     {
+        $dates = request()->get('date') ?? null;
+
+        $date = explode(' - ',$dates);
 
         // $data = DetailReporforium::query();
         $data = DB::table('detail_reporforium')
                 ->join('tbl_reporforium','detail_reporforium.id_reporforium','=','tbl_reporforium.id_reporforium')
-                ->orderBy('nama','ASC')
-                ->get();
+                ->orderBy('nama','ASC');
+
+        if($dates!=null)    
+            $data = $data->whereBetween('tanggal',$date);
+
+        $data = $data->get();
         // return var_dump($data);
         // $data->orderBy('nama','ASC');
         return DataTables::of($data)

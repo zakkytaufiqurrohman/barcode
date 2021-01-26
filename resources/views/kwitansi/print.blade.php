@@ -82,7 +82,7 @@
             <td><b>total:</b> {{$total}} </td>
         </tr>
         <tr>
-            <td colspan = 2 rowspan="1">Catatan:</td>
+            <td colspan = 2 rowspan="1">Catatan: {{$data->catatan}}</td>
             <td>Penyetor</td>
             <td>Mengetahui</td>
             <td>Penerima</td>
@@ -94,8 +94,8 @@
             <td>{{$data->penerima}}</td>
         </tr>
         <?php
-            // $kode =  config('app.url').'/kwitansi/'.$data->berkas->kode_berkas; 
-            // echo DNS2D::getBarcodeHTML(strval($kode), 'QRCODE',3,3); 
+            $kode =  config('app.url').'/kwitansi/'.$data->berkas->kode_berkas; 
+            echo DNS2D::getBarcodeHTML(strval($kode), 'QRCODE',3,3); 
         ?>
     </table>
 </body>

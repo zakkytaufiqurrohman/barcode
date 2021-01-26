@@ -40,7 +40,7 @@ class KwitansiController extends Controller
                 $url= asset("barcode/$nameImage");
 
                 $barcode = '';
-                $barcode .= "<a href='kwitansis/download/$nameImage'><img src=".$url." border='0' width='100' class='img' align='center' />'</a>" ;
+                $barcode .= "<a href='kwitansis/download$nameImage'><img src=".$url." border='0' width='100' class='img' align='center' />'</a>" ;
 
                 return $barcode;
             })

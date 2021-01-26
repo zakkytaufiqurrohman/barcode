@@ -39,7 +39,7 @@ class TandaTerimav2Controller extends Controller
                 $url= asset("barcode/$nameImage");
 
                 $barcode = '';
-                $barcode .= "<a href='tanda-terimas/download/$nameImage'><img src=".$url." border='0' width='100' class='img' align='center' />'</a>" ;
+                $barcode .= "<a href='tandaterimas/download$nameImage'><img src=".$url." border='0' width='100' class='img' align='center' />'</a>" ;
 
                 return $barcode;
             })
@@ -251,5 +251,11 @@ class TandaTerimav2Controller extends Controller
         $setting = Setting::first();
         $pdf = PDF::loadview('tandaterimav2.print',['data'=>$data,'setting'=>$setting]);
         return $pdf->stream('tandaterima.pdf');
+    }
+
+    public function download($filepath)
+    {   
+        $url=  public_path(). '/barcode/'. $filepath;
+        return \Response::download($url);
     }
 }

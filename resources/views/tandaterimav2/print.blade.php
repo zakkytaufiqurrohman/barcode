@@ -15,17 +15,13 @@
 		}
     </style>
     
-    <table align="center"  >
+    <table align="center" width="100%" >
         <tr>
             <td>
                 <center>
-                    <!-- <font size="4">KANTOR NOTARIS - PPAT</font><br>
-                    <font size="4"><b>DYAH ASRI WURININGRUM, S.H., M.Kn.</b></font><br>
-                    <font size="2">Puri Malangjiwan IV No. 1B, Malangjiwan, Colomadu, Karangayar</font><br>
-                    <font size="2">Telp./Fax (0271) 7685446 / 082133088911</font> -->
                     {!!$setting->nama!!}
                 </center>
-                </td>
+            </td>
         </tr>
         <tr>
             <td colspan="2"><hr> </td>

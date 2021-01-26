@@ -34,6 +34,6 @@ class ReadQrController extends Controller
 
     public function readQRNew($nama,$id)
     {
-        return view('readQrNew',compact('id','nama'));
+        return view('readQRNew',compact('id','nama'));
     }
 }

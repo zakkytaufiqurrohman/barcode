@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Berkas;
 use App\Models\Setting;
-use App\Models\TandaTerimaV2;
+use App\Models\TandaTerimav2;
 use App\User;
 use Yajra\DataTables\Facades\DataTables;
 use App\Http\Controllers\Controller;
@@ -150,7 +150,7 @@ class TandaTerimav2Controller extends Controller
     {
         DB::beginTransaction();
         try {
-            $tandaTerima = TandaTerimaV2::find($request->id);
+            $tandaTerima = TandaTerimav2::find($request->id);
             $berkas = Berkas::find($tandaTerima->id_berkas);
             if (!$berkas) {
                 DB::rollback();

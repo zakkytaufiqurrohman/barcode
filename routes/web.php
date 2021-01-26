@@ -16,6 +16,8 @@ Route::middleware('guest')->group(function () {
 
 Route::get('/login', 'Auth\LoginController@index')->name('login');
 Route::post('/login', 'Auth\LoginController@login')->name('login');
+Route::get('/resetpassword', 'Auth\ResetPasswordController@index')->name('resetpassword');
+Route::post('/sendlinkreset', 'Auth\ResetPasswordController@sendLinkReset')->name('sendlinkreset');
 });
 // waarmaking
 Route::middleware('auth')->group(function () {

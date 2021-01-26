@@ -34,29 +34,18 @@
   </div>
   <!-- /.login-logo -->
   <div class="login-box-body">
-    <p class="login-box-msg">Login</p>
+    <p class="login-box-msg">Reset Password</p>
 
     <form action="javascript:void(0);" class="needs-validation" novalidate="" method="post" id="form-login">
         @csrf
       <div class="form-group has-feedback">
-        <input id="username_user" type="text" class="form-control" name="username_user" placeholder="Username">
+        <input id="email" type="text" class="form-control" name="email" placeholder="Email">
         <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback">
-        <input id="password_user" type="password" class="form-control" name="password" placeholder="Password">
-        <span class="glyphicon glyphicon-lock form-control-feedback"></span>
-      </div>
-      <div class="form-group has-feedback">
         <!-- /.col -->
         <div class="col-12">
-          <button type="submit" class="btn btn-primary btn-block btn-flat">Masuk</button>
-        </div>
-        <!-- /.col -->
-      </div>
-      <div class="form-group has-feedback">
-        <!-- /.col -->
-        <div class="col-12">
-          <a href="{{ url('resetpassword') }}">Lupa Password?</a>
+          <button type="submit" class="btn btn-primary btn-block btn-flat">Kirim Link Reset Password</button>
         </div>
         <!-- /.col -->
       </div>
@@ -93,10 +82,10 @@
       $("#form-login").on("submit", function (e) {
           e.preventDefault();
 
-          if($("#username_user").val().length == 0 || $("#password_user").val().length == 0) {
+          /*if($("#username_user").val().length == 0 || $("#password_user").val().length == 0) {
               notification('error', 'Mohon isi semua field.');
               return false;
-          }
+          }*/
 
           login();
       });
@@ -107,7 +96,7 @@
       var formData = $("#form-login").serialize();
 
       $.ajax({
-          url: "{{route('login')}}",
+          url: "{{route('sendlinkreset')}}",
           type: "POST",
           dataType: "json",
           data: formData,

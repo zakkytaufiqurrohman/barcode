@@ -40,7 +40,7 @@ class KwitansiController extends Controller
                 $url= asset("barcode/$nameImage");
 
                 $barcode = '';
-                $barcode .= "<a href='kwitansis/download/$nameImage'><img src=".$url." border='0' width='100' class='img' align='center' />'</a>" ;
+                $barcode .= "<a href='kwitansis/download$nameImage'><img src=".$url." border='0' width='100' class='img' align='center' />'</a>" ;
 
                 return $barcode;
             })
@@ -300,5 +300,11 @@ class KwitansiController extends Controller
         $setting = Setting::first();
         $pdf = PDF::loadview('kwitansi.print',['data'=>$data,'setting'=>$setting]);
         return $pdf->stream('kwitansi.pdf');
+    }
+
+    public function download($filepath)
+    {   
+        $url=  public_path(). '/barcode/'. $filepath;
+        return \Response::download($url);
     }
 }

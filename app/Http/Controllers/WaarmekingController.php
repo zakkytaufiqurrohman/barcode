@@ -57,7 +57,7 @@ class WaarmekingController extends Controller
                 $url= asset("barcode/$nameImage");
 
                 $barcode = '';
-                $barcode .= "<a href='waarmekings/download/$nameImage'><img src=".$url." border='0' width='100' class='img' align='center' />'</a>" ;
+                $barcode .= "<a href='waarmekings/download$nameImage'><img src=".$url." border='0' width='100' class='img' align='center' />'</a>" ;
 
                 return $barcode;
             })

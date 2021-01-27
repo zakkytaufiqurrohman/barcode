@@ -2,7 +2,7 @@
     use App\Models\Berkas;
     use App\Models\Setting;
 
-    $berkas = Berkas::with($nama)->where('kode_berkas',$id)->first();
+    $berkas = Berkas::with('reporforium')->where('kode_berkas',$id)->first();
     $data = 0;
     if (empty($berkas)){
         echo 'not found';
@@ -27,7 +27,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>{{strtoupper($nama)}}</title>
+  <title>REPORFORIUM</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- Font Awesome -->
@@ -57,7 +57,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>{{strtoupper($nama)}}</h1>
+            <h1>Reporforium</h1>
           </div>
         </div>
       </div><!-- /.container-fluid -->
@@ -122,7 +122,7 @@
         @csrf
         <div class="input-group">
             <input type="hidden" name="id" value={{$id}}>
-            <input type="hidden" name="nama" value={{$nama}}>
+            <input type="hidden" name="nama" value='reporforium'>
             <input type="password" class="form-control" placeholder="Password" name="password">
 
             <div class="input-group-append">

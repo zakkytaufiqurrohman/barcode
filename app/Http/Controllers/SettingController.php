@@ -26,7 +26,9 @@ class SettingController extends Controller
             $nama_file = time()."_".$text;
             $file->move(public_path('settings'),$nama_file);
             $image_path = public_path('settings/').$update->header;
-            unlink($image_path);
+            if (file_exists(public_path('settings/').$update->header)){
+                unlink($image_path);
+            }
         }
         else {
             $nama_file = $update->header;

@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Berkas;
 use App\Models\Setting;
-use App\Models\TandaTerimaV2;
+use App\Models\TandaTerimav2;
 use App\User;
 use Yajra\DataTables\Facades\DataTables;
 use App\Http\Controllers\Controller;
@@ -39,7 +39,7 @@ class TandaTerimav2Controller extends Controller
                 $url= asset("barcode/$nameImage");
 
                 $barcode = '';
-                $barcode .= "<a href='tanda-terimas/download/$nameImage'><img src=".$url." border='0' width='100' class='img' align='center' />'</a>" ;
+                $barcode .= "<a href='tandaterimas/download$nameImage'><img src=".$url." border='0' width='100' class='img' align='center' />'</a>" ;
 
                 return $barcode;
             })
@@ -150,7 +150,7 @@ class TandaTerimav2Controller extends Controller
     {
         DB::beginTransaction();
         try {
-            $tandaTerima = TandaTerimaV2::find($request->id);
+            $tandaTerima = TandaTerimav2::find($request->id);
             $berkas = Berkas::find($tandaTerima->id_berkas);
             if (!$berkas) {
                 DB::rollback();
@@ -251,5 +251,11 @@ class TandaTerimav2Controller extends Controller
         $setting = Setting::first();
         $pdf = PDF::loadview('tandaterimav2.print',['data'=>$data,'setting'=>$setting]);
         return $pdf->stream('tandaterima.pdf');
+    }
+
+    public function download($filepath)
+    {   
+        $url=  public_path(). '/barcode/'. $filepath;
+        return \Response::download($url);
     }
 }

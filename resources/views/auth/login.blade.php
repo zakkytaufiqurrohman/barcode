@@ -117,7 +117,7 @@
           success(result) {
             if(result['status'] == 'success'){
                 toastr.success(result.message);
-                window.location = "{{route('waarmeking')}}";    
+                window.location = "/";    
             }
             else {
               toastr.error(result.message);

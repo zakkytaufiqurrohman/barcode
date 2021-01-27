@@ -23,9 +23,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/logout', 'Auth\LoginController@logout')->name('logout');
 
     // home
-    Route::get('/', function () {
-        return view('home');
-    });
+    Route::get('/', 'HomeController@index');
 
     // waarmeking
     Route::name('waarmeking')->prefix('/waarmekings')->group(function () {

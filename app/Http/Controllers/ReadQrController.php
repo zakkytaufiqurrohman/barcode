@@ -23,6 +23,24 @@ class ReadQrController extends Controller
         if(!empty($data)){
             if(password_verify($password,$data->password)){
                 $_SESSION['username'] = $data->password;
+                return view('readQr',compact('id','nama'));
+            }
+            else {
+                return redirect()->back()->with('error','Password Salah');
+            }
+        }
+        return redirect()->back()->with('error','Password Salah');
+    }
+
+    public function logins(Request $request)
+    {
+        $id = $request->id;
+        $nama = $request->nama;
+        $password = addslashes($request->password);
+        $data = PasswordBerkas::first();
+        if(!empty($data)){
+            if(password_verify($password,$data->password)){
+                $_SESSION['username'] = $data->password;
                 return view('readQrNew',compact('id','nama'));
             }
             else {

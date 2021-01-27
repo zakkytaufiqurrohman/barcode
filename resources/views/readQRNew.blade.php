@@ -118,7 +118,7 @@
   <!-- START LOCK SCREEN ITEM -->
   <div class="lockscreen-item">
     <!-- lockscreen credentials (contains the form) -->
-    <form method="post" action="{{route('login_berkas')}}">
+    <form method="post" action="{{route('login_berkas_repo')}}">
         @csrf
         <div class="input-group">
             <input type="hidden" name="id" value={{$id}}>

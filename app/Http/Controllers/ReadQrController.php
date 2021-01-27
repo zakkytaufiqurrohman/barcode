@@ -32,8 +32,8 @@ class ReadQrController extends Controller
         return redirect()->back()->with('error','Password Salah');
     }
 
-    public function readQRNew($nama,$id)
+    public function readQRNew($id)
     {
-        return view('readQRNew',compact('id','nama'));
+        return view('readQRNew',compact('id'));
     }
 }

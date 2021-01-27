@@ -36,7 +36,7 @@ class ReporforiumController extends Controller
                 // get kode berkas from table berkas
                 $kode = $data->berka->kode_berkas;
                 $kode = str_replace("/", "", $kode);
-                $kode =  config('app.url').'/berkas/reporforium/'.$kode;
+                $kode =  config('app.url').'/berkas_reporforium/'.$kode;
                 // generate barcode
                 $images = \DNS2D::getBarcodePNGPath(strval($kode), 'QRCODE',5,5);
                 // get image patch

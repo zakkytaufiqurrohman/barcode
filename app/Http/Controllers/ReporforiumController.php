@@ -97,7 +97,7 @@ class ReporforiumController extends Controller
         date_default_timezone_set('Asia/Jakarta');
         $this->validate($request,[
              'nomor' => 'required|min:3|max:255',
-             'no_bulanan' => 'required|number',
+             'no_bulanan' => 'required|int',
              'tanggal' => 'required|min:3',
              'sifat_akta' => 'required|min:3',
              'sk_kemenhumkam' =>'required|min:3',
@@ -208,7 +208,7 @@ class ReporforiumController extends Controller
         date_default_timezone_set('Asia/Jakarta');
         $this->validate($request,[
             'nomor' => 'required|min:3|max:255',
-            'no_bulanan' => 'required|number',
+            'no_bulanan' => 'required|int',
             'tanggal' => 'required|min:3',
             'sifat_akta' => 'required|min:3',
             'sk_kemenhumkam' =>'required|min:3',

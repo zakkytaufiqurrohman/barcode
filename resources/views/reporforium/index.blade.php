@@ -88,7 +88,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="add-no_bulanan">No Bulanan</label>
-                                    <input type="text" name="no_bulanan" class="form-control" id="add-no_bulanan" placeholder="No Bulanan">
+                                    <input type="number" name="no_bulanan" class="form-control" id="add-no_bulanan" placeholder="No Bulanan">
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleFormControlInput1">Tanggal</label>
@@ -167,7 +167,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="update-no_bulanan">No Bulanan</label>
-                                    <input type="text" name="no_bulanan" class="form-control" id="update-no_bulanan" placeholder="No Bulanan">
+                                    <input type="number" name="no_bulanan" class="form-control" id="update-no_bulanan" placeholder="No Bulanan">
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleFormControlInput1">Tanggal</label>

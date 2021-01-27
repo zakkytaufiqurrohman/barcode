@@ -52,7 +52,7 @@ class ReporforiumController extends Controller
             ->addColumn('action', function ($data) {
                
                 $action = '';
-                $action .= "<a href='" . route('reporforium.detail',$data->id_reporforium) . "' class='btn btn-icon btn-success'><i class='fa fa-info'></i></a>&nbsp;"; 
+                $action .= "<a href='" . route('reporforium.detail',$data->id_reporforium) . "' class='btn btn-icon btn-success'><i class='fa fa-eye'></i></a>&nbsp;"; 
                 $action .= "<a href='javascript:void(0)' class='btn btn-icon btn-primary' data-id='{$data->id_reporforium}' onclick='showReporforium(this);'><i class='fa fa-edit'></i></a>&nbsp;";
                 $action .= "<a href='javascript:void(0)' class='btn btn-icon btn-danger'  data-id='{$data->id_reporforium}' onclick='deleteReporforium(this);'><i class='fa fa-trash'></i></a>&nbsp;";
 
@@ -94,6 +94,21 @@ class ReporforiumController extends Controller
 
     public function store(Request $request)
     {
+        date_default_timezone_set('Asia/Jakarta');
+        $this->validate($request,[
+             'nomor' => 'required|min:3|max:255',
+             'no_bulanan' => 'required|number',
+             'tanggal' => 'required|min:3',
+             'sifat_akta' => 'required|min:3',
+             'sk_kemenhumkam' =>'required|min:3',
+        ],[
+            'nomor.required'=>'Nomor Tidak Boleh Kosong',
+            'tanggal.required'=>'Tanggal Tidak Boleh Kosong',
+            'no_bulanan.required'=>'No Bulanan Tidak Boleh Kosong',
+            'sk_kemenhumkam.required'=>'Sk Kemenkumham Tidak Boleh Kosong',
+            'sifat_akta.required'=>'Sifat Akta Tidak Boleh Kosong',
+            
+        ]);
         //validasi
         // untuk foto img / untuk berkas pdf
         $this->validate($request,[
@@ -191,7 +206,20 @@ class ReporforiumController extends Controller
     public function update(Request $request)
     {
         date_default_timezone_set('Asia/Jakarta');
-    
+        $this->validate($request,[
+            'nomor' => 'required|min:3|max:255',
+            'no_bulanan' => 'required|number',
+            'tanggal' => 'required|min:3',
+            'sifat_akta' => 'required|min:3',
+            'sk_kemenhumkam' =>'required|min:3',
+       ],[
+           'nomor.required'=>'Nomor Tidak Boleh Kosong',
+           'tanggal.required'=>'Tanggal Tidak Boleh Kosong',
+           'no_bulanan.required'=>'No Bulanan Tidak Boleh Kosong',
+           'sk_kemenhumkam.required'=>'Sk Kemenkumham Tidak Boleh Kosong',
+           'sifat_akta.required'=>'Sifat Akta Tidak Boleh Kosong',
+           
+       ]);
         DB::beginTransaction();
         try{
             

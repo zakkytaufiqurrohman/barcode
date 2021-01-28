@@ -185,16 +185,16 @@ Route::middleware('auth')->group(function () {
 
     // klaper
     Route::name('klaper')->prefix('/klapers')->group(function () {
-        Route::get('/', 'klaperController@index');
-        Route::post('/', 'klaperController@store');
-        Route::put('/', 'klaperController@update');
-        Route::delete('/', 'klaperController@destroy');
-        Route::get('/show', 'klaperController@show')->name('.show');
-        Route::get('/detail/{id}', 'klaperController@detail')->name('.detail');
+        Route::get('/', 'KlaperController@index');
+        Route::post('/', 'KlaperController@store');
+        Route::put('/', 'KlaperController@update');
+        Route::delete('/', 'KlaperController@destroy');
+        Route::get('/show', 'KlaperController@show')->name('.show');
+        Route::get('/detail/{id}', 'KlaperController@detail')->name('.detail');
         
-        Route::get('/data', 'klaperController@data')->name('.data');
+        Route::get('/data', 'KlaperController@data')->name('.data');
 
-        Route::get('/download/{id}', 'klaperController@download')->name('.download');
+        Route::get('/download/{id}', 'KlaperController@download')->name('.download');
 
     });
 

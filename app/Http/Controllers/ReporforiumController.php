@@ -203,6 +203,16 @@ class ReporforiumController extends Controller
         return response()->json(['status' => 'success', 'message' => 'Berhasil mengambil data daftar reporforium', 'data' => $reporforium]);
     }
 
+    public function showDetail(Request $request)
+    {
+        $detailreporforium = DetailReporforium::where('id_reporforium',$request->id)->get();
+        if (!$detailreporforium) {
+            return response()->json(['status' => 'error', 'message' => 'reporforium tidak ditemukan', 'data' => '']);
+        }
+
+        return response()->json(['status' => 'success', 'message' => 'Berhasil mengambil data daftar detail reporforium', 'data' => $detailreporforium, 'id' => $request->id]);
+    }
+
     public function update(Request $request)
     {
         date_default_timezone_set('Asia/Jakarta');
@@ -253,51 +263,51 @@ class ReporforiumController extends Controller
                 'password' => $passwordStatus,
             ]);
             
-            // detail reporforium
-            $nama = $request->nama;
-            $nik = $request->nik;
-            if(empty($nama)){
-                return response()->json(['status' => 'error', 'message' => 'nama tidak boleh kosong']);
-            }
+            // // detail reporforium
+            // $nama = $request->nama;
+            // $nik = $request->nik;
+            // if(empty($nama)){
+            //     return response()->json(['status' => 'error', 'message' => 'nama tidak boleh kosong']);
+            // }
             
-            // delete all 
-            $detail_repo = DetailReporforium::where('id_reporforium',$request->id);
-            if (!empty($detail_repo)){
+            // // delete all 
+            // $detail_repo = DetailReporforium::where('id_reporforium',$request->id);
+            // if (!empty($detail_repo)){
 
-                if (file_exists(public_path('Reporforium/foto/').$detail_repo->foto))
-                {
-                    $image_path_pas_foto = public_path('Reporforium/foto/').$detail_repo->foto;
-                    unlink($image_path_pas_foto);
-                }
-                $detail_repo->delete();
-            }
-            $nama = $request->nama;
-            $nik = $request->nik;
-            $fotos = $request->foto;
+            //     if (file_exists(public_path('Reporforium/foto/').$detail_repo->foto))
+            //     {
+            //         $image_path_pas_foto = public_path('Reporforium/foto/').$detail_repo->foto;
+            //         unlink($image_path_pas_foto);
+            //     }
+            //     $detail_repo->delete();
+            // }
+            // $nama = $request->nama;
+            // $nik = $request->nik;
+            // $fotos = $request->foto;
            
-            $i = 0;
+            // $i = 0;
 
-            foreach(array_combine($nama,$nik) as $niks => $name)
-            {
-                if(! empty([$niks,$name]))
-                {
-                    $foto = $fotos[$i];
-                    $text_foto = str_replace(' ', '',$foto->getClientOriginalName());
+            // foreach(array_combine($nama,$nik) as $niks => $name)
+            // {
+            //     if(! empty([$niks,$name]))
+            //     {
+            //         $foto = $fotos[$i];
+            //         $text_foto = str_replace(' ', '',$foto->getClientOriginalName());
         
-                    $nama_file_foto = time()."_".$text_foto;
+            //         $nama_file_foto = time()."_".$text_foto;
                     
-                    $foto->move(public_path('Reporforium/foto'),$nama_file_foto);
-                    $temp[] = [
-                        'id_reporforium' => $reporforium->id_reporforium,
-                        'foto' => $nama_file_foto,
-                        'nik' => $niks,
-                        'nama' => $name,
-                    ];
-                }
-                $i++;
-            }
+            //         $foto->move(public_path('Reporforium/foto'),$nama_file_foto);
+            //         $temp[] = [
+            //             'id_reporforium' => $reporforium->id_reporforium,
+            //             'foto' => $nama_file_foto,
+            //             'nik' => $niks,
+            //             'nama' => $name,
+            //         ];
+            //     }
+            //     $i++;
+            // }
             
-            DetailReporforium::insert($temp);
+            // DetailReporforium::insert($temp);
 
             DB::commit();
             return response()->json(['status' => 'success', 'message' => 'Berhasil menambahkan kwintansi']);
@@ -347,6 +357,112 @@ class ReporforiumController extends Controller
         }
         else {
             return view('reporforium.detail',compact('reporforium'));
+        }
+    }
+
+    public function storeDetail(Request $request)
+    {
+        date_default_timezone_set('Asia/Jakarta');
+        $this->validate($request,[
+            'nama' => 'required',
+            'nik' => 'required',
+        ]);
+        
+        $this->validate($request,[
+            'foto.*' => 'required|max:2048|mimes:jpeg,jpg,png'
+        ]);
+
+        DB::beginTransaction();
+        try{
+            
+            $id_reporforium = $request->id;
+            $foto = $request->foto;
+            $text_foto = str_replace(' ', '',$foto->getClientOriginalName());
+        
+            $nama_file_foto = time()."_".$text_foto;
+                    
+            $foto->move(public_path('Reporforium/foto'),$nama_file_foto);
+            
+            $insert[] = [
+                'id_reporforium' => $id_reporforium,
+                'nik' => $niks,
+                'nama' => $name,
+                'foto' => $nama_file_foto
+            ];
+            DetailReporforium::insert($insert);
+
+            DB::commit();
+            return response()->json(['status' => 'success', 'message' => 'Berhasil mengubah detail reporforium', 'id' => $id_reporforium]);
+        } catch(Exception $e){
+            DB::rollback();
+            return response()->json(['status' => 'error', 'message' => $e->getMessage()]);
+        }
+    }
+
+    public function updateDetail(Request $request)
+    {
+        date_default_timezone_set('Asia/Jakarta');
+        $this->validate($request,[
+            'id' => 'required',
+            'nama' => 'required',
+            'nik' => 'required',
+        ]);
+
+        DB::beginTransaction();
+        try{
+            
+            $data = DetailReporforium::find($request->id);
+            $foto_lama = $data->foto;
+            $id_reporforium = $data->id_reporforium;
+            $foto = $request->foto;
+            if(!empty($foto)){
+                $text_foto = str_replace(' ', '',$foto->getClientOriginalName());
+        
+                $nama_file_foto = time()."_".$text_foto;
+                    
+                $foto->move(public_path('Reporforium/foto'),$nama_file_foto);
+                
+                if (file_exists(public_path('Reporforium/foto/'.$foto_lama)))
+                {
+                    unlink(public_path('Reporforium/foto/'.$foto_lama));
+                }
+
+                $update[] = [
+                    'foto' => $nama_file_foto
+                ];
+            }
+            
+            $update[] = [
+                'nik' => $niks,
+                'nama' => $name,
+            ];
+            $data->update($update);
+
+            DB::commit();
+            return response()->json(['status' => 'success', 'message' => 'Berhasil mengubah detail reporforium', 'id' => $id_reporforium]);
+        } catch(Exception $e){
+            DB::rollback();
+            return response()->json(['status' => 'error', 'message' => $e->getMessage()]);
+        }
+    }
+
+    public function destroyDetail(Request $request)
+    {
+        DB::beginTransaction();
+        try {
+            $detailreporforium = DetailReporforium::find($request->id);
+            if (!$detailreporforium) {
+                DB::rollback();
+                return response()->json(['status' => 'error', 'message' => 'Detail Reporforium tidak ditemukan.']);
+            }
+            $id_reporforium = $detailreporforium->id_reporforium;
+            $detailreporforium->delete();
+
+            DB::commit();
+            return response()->json(['status' => 'success', 'message' => 'Berhasil menghapus Detail Reporforium', 'id' => $id_reporforium]);
+        } catch (Exception $e) {
+            DB::rollback();
+            return response()->json(['status' => 'error', 'message' => $e->getMessage()]);
         }
     }
 

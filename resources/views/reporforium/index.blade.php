@@ -192,7 +192,7 @@
                                 </div>
                             </div>
                             <div class="col-md-6">
-                                <button id="btn-modal-detail-reporforium" class="btn btn-info"><i class="fa fa-pencil"></i>Ubah Detail Reporforium?</button>
+                                <button id="btn-modal-detail-reporforium" class="btn btn-info"><i class="fa fa-pencil"></i> Ubah Detail Reporforium ?</button>
                             </div>
                             <!-- /.col -->
                           </div>
@@ -419,7 +419,7 @@
     }
 
     function detailRepo(id){
-
+        $(".kotak").remove();
         $.ajax({
             url: "{{route('reporforium.show_detail')}}",
             type: "GET",
@@ -440,7 +440,6 @@
             },
             success(result) {
                 id_reporforium = result.id;
-                // alert(id_reporforium);
                  $.each( result['data'], function( key, value ) {
                     var warna = '';
                     if(key % 2 == 0) {
@@ -616,9 +615,6 @@
             },
             success(result) {
                 if(result['status'] == 'success'){
-                    alert(result['id']);
-                    // $(".form-add-reporforium")[0].reset();
-                    // $('#modal-add-reporforium').modal('hide');
                     detailRepo(result['id']);
                 }
 

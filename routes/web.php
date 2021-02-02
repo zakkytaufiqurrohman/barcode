@@ -89,8 +89,9 @@ Route::middleware('auth')->group(function () {
         Route::put('/', 'AktaNotarisController@update');
         Route::delete('/', 'AktaNotarisController@destroy');
         Route::get('/show', 'AktaNotarisController@show')->name('.show');
-        
+        Route::get('/detail/{id}', 'AktaNotarisController@detail')->name('.detail');
         Route::get('/data', 'AktaNotarisController@data')->name('.data');
+
 
         Route::get('/download/{id}', 'AktaNotarisController@download')->name('.download');
 

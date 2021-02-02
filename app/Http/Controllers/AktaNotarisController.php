@@ -44,6 +44,7 @@ class AktaNotarisController extends Controller
             ->addColumn('action', function ($data) {
                
                 $action = '';
+                $action .= "<a href='" . route('akta-notaris.detail', $data->id_aktanotaris) ."' class='btn btn-icon btn-success'><i class='fa fa-eye'></i></a>&nbsp;";
                 $action .= "<a href='javascript:void(0)' class='btn btn-icon btn-primary' data-id='{$data->id_aktanotaris}' onclick='showAktaNotaris(this);'><i class='fa fa-edit'></i></a>&nbsp;";
                 $action .= "<a href='javascript:void(0)' class='btn btn-icon btn-danger'  data-id='{$data->id_aktanotaris}' onclick='deleteAktaNotaris(this);'><i class='fa fa-trash'></i></a>&nbsp;";
 
@@ -77,6 +78,12 @@ class AktaNotarisController extends Controller
                     $dibuat = $user->nama_user;  
                     return $dibuat;
                 }
+            })
+            ->addColumn('isi', function ($data) {
+               
+                $isi = substr($data->isi,0,25);
+                $isi .= "...";
+                return $isi;
             })
             ->escapeColumns([])
             ->addIndexColumn()
@@ -243,9 +250,16 @@ class AktaNotarisController extends Controller
             return response()->json(['status' => 'error', 'message' => $e->getMessage()]);
         }
     }
+
     public function download($filepath)
     {
         $url=  public_path(). '/barcode/'. $filepath;
         return \Response::download($url);
+    }
+
+    public function detail(Request $request)
+    {
+        $notaris = AktaNotaris::find($request->id);
+        return view('akta-notaris.detail',compact('notaris'));
     }
 }

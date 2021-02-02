@@ -81,7 +81,7 @@ class AktaPpatController extends Controller
             })
             ->addColumn('objek', function ($data) {
                
-                $objek = substr($data->objek,0,10);
+                $objek = substr($data->objek,0,25);
                 $objek .= "...";
                 return $objek;
             })

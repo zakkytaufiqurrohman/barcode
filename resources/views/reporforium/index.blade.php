@@ -458,6 +458,7 @@
                     html += `<form method="POST" action="javascript:void(0)" class="form-update-detail-reporforium" id="form-update-detail-reporforium-${id_detail}" enctype="multipart/form-data">
                                 @csrf
                                 @method('PUT')
+                                <input type="hidden" name="id" value="${id_detail}">
                                 <div class="form-group">
                                     <label>NIK</label>
                                     <input type="text" class="form-control m-input" name="nik" placeholder="NIK" value="${nik}">
@@ -589,13 +590,15 @@
         });
     });
 
-    $('.form-update-detail-reporforium').submit(function(){
+    // $('.form-update-detail-reporforium').submit(function(){
+    $(document).on("submit", ".form-update-detail-reporforium", function(e)
+    {
         e.preventDefault();
             var form=$("body");
                 form.find('.help-block').remove();
                 form.find('.form-group').removeClass('has-error');
         $.ajax({
-            url: "{{route('reporforium.detail')}}",
+            url: "{{route('reporforium.dedit')}}",
             type: "POST",
             dataType: "json",
             data: new FormData(this),
@@ -613,6 +616,7 @@
             },
             success(result) {
                 if(result['status'] == 'success'){
+                    alert(result['id']);
                     // $(".form-add-reporforium")[0].reset();
                     // $('#modal-add-reporforium').modal('hide');
                     detailRepo(result['id']);
@@ -667,7 +671,7 @@
     {
         if (confirm("Apakah Anda Yakin ?")) {
             $.ajax({
-                url: "{{route('reporforium.detail')}}",
+                url: "{{route('reporforium.ddelete')}}",
                 type: "POST",
                 dataType: "json",
                 data: {

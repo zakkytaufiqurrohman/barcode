@@ -359,9 +359,15 @@ class ReporforiumController extends Controller
     {
         date_default_timezone_set('Asia/Jakarta');
         $this->validate($request,[
-            'id' => 'required',
             'nama' => 'required',
-            'nik' => 'required',
+            'nik' => 'required|int',
+            'foto' => 'max:2048|mimes:jpeg,jpg,png',
+        ],[
+            'nama.required'=>'nama Tidak Boleh Kosong',
+            'nik.required'=>'nik Tidak Boleh Kosong',
+            'nik.integer' => 'NIK Tidak boleh mengandung huruf/karakter',   
+            'foto.mimes' => 'Format foto salah, upload foto jpg,jpeg,png',
+            'foto.max' => 'Max foto berukuran 2048 Mb'     
         ]);
 
         DB::beginTransaction();
@@ -370,8 +376,9 @@ class ReporforiumController extends Controller
             $data = DetailReporforium::find($request->id);
             $foto_lama = $data->foto;
             $id_reporforium = $data->id_reporforium;
-            $foto = $request->foto;
-            if(!empty($foto)){
+            $namaFoto = $foto_lama;
+            if($request->has('foto')){
+                $foto = $request->foto;
                 $text_foto = str_replace(' ', '',$foto->getClientOriginalName());
         
                 $nama_file_foto = time()."_".$text_foto;
@@ -383,16 +390,14 @@ class ReporforiumController extends Controller
                     unlink(public_path('Reporforium/foto/'.$foto_lama));
                 }
 
-                $update[] = [
-                    'foto' => $nama_file_foto
-                ];
+                $namaFoto = $nama_file_foto;
             }
             
-            $update[] = [
-                'nik' => $niks,
-                'nama' => $name,
-            ];
-            $data->update($update);
+            $data->update([
+                'nik' => $request->nik,
+                'nama' => $request->nama,
+                'foto' => $namaFoto
+            ]);
 
             DB::commit();
             return response()->json(['status' => 'success', 'message' => 'Berhasil mengubah detail reporforium', 'id' => $id_reporforium]);
@@ -412,6 +417,10 @@ class ReporforiumController extends Controller
                 return response()->json(['status' => 'error', 'message' => 'Detail Reporforium tidak ditemukan.']);
             }
             $id_reporforium = $detailreporforium->id_reporforium;
+            if (file_exists(public_path('Reporforium/foto/'.$detailreporforium->foto)))
+            {
+                unlink(public_path('Reporforium/foto/'.$detailreporforium->foto));
+            }
             $detailreporforium->delete();
 
             DB::commit();

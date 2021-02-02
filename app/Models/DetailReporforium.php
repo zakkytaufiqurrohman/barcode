@@ -9,7 +9,7 @@ class DetailReporforium extends Model
     
     protected $table = 'detail_reporforium';
     protected $primaryKey = 'id_detail_reporforium';
-    protected $fillable = ['id_reporforium','foto','nik','nama', 'created_at', 'updated_at'];
+    protected $fillable = ['id_reporforium','foto','nik','nama'];
 
     public function users()
     {

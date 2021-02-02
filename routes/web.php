@@ -178,8 +178,8 @@ Route::middleware('auth')->group(function () {
         Route::get('/show_detail', 'ReporforiumController@showDetail')->name('.show_detail');
         Route::get('/detail/{id}', 'ReporforiumController@detail')->name('.detail');
         Route::post('/detail', 'ReporforiumController@storeDetail')->name('.dstore');
-        Route::delete('/detail', 'ReporforiumController@destroyDetail')->name('.detail');
-        Route::put('/detail', 'ReporforiumController@updateDetail')->name('.detail');
+        Route::delete('/detail', 'ReporforiumController@destroyDetail')->name('.ddelete');
+        Route::put('/detail', 'ReporforiumController@updateDetail')->name('.dedit');
         
         Route::get('/data', 'ReporforiumController@data')->name('.data');
 

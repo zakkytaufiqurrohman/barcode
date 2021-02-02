@@ -81,22 +81,19 @@
             <ul class="dropdown-menu">
               <!-- User image -->
               <li class="user-header">
-                <img src="{{ url('') }}/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
-
+                <img src="{{ url('') }}/dist/img/user.png" class="img-circle" alt="User Image">
                 <p>
                   {{Auth::user()->nama_user}}
-                  <small>{{\Carbon\Carbon::parse(Auth::user()->tanggal_user)->format('D M Y')}}</small>
+                  <small>{{\Carbon\Carbon::today()->format('W F Y')}}</small>
                 </p>
               </li>
               <!-- Menu Body -->
               <!-- Menu Footer-->
               <li class="user-footer">
-                <!-- <div class="pull-left">
-                  <a href="#" class="btn btn-default btn-flat">Profile</a>
-                </div> -->
                 <div class="pull-right">
-                <a href="javascript:void(0);" class="dropdown-item has-icon text-danger" onclick="event.preventDefault(); document.getElementById('form-logout').submit();">Keluar</a>
+                  <a href="javascript:void(0);" class="btn btn-danger btn-flat" onclick="event.preventDefault(); document.getElementById('form-logout').submit();">Keluar</a>
                 </div>
+              
                 <form id="form-logout" action="{{route('logout')}}" method="POST" style="display: none;">
                     @csrf
                 </form>

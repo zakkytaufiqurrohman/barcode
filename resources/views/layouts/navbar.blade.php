@@ -7,13 +7,15 @@
             </span>
           </a>
         </li>
+        @if(auth::user()->level_user == 'Superadmin')
         <li>
           <a href="{{route('password_berkas')}}">
-            <i class="fa fa-key"></i> <span>Password Berkas</span>
+            <i class="fa fa-key"></i> <span>Password Berkas </span>
             <span class="pull-right-container">
             </span>
           </a>
         </li>
+        @endif
         <!--  -->
         <li class="header">Berkas</li>
         <li>
@@ -114,4 +116,4 @@
             <li><a href="{{route('setting')}}"><i class="fa fa-circle-o"></i> Setting</a></li>
           </ul>
         </li>
-      </ul>
+</ul>

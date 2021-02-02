@@ -27,7 +27,7 @@ class HomeController extends Controller
          $ppat = Ppat::count();
          $kwitansi = Kwitansi::count();
          $reporforium = Reporforium::count();
-         $user = Reporforium::count();
+         $user = User::count();
 
          return view ('home',compact('waarmeking','covernot','legalisasi','aktaNotaris','aktaJaminanFidusia','tandaTerimav2','ppat','kwitansi','reporforium','user'));
      }

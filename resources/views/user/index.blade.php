@@ -138,7 +138,7 @@
                         <label for="update-password_user">Password</label>
                         <input type="password" name="password_user" class="form-control" id="update-password_user" placeholder="Password">
                     </div> --}}
-                    {{-- <div class="form-group">
+                    <div class="form-group">
                         <label for="update-level_user">Level User</label>
                         <select class="form-control" name="level_user" id="update-level_user" aria-label="Default select example">
                             <option selected>-- Pilih Level User --</option>
@@ -146,7 +146,7 @@
                             <option value="Admin">Admin</option>
                             <option value="User">User</option>
                           </select>
-                    </div> --}}
+                    </div>
                 </div>
                 <div class="modal-footer bg-whitesmoke br">
                     <button type="button" class="btn btn-danger" data-dismiss="modal">Batal</button>
@@ -274,7 +274,7 @@
                 $('#modal-update-user').find("input[name='nama_user']").val(result['data']['nama_user']);
                 $('#modal-update-user').find("input[name='email_user']").val(result['data']['email_user']);
                 $('#modal-update-user').find("input[name='username_user']").val(result['data']['username_user']);
-
+                $('#modal-update-user').find("select[name='level_user']").val(result['data']['level_user']).trigger('change');
             },
             error(xhr, status, error) {
                 var err = eval('(' + xhr.responseText + ')');
@@ -334,7 +334,7 @@
     }
 
      // delete
-     function deleteUser(object)
+    function deleteUser(object)
     {
         var id = $(object).data('id');
         if (confirm("Apakah Anda Yakin ?")) {
@@ -345,6 +345,33 @@
                 data: {
                     "id": id,
                     "_method": "DELETE",
+                    "_token": "{{ csrf_token() }}"
+                },
+                success(result) {
+                    if(result['status'] == 'success'){
+                        getUser();
+                    }
+                    toastr.success(result.message);
+                },
+                error(xhr, status, error) {
+                    var err = eval('(' + xhr.responseText + ')');
+                    toastr.error(err);
+                }
+            });
+        }     
+    }
+
+    function resetPassword(object)
+    {
+        var id = $(object).data('id');
+        if (confirm("Apakah Anda Yakin Reset Password ke 12345678 ?")) {
+            $.ajax({
+                url: "{{route('user.reset')}}",
+                type: "POST",
+                dataType: "json",
+                data: {
+                    "id": id,
+                    "_method": "post",
                     "_token": "{{ csrf_token() }}"
                 },
                 success(result) {

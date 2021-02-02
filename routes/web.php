@@ -216,7 +216,7 @@ Route::middleware('auth')->group(function () {
         Route::patch('/', 'UserController@edit');
         Route::patch('/update-password', 'UserController@updatePassword')->name('.update-password');
 
-        
+        Route::post('/reset-password', 'UserController@reset')->name('.reset');
         Route::get('/data', 'UserController@data')->name('.data');
 
     });

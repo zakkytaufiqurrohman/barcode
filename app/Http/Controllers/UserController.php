@@ -97,6 +97,7 @@ class UserController extends Controller
             'nama_user' => 'required|min:3|max:255',
             'email_user' => 'required|email|unique:tbl_user,email_user,'.$request->id.',id_user',
             'username_user' => 'required|min:3|unique:tbl_user,username_user,'.$request->id.',id_user',
+            'level_user' =>'required|in:Superadmin,Admin,User',
         ],[
            'nama_user.required'=>'Nama Tidak Boleh Kosong',
            'email_user.required'=>'Email Tidak Boleh Kosong',
@@ -114,6 +115,7 @@ class UserController extends Controller
                 'nama_user' => $request->nama_user,
                 'email_user' => $request->email_user,
                 'username_user' => $request->username_user,
+                'level_user' => $request->level_user
             ]);
             DB::commit();
 
@@ -154,6 +156,7 @@ class UserController extends Controller
             ->addColumn('action', function ($data) {
                
                 $action = '';
+                $action .= "<a href='javascript:void(0)' class='btn btn-icon btn-success'  data-id='{$data->id_user}' onclick='resetPassword(this);'><i class='fa fa-refresh'></i></a>&nbsp;";
                 $action .= "<a href='javascript:void(0)' class='btn btn-icon btn-primary' data-id='{$data->id_user}' onclick='showUser(this);'><i class='fa fa-edit'></i></a>&nbsp;";
                 $action .= "<a href='javascript:void(0)' class='btn btn-icon btn-danger'  data-id='{$data->id_user}' onclick='deleteUser(this);'><i class='fa fa-trash'></i></a>&nbsp;";
 
@@ -248,5 +251,26 @@ class UserController extends Controller
         {           
             return back()->withErrors(['Password yang anda input salah!', 'The Message']);        
         }  
+    }
+
+    public function reset(Request $request)
+    {
+        DB::beginTransaction();
+        try {
+            $user = User::find($request->id);
+            if (!$user) {
+                DB::rollback();
+                return response()->json(['status' => 'error', 'message' => 'User tidak ditemukan.']);
+            }
+            $user->update([
+                'password_user' => Hash::make(12345678),
+            ]);
+
+            DB::commit();
+            return response()->json(['status' => 'success', 'message' => 'Berhasil reset password User']);
+        } catch (Exception $e) {
+            DB::rollback();
+            return response()->json(['status' => 'error', 'message' => $e->getMessage()]);
+        }
     }
 }

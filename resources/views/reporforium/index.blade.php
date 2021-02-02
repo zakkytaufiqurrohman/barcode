@@ -115,7 +115,6 @@
                                         <input type="file" name="foto[]" class="form-control" id="add-foto" placeholder="Foto">
                                     </div>
                                 
-
                                 <div class="newRowJumlah">
                                 </div>
                                 <button class="addRowJumlah btn btn-info" type="button">Add Row</button>
@@ -440,14 +439,22 @@
                 $("select").removeAttr('disabled', 'disabled');
             },
             success(result) {
-                var id_reporforium = result.id;
+                id_reporforium = result.id;
+                // alert(id_reporforium);
                  $.each( result['data'], function( key, value ) {
+                    var warna = '';
+                    if(key % 2 == 0) {
+                         warna = 'box box-danger';
+                    }
+                    else {
+                        warna = 'box box-primary';
+                    }
                     var nama = value.nama
                     var nik = value.nik
                     var id_detail = value.id_detail_reporforium
                     var html = '';
                     // nik
-                    html += '<div class="kotak">'
+                    html += `<div class="kotak ${warna}">`;
                     html += `<form method="POST" action="javascript:void(0)" class="form-update-detail-reporforium" id="form-update-detail-reporforium-${id_detail}" enctype="multipart/form-data">
                                 @csrf
                                 @method('PUT')
@@ -461,7 +468,9 @@
                                 </div>
                                 <div class="form-group">
                                     <label>Foto</label>
-                                    <img src="Reporforium/foto/${value.foto}" widht="200" height="200">
+                                    <br>
+                                    <img src="Reporforium/foto/${value.foto}" widht="100" height="100">
+                                    <br>
                                     <input type="file" class="form-control m-input" name="foto" placeholder="foto" autocomplete="off">
                                 </div>
                                 <div class="input-group-append">
@@ -469,6 +478,7 @@
                                     <button type="submit" class="btn btn-info update-detail"><span class="fa fa-pencil"></span>Ubah</button>
                                </div>
                             </form>`;
+                    html += '<hr>';
                     html += '</div>';
 
                     
@@ -531,13 +541,16 @@
             }
         });
     }
-    $('.form-add-detail-reporforium').submit(function(){
+    // $('.form-add-detail-reporforium').submit(function()
+    $(document).on("submit", ".form-add-detail-reporforium", function(e)
+    {
+        console.log('dasd');
         e.preventDefault();
             var form=$("body");
                 form.find('.help-block').remove();
                 form.find('.form-group').removeClass('has-error');
         $.ajax({
-            url: "{{route('reporforium.detail')}}",
+            url: "{{route('reporforium.dstore')}}",
             type: "POST",
             dataType: "json",
             data: new FormData(this),
@@ -555,8 +568,7 @@
             },
             success(result) {
                 if(result['status'] == 'success'){
-                    // $(".form-add-reporforium")[0].reset();
-                    // $('#modal-add-reporforium').modal('hide');
+                    $(".inputFormRow").remove();
                     detailRepo(result['id']);
                 }
 
@@ -568,7 +580,7 @@
             },
             error:function (response){
                 $.each(response.responseJSON.errors,function(key,value){
-                    $("input[name="+key+"]")
+                    $(".form-add-detail-reporforium input[name="+key+"]")
                         .closest('.form-group')
                         .addClass('has-error')
                         .append('<span class="help-block"><strong>'+value+'</strong></span>');
@@ -714,14 +726,11 @@
     }
 
     $(".addRowJumlah").click(function () {
-        var html = '';
-        var id_reporforium = id_reporforium;
-        // detail
-        
+        var html = '';      
         html += '<div class="inputFormRow">'
         html += `<form method="POST" action="javascript:void(0)" class="form-add-detail-reporforium" id="form-add-detail-reporforium" enctype="multipart/form-data">
                     @csrf
-                    <input type="hidden" value="${id_reporforium}" name="id">
+                    <input type="hidden" name="id" value="${id_reporforium}">
                     <div class="form-group">
                         <label>NIK</label>
                         <input type="text" class="form-control m-input" name="nik" placeholder="NIK" >

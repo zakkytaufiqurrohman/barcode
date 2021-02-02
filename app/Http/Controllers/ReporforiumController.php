@@ -263,52 +263,6 @@ class ReporforiumController extends Controller
                 'password' => $passwordStatus,
             ]);
             
-            // // detail reporforium
-            // $nama = $request->nama;
-            // $nik = $request->nik;
-            // if(empty($nama)){
-            //     return response()->json(['status' => 'error', 'message' => 'nama tidak boleh kosong']);
-            // }
-            
-            // // delete all 
-            // $detail_repo = DetailReporforium::where('id_reporforium',$request->id);
-            // if (!empty($detail_repo)){
-
-            //     if (file_exists(public_path('Reporforium/foto/').$detail_repo->foto))
-            //     {
-            //         $image_path_pas_foto = public_path('Reporforium/foto/').$detail_repo->foto;
-            //         unlink($image_path_pas_foto);
-            //     }
-            //     $detail_repo->delete();
-            // }
-            // $nama = $request->nama;
-            // $nik = $request->nik;
-            // $fotos = $request->foto;
-           
-            // $i = 0;
-
-            // foreach(array_combine($nama,$nik) as $niks => $name)
-            // {
-            //     if(! empty([$niks,$name]))
-            //     {
-            //         $foto = $fotos[$i];
-            //         $text_foto = str_replace(' ', '',$foto->getClientOriginalName());
-        
-            //         $nama_file_foto = time()."_".$text_foto;
-                    
-            //         $foto->move(public_path('Reporforium/foto'),$nama_file_foto);
-            //         $temp[] = [
-            //             'id_reporforium' => $reporforium->id_reporforium,
-            //             'foto' => $nama_file_foto,
-            //             'nik' => $niks,
-            //             'nama' => $name,
-            //         ];
-            //     }
-            //     $i++;
-            // }
-            
-            // DetailReporforium::insert($temp);
-
             DB::commit();
             return response()->json(['status' => 'success', 'message' => 'Berhasil menambahkan kwintansi']);
         } catch(Exception $e){
@@ -365,13 +319,17 @@ class ReporforiumController extends Controller
         date_default_timezone_set('Asia/Jakarta');
         $this->validate($request,[
             'nama' => 'required',
-            'nik' => 'required',
+            'nik' => 'required|int',
+            'foto' => 'required|max:2048|mimes:jpeg,jpg,png',
+        ],[
+            'nama.required'=>'nama Tidak Boleh Kosong',
+            'nik.required'=>'nik Tidak Boleh Kosong',
+            'nik.integer' => 'NIK Tidak boleh mengandung huruf/karakter',
+            'foto.required'=>'foto Tidak Boleh Kosong',   
+            'foto.mimes' => 'Format foto salah, upload foto jpg,jpeg,png',
+            'foto.max' => 'Max foto berukuran 2048 Mb'     
         ]);
         
-        $this->validate($request,[
-            'foto.*' => 'required|max:2048|mimes:jpeg,jpg,png'
-        ]);
-
         DB::beginTransaction();
         try{
             
@@ -381,17 +339,15 @@ class ReporforiumController extends Controller
         
             $nama_file_foto = time()."_".$text_foto;
                     
-            $foto->move(public_path('Reporforium/foto'),$nama_file_foto);
-            
-            $insert[] = [
+            DetailReporforium::insert([
                 'id_reporforium' => $id_reporforium,
-                'nik' => $niks,
-                'nama' => $name,
+                'nik' => $request->nik,
+                'nama' => $request->nama,
                 'foto' => $nama_file_foto
-            ];
-            DetailReporforium::insert($insert);
+            ]);
 
             DB::commit();
+            $foto->move(public_path('Reporforium/foto'),$nama_file_foto);
             return response()->json(['status' => 'success', 'message' => 'Berhasil mengubah detail reporforium', 'id' => $id_reporforium]);
         } catch(Exception $e){
             DB::rollback();

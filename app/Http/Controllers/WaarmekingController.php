@@ -43,6 +43,8 @@ class WaarmekingController extends Controller
     {
 
         $data = Waarmeking::query();
+        $data->orderBy('id_waarmeking','DESC');
+
         return DataTables::eloquent($data)
             ->addColumn('barcode',function ($data) {
                 // get kode berkas from table berkas

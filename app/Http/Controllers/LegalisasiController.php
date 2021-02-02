@@ -22,6 +22,8 @@ class LegalisasiController extends Controller
     {
 
         $data = Legalisasi::query();
+        $data->orderBy('id_legalisasi','DESC');
+
         return DataTables::eloquent($data)
             ->addColumn('barcode',function ($data) {
                 // get kode berkas from table berkas

@@ -162,6 +162,8 @@ class CovernotController extends Controller
     {
 
         $data = Covernot::query();
+        $data->orderBy('id_covernot','DESC');
+
         return DataTables::eloquent($data)
             ->addColumn('barcode',function ($data) {
                 // get kode berkas from table berkas

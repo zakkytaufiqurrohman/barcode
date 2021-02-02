@@ -26,6 +26,7 @@ class KwitansiController extends Controller
     {
 
         $data = Kwitansi::query();
+        $data->orderBy('id_kwitansi','DESC');
         return DataTables::eloquent($data)
             ->addColumn('barcode',function ($data) {
                 // get kode berkas from table berkas

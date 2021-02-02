@@ -21,6 +21,7 @@ class AktaJaminanFidusiaController extends Controller
     public function data(Request $request)
     {
         $data = AktaJaminanFidusia::query();
+        $data->orderBy('id_aktajaminanfidusia','DESC');
         return DataTables::eloquent($data)
             ->addColumn('barcode',function ($data) {
                 // get kode berkas from table berkas

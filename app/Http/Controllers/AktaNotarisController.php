@@ -21,6 +21,8 @@ class AktaNotarisController extends Controller
     public function data(Request $request)
     {
         $data = AktaNotaris::query();
+        $data->orderBy('id_aktanotaris','DESC');
+        
         return DataTables::eloquent($data)
             ->addColumn('barcode',function ($data) {
                 // get kode berkas from table berkas

@@ -79,6 +79,7 @@ class TandaTerimaController extends Controller
     {
 
         $data = TandaTerima::query();
+        $data->orderBy('id_tandaterima','DESC');
         return DataTables::eloquent($data)
             ->addColumn('barcode',function ($data) {
                 // get kode berkas from table berkas

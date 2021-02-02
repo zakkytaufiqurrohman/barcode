@@ -22,6 +22,7 @@ class AktaPpatController extends Controller
     {
 
         $data = AktaPpat::query();
+        $data->orderBy('id_aktappat','DESC');
         return DataTables::eloquent($data)
             ->addColumn('barcode',function ($data) {
                 // get kode berkas from table berkas
@@ -43,6 +44,7 @@ class AktaPpatController extends Controller
             ->addColumn('action', function ($data) {
                
                 $action = '';
+                $action .= "<a href='" . route('akta-ppat.detail', $data->id_aktappat) ."' class='btn btn-icon btn-success'><i class='fa fa-eye'></i></a>&nbsp;";
                 $action .= "<a href='javascript:void(0)' class='btn btn-icon btn-primary' data-id='{$data->id_aktappat}' onclick='showAktaPpat(this);'><i class='fa fa-edit'></i></a>&nbsp;";
                 $action .= "<a href='javascript:void(0)' class='btn btn-icon btn-danger'  data-id='{$data->id_aktappat}' onclick='deleteAktaPpat(this);'><i class='fa fa-trash'></i></a>&nbsp;";
 
@@ -76,6 +78,12 @@ class AktaPpatController extends Controller
                     $dibuat = $user->nama_user;  
                     return $dibuat;
                 }
+            })
+            ->addColumn('objek', function ($data) {
+               
+                $objek = substr($data->objek,0,10);
+                $objek .= "...";
+                return $objek;
             })
             ->escapeColumns([])
             ->addIndexColumn()
@@ -244,9 +252,16 @@ class AktaPpatController extends Controller
             return response()->json(['status' => 'error', 'message' => $e->getMessage()]);
         }
     }
+
     public function download($filepath)
     {
         $url=  public_path(). '/barcode/'. $filepath;
         return \Response::download($url);
+    }
+
+    public function detail(Request $request)
+    {
+        $ppat = AktaPpat::find($request->id);
+        return view('akta-ppat.detail',compact('ppat'));
     }
 }

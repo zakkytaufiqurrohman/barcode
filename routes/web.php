@@ -74,6 +74,7 @@ Route::middleware('auth')->group(function () {
         Route::put('/', 'AktaPpatController@update');
         Route::delete('/', 'AktaPpatController@destroy');
         Route::get('/show', 'AktaPpatController@show')->name('.show');
+        Route::get('/detail/{id}', 'AktaPpatController@detail')->name('.detail');
         
         Route::get('/data', 'AktaPpatController@data')->name('.data');
 

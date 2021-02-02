@@ -45,6 +45,13 @@
           </a>
         </li>
         <li>
+          <a href="{{route('ppat')}}">
+            <i class="fa fa-calendar"></i> <span>PPAT</span>
+            <span class="pull-right-container">
+            </span>
+          </a>
+        </li>
+        <li>
           <a href="{{route('akta-notaris')}}">
             <i class="fa fa-calendar"></i> <span>AKTA NOTARIS</span>
             <span class="pull-right-container">
@@ -68,13 +75,6 @@
         <li>
           <a href="{{route('tandaterima')}}">
             <i class="fa fa-calendar"></i> <span>TANDA TERIMA</span>
-            <span class="pull-right-container">
-            </span>
-          </a>
-        </li>
-        <li>
-          <a href="{{route('ppat')}}">
-            <i class="fa fa-calendar"></i> <span>PPAT</span>
             <span class="pull-right-container">
             </span>
           </a>

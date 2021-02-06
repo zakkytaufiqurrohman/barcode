@@ -256,6 +256,7 @@
     } );
 </script>
 <script>
+    var id_reporforium;
     $(function () {
         $('#date').daterangepicker({
             autoclose: true,
@@ -730,7 +731,7 @@
         html += '<div class="inputFormRow">'
         html += `<form method="POST" action="javascript:void(0)" class="form-add-detail-reporforium" id="form-add-detail-reporforium" enctype="multipart/form-data">
                     @csrf
-                    <input type="hidden" name="id" value="${id_reporforium}">
+                    <input type="text" name="id" value="${id_reporforium}">
                     <div class="form-group">
                         <label>NIK</label>
                         <input type="text" class="form-control m-input" name="nik" placeholder="NIK" >

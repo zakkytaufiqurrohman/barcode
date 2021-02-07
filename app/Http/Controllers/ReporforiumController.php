@@ -438,4 +438,13 @@ class ReporforiumController extends Controller
         $url=  public_path(). '/barcode/'. $filepath;
         return \Response::download($url);
     }
+
+    public function print(Request $request)
+    {
+        $dates = request()->get('date') ?? null;
+
+        $date = explode(' - ',$dates);
+        $data = Reporforium::whereBetween('tanggal',$date);
+        dd($data);
+    }
 }

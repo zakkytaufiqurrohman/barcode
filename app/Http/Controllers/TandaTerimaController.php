@@ -101,6 +101,7 @@ class TandaTerimaController extends Controller
             ->addColumn('action', function ($data) {
                
                 $action = '';
+                $action .= "<a href='" . route('tanda-terima.detail', $data->id_tandaterima) ."' class='btn btn-icon btn-success'><i class='fa fa-eye'></i></a>&nbsp;";
                 $action .= "<a href='javascript:void(0)' class='btn btn-icon btn-primary' data-id='{$data->id_tandaterima}' onclick='showTandaTerima(this);'><i class='fa fa-edit'></i></a>&nbsp;";
                 $action .= "<a href='javascript:void(0)' class='btn btn-icon btn-danger'  data-id='{$data->id_tandaterima}' onclick='deleteTandaTerima(this);'><i class='fa fa-trash'></i></a>&nbsp;";
 
@@ -243,5 +244,11 @@ class TandaTerimaController extends Controller
     {   
         $url=  public_path(). '/barcode/'. $filepath;
         return \Response::download($url);
+    }
+
+    public function detail(Request $request)
+    {
+        $tandaTerima = TandaTerima::find($request->id);
+        return view('tanda-Terima.detail',compact('tandaTerima'));
     }
 }

@@ -34,6 +34,8 @@ Route::middleware('auth')->group(function () {
         Route::get('/show', 'WaarmekingController@show')->name('.show');
         
         Route::get('/data', 'WaarmekingController@data')->name('.data');
+        Route::get('/detail/{id}', 'WaarmekingController@detail')->name('.detail');
+
 
         Route::get('/download/{id}', 'WaarmekingController@download')->name('.download');
 
@@ -48,6 +50,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/show', 'CovernotController@show')->name('.show');
         
         Route::get('/data', 'CovernotController@data')->name('.data');
+        Route::get('/detail/{id}', 'CovernotController@detail')->name('.detail');
 
         Route::get('/download/{id}', 'CovernotController@download')->name('.download');
 
@@ -61,6 +64,8 @@ Route::middleware('auth')->group(function () {
         Route::delete('/', 'LegalisasiController@destroy');
         Route::get('/show', 'LegalisasiController@show')->name('.show');
         
+        Route::get('/detail/{id}', 'LegalisasiController@detail')->name('.detail');
+
         Route::get('/data', 'LegalisasiController@data')->name('.data');
 
         Route::get('/download/{id}', 'LegalisasiController@download')->name('.download');
@@ -105,6 +110,7 @@ Route::middleware('auth')->group(function () {
         Route::delete('/', 'AktaJaminanFidusiaController@destroy');
         Route::get('/show', 'AktaJaminanFidusiaController@show')->name('.show');
         
+        Route::get('/detail/{id}', 'AktaJaminanFidusiaController@detail')->name('.detail');
         Route::get('/data', 'AktaJaminanFidusiaController@data')->name('.data');
 
         Route::get('/download/{id}', 'AktaJaminanFidusiaController@download')->name('.download');
@@ -120,6 +126,8 @@ Route::middleware('auth')->group(function () {
         Route::get('/show', 'TandaTerimaController@show')->name('.show');
         
         Route::get('/data', 'TandaTerimaController@data')->name('.data');
+        Route::get('/detail/{id}', 'TandaTerimaController@detail')->name('.detail');
+
 
         Route::get('/download/{id}', 'TandaTerimaController@download')->name('.download');
 

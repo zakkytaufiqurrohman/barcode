@@ -114,9 +114,11 @@ class ReporforiumController extends Controller
         $this->validate($request,[
             'foto.*' => 'required|max:2048|mimes:jpeg,jpg,png'
         ]); 
-        // untuk foto img / untuk berkas pdf
+        // untuk untuk berkas pdf
         $this->validate($request,[
             'berkas' => 'required|max:10000|mimes:pdf'
+        ],[
+            'berkas.mimes' => 'Format harus pdf'
         ]);
         $passwordStatus = 'OFF';
         if($request->has('password')){

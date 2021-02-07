@@ -185,6 +185,7 @@ class CovernotController extends Controller
             ->addColumn('action', function ($data) {
                
                 $action = '';
+                $action .= "<a href='" . route('covernot.detail', $data->id_covernot) ."' class='btn btn-icon btn-success'><i class='fa fa-eye'></i></a>&nbsp;";
                 $action .= "<a href='javascript:void(0)' class='btn btn-icon btn-primary' data-id='{$data->id_covernot}' onclick='showCovernot(this);'><i class='fa fa-edit'></i></a>&nbsp;";
                 $action .= "<a href='javascript:void(0)' class='btn btn-icon btn-danger'  data-id='{$data->id_covernot}' onclick='deleteCovernot(this);'><i class='fa fa-trash'></i></a>&nbsp;";
 
@@ -228,5 +229,11 @@ class CovernotController extends Controller
     {
         $url=  public_path(). '/barcode/'. $filepath;
         return \Response::download($url);
+    }
+
+    public function detail(Request $request)
+    {
+        $covernot = Covernot::find($request->id);
+        return view('covernot.detail',compact('covernot'));
     }
 }

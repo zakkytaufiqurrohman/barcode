@@ -66,6 +66,7 @@ class WaarmekingController extends Controller
             ->addColumn('action', function ($data) {
                
                 $action = '';
+                $action .= "<a href='" . route('waarmeking.detail', $data->id_waarmeking) ."' class='btn btn-icon btn-success'><i class='fa fa-eye'></i></a>&nbsp;";
                 $action .= "<a href='javascript:void(0)' class='btn btn-icon btn-primary' data-id='{$data->id_waarmeking}' onclick='showWaarmeking(this);'><i class='fa fa-edit'></i></a>&nbsp;";
                 $action .= "<a href='javascript:void(0)' class='btn btn-icon btn-danger'  data-id='{$data->id_waarmeking}' onclick='deleteWaarmeking(this);'><i class='fa fa-trash'></i></a>&nbsp;";
 
@@ -246,5 +247,11 @@ class WaarmekingController extends Controller
             DB::rollback();
             return response()->json(['status' => 'error', 'message' => $e->getMessage()]);
         }
+    }
+
+    public function detail(Request $request)
+    {
+        $waarmeking = Waarmeking::find($request->id);
+        return view('waarmeking.detail',compact('waarmeking'));
     }
 }

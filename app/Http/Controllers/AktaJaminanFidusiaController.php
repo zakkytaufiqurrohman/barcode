@@ -43,6 +43,7 @@ class AktaJaminanFidusiaController extends Controller
             ->addColumn('action', function ($data) {
                
                 $action = '';
+                $action .= "<a href='" . route('akta-jaminan-fidusia.detail', $data->id_aktajaminanfidusia ) ."' class='btn btn-icon btn-success'><i class='fa fa-eye'></i></a>&nbsp;";
                 $action .= "<a href='javascript:void(0)' class='btn btn-icon btn-primary' data-id='{$data->id_aktajaminanfidusia}' onclick='showAktaJaminanFidusia(this);'><i class='fa fa-edit'></i></a>&nbsp;";
                 $action .= "<a href='javascript:void(0)' class='btn btn-icon btn-danger'  data-id='{$data->id_aktajaminanfidusia}' onclick='deleteAktaJaminanFidusia(this);'><i class='fa fa-trash'></i></a>&nbsp;";
 
@@ -241,9 +242,16 @@ class AktaJaminanFidusiaController extends Controller
             return response()->json(['status' => 'error', 'message' => $e->getMessage()]);
         }
     }
+
     public function download($filepath)
     {
         $url=  public_path(). '/barcode/'. $filepath;
         return \Response::download($url);
+    }
+
+    public function detail(Request $request)
+    {
+        $fidusia = AktaJaminanFidusia::find($request->id);
+        return view('akta-jaminan-fidusia.detail',compact('fidusia'));
     }
 }

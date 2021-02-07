@@ -59,6 +59,7 @@
                                 <img src="{{asset('Reporforium/foto/'.$ok->foto)}}" alt="foto" width="80" heigth="80">
                                 {{$no }}. {{$ok->nama}} | {{$ok->nik}} 
                                 <br>
+                                <br>
                                 <?php $no++?>
                             @endforeach
                         </td>

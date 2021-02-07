@@ -45,6 +45,7 @@ class LegalisasiController extends Controller
             ->addColumn('action', function ($data) {
                
                 $action = '';
+                $action .= "<a href='" . route('legalisasi.detail', $data->id_legalisasi) ."' class='btn btn-icon btn-success'><i class='fa fa-eye'></i></a>&nbsp;";
                 $action .= "<a href='javascript:void(0)' class='btn btn-icon btn-primary' data-id='{$data->id_legalisasi}' onclick='showLegalisasi(this);'><i class='fa fa-edit'></i></a>&nbsp;";
                 $action .= "<a href='javascript:void(0)' class='btn btn-icon btn-danger'  data-id='{$data->id_legalisasi}' onclick='deleteLegalisasi(this);'><i class='fa fa-trash'></i></a>&nbsp;";
 
@@ -242,5 +243,11 @@ class LegalisasiController extends Controller
     {
         $url=  public_path(). '/barcode/'. $filepath;
         return \Response::download($url);
+    }
+
+    public function detail(Request $request)
+    {
+        $legalisasi = Legalisasi::find($request->id);
+        return view('legalisasi.detail',compact('legalisasi'));
     }
 }

@@ -230,7 +230,7 @@
                                 <label for="update-penerima">Nama Penghadap, NIK & FOTO</label>
                                 <div class="newRowJumlahs"></div>
                                 <div class="newRowJumlah"></div>
-                            <button class="addRowJumlah btn btn-info" type="button">Add Row</button>
+                            <button class="addRowJumlahEdit btn btn-info" type="button">Add Row</button>
                             </div>
                             <!-- /.col -->
                           </div>
@@ -726,12 +726,12 @@
         });
     }
 
-    $(".addRowJumlah").click(function () {
+    $(".addRowJumlahEdit").click(function () {
         var html = '';      
         html += '<div class="inputFormRow">'
         html += `<form method="POST" action="javascript:void(0)" class="form-add-detail-reporforium" id="form-add-detail-reporforium" enctype="multipart/form-data">
                     @csrf
-                    <input type="text" name="id" value="${id_reporforium}">
+                    <input type="hidden" name="id" value="${id_reporforium}">
                     <div class="form-group">
                         <label>NIK</label>
                         <input type="text" class="form-control m-input" name="nik" placeholder="NIK" >
@@ -748,6 +748,32 @@
                         <button id="removeRow" type="button" class="btn btn-danger"><span class="fa fa-trash"></span>Hapus</button>
                         <button type="submit" class="btn btn-info "><span class="fa fa-save"></span>Simpan</button>
                     </div>
+                </form>`;
+        
+        $('.newRowJumlah').append(html);
+    });
+
+    $(".addRowJumlah").click(function () {
+        var html = '';      
+        html += '<div class="inputFormRow">'
+        html += `<form method="POST" action="javascript:void(0)" class="form-add-detail-reporforium" id="form-add-detail-reporforium" enctype="multipart/form-data">
+                    @csrf
+                    <div class="form-group">
+                        <label>NIK</label>
+                        <input type="text" class="form-control m-input" name="nik" placeholder="NIK" >
+                    </div>
+                    <div class="form-group">
+                        <label>Nama Penghadap</label>
+                        <input type="text" class="form-control m-input" name="nama" placeholder="Nama Penghadap">
+                    </div>
+                    <div class="form-group">
+                        <label>Foto</label>
+                        <input type="file" class="form-control m-input" name="foto" placeholder="foto" autocomplete="off">
+                    </div>
+                    <div class="input-group-append">
+                        <button id="removeRow" type="button" class="btn btn-danger"><span class="fa fa-trash"></span>Hapus</button>
+                    </div>
+                    <br>
                 </form>`;
         
         $('.newRowJumlah').append(html);

@@ -194,7 +194,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/data', 'ReporforiumController@data')->name('.data');
 
         Route::get('/download/{id}', 'ReporforiumController@download')->name('.download');
-        Route::post('/print', 'ReporforiumController@print')->name('.print');
+        Route::get('/print/{id}', 'ReporforiumController@print')->name('.print');
 
     });
 

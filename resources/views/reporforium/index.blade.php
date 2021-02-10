@@ -16,8 +16,6 @@
                     <div class="card-header-action">
                         <div class="col-xs-4 col-sm-6 col-md-6 col-lg-6">
                             <a href="javascript:void(0)" onclick="openModalAdd();" class="btn btn-primary"><i class="fa fa-plus"></i> Tambah</a>
-                            <div class="print">
-                            </div>
                         </div>
                         <div class="form-group col-xs-8 col-sm-6 col-md-6 col-lg-6">
                             <div class="input-group">
@@ -32,7 +30,12 @@
             </div>
             <!-- /.box-header -->
             <div class="box-body">
-              <table id="reporforium-table" class="table table-bordered table-hover">
+            
+            <table id="reporforium-table" class="table table-bordered table-hover">
+            <div class="print pull-right" >
+            </div>
+            <br>
+            <br>
                 <thead>
                     <tr>
                         <th class="text-center" width="10">No</th>
@@ -270,11 +273,11 @@
             }
         });
         $('#date').on('apply.daterangepicker', function(ev, picker) {
-            $(this).val(picker.startDate.format('YYYY/MM/DD') + ' - ' + picker.endDate.format('YYYY/MM/DD'));
-            
-            // alert(date);
-
-            var html = `<a href="javascript:void(0)" onclick="prints();" class="btn btn-primary"><i class="fa fa-plus"></i>Print</a>
+            $(this).val(picker.startDate.format('YYYY-MM-DD') + '&' + picker.endDate.format('YYYY-MM-DD'));
+            var date = $('#date').val();
+            $('.links').remove();
+            var SITEURL = '{{URL::to('')}}/reporforiums/print/'+date;
+            var html = `<a href="${SITEURL}" class="links btn btn-success"><i class="fa fa-print"></i> Print </a>
                         `;
             $(".print").append(html);
             getreporforium();
@@ -376,22 +379,6 @@
         });
     });
 
-    function prints(){   
-            var SITEURL = '{{URL::to('')}}/';
-            var date = $('#date').val();
-            $.ajax({
-            url: SITEURL+'reporforiums/print' ,
-            type: "post",
-            // dataType: "json",
-            data: {
-                date:date,
-                "_token": "{{ csrf_token() }}"
-            },
-            success(result) {
-                console.log('dsadasd');
-                }
-            });
-    }
     // edit show/asign data
     function showReporforium(object)
     {

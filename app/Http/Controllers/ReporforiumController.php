@@ -12,6 +12,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
+use PDF;
 
 class ReporforiumController extends Controller
 {
@@ -24,7 +25,7 @@ class ReporforiumController extends Controller
     {
         $dates = request()->get('date') ?? null;
 
-        $date = explode(' - ',$dates);
+        $date = explode('&',$dates);
 
         $data = Reporforium::query();
 
@@ -439,12 +440,14 @@ class ReporforiumController extends Controller
         return \Response::download($url);
     }
 
-    public function print(Request $request)
+    public function print($dates)
     {
-        $dates = request()->get('date') ?? null;
+        $dates = $dates ?? null;
 
-        $date = explode(' - ',$dates);
-        $data = Reporforium::whereBetween('tanggal',$date);
-        dd($data);
+        $date = explode('&',$dates);
+        $reporforiums = Reporforium::with('detailrepo')->whereBetween('tanggal',$date)->get();
+    
+        $pdf = PDF::loadview('reporforium.print',['reporforiums'=>$reporforiums,'date'=> $date])->setPaper('a4', 'landscape');;
+        return $pdf->stream('tandaterima.pdf');
     }
 }

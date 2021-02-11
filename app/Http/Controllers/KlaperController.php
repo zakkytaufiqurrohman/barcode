@@ -7,6 +7,7 @@ use Yajra\DataTables\Facades\DataTables;
 use App\Models\Reporforium;
 use App\Models\DetailReporforium;
 use DB;
+use PDF;
 
 class KlaperController extends Controller
 {
@@ -19,7 +20,7 @@ class KlaperController extends Controller
     {
         $dates = request()->get('date') ?? null;
 
-        $date = explode(' - ',$dates);
+        $date = explode('&',$dates);
 
         // $data = DetailReporforium::query();
         $data = DB::table('detail_reporforium')
@@ -51,5 +52,20 @@ class KlaperController extends Controller
             ->escapeColumns([])
             ->addIndexColumn()
             ->make(true);
+    }
+
+    function print($dates)
+    {
+        $dates = $dates ?? null;
+
+        $date = explode('&',$dates);
+        $klapers = DB::table('detail_reporforium')
+        ->join('tbl_reporforium','detail_reporforium.id_reporforium','=','tbl_reporforium.id_reporforium')
+        ->whereBetween('tanggal',$date)
+        ->orderBy('nama','ASC')
+        ->get();
+
+        $pdf = PDF::loadview('klaper.print',['klapers'=>$klapers,'date'=> $date]);
+        return $pdf->stream('klaper.pdf');
     }
 }

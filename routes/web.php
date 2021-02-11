@@ -209,6 +209,8 @@ Route::middleware('auth')->group(function () {
         
         Route::get('/data', 'KlaperController@data')->name('.data');
 
+        Route::get('/print/{id}', 'KlaperController@print')->name('.print');
+
         Route::get('/download/{id}', 'KlaperController@download')->name('.download');
 
     });

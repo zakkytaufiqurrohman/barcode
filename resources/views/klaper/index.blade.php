@@ -27,6 +27,10 @@
             </div>
             <!-- /.box-header -->
             <div class="box-body">
+            <div class="print pull-right" >
+            </div>
+            <br>
+            <br>
               <table id="tandaterima-table" class="table table-bordered table-hover">
                 <thead>
                     <tr>
@@ -70,7 +74,13 @@
             }
         });
         $('#date').on('apply.daterangepicker', function(ev, picker) {
-            $(this).val(picker.startDate.format('YYYY/MM/DD') + ' - ' + picker.endDate.format('YYYY/MM/DD'));
+            $(this).val(picker.startDate.format('YYYY-MM-DD') + '&' + picker.endDate.format('YYYY-MM-DD'));
+            var date = $('#date').val();
+            $('.links').remove();
+            var SITEURL = '{{URL::to('')}}/klapers/print/'+date;
+            var html = `<a href="${SITEURL}" class="links btn btn-success"><i class="fa fa-print"></i> Print </a>
+                        `;
+            $(".print").append(html);
             getKlaper();
         });
 

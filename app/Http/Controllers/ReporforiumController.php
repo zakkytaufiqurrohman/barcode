@@ -447,7 +447,7 @@ class ReporforiumController extends Controller
         $date = explode('&',$dates);
         $reporforiums = Reporforium::with('detailrepo')->whereBetween('tanggal',$date)->get();
     
-        $pdf = PDF::loadview('reporforium.print',['reporforiums'=>$reporforiums,'date'=> $date])->setPaper('a4', 'landscape');;
-        return $pdf->stream('tandaterima.pdf');
+        $pdf = PDF::loadview('reporforium.print',['reporforiums'=>$reporforiums,'date'=> $date])->setPaper('a4', 'landscape');
+        return $pdf->stream('reporforium.pdf');
     }
 }

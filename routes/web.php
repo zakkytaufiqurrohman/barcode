@@ -254,3 +254,5 @@ Route::post('/login_berkas', 'ReadQrController@login')->name('login_berkas');
 
 Route::post('/login_berkas_repo', 'ReadQrController@logins')->name('login_berkas_repo');
 Route::get('/berkas_reporforium/{id}', 'ReadQrController@readQRNew');
+
+Route::get('/imports/','ReporforiumController@import');

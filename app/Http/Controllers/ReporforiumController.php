@@ -13,6 +13,8 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
 use PDF;
+use App\Imports\ReporforiumImport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ReporforiumController extends Controller
 {
@@ -449,5 +451,11 @@ class ReporforiumController extends Controller
     
         $pdf = PDF::loadview('reporforium.print',['reporforiums'=>$reporforiums,'date'=> $date])->setPaper('a4', 'landscape');
         return $pdf->stream('reporforium.pdf');
+    }
+
+    public function import()
+    {
+        Excel::import(new ReporforiumImport, public_path('/import/reporforium.xlsx'));
+        return 'oke';
     }
 }

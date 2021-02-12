@@ -453,9 +453,40 @@ class ReporforiumController extends Controller
         return $pdf->stream('reporforium.pdf');
     }
 
-    public function import()
+    public function import(Request $request)
     {
-        Excel::import(new ReporforiumImport, public_path('/import/reporforium.xlsx'));
-        return 'oke';
+        date_default_timezone_set('Asia/Jakarta');
+        $this->validate($request,[
+            // 'excel' => 'required|mimes:xls,xlsx',
+            'excel' => 'required',
+        ]);
+        
+        DB::beginTransaction();
+        try{
+
+            // menangkap file excel
+            $file = $request->file('excel');
+    
+            // membuat nama file unik
+            $nama_file = rand().$file->getClientOriginalName();
+    
+            // upload ke folder file_siswa di dalam folder public
+            $file->move(public_path('import/'),$nama_file);
+    
+            // import data
+            Excel::import(new ReporforiumImport, public_path('import/'.$nama_file));
+    
+            DB::commit();
+            return response()->json(['status' => 'success', 'message' => 'Berhasil mengubah detail reporforium']);
+        } catch(Exception $e){
+            DB::rollback();
+            return response()->json(['status' => 'error', 'message' => $e->getMessage()]);
+        }
+    }
+
+    public function downloadExcel()
+    {
+        $url=  public_path(). '/Import/reporforium.xlsx';
+        return \Response::download($url);
     }
 }

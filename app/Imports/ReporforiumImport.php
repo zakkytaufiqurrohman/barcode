@@ -3,6 +3,7 @@
 namespace App\Imports;
 
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Concerns\ToCollection;
 use App\Models\Berkas;
 use App\Models\DetailReporforium;
@@ -24,50 +25,51 @@ class ReporforiumImport implements ToCollection,WithHeadingRow
     {
         foreach ($collection as $row) 
         {
-            
-            // var_dump($row['Password']);
-            // die;
-            DB::beginTransaction();
-            try{
-                $berkas = Berkas::create([
-                    'password' => $row['Password'],
-                    'tipe_berkas' => 'reporforium',
-                    'id_user' => 15,
-                    'tanggal' => Carbon::parse($row['Tanggal'])->format('Y-m-d') ,
-                    'waktu' => Carbon::now()->format('H:i:s'),
-                    'password_berkas' => 'rahasiailahi',
-                    'kode_berkas' => 'oke bos'
-                ]);
-                // var_dump($row['Passwords']);
+            if(!empty($row['Nomor'])){
+                // var_dump($row['Password']);
                 // die;
-                $reporforium = Reporforium::create([
-                    'id_berkas' => $berkas->id_berkas,
-                    'nomor' => $row['Nomor'],
-                    'no_bulanan' => $row['No Bulanan'],
-                    'tanggal' => Carbon::parse($row['Tanggal'])->format('Y-m-d') ,
-                    'sifat_akta' => $row['Sifat Akta'],
-                    'berkas' => '',
-                    'sk_kemenhumkam' => $row['SK Kemenhumkam'],
-    
-                ]);
-                // var_dump($reporforium->id_reporforium);
-                $names = explode(',',$row['Nama Penghadap']);
-                foreach($names as $name){
-                    $data [] = [
-                        'id_reporforium' => $reporforium->id_reporforium,
-                        'foto' => '',
-                        'nik' => '',
-                        'nama' => $name
-                    ];
+                DB::beginTransaction();
+                try{
+                    $berkas = Berkas::create([
+                        'password' => $row['Password'],
+                        'tipe_berkas' => 'reporforium',
+                        'id_user' => Auth::user()->id_user,
+                        'tanggal' => Carbon::parse($row['Tanggal'])->format('Y-m-d') ,
+                        'waktu' => Carbon::now()->format('H:i:s'),
+                        'password_berkas' => bcrypt(12345678),
+                        'kode_berkas' => str_replace("/", "",bcrypt(date("Y-m-d h:i:sa").rand(10,100)))
+                    ]);
+                    // var_dump($row['Passwords']);
+                    // die;
+                    $reporforium = Reporforium::create([
+                        'id_berkas' => $berkas->id_berkas,
+                        'nomor' => $row['Nomor'],
+                        'no_bulanan' => $row['No Bulanan'],
+                        'tanggal' => Carbon::parse($row['Tanggal'])->format('Y-m-d') ,
+                        'sifat_akta' => $row['Sifat Akta'],
+                        'berkas' => '',
+                        'sk_kemenhumkam' => $row['SK Kemenhumkam'],
+        
+                    ]);
+                    // var_dump($reporforium->id_reporforium);
+                    $names = explode(',',$row['Nama Penghadap']);
+                    $nik = explode(',',$row['NIK']);
+
+                    foreach ( $names as $idx => $val ) {
+                        $data[] = [ 
+                            'id_reporforium' => $reporforium->id_reporforium,
+                            'nama' => $val, 
+                            'nik' => $nik[$idx],
+                            'foto' => ''
+                        ];
+                    }
+                    DetailReporforium::insert($data);
+                    DB::commit();
+                    
+                } catch(Exception $e) {
+                    DB::rollback();
                 }
-
-                DetailReporforium::insert($data);
-                DB::commit();
-
-            } catch(Exception $e) {
-                DB::rollback();
             }
-
         }
     }
 }

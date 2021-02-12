@@ -16,6 +16,7 @@
                     <div class="card-header-action">
                         <div class="col-xs-4 col-sm-6 col-md-6 col-lg-6">
                             <a href="javascript:void(0)" onclick="openModalAdd();" class="btn btn-primary"><i class="fa fa-plus"></i> Tambah</a>
+                            <a href="javascript:void(0)" onclick="openModalImport();" class="btn btn-success"><i class="fa fa-file-excel-o"></i> Import</a>
                         </div>
                         <div class="form-group col-xs-8 col-sm-6 col-md-6 col-lg-6">
                             <div class="input-group">
@@ -249,6 +250,47 @@
         </div>
     </div>
 </div>
+<!-- modal edit detail reporforium -->
+<div class="modal fade" role="dialog" id="modal-import-reporforium">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Import Reporforium</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+                <div class="modal-body">
+                    <div class="box-body">
+                        <div class="row">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                {{-- <a href="{{ url('download/example-excel')}}" target="_blank" class="btn btn-primary">Download Example Excel</a> --}}
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                            <form id="form-import-excel" class="mt-5" action="javascript:void(0)" method="POST" enctype="multipart/form-data">
+                                @csrf
+                                <div class="form-group">
+                                    <label>Import Excel</label>
+                                    <div class="input-group">
+                                        <input type="file" class="form-control" name="excel" id="excel" autocomplete="off">
+                                        <div class="input-group-btn">
+                                            <button class="btn btn-primary" type="submit" id="btnImportExcel"><i class="fa fa-save"></i></button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                            </div>
+                        </div>    
+                    </div>
+                </div>
+                <div class="modal-footer bg-whitesmoke br">
+                    <a href="{{ url('download/example-excel')}}" target="_blank" class="btn btn-primary">Download Example Excel</a>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Batal</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 <!-- / modal edit detail reporforium -->
 <!-- /.content -->
 @endsection
@@ -331,6 +373,15 @@
         setTimeout(() => {
             $('#add-nomor').focus();
         }, 500);
+    
+    }
+    function openModalImport()
+    {
+        $('#modal-import-reporforium').modal('show');
+        setTimeout(() => {
+            $('#excel').focus();
+        }, 500);
+    
     }
     // add /simpan
     $("#form-add-reporforium").on("submit", function(e) {
@@ -793,6 +844,55 @@
     $(document).on('click', '#removeRow', function () {
         $(this).closest('.inputFormRow').remove();
     });
+
+    $("#form-import-excel").on("submit", function(e) {
+        e.preventDefault();   
+        var form=$("body");
+                form.find('.help-block').remove();
+                form.find('.form-group').removeClass('has-error');
+        $.ajax({
+            url: "{{route('imports')}}",
+            type: "POST",
+            dataType: "json",
+            data: new FormData(this),
+            processData: false,
+            contentType: false,
+            beforeSend() {
+                $("#btnImportExcel").addClass('btn-progress');
+                $("input").attr('disabled', 'disabled');
+                $("button").attr('disabled', 'disabled');
+            },
+            complete() {
+                $("#btnImportExcel").removeClass('btn-progress');
+                $("input").removeAttr('disabled', 'disabled');
+                $("button").removeAttr('disabled', 'disabled');
+            },
+            success(result) {
+                if(result['status'] == 'success'){
+                    $("#form-import-excel")[0].reset();
+                    // $('#modal-add-reporforium').modal('hide');
+                    alert('success');
+                    getreporforium();
+                }
+
+                toastr.success(result.message);
+            },
+            error(xhr, status, error) {
+                var err = eval('(' + xhr.responseText + ')');
+                toastr.error(err.message);
+            },
+            error:function (response){
+                alert('gagal');
+                $.each(response.responseJSON.errors,function(key,value){
+                    $("input[name="+key+"]")
+                        .closest('.form-group')
+                        .addClass('has-error')
+                        .append('<span class="help-block"><strong>'+value+'</strong></span>');
+                })
+            }
+        });
+    });
+
             
 </script>
 @endsection

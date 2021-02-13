@@ -26,8 +26,6 @@ class ReporforiumImport implements ToCollection,WithHeadingRow
         foreach ($collection as $row) 
         {
             if(!empty($row['Nomor'])){
-                // var_dump($row['Password']);
-                // die;
                 DB::beginTransaction();
                 try{
                     $berkas = Berkas::create([
@@ -39,8 +37,7 @@ class ReporforiumImport implements ToCollection,WithHeadingRow
                         'password_berkas' => bcrypt(12345678),
                         'kode_berkas' => str_replace("/", "",bcrypt(date("Y-m-d h:i:sa").rand(10,100)))
                     ]);
-                    // var_dump($row['Passwords']);
-                    // die;
+
                     $reporforium = Reporforium::create([
                         'id_berkas' => $berkas->id_berkas,
                         'nomor' => $row['Nomor'],
@@ -51,7 +48,7 @@ class ReporforiumImport implements ToCollection,WithHeadingRow
                         'sk_kemenhumkam' => $row['SK Kemenhumkam'],
         
                     ]);
-                    // var_dump($reporforium->id_reporforium);
+
                     $names = explode(',',$row['Nama Penghadap']);
                     $nik = explode(',',$row['NIK']);
 

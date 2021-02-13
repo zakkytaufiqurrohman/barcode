@@ -271,12 +271,11 @@
                                 @csrf
                                 <div class="form-group">
                                     <label>Import Excel</label>
-                                    <div class="input-group">
-                                        <input type="file" class="form-control" name="excel" id="excel" autocomplete="off">
-                                        <div class="input-group-btn">
-                                            <button class="btn btn-primary" type="submit" id="btnImportExcel"><i class="fa fa-save"></i></button>
-                                        </div>
-                                    </div>
+                                    <input type="file" class="form-control" name="excel" id="excel" autocomplete="off">
+                                </div>
+                                <div class="form-group">
+                                    <button class="btn btn-success" type="submit" id="btnImportExcel"><i class="fa fa-file-excel-o"></i>&nbsp;Import</button>
+                                    <a href="{{ url('download/example-excel')}}" target="_blank" class="btn btn-primary"><i class="fa fa-download"></i>&nbsp; Download Example Excel</a>
                                 </div>
                             </form>
                             </div>
@@ -284,7 +283,7 @@
                     </div>
                 </div>
                 <div class="modal-footer bg-whitesmoke br">
-                    <a href="{{ url('download/example-excel')}}" target="_blank" class="btn btn-primary">Download Example Excel</a>
+                    {{-- <a href="{{ url('download/example-excel')}}" target="_blank" class="btn btn-primary">Download Example Excel</a> --}}
                     <button type="button" class="btn btn-danger" data-dismiss="modal">Batal</button>
                 </div>
             </form>
@@ -870,8 +869,7 @@
             success(result) {
                 if(result['status'] == 'success'){
                     $("#form-import-excel")[0].reset();
-                    // $('#modal-add-reporforium').modal('hide');
-                    alert('success');
+                    $('#modal-import-reporforium').modal('hide');
                     getreporforium();
                 }
 
@@ -882,7 +880,6 @@
                 toastr.error(err.message);
             },
             error:function (response){
-                alert('gagal');
                 $.each(response.responseJSON.errors,function(key,value){
                     $("input[name="+key+"]")
                         .closest('.form-group')

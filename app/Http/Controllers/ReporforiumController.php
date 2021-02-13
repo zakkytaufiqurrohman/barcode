@@ -475,9 +475,11 @@ class ReporforiumController extends Controller
     
             // import data
             Excel::import(new ReporforiumImport, public_path('import/'.$nama_file));
-    
+            
+            if (file_exists(public_path('import/'.$nama_file))) unlink(public_path('import/'.$nama_file));
+
             DB::commit();
-            return response()->json(['status' => 'success', 'message' => 'Berhasil mengubah detail reporforium']);
+            return response()->json(['status' => 'success', 'message' => 'Berhasil import data!']);
         } catch(Exception $e){
             DB::rollback();
             return response()->json(['status' => 'error', 'message' => $e->getMessage()]);

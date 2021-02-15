@@ -482,27 +482,24 @@ class PpatController extends Controller
     {
         date_default_timezone_set('Asia/Jakarta');
         $this->validate($request,[
-            // 'excel' => 'required|mimes:xls,xlsx',
-            'excel' => 'required',
+            'excel' => 'required|mimes:xls,xlsx',
         ]);
         
         DB::beginTransaction();
         try{
 
-            // menangkap file excel
-            $file = $request->file('excel');
+            // // menangkap file excel
+            // $file = $request->file('excel');
     
-            // membuat nama file unik
-            $nama_file = rand().$file->getClientOriginalName();
+            // // membuat nama file unik
+            // $nama_file = rand().$file->getClientOriginalName();
     
-            // upload ke folder file_siswa di dalam folder public
-            $file->move(public_path('import/'),$nama_file);
+            // // upload ke folder file_siswa di dalam folder public
+            // $file->move(public_path('import/'),$nama_file);
     
             // import data
-            Excel::import(new PpatImport, public_path('import/'.$nama_file));
+            Excel::import(new PpatImport,request()->file('excel'));
             
-            if (file_exists(public_path('import/'.$nama_file))) unlink(public_path('import/'.$nama_file));
-
             DB::commit();
             return response()->json(['status' => 'success', 'message' => 'Berhasil import data!']);
         } catch(Exception $e){

@@ -462,21 +462,9 @@ class ReporforiumController extends Controller
         
         DB::beginTransaction();
         try{
-
-            // menangkap file excel
-            $file = $request->file('excel');
-    
-            // membuat nama file unik
-            $nama_file = rand().$file->getClientOriginalName();
-    
-            // upload ke folder  di dalam folder public
-            $file->move(public_path('import/'),$nama_file);
-    
             // import data
-            Excel::import(new ReporforiumImport, public_path('import/'.$nama_file));
+            Excel::import(new ReporforiumImport, request()->file('excel'));
             
-            if (file_exists(public_path('import/'.$nama_file))) unlink(public_path('import/'.$nama_file));
-
             DB::commit();
             return response()->json(['status' => 'success', 'message' => 'Berhasil import data!']);
         } catch(Exception $e){

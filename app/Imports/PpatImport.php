@@ -23,14 +23,13 @@ class PpatImport implements ToCollection,WithHeadingRow
     {
         foreach ($collection as $row) 
         {
-            // var_dump($row['18']);die;
             DB::beginTransaction();
             try{
                 $berkas = Berkas::create([
                     'password' => $row['19'],
                     'tipe_berkas' => 'aktappat',
                     'id_user' => Auth::user()->id_user,
-                    'tanggal' => Carbon::parse($row['3'])->format('Y-m-d'),
+                    'tanggal' => Carbon::instance(\PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row['3'])),
                     'waktu' => Carbon::now()->format('H:i:s'),
                     'password_berkas' => bcrypt(12345678),
                     'kode_berkas' => str_replace("/", "",bcrypt(date("Y-m-d h:i:sa").rand(10,100)))
@@ -50,9 +49,9 @@ class PpatImport implements ToCollection,WithHeadingRow
                     'harga_transaksi' => $row['11'],
                     'nop_tahun' => $row['12'],
                     'nilai_njop' => $row['13'],
-                    'tanggal_ssp' => \Carbon\Carbon::parse($row['14'])->format('Y-m-d'),
+                    'tanggal_ssp' => Carbon::instance(\PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row['14'])),
                     'nilai_ssp' => $row['15'],
-                    'tanggal_ssb' => \Carbon\Carbon::parse($row['16'])->format('Y-m-d'),
+                    'tanggal_ssb' => Carbon::instance(\PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row['16'])),
                     'nilai_ssb' => $row['17'],
                     'keterangan' => $row['18'],
                     'id_berkas' => $berkas->id_berkas,

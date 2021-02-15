@@ -15,6 +15,7 @@
                 <div class="card-header">
                     <div class="card-header-action">
                         <a href="javascript:void(0)" onclick="openModalAdd();" class="btn btn-primary"><i class="fa fa-plus"></i> Tambah</a>
+                        <a href="javascript:void(0)" onclick="openModalImport();" class="btn btn-success"><i class="fa fa-file-excel-o"></i> Import</a>
                     </div>
                 </div>
             </div>
@@ -355,6 +356,45 @@
     </div>
 </div>
 <!-- end modal edit -->
+<div class="modal fade" role="dialog" id="modal-import-ppat">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Import PPAT</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+                <div class="modal-body">
+                    <div class="box-body">
+                        <div class="row">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                {{-- <a href="{{ url('download/example-excel')}}" target="_blank" class="btn btn-primary">Download Example Excel</a> --}}
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                            <form id="form-import-excel" class="mt-5" action="javascript:void(0)" method="POST" enctype="multipart/form-data">
+                                @csrf
+                                <div class="form-group">
+                                    <label>Import Excel</label>
+                                    <input type="file" class="form-control" name="excel" id="excel" autocomplete="off">
+                                </div>
+                                <div class="form-group">
+                                    <button class="btn btn-success" type="submit" id="btnImportExcel"><i class="fa fa-file-excel-o"></i>&nbsp;Import</button>
+                                    <a href="{{ route('ppat.downloadExcel')}}" target="_blank" class="btn btn-primary"><i class="fa fa-download"></i>&nbsp; Download Example Excel</a>
+                                </div>
+                            </form>
+                            </div>
+                        </div>    
+                    </div>
+                </div>
+                <div class="modal-footer bg-whitesmoke br">
+                    {{-- <a href="{{ url('download/example-excel')}}" target="_blank" class="btn btn-primary">Download Example Excel</a> --}}
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Batal</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 <!-- /.content -->
 @endsection
 @section('js')
@@ -392,6 +432,15 @@
         }, 500);
     }
     // add /simpan
+
+    function openModalImport()
+    {
+        $('#modal-import-ppat').modal('show');
+        setTimeout(() => {
+            $('#excel').focus();
+        }, 500);
+    
+    }
 
     $(document).on("submit", "#form-add-ppat", function(event)
 {
@@ -641,6 +690,52 @@
             ]
         });
     }
+
+    $("#form-import-excel").on("submit", function(e) {
+        e.preventDefault();   
+        var form=$("body");
+                form.find('.help-block').remove();
+                form.find('.form-group').removeClass('has-error');
+        $.ajax({
+            url: "{{route('ppat.import')}}",
+            type: "POST",
+            dataType: "json",
+            data: new FormData(this),
+            processData: false,
+            contentType: false,
+            beforeSend() {
+                $("#btnImportExcel").addClass('btn-progress');
+                $("input").attr('disabled', 'disabled');
+                $("button").attr('disabled', 'disabled');
+            },
+            complete() {
+                $("#btnImportExcel").removeClass('btn-progress');
+                $("input").removeAttr('disabled', 'disabled');
+                $("button").removeAttr('disabled', 'disabled');
+            },
+            success(result) {
+                if(result['status'] == 'success'){
+                    $("#form-import-excel")[0].reset();
+                    $('#modal-import-ppat').modal('hide');
+                    getAktaPpat();
+                }
+
+                toastr.success(result.message);
+            },
+            error(xhr, status, error) {
+                var err = eval('(' + xhr.responseText + ')');
+                toastr.error(err.message);
+            },
+            error:function (response){
+                $.each(response.responseJSON.errors,function(key,value){
+                    $("input[name="+key+"]")
+                        .closest('.form-group')
+                        .addClass('has-error')
+                        .append('<span class="help-block"><strong>'+value+'</strong></span>');
+                })
+            }
+        });
+    });
             
 </script>
 @endsection

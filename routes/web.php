@@ -146,6 +146,9 @@ Route::middleware('auth')->group(function () {
 
         Route::get('/download/{id}', 'PpatController@download')->name('.download');
 
+        Route::post('/import/','PpatController@import')->name('.import');
+        Route::get('/import/download','PpatController@downloadExcel')->name('.downloadExcel');
+
     });
 
     // Kwitansi

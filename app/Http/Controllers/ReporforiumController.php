@@ -457,8 +457,7 @@ class ReporforiumController extends Controller
     {
         date_default_timezone_set('Asia/Jakarta');
         $this->validate($request,[
-            // 'excel' => 'required|mimes:xls,xlsx',
-            'excel' => 'required',
+            'excel' => 'required|mimes:xls,xlsx',
         ]);
         
         DB::beginTransaction();
@@ -470,7 +469,7 @@ class ReporforiumController extends Controller
             // membuat nama file unik
             $nama_file = rand().$file->getClientOriginalName();
     
-            // upload ke folder file_siswa di dalam folder public
+            // upload ke folder  di dalam folder public
             $file->move(public_path('import/'),$nama_file);
     
             // import data

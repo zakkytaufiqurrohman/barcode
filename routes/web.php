@@ -196,6 +196,9 @@ Route::middleware('auth')->group(function () {
         Route::get('/download/{id}', 'ReporforiumController@download')->name('.download');
         Route::get('/print/{id}', 'ReporforiumController@print')->name('.print');
 
+        Route::post('/imports','ReporforiumController@import')->name('.import');
+        Route::get('/example-excel','ReporforiumController@downloadExcel')->name('.excel');
+
     });
 
     // klaper
@@ -255,5 +258,3 @@ Route::post('/login_berkas', 'ReadQrController@login')->name('login_berkas');
 Route::post('/login_berkas_repo', 'ReadQrController@logins')->name('login_berkas_repo');
 Route::get('/berkas_reporforium/{id}', 'ReadQrController@readQRNew');
 
-Route::post('/imports','ReporforiumController@import')->name('imports');
-Route::get('/download/example-excel','ReporforiumController@downloadExcel');

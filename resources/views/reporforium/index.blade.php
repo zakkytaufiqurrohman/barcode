@@ -264,7 +264,6 @@
                     <div class="box-body">
                         <div class="row">
                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                {{-- <a href="{{ url('download/example-excel')}}" target="_blank" class="btn btn-primary">Download Example Excel</a> --}}
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                             <form id="form-import-excel" class="mt-5" action="javascript:void(0)" method="POST" enctype="multipart/form-data">
@@ -275,7 +274,7 @@
                                 </div>
                                 <div class="form-group">
                                     <button class="btn btn-success" type="submit" id="btnImportExcel"><i class="fa fa-file-excel-o"></i>&nbsp;Import</button>
-                                    <a href="{{ url('download/example-excel')}}" target="_blank" class="btn btn-primary"><i class="fa fa-download"></i>&nbsp; Download Example Excel</a>
+                                    <a href="{{ route('reporforium.excel')}}" target="_blank" class="btn btn-primary"><i class="fa fa-download"></i>&nbsp; Download Example Excel</a>
                                 </div>
                             </form>
                             </div>
@@ -850,7 +849,7 @@
                 form.find('.help-block').remove();
                 form.find('.form-group').removeClass('has-error');
         $.ajax({
-            url: "{{route('imports')}}",
+            url: "{{route('reporforium.import')}}",
             type: "POST",
             dataType: "json",
             data: new FormData(this),

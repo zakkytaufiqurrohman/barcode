@@ -32,7 +32,7 @@ class ReporforiumImport implements ToCollection,WithHeadingRow
                         'password' => $row['Password'],
                         'tipe_berkas' => 'reporforium',
                         'id_user' => Auth::user()->id_user,
-                        'tanggal' => Carbon::parse($row['Tanggal'])->format('Y-m-d') ,
+                        'tanggal' => Carbon::instance(\PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row['Tanggal'])),
                         'waktu' => Carbon::now()->format('H:i:s'),
                         'password_berkas' => bcrypt(12345678),
                         'kode_berkas' => str_replace("/", "",bcrypt(date("Y-m-d h:i:sa").rand(10,100)))
@@ -42,7 +42,7 @@ class ReporforiumImport implements ToCollection,WithHeadingRow
                         'id_berkas' => $berkas->id_berkas,
                         'nomor' => $row['Nomor'],
                         'no_bulanan' => $row['No Bulanan'],
-                        'tanggal' => Carbon::parse($row['Tanggal'])->format('Y-m-d') ,
+                        'tanggal' => Carbon::instance(\PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row['Tanggal'])),
                         'sifat_akta' => $row['Sifat Akta'],
                         'berkas' => '',
                         'sk_kemenhumkam' => $row['SK Kemenhumkam'],
@@ -50,13 +50,13 @@ class ReporforiumImport implements ToCollection,WithHeadingRow
                     ]);
 
                     $names = explode(',',$row['Nama Penghadap']);
-                    $nik = explode(',',$row['NIK']);
+                    // $nik = explode(',',$row['NIK']);
 
                     foreach ( $names as $idx => $val ) {
                         $data[] = [ 
                             'id_reporforium' => $reporforium->id_reporforium,
                             'nama' => $val, 
-                            'nik' => $nik[$idx],
+                            // 'nik' => $nik[$idx],
                             'foto' => ''
                         ];
                     }

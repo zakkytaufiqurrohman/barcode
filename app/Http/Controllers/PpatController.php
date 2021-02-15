@@ -11,6 +11,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Imports\PpatImport;
+
 
 class PpatController extends Controller
 {
@@ -467,10 +470,50 @@ class PpatController extends Controller
         $url=  public_path(). '/barcode/'. $filepath;
         return \Response::download($url);
     }
+
     public function detail(Request $request)
     {
         $ppat = Ppat::find($request->id);
         // dd($ppat);
         return view('ppat.detail',compact('ppat'));
+    }
+
+    public function import(Request $request)
+    {
+        date_default_timezone_set('Asia/Jakarta');
+        $this->validate($request,[
+            // 'excel' => 'required|mimes:xls,xlsx',
+            'excel' => 'required',
+        ]);
+        
+        DB::beginTransaction();
+        try{
+
+            // menangkap file excel
+            $file = $request->file('excel');
+    
+            // membuat nama file unik
+            $nama_file = rand().$file->getClientOriginalName();
+    
+            // upload ke folder file_siswa di dalam folder public
+            $file->move(public_path('import/'),$nama_file);
+    
+            // import data
+            Excel::import(new PpatImport, public_path('import/'.$nama_file));
+            
+            if (file_exists(public_path('import/'.$nama_file))) unlink(public_path('import/'.$nama_file));
+
+            DB::commit();
+            return response()->json(['status' => 'success', 'message' => 'Berhasil import data!']);
+        } catch(Exception $e){
+            DB::rollback();
+            return response()->json(['status' => 'error', 'message' => $e->getMessage()]);
+        }
+    }
+
+    public function downloadExcel()
+    {
+        $url=  public_path(). '/Import/ppat.xlsx';
+        return \Response::download($url);
     }
 }

@@ -12,11 +12,13 @@ use Maatwebsite\Excel\Concerns\WithHeadingRow;
 use Carbon\Carbon;
 use DB;
 use Maatwebsite\Excel\Imports\HeadingRowFormatter;
+use Maatwebsite\Excel\Concerns\WithValidation;
+
 
 HeadingRowFormatter::default('none');
 
 
-class ReporforiumImport implements ToCollection,WithHeadingRow  
+class ReporforiumImport implements ToCollection,WithHeadingRow,WithValidation
 {
     /**
     * @param Collection $collection
@@ -45,7 +47,7 @@ class ReporforiumImport implements ToCollection,WithHeadingRow
                         'tanggal' => Carbon::instance(\PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row['Tanggal'])),
                         'sifat_akta' => $row['Sifat Akta'],
                         'berkas' => '',
-                        'sk_kemenhumkam' => $row['SK Kemenhumkam'],
+                        'sk_kemenhumkam' => $row['SK Kemenhumham'],
         
                     ]);
 
@@ -68,5 +70,33 @@ class ReporforiumImport implements ToCollection,WithHeadingRow
                 }
             }
         }
+        
+    }
+
+    public function rules(): array
+    {
+        return [
+            'Nomor' => 'required',
+            'No Bulanan' => 'required',
+            'Tanggal' => 'required',
+            'Sifat Akta' => 'required',
+            'SK Kemenhumham' => 'required',
+            'Nama Penghadap' => 'required',
+            'Password' => 'required|in:OFF,ON',
+        ];
+    }
+
+    public function customValidationMessages()
+    {
+        return [
+            'Nomor.required' => 'Nomor tidak boleh kosong',
+            'No Bulanan.required' => 'No bulanan tidak boleh kosong',
+            'Tanggal.required' => 'Tanggal tidak boleh kosong',
+            'Sifat Akta.required' =>'Siafat akta tidak boleh kosong',
+            'SK Kemenhumham.required' => 'SK kemenhumham tidak boleh kosong',
+            'Nama Penghadap.required' => 'Nama penghadap tidak boleh kosong',
+            'Password.in' => 'Masukkan Data OFF atau ON',
+            'Password.required' => 'Password tidak boleh kosong'
+        ];
     }
 }

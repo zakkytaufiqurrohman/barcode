@@ -355,7 +355,7 @@
         </div>
     </div>
 </div>
-<!-- end modal edit -->
+<!-- end modal import -->
 <div class="modal fade" role="dialog" id="modal-import-ppat">
     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
         <div class="modal-content">
@@ -379,7 +379,7 @@
                                     <input type="file" class="form-control" name="excel" id="excel" autocomplete="off">
                                 </div>
                                 <div class="form-group">
-                                    <button class="btn btn-success" type="submit" id="btnImportExcel"><i class="fa fa-file-excel-o"></i>&nbsp;Import</button>
+                                    <button class="btn btn-success" type="submit" id="btnImportExcel"><i class="fa fa-upload" aria-hidden="true"></i>&nbsp;Import</button>
                                     <a href="{{ route('ppat.downloadExcel')}}" target="_blank" class="btn btn-primary"><i class="fa fa-download"></i>&nbsp; Download Example Excel</a>
                                 </div>
                             </form>

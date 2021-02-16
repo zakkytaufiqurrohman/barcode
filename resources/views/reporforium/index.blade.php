@@ -250,7 +250,7 @@
         </div>
     </div>
 </div>
-<!-- modal edit detail reporforium -->
+<!-- modal import excel reporforium -->
 <div class="modal fade" role="dialog" id="modal-import-reporforium">
     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
         <div class="modal-content">
@@ -273,7 +273,7 @@
                                     <input type="file" class="form-control" name="excel" id="excel" autocomplete="off">
                                 </div>
                                 <div class="form-group">
-                                    <button class="btn btn-success" type="submit" id="btnImportExcel"><i class="fa fa-file-excel-o"></i>&nbsp;Import</button>
+                                    <button class="btn btn-success" type="submit" id="btnImportExcel"><i class="fa fa-upload" aria-hidden="true"></i></i>&nbsp;Import</button>
                                     <a href="{{ route('reporforium.excel')}}" target="_blank" class="btn btn-primary"><i class="fa fa-download"></i>&nbsp; Download Example Excel</a>
                                 </div>
                             </form>
@@ -880,10 +880,7 @@
             },
             error:function (response){
                 $.each(response.responseJSON.errors,function(key,value){
-                    $("input[name="+key+"]")
-                        .closest('.form-group')
-                        .addClass('has-error')
-                        .append('<span class="help-block"><strong>'+value+'</strong></span>');
+                    toastr.error(value);
                 })
             }
         });

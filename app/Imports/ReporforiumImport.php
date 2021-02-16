@@ -55,9 +55,7 @@ class ReporforiumImport implements ToCollection,WithHeadingRow
                     foreach ( $names as $idx => $val ) {
                         $data[] = [ 
                             'id_reporforium' => $reporforium->id_reporforium,
-                            'nama' => $val, 
-                            // 'nik' => $nik[$idx],
-                            'foto' => ''
+                            'nama' => $val,
                         ];
                     }
                     DetailReporforium::insert($data);

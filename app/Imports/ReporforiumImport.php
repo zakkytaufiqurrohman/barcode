@@ -57,7 +57,7 @@ class ReporforiumImport implements ToCollection,WithHeadingRow
                             'id_reporforium' => $reporforium->id_reporforium,
                             'nama' => $val, 
                             // 'nik' => $nik[$idx],
-                            'foto' => ''
+                            'foto' => 'empty'
                         ];
                     }
                     DetailReporforium::insert($data);

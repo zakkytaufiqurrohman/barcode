@@ -388,7 +388,6 @@ class ReporforiumController extends Controller
         
                 $nama_file_foto = time()."_".$text_foto;
                     
-                $foto->move(public_path('Reporforium/foto'),$nama_file_foto);
                 
                 if (file_exists(public_path('Reporforium/foto/'.$foto_lama)))
                 {
@@ -403,6 +402,7 @@ class ReporforiumController extends Controller
                 'nama' => $request->nama,
                 'foto' => $namaFoto
             ]);
+            $foto->move(public_path('Reporforium/foto'),$nama_file_foto);
 
             DB::commit();
             return response()->json(['status' => 'success', 'message' => 'Berhasil mengubah detail reporforium', 'id' => $id_reporforium]);

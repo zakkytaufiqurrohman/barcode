@@ -274,20 +274,20 @@ class PpatController extends Controller
             'nomor_hak' => 'required|min:3',
             'letak_bangunan' => 'required|min:3',
             'luas_tanah' => 'required|min:3',
-            'luas_bangunan' => 'required|min:3',
+            'luas_bangunan' => 'required',
             'harga_transaksi' => 'required|min:3',
             'nop_tahun' =>'required|min:3',
-            'nilai_njop' => 'required|min:3',
+            // 'nilai_njop' => 'required|min:3',
             'tanggal_ssp' => 'required',
             'nilai_ssp' => 'required|min:3',
             'tanggal_ssb' => 'required',
             'nilai_ssb' => 'required|min:3',
-            'keterangan' =>'required|min:3',
+            // 'keterangan' =>'required|min:3',
             'tgl_masuk_bpn' => 'required',
-            'tgl_selesai_bpn' => 'required',
-            'tgl_penyerahan_clien' => 'required',
-            'no_ktp' => 'required|min:3',
-            'alamat' => 'required|min:3',
+            // 'tgl_selesai_bpn' => 'required',
+            // 'tgl_penyerahan_clien' => 'required',
+            // 'no_ktp' => 'required|min:3',
+            // 'alamat' => 'required|min:3',
             'pas_foto' =>'file|image|mimes:jpeg,png,jpg|max:2048',
             'foto_akad' =>'file|image|mimes:jpeg,png,jpg|max:2048',
         ],[
@@ -413,7 +413,7 @@ class PpatController extends Controller
                 'alamat' => $request->alamat,
             ]);
             
-            DB::commit();
+            // DB::commit();
 
             $id_berkas = $update->id_berkas;
             if($id_berkas == null || empty($id_berkas)){

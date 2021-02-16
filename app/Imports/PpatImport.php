@@ -55,6 +55,8 @@ class PpatImport implements ToCollection,WithHeadingRow
                     'nilai_ssb' => $row['17'],
                     'keterangan' => $row['18'],
                     'id_berkas' => $berkas->id_berkas,
+                    'pas_foto' => 'empty',
+                    'foto_akad' => 'empty',
                 ]);
                 DB::commit();
 

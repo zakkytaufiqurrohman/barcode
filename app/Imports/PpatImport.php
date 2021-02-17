@@ -11,10 +11,11 @@ use Maatwebsite\Excel\Concerns\WithHeadingRow;
 use Carbon\Carbon;
 use DB;
 use Maatwebsite\Excel\Imports\HeadingRowFormatter;
+use Maatwebsite\Excel\Concerns\WithValidation;
 
 HeadingRowFormatter::default('none');
 
-class PpatImport implements ToCollection,WithHeadingRow
+class PpatImport implements ToCollection,WithHeadingRow,WithValidation
 {
     /**
     * @param Collection $collection
@@ -70,5 +71,54 @@ class PpatImport implements ToCollection,WithHeadingRow
     public function headingRow(): int
     {
         return 3;
+    }
+
+    public function rules(): array
+    {
+        return [
+            '1' => 'required',
+            '2' => 'required',
+            '3' => 'required',
+            '4' => 'required',
+            '5' => 'required',
+            '6' => 'required',
+            '7' => 'required',
+            '8' => 'required',
+            '8' => 'required',
+            '10' => 'required',
+            '11' => 'required',
+            '12' => 'required',
+            // '13' => 'required',
+            // '14' => 'required',
+            '15' => 'required',
+            // '16' => 'required',
+            '17' => 'required',
+            // '18' => 'required',
+            '19' => 'required',
+        ];
+    }
+
+    public function customValidationMessages()
+    {
+        return [
+            '1.required' => 'No urut tidak boleh kosong',
+            '2.required' => 'No tidak boleh kosong',
+            '3.required' => 'Tanggal akta tidak boleh kosong',
+            '4.required' => 'Bentuk perbuatan hukum tidak boleh kosong',
+            '5.required' => 'Pihak yang mengalihkan tidak boleh kosong',
+            '6.required' => 'Pihak yang menerima tidak boleh kosong',
+            '7.required' => 'Jenis dan nomor hak tidak boleh kosong',
+            '8.required' => 'Letak dan luas bangunan tidak boleh kosong',
+            '8.required' => 'Luas tanah tidak boleh kosong',
+            '10.required' => 'Luas bangunan tidak boleh kosong',
+            '11.required' => 'Nilai transaksi tidak boleh kosong',
+            '12.required' => 'NOP tidak boleh kosong',
+            // '13' => 'NOJP tidak boleh kosong',
+            // '14' => 'Tanggal SPP tidak boleh kosong',
+            '15.required' => 'Harga SPP tidak boleh kosong',
+            // '16' => 'Tanggal SBB tidak boleh kosong',
+            '17.required' => 'Harga SBB tidak boleh kosong',
+            '19.required' => 'Password On/off tidak boleh kosong',
+        ];
     }
 }

@@ -463,10 +463,16 @@ class ReporforiumController extends Controller
         DB::beginTransaction();
         try{
             // import data
-            Excel::import(new ReporforiumImport, request()->file('excel'));
+            $data = Excel::import(new ReporforiumImport, request()->file('excel'));
+            if(empty($data->errors)){
+                DB::commit();
+                return response()->json(['status' => 'success', 'message' =>'berasil di import']);
+            }
+            else{
+                return response()->json(['status' => 'error', 'message' => $data->errors]);
+            }
             
-            DB::commit();
-            return response()->json(['status' => 'success', 'message' => 'Berhasil import data!']);
+           
         } catch(Exception $e){
             DB::rollback();
             return response()->json(['status' => 'error', 'message' => $e->getMessage()]);

@@ -728,6 +728,7 @@
             },
             error:function (response){
                 $.each(response.responseJSON.errors,function(key,value){
+                    toastr.error(value);
                     $("input[name="+key+"]")
                         .closest('.form-group')
                         .addClass('has-error')

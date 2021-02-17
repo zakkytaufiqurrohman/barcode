@@ -498,10 +498,16 @@ class PpatController extends Controller
             // $file->move(public_path('import/'),$nama_file);
     
             // import data
-            Excel::import(new PpatImport,request()->file('excel'));
-            
-            DB::commit();
-            return response()->json(['status' => 'success', 'message' => 'Berhasil import data!']);
+            $data = Excel::import(new PpatImport,request()->file('excel'));
+            if(empty($data->errors)){
+                DB::commit();
+                return response()->json(['status' => 'success', 'message' =>'berasil di import']);
+            }
+            else{
+                return response()->json(['status' => 'error', 'message' => $data->errors]);
+            }
+            // DB::commit();
+            // return response()->json(['status' => 'success', 'message' => 'Berhasil import data!']);
         } catch(Exception $e){
             DB::rollback();
             return response()->json(['status' => 'error', 'message' => $e->getMessage()]);

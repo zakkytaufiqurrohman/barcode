@@ -481,7 +481,7 @@ class ReporforiumController extends Controller
 
     public function downloadExcel()
     {
-        $url=  public_path(). '/Import/reporforium.xlsx';
+        $url=  public_path(). '/import/reporforium.xlsx';
         return \Response::download($url);
     }
 }

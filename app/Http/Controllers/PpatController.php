@@ -516,7 +516,7 @@ class PpatController extends Controller
 
     public function downloadExcel()
     {
-        $url=  public_path(). '/Import/ppat.xlsx';
+        $url=  public_path(). '/import/ppat.xlsx';
         return \Response::download($url);
     }
 }

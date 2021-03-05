@@ -91,23 +91,26 @@ class TandaTerimav2Controller extends Controller
 
         date_default_timezone_set('Asia/Jakarta');
         $this->validate($request,[
-             'terima' => 'required|min:3|max:255',
-             'berupa' => 'required|min:3',
-             'keperluan' => 'required|min:3',
-             'tanggal' => 'required',
-             'penerima' => 'required|min:3',
-             'penyerah' =>'required|min:3',
-        ],[
-            'terima.required'=>'Terima Dari Tidak Boleh Kosong',
-            'berupa.required'=>'berupa 2 Tidak Boleh Kosong',
-            'keperluan.required'=>'keperluan Tidak Boleh Kosong',
-            'tanggal.required'=>'Tanggal Tidak Boleh Kosong',
-            'penerima.required'=>'penerima Tidak Boleh Kosong',
-            'penyerah.required'=>'penyerah Tidak Boleh Kosong',
+            'terima' => 'required|min:2|max:255',
+            'berupa' => 'required|min:2',
+            'keperluan' => 'required|min:2',
+            'tanggal' => 'required',
+            'penerima' => 'required|min:2',
+            'penyerah' =>'required|min:2',
+       ],[
+           'terima.required'=>'Terima Dari Tidak Boleh Kosong',
+           'berupa.required'=>'Berupa Tidak Boleh Kosong',
+           'keperluan.required'=>'Keperluan Tidak Boleh Kosong',
+           'tanggal.required'=>'Tanggal Tidak Boleh Kosong',
+           'penerima.required'=>'Penerima Tidak Boleh Kosong',
+           'penyerah.required'=>'Penyerah Tidak Boleh Kosong',
 
-            // 'terima.min'=>'Pihak 1 minimal 3 character',
-            // 'berupa.min'=>'Pihak 2 minimal 3 character',
-            // 'isi.min'=>'Isi minimal 3 character',
+           'terima.min'=>'Pihak 1 minimal 2 character',
+           'berupa.min'=>'Pihak 2 minimal 2 character',
+           'isi.min'=>'Isi minimal 2 character',
+           'keperluan.min'=>'keperluan minimal 2 character',
+           'penerima.min'=>'penerima minimal 2 character',
+           'penyerah.min'=>'penyerah minimal 2 character',
         ]);
          $passwordStatus = 'OFF';
          if($request->has('password')){
@@ -189,19 +192,26 @@ class TandaTerimav2Controller extends Controller
     {
         date_default_timezone_set('Asia/Jakarta');
         $this->validate($request,[
-             'terima' => 'required|min:3|max:255',
-             'berupa' => 'required|min:3',
-             'keperluan' => 'required|min:3',
-             'tanggal' => 'required',
-             'penerima' => 'required|min:3',
-             'penyerah' =>'required|min:3',
-        ],[
-            'terima.required'=>'Terima Dari Tidak Boleh Kosong',
-            'berupa.required'=>'berupa 2 Tidak Boleh Kosong',
-            'keperluan.required'=>'keperluan Tidak Boleh Kosong',
-            'tanggal.required'=>'Tanggal Tidak Boleh Kosong',
-            'penerima.required'=>'penerima Tidak Boleh Kosong',
-            'penyerah.required'=>'penyerah Tidak Boleh Kosong',
+            'terima' => 'required|min:2|max:255',
+            'berupa' => 'required|min:2',
+            'keperluan' => 'required|min:2',
+            'tanggal' => 'required',
+            'penerima' => 'required|min:2',
+            'penyerah' =>'required|min:2',
+       ],[
+           'terima.required'=>'Terima Dari Tidak Boleh Kosong',
+           'berupa.required'=>'Berupa Tidak Boleh Kosong',
+           'keperluan.required'=>'Keperluan Tidak Boleh Kosong',
+           'tanggal.required'=>'Tanggal Tidak Boleh Kosong',
+           'penerima.required'=>'Penerima Tidak Boleh Kosong',
+           'penyerah.required'=>'Penyerah Tidak Boleh Kosong',
+
+           'terima.min'=>'Pihak 1 minimal 2 character',
+           'berupa.min'=>'Pihak 2 minimal 2 character',
+           'isi.min'=>'Isi minimal 2 character',
+           'keperluan.min'=>'keperluan minimal 2 character',
+           'penerima.min'=>'penerima minimal 2 character',
+           'penyerah.min'=>'penyerah minimal 2 character',
         ]);
 
         DB::beginTransaction();

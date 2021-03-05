@@ -92,23 +92,30 @@ class KwitansiController extends Controller
     {
         // dd($request->jumlah);
         date_default_timezone_set('Asia/Jakarta');
-        // $this->validate($request,[
-        //      'nomor' => 'required|min:3|max:255',
-        //      'tanggal' => 'required',
-        //      'pihak1' => 'required|min:3',
-        //      'pihak2' => 'required|min:3',
-        //      'isi' =>'required|min:3',
-        // ],[
-        //     'nomor.required'=>'Nomor Tidak Boleh Kosong',
-        //     'tanggal.required'=>'Tanggal Tidak Boleh Kosong',
-        //     'pihak1.required'=>'Pihak 1 Tidak Boleh Kosong',
-        //     'pihak2.required'=>'Pihak 2 Tidak Boleh Kosong',
-        //     'isi.required'=>'Isi Tidak Boleh Kosong',
-        //     'nomor.min'=>'Nomor minimal 3 character',
-        //     'pihak1.min'=>'Pihak 1 minimal 3 character',
-        //     'pihak2.min'=>'Pihak 2 minimal 3 character',
-        //     'isi.min'=>'Isi minimal 3 character',
-        //     ]);
+        $this->validate($request,[
+            'nomor' => 'required|min:2|max:255',
+            'tanggal' => 'required',
+            'terima' => 'required|min:2',
+            'catatan' => 'required|min:2',
+            'penyetor' =>'required|min:2',
+            'mengetahui' =>'required|min:2',
+            'penerima' =>'required|min:2',
+       ],[
+           'nomor.required'=>'Nomor Tidak Boleh Kosong',
+           'tanggal.required'=>'Tanggal Tidak Boleh Kosong',
+           'terima.required'=>'Terima Tidak Boleh Kosong',
+           'catatan.required'=>'Catatan Tidak Boleh Kosong',
+           'penyetor.required'=>'Penyetor Tidak Boleh Kosong',
+           'mengetahui.required'=>'Mengetahui Tidak Boleh Kosong',
+           'penerima.required'=>'Penerima Tidak Boleh Kosong',
+           
+           'nomor.min'=>'Nomor minimal 2 character',
+           'terima.min'=>'Terima minimal 2 character',
+           'catatan.min'=>'Catatan minimal 2 character',
+           'penyetor.min'=>'Penyetor minimal 2 character',
+           'mengetahui.min'=>'Mengetahui minimal 2 character',
+           'penerima.min'=>'Penerima minimal 2 character',
+           ]);
          $passwordStatus = 'OFF';
          if($request->has('password')){
                 $passwordStatus= 'ON';
@@ -221,7 +228,30 @@ class KwitansiController extends Controller
     public function update(Request $request)
     {
         date_default_timezone_set('Asia/Jakarta');
-    
+        $this->validate($request,[
+            'nomor' => 'required|min:2|max:255',
+            'tanggal' => 'required',
+            'terima' => 'required|min:2',
+            'catatan' => 'required|min:2',
+            'penyetor' =>'required|min:2',
+            'mengetahui' =>'required|min:2',
+            'penerima' =>'required|min:2',
+       ],[
+           'nomor.required'=>'Nomor Tidak Boleh Kosong',
+           'tanggal.required'=>'Tanggal Tidak Boleh Kosong',
+           'terima.required'=>'Terima Tidak Boleh Kosong',
+           'catatan.required'=>'Catatan Tidak Boleh Kosong',
+           'penyetor.required'=>'Penyetor Tidak Boleh Kosong',
+           'mengetahui.required'=>'Mengetahui Tidak Boleh Kosong',
+           'penerima.required'=>'Penerima Tidak Boleh Kosong',
+           
+           'nomor.min'=>'Nomor minimal 2 character',
+           'terima.min'=>'Terima minimal 2 character',
+           'catatan.min'=>'Catatan minimal 2 character',
+           'penyetor.min'=>'Penyetor minimal 2 character',
+           'mengetahui.min'=>'Mengetahui minimal 2 character',
+           'penerima.min'=>'Penerima minimal 2 character',
+           ]);
         DB::beginTransaction();
         try{
             

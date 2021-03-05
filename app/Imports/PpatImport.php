@@ -24,6 +24,15 @@ class PpatImport implements ToCollection,WithHeadingRow,WithValidation
     {
         foreach ($collection as $row) 
         {
+            $tgl = null;
+            $tglSsb = null;
+            if ($row['14'] !== null || !empty($row['14']) ){
+                $tgl = Carbon::instance(\PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row['14']));
+            }
+            if ($row['16'] !== null || !empty($row['16']) ){
+                $tglSsb = Carbon::instance(\PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row['16']));
+            }
+            
             DB::beginTransaction();
             try{
                 $berkas = Berkas::create([
@@ -50,9 +59,9 @@ class PpatImport implements ToCollection,WithHeadingRow,WithValidation
                     'harga_transaksi' => $row['11'],
                     'nop_tahun' => $row['12'],
                     'nilai_njop' => $row['13'],
-                    'tanggal_ssp' => Carbon::instance(\PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row['14'])),
+                    'tanggal_ssp' => $tgl,
                     'nilai_ssp' => $row['15'],
-                    'tanggal_ssb' => Carbon::instance(\PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row['16'])),
+                    'tanggal_ssb' => $tglSsb,
                     'nilai_ssb' => $row['17'],
                     'keterangan' => $row['18'],
                     'id_berkas' => $berkas->id_berkas,
@@ -77,7 +86,7 @@ class PpatImport implements ToCollection,WithHeadingRow,WithValidation
     {
         return [
             '1' => 'required',
-            '2' => 'required',
+            '2' => 'required|unique:tbl_ppat,no_akta',
             '3' => 'required',
             '4' => 'required',
             '5' => 'required',
@@ -103,6 +112,7 @@ class PpatImport implements ToCollection,WithHeadingRow,WithValidation
         return [
             '1.required' => 'No urut tidak boleh kosong',
             '2.required' => 'No tidak boleh kosong',
+            '2.unique' => 'Nomor sudah pernah di input',
             '3.required' => 'Tanggal akta tidak boleh kosong',
             '4.required' => 'Bentuk perbuatan hukum tidak boleh kosong',
             '5.required' => 'Pihak yang mengalihkan tidak boleh kosong',

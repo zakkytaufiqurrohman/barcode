@@ -26,7 +26,7 @@
                       <tr>
                         <td>Tanggal</td>
                         <td>:</td>
-                        <td>{{ $covernot->tanggal }}</td>
+                        <td>{{ \Carbon\Carbon::parse($covernot->tanggal)->isoFormat('D MMMM Y')}}</td>
                       </tr>
 					            <tr>
                         <td>Isi</td>

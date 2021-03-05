@@ -1,4 +1,12 @@
 <ul class="sidebar-menu" data-widget="tree">
+        <li class="header">Main</li>
+        <li>
+          <a href="{{ url('/') }}">
+            <i class="fa fa-home"></i> <span>Home</span>
+            <span class="pull-right-container">
+            </span>
+          </a>
+        </li>
         <li class="header">Admin</li>
         <li>
           <a href="{{route('user')}}">

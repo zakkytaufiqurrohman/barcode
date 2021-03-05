@@ -26,7 +26,7 @@
                       <tr>
                         <td>Tanggal</td>
                         <td>:</td>
-                        <td>{{ $legalisasi->tanggal }}</td>
+                        <td>{{ \Carbon\Carbon::parse($legalisasi->tanggal)->isoFormat('D MMMM Y')}}</td>
                       </tr>
                       <tr>
                         <td>Pihak 1</td>

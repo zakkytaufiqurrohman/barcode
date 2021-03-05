@@ -76,7 +76,7 @@ class ReporforiumImport implements ToCollection,WithHeadingRow,WithValidation
     public function rules(): array
     {
         return [
-            'Nomor' => 'required',
+            'Nomor' => 'required|unique:tbl_reporforium,nomor',
             'No Bulanan' => 'required',
             'Tanggal' => 'required',
             'Sifat Akta' => 'required',
@@ -90,6 +90,7 @@ class ReporforiumImport implements ToCollection,WithHeadingRow,WithValidation
     {
         return [
             'Nomor.required' => 'Nomor tidak boleh kosong',
+            'Nomor.unique' => 'Nomor Sudah Pernah Di input',
             'No Bulanan.required' => 'No bulanan tidak boleh kosong',
             'Tanggal.required' => 'Tanggal tidak boleh kosong',
             'Sifat Akta.required' =>'Siafat akta tidak boleh kosong',

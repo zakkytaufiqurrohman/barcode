@@ -94,12 +94,12 @@ class AktaNotarisController extends Controller
     {
         date_default_timezone_set('Asia/Jakarta');
         $this->validate($request,[
-            'judul' => 'required|min:3',
-             'nomor' => 'required|min:3|max:255',
+            'judul' => 'required|min:2',
+             'nomor' => 'required|min:2|max:255',
              'tanggal' => 'required',
-             'pihak1' => 'required|min:3',
-             'pihak2' => 'required|min:3',
-             'isi' =>'required|min:3',
+             'pihak1' => 'required|min:2',
+             'pihak2' => 'required|min:2',
+             'isi' =>'required|min:2',
         ],[
             'judul.required'=>'Judul Tidak Boleh Kosong',
             'nomor.required'=>'Nomor Tidak Boleh Kosong',
@@ -107,11 +107,11 @@ class AktaNotarisController extends Controller
             'pihak1.required'=>'Pihak 1 Tidak Boleh Kosong',
             'pihak2.required'=>'Pihak 2 Tidak Boleh Kosong',
             'isi.required'=>'isi Tidak Boleh Kosong',
-            'judul.min'=>'Judul minimal 3 character',
-            'nomor.min'=>'Nomor minimal 3 character',
-            'pihak1.min'=>'Pihak 1 minimal 3 character',
-            'pihak2.min'=>'Pihak 2 minimal 3 character',
-            'isi.min'=>'isi minimal 3 character',
+            'judul.min'=>'Judul minimal 2 character',
+            'nomor.min'=>'Nomor minimal 2 character',
+            'pihak1.min'=>'Pihak 1 minimal 2 character',
+            'pihak2.min'=>'Pihak 2 minimal 2 character',
+            'isi.min'=>'isi minimal 2 character',
             ]);
          $passwordStatus = 'OFF';
          if($request->has('password')){
@@ -166,12 +166,12 @@ class AktaNotarisController extends Controller
     {
         date_default_timezone_set('Asia/Jakarta');
         $this->validate($request,[
-            'judul' => 'required|min:3',
-            'nomor' => 'required|min:3|max:255',
+            'judul' => 'required|min:2',
+            'nomor' => 'required|min:2|max:255',
             'tanggal' => 'required',
-            'pihak1' => 'required|min:3',
-            'pihak2' => 'required|min:3',
-            'isi' =>'required|min:3',
+            'pihak1' => 'required|min:2',
+            'pihak2' => 'required|min:2',
+            'isi' =>'required|min:2',
         ],[
             'judul.required'=>'Judul Tidak Boleh Kosong',
             'nomor.required'=>'Nomor Tidak Boleh Kosong',
@@ -179,11 +179,11 @@ class AktaNotarisController extends Controller
             'pihak1.required'=>'Pihak 1 Tidak Boleh Kosong',
             'pihak2.required'=>'Pihak 2 Tidak Boleh Kosong',
             'isi.required'=>'isi Tidak Boleh Kosong',
-            'judul.min'=>'Judul minimal 3 character',
-            'nomor.min'=>'Nomor minimal 3 character',
-            'pihak1.min'=>'Pihak 1 minimal 3 character',
-            'pihak2.min'=>'Pihak 2 minimal 3 character',
-            'isi.min'=>'isi minimal 3 character',
+            'judul.min'=>'Judul minimal 2 character',
+            'nomor.min'=>'Nomor minimal 2 character',
+            'pihak1.min'=>'Pihak 1 minimal 2 character',
+            'pihak2.min'=>'Pihak 2 minimal 2 character',
+            'isi.min'=>'isi minimal 2 character',
             ]);
 
         DB::beginTransaction();

@@ -99,17 +99,22 @@ class ReporforiumController extends Controller
     {
         date_default_timezone_set('Asia/Jakarta');
         $this->validate($request,[
-             'nomor' => 'required|min:3|max:255',
+            'nomor' => 'required|min:2|max:255',
              'no_bulanan' => 'required|int',
-             'tanggal' => 'required|min:3',
-             'sifat_akta' => 'required|min:3',
-             'sk_kemenhumkam' =>'required|min:3',
+             'tanggal' => 'required|min:2',
+             'sifat_akta' => 'required|min:2',
+             'sk_kemenhumkam' =>'required|min:2',
         ],[
             'nomor.required'=>'Nomor Tidak Boleh Kosong',
             'tanggal.required'=>'Tanggal Tidak Boleh Kosong',
             'no_bulanan.required'=>'No Bulanan Tidak Boleh Kosong',
             'sk_kemenhumkam.required'=>'Sk Kemenkumham Tidak Boleh Kosong',
             'sifat_akta.required'=>'Sifat Akta Tidak Boleh Kosong',
+
+            'nomor.min'=>'Nomor minimal 2 character',
+            'no_bulanan.min'=>'No Bulanan minimal 2 character',
+            'sk_kemenhumkam.min'=>'Sk Kemenkumham minimal 2 character',
+            'sifat_akta.min'=>'Sifat Akta minimal 2 character',
             
         ]);
         //validasi
@@ -222,17 +227,22 @@ class ReporforiumController extends Controller
     {
         date_default_timezone_set('Asia/Jakarta');
         $this->validate($request,[
-            'nomor' => 'required|min:3|max:255',
+            'nomor' => 'required|min:2|max:255',
             'no_bulanan' => 'required|int',
-            'tanggal' => 'required|min:3',
-            'sifat_akta' => 'required|min:3',
-            'sk_kemenhumkam' =>'required|min:3',
+            'tanggal' => 'required|min:2',
+            'sifat_akta' => 'required|min:2',
+            'sk_kemenhumkam' =>'required|min:2',
        ],[
            'nomor.required'=>'Nomor Tidak Boleh Kosong',
            'tanggal.required'=>'Tanggal Tidak Boleh Kosong',
            'no_bulanan.required'=>'No Bulanan Tidak Boleh Kosong',
            'sk_kemenhumkam.required'=>'Sk Kemenkumham Tidak Boleh Kosong',
            'sifat_akta.required'=>'Sifat Akta Tidak Boleh Kosong',
+           
+           'nomor.min'=>'Nomor minimal 2 character',
+            'no_bulanan.min'=>'No Bulanan minimal 2 character',
+            'sk_kemenhumkam.min'=>'Sk Kemenkumham minimal 2 character',
+            'sifat_akta.min'=>'Sifat Akta minimal 2 character',
            
        ]);
         DB::beginTransaction();

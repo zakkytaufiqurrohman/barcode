@@ -106,8 +106,8 @@
                             <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="add-uraian">Uraian & jumlah</label>
-                                        <input type="text" name="uraian[]" class="form-control" id="add-uraian" placeholder="Uraian">
-                                        <input type="number" name="jumlah[]" class="form-control" id="add-pihak1" placeholder="Jumlah">
+                                        <input type="text" required name="uraian[]" class="form-control" id="add-uraian" placeholder="Uraian">
+                                        <input type="number" required name="jumlah[]" class="form-control" id="add-pihak1" placeholder="Jumlah">
                                     </div>
                                 
 
@@ -253,6 +253,8 @@
     // open modal
     function openModalAdd()
     {
+        $('.newRowJumlah').empty();
+        $('.newRowJumlahs').empty();
         $('#modal-add-kwitansi').modal('show');
         setTimeout(() => {
             $('#add-nomor').focus();
@@ -356,22 +358,23 @@
                     var html = '';
                     // uraian
                     html += '<div class="kotak">'
-                    html += '<input type="hidden" name="id_uraian" value='+value.id_uraian+'>';
+                    html += '<input type="hidden" name="id_uraian" required value='+value.id_uraian+'>';
                     html += '<div class="form-group">'
                     html += '<div class="inputFormRow">';
-                    html += '<input type="text" name="uraian[]" value="'+uraian+'" class="form-control m-input" placeholder="Tambah Uraian" autocomplete="off">';
+                    html += '<input type="text" name="uraian[]" required value="'+uraian+'" class="coba form-control m-input" placeholder="Tambah Uraian" autocomplete="off">';
                     html += '<div class="input-group-append">';
                     html += '</div>';
                     // jumlah
                     html += '<div class="form-group">'
-                    html += '<input type="number" name="jumlah[]" value='+jumlah+' class="form-control m-input" placeholder="Tambah Jumlah" autocomplete="off">';
+                    html += '<input type="number" required name="jumlah[]" value='+jumlah+' class="form-control m-input" placeholder="Tambah Jumlah" autocomplete="off">';
                     html += '<div class="input-group-append">';
                     html += '<button id="removeRow" type="button" class="btn btn-danger "><span class="fa fa-trash"></span></button>';
                     html += '</div>';
                     html += '</div>';
                     html += '</div>';
 
-                    
+                    // $('.newRowJumlahs').empty();
+                    $('.newRowJumlah').empty();
                     $('.newRowJumlahs').append(html);
                 });
                
@@ -498,12 +501,12 @@
         
         html += '<div class="form-group">'
         html += '<div class="inputFormRow">';
-        html += '<input type="text" name="uraian[]" class="form-control m-input" placeholder="Tambah Uraian" autocomplete="off">';
+        html += '<input type="text" required name="uraian[]" class="form-control m-input" placeholder="Tambah Uraian" autocomplete="off">';
         html += '<div class="input-group-append">';
         html += '</div>';
         // jumlah
         html += '<div class="form-group">'
-        html += '<input type="number" name="jumlah[]" class="form-control m-input" placeholder="Tambah Jumlah" autocomplete="off">';
+        html += '<input type="number" required name="jumlah[]" class="form-control m-input" placeholder="Tambah Jumlah" autocomplete="off">';
         html += '<div class="input-group-append">';
         html += '<button id="removeRow" type="button" class="btn btn-danger"><span class="fa fa-trash"></span></button>';
         html += '</div>';

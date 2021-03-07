@@ -81,7 +81,6 @@
             <ul class="dropdown-menu">
               <!-- User image -->
               <li class="user-header">
-                <img src="{{ url('') }}/dist/img/user.png" class="img-circle" alt="User Image">
                 <p>
                   {{Auth::user()->nama_user}}
                   <small>{{\Carbon\Carbon::today()->format('W F Y')}}</small>
@@ -159,9 +158,9 @@
   <!-- /.content-wrapper -->
   <footer class="main-footer">
     <div class="pull-right hidden-xs">
-      <b>Version</b> 2.4.0
+      <!-- <b>Version</b> 2.4.0 -->
     </div>
-    <strong>Copyright &copy; 2014-2016 <a href="https://adminlte.io">Almsaeed Studio</a>.</strong> All rights
+    <strong>Copyright &copy; Pena Sarana Informatika.</strong> All rights
     reserved.
   </footer>
 

@@ -73,6 +73,11 @@
             </div>
             <div class="row" style="margin-top: 10px">
               <div class="col-12 table-responsive">
+                @if($nama == 'tandaterima')
+					@include('tandaterimav2.scan')
+				@elseif($nama == 'kwitansi')
+					@include('kwitansi.scan')
+				@else
                 <table class="table table-striped">
                   <tbody>
                     <tr>
@@ -92,11 +97,10 @@
                     </tr>
                   </tbody>
                 </table>
+                @endif
               </div>
 
             </div>
-              {{-- <p>Nomor:{{$berkas->$nama->nomor}}</p>
-              <p>isi:{!! $berkas->$nama->isi !!}</p>   --}}
               <div class="row">
               	<div class="col-12">
               		<p class="">Info : Info : Kantor Jl. Sesama No.1 Kepanjen Kab. Malang

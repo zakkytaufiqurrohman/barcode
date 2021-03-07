@@ -107,7 +107,7 @@
                                     <div class="form-group">
                                         <label for="add-uraian">Uraian & jumlah</label>
                                         <input type="text" name="uraian[]" class="form-control" id="add-uraian" placeholder="Uraian">
-                                        <input type="text" name="jumlah[]" class="form-control" id="add-pihak1" placeholder="Jumlah">
+                                        <input type="number" name="jumlah[]" class="form-control" id="add-pihak1" placeholder="Jumlah">
                                     </div>
                                 
 
@@ -364,7 +364,7 @@
                     html += '</div>';
                     // jumlah
                     html += '<div class="form-group">'
-                    html += '<input type="text" name="jumlah[]" value='+jumlah+' class="form-control m-input" placeholder="Tambah Jumlah" autocomplete="off">';
+                    html += '<input type="number" name="jumlah[]" value='+jumlah+' class="form-control m-input" placeholder="Tambah Jumlah" autocomplete="off">';
                     html += '<div class="input-group-append">';
                     html += '<button id="removeRow" type="button" class="btn btn-danger "><span class="fa fa-trash"></span></button>';
                     html += '</div>';
@@ -503,7 +503,7 @@
         html += '</div>';
         // jumlah
         html += '<div class="form-group">'
-        html += '<input type="text" name="jumlah[]" class="form-control m-input" placeholder="Tambah Jumlah" autocomplete="off">';
+        html += '<input type="number" name="jumlah[]" class="form-control m-input" placeholder="Tambah Jumlah" autocomplete="off">';
         html += '<div class="input-group-append">';
         html += '<button id="removeRow" type="button" class="btn btn-danger"><span class="fa fa-trash"></span></button>';
         html += '</div>';

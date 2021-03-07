@@ -55,6 +55,11 @@ class Berkas extends Model
         return $this->hasOne(TandaTerima::class,'id_berkas','id_berkas');
     }
 
+    public function tandaTerimav2()
+    {
+        return $this->hasOne(TandaTerimav2::class,'id_berkas','id_berkas');
+    }
+
     public function ppat()
     {
         return $this->hasOne(Ppat::class,'id_berkas','id_berkas');

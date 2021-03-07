@@ -74,7 +74,7 @@
                 <td>{{$uraian->jumlah}}</td>
             </tr>
             <?php
-                $total += $uraian->jumlah
+                $total += intval($uraian->jumlah);
             ?>
         @endforeach
         <tr>

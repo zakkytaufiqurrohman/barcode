@@ -25,11 +25,6 @@
                         <td>{{ $waarmeking->nomor }}</td>
                       </tr>
                       <tr>
-                        <td>Tanggal</td>
-                        <td>:</td>
-                        <td>{{ $waarmeking->tanggal }}</td>
-                      </tr>
-                      <tr>
                         <td>Tanggal Akta</td>
                         <td>:</td>
                         <td>{{ \Carbon\Carbon::parse($waarmeking->tanggal)->isoFormat('D MMMM Y')}}</td>

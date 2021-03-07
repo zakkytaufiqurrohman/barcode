@@ -31,7 +31,7 @@
                       <tr>
                         <td>Tanggal</td>
                         <td>:</td>
-                        <td>{{ $fidusia->tanggal }}</td>
+                        <td>{{ \Carbon\Carbon::parse($fidusia->tanggal)->isoFormat('D MMMM Y')}}</td>
                       </tr>
                       <tr>
                         <td>Pihak 1</td>

@@ -24,21 +24,21 @@ class TandaTerimaController extends Controller
 
         date_default_timezone_set('Asia/Jakarta');
         $this->validate($request,[
-             'judul' => 'required|min:3|max:255',
-             'pembuat' => 'required|min:3',
-             'tanggal' => 'required',
-             'nomor' => 'required|min:3',
-             'isi' =>'required|min:3',
-        ],[
-            'nomor.required'=>'Nomor Tidak Boleh Kosong',
-            'tanggal.required'=>'Tanggal Tidak Boleh Kosong',
-            'judul.required'=>'Pihak 1 Tidak Boleh Kosong',
-            'pembuat.required'=>'Pihak 2 Tidak Boleh Kosong',
-            'isi.required'=>'Isi Tidak Boleh Kosong',
-            'nomor.min'=>'Nomor minimal 3 character',
-            'judul.min'=>'Pihak 1 minimal 3 character',
-            'pembuat.min'=>'Pihak 2 minimal 3 character',
-            'isi.min'=>'Isi minimal 3 character',
+            'judul' => 'required|min:2|max:255',
+            'pembuat' => 'required|min:2',
+            'tanggal' => 'required',
+            'nomor' => 'required|min:2',
+            'isi' =>'required|min:2',
+       ],[
+           'nomor.required'=>'Nomor Tidak Boleh Kosong',
+           'tanggal.required'=>'Tanggal Tidak Boleh Kosong',
+           'judul.required'=>'Pihak 1 Tidak Boleh Kosong',
+           'pembuat.required'=>'Pihak 2 Tidak Boleh Kosong',
+           'isi.required'=>'Isi Tidak Boleh Kosong',
+           'nomor.min'=>'Nomor minimal 2 character',
+           'judul.min'=>'Pihak 1 minimal 2 character',
+           'pembuat.min'=>'Pihak 2 minimal 2 character',
+           'isi.min'=>'Isi minimal 2 character',
             ]);
          $passwordStatus = 'OFF';
          if($request->has('password')){
@@ -158,21 +158,21 @@ class TandaTerimaController extends Controller
     {
         date_default_timezone_set('Asia/Jakarta');
         $this->validate($request,[
-            'judul' => 'required|min:3|max:255',
-            'pembuat' => 'required|min:3',
+            'judul' => 'required|min:2|max:255',
+            'pembuat' => 'required|min:2',
             'tanggal' => 'required',
-            'nomor' => 'required|min:3',
-            'isi' =>'required|min:3',
+            'nomor' => 'required|min:2',
+            'isi' =>'required|min:2',
        ],[
            'nomor.required'=>'Nomor Tidak Boleh Kosong',
            'tanggal.required'=>'Tanggal Tidak Boleh Kosong',
            'judul.required'=>'Pihak 1 Tidak Boleh Kosong',
            'pembuat.required'=>'Pihak 2 Tidak Boleh Kosong',
            'isi.required'=>'Isi Tidak Boleh Kosong',
-           'nomor.min'=>'Nomor minimal 3 character',
-           'judul.min'=>'Pihak 1 minimal 3 character',
-           'pembuat.min'=>'Pihak 2 minimal 3 character',
-           'isi.min'=>'Isi minimal 3 character',
+           'nomor.min'=>'Nomor minimal 2 character',
+           'judul.min'=>'Pihak 1 minimal 2 character',
+           'pembuat.min'=>'Pihak 2 minimal 2 character',
+           'isi.min'=>'Isi minimal 2 character',
            ]);
 
         DB::beginTransaction();

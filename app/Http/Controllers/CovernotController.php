@@ -23,15 +23,15 @@ class CovernotController extends Controller
     {
         date_default_timezone_set('Asia/Jakarta');
         $this->validate($request,[
-             'nomor' => 'required|min:3|max:255',
-             'tanggal' => 'required',
-             'isi' =>'required|min:3',
-        ],[
-            'nomor.required'=>'Nomor Tidak Boleh Kosong',
-            'tanggal.required'=>'Tanggal Tidak Boleh Kosong',
-            'isi.required'=>'Isi Tidak Boleh Kosong',
-            'nomor.min'=>'Nomor minimal 3 character',
-            'isi.min'=>'Isi minimal 3 character',
+            'nomor' => 'required|min:2|max:255',
+            'tanggal' => 'required',
+            'isi' =>'required|min:2',
+       ],[
+           'nomor.required'=>'Nomor Tidak Boleh Kosong',
+           'tanggal.required'=>'Tanggal Tidak Boleh Kosong',
+           'isi.required'=>'Isi Tidak Boleh Kosong',
+           'nomor.min'=>'Nomor minimal 2 character',
+           'isi.min'=>'Isi minimal 2 character',
             ]);
          $passwordStatus = 'OFF';
          if($request->has('password')){
@@ -71,15 +71,15 @@ class CovernotController extends Controller
     {
         date_default_timezone_set('Asia/Jakarta');
         $this->validate($request,[
-             'nomor' => 'required|min:3|max:255',
-             'tanggal' => 'required',
-             'isi' =>'required|min:3',
-        ],[
-            'nomor.required'=>'Nomor Tidak Boleh Kosong',
-            'tanggal.required'=>'Tanggal Tidak Boleh Kosong',
-            'isi.required'=>'Isi Tidak Boleh Kosong',
-            'nomor.min'=>'Nomor minimal 3 character',
-            'isi.min'=>'Isi minimal 3 character',
+            'nomor' => 'required|min:2|max:255',
+            'tanggal' => 'required',
+            'isi' =>'required|min:2',
+       ],[
+           'nomor.required'=>'Nomor Tidak Boleh Kosong',
+           'tanggal.required'=>'Tanggal Tidak Boleh Kosong',
+           'isi.required'=>'Isi Tidak Boleh Kosong',
+           'nomor.min'=>'Nomor minimal 2 character',
+           'isi.min'=>'Isi minimal 2 character',
             ]);
 
         DB::beginTransaction();

@@ -45,9 +45,9 @@ class AktaJaminanFidusiaController extends Controller
                 $action = '';
                 $id_berkas = $data->berkas->id_user;
                 if ($id_berkas ==  Auth::user()->id_user ||  Auth::user()->level_user == 'Admin' || Auth::user()->level_user == 'Superadmin') {
-                $action .= "<a href='" . route('akta-jaminan-fidusia.detail', $data->id_aktajaminanfidusia ) ."' class='btn btn-icon btn-success'><i class='fa fa-eye'></i></a>&nbsp;";
-                $action .= "<a href='javascript:void(0)' class='btn btn-icon btn-primary' data-id='{$data->id_aktajaminanfidusia}' onclick='showAktaJaminanFidusia(this);'><i class='fa fa-edit'></i></a>&nbsp;";
-                $action .= "<a href='javascript:void(0)' class='btn btn-icon btn-danger'  data-id='{$data->id_aktajaminanfidusia}' onclick='deleteAktaJaminanFidusia(this);'><i class='fa fa-trash'></i></a>&nbsp;";
+                    $action .= "<a href='" . route('akta-jaminan-fidusia.detail', $data->id_aktajaminanfidusia ) ."' class='btn btn-icon btn-success'><i class='fa fa-eye'></i></a>&nbsp;";
+                    $action .= "<a href='javascript:void(0)' class='btn btn-icon btn-primary' data-id='{$data->id_aktajaminanfidusia}' onclick='showAktaJaminanFidusia(this);'><i class='fa fa-edit'></i></a>&nbsp;";
+                    $action .= "<a href='javascript:void(0)' class='btn btn-icon btn-danger'  data-id='{$data->id_aktajaminanfidusia}' onclick='deleteAktaJaminanFidusia(this);'><i class='fa fa-trash'></i></a>&nbsp;";
                 }
                 return $action;
             })

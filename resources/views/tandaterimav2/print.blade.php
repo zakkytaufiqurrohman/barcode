@@ -89,7 +89,7 @@
        
     </table><br><br>
         <?php
-            $kode =  config('app.url').'/kwitansi/'.$data->berkas->kode_berkas; 
+            $kode =  config('app.url').'/berkas/tandaterima/'.$data->berkas->kode_berkas; 
             echo DNS2D::getBarcodeHTML(strval($kode), 'QRCODE',3,3); 
         ?>
 

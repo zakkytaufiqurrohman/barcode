@@ -94,7 +94,7 @@
             <td>{{$data->penerima}}</td>
         </tr>
         <?php
-            $kode =  config('app.url').'/kwitansi/'.$data->berkas->kode_berkas; 
+            $kode =  config('app.url').'/berkas/kwitansi/'.$data->berkas->kode_berkas; 
             echo DNS2D::getBarcodeHTML(strval($kode), 'QRCODE',3,3); 
         ?>
     </table>

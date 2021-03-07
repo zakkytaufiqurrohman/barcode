@@ -7,6 +7,7 @@
             </span>
           </a>
         </li>
+        @if(auth::user()->level_user == 'Superadmin' || auth::user()->level_user == 'Admin')
         <li class="header">Admin</li>
         <li>
           <a href="{{route('user')}}">
@@ -15,7 +16,6 @@
             </span>
           </a>
         </li>
-        @if(auth::user()->level_user == 'Superadmin')
         <li>
           <a href="{{route('password_berkas')}}">
             <i class="fa fa-key"></i> <span>Password Berkas </span>
@@ -121,7 +121,9 @@
           <ul class="treeview-menu">
             <li><a href="{{route('user.profile')}}"><i class="fa fa-circle-o"></i> Edit Profile</a></li>
             <li><a href="{{route('user.password')}}"><i class="fa fa-circle-o"></i> Edit Password</a></li>
+            @if(auth::user()->level_user == 'Superadmin' || auth::user()->level_user == 'Admin')
             <li><a href="{{route('setting')}}"><i class="fa fa-circle-o"></i> Setting</a></li>
+            @endif
           </ul>
         </li>
 </ul>

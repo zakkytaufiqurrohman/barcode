@@ -3,14 +3,19 @@
 namespace App\Http\Controllers;
 
 use App\Models\Setting;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 class SettingController extends Controller
 {
     public function index()
     {
-        $data = Setting::first();
-        return view('setting.index',compact('data'));
+        if(auth::user()->level_user == 'Superadmin' || auth::user()->level_user == 'Admin'){
+            $data = Setting::first();
+            return view('setting.index',compact('data'));
+        }
+        return 'Akun anda tidak punya wewenang';
+       
     }
 
     public function store(Request $request)

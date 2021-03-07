@@ -53,12 +53,14 @@ class ReporforiumController extends Controller
                 return $barcode;
             })
             ->addColumn('action', function ($data) {
-               
                 $action = '';
-                $action .= "<a href='" . route('reporforium.detail',$data->id_reporforium) . "' class='btn btn-icon btn-success'><i class='fa fa-eye'></i></a>&nbsp;"; 
-                $action .= "<a href='javascript:void(0)' class='btn btn-icon btn-primary' data-id='{$data->id_reporforium}' onclick='showReporforium(this);'><i class='fa fa-edit'></i></a>&nbsp;";
-                $action .= "<a href='javascript:void(0)' class='btn btn-icon btn-danger'  data-id='{$data->id_reporforium}' onclick='deleteReporforium(this);'><i class='fa fa-trash'></i></a>&nbsp;";
 
+                $id_berkas = $data->berka->id_user;
+                if ($id_berkas ==  Auth::user()->id_user ||  Auth::user()->level_user == 'Admin' || Auth::user()->level_user == 'Superadmin') {
+                    $action .= "<a href='" . route('reporforium.detail',$data->id_reporforium) . "' class='btn btn-icon btn-success'><i class='fa fa-eye'></i></a>&nbsp;"; 
+                    $action .= "<a href='javascript:void(0)' class='btn btn-icon btn-primary' data-id='{$data->id_reporforium}' onclick='showReporforium(this);'><i class='fa fa-edit'></i></a>&nbsp;";
+                    $action .= "<a href='javascript:void(0)' class='btn btn-icon btn-danger'  data-id='{$data->id_reporforium}' onclick='deleteReporforium(this);'><i class='fa fa-trash'></i></a>&nbsp;";
+                }
                 return $action;
             })
             ->addColumn('tanggal', function ($data) {

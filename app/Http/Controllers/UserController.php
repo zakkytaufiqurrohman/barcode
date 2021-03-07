@@ -16,7 +16,11 @@ class UserController extends Controller
 {
     public function index()
     {
-        return view('user.index');
+        if(auth::user()->level_user == 'Superadmin' || auth::user()->level_user == 'Admin'){
+            return view('user.index');
+        }
+        return 'Akun anda tidak punya wewenang';
+        
     }
     public function profile(Request $request)
     {

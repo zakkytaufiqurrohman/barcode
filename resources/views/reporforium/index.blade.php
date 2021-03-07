@@ -186,6 +186,8 @@
                                     <label for="update-sk_kemenhumkam">sk_kemenhumkam</label>
                                     <input type="text" name="sk_kemenhumkam" class="form-control" id="update-sk_kemenhumkam" placeholder="sk_kemenhumkam">
                                 </div>
+                                <div class="file_lama">
+                                </div>
                                 <div class="form-group">
                                     <label for="update-berkas">berkas</label>
                                     <input type="file" name="berkas" class="form-control" id="update-berkas" placeholder="Penyetor">
@@ -328,10 +330,10 @@
         
         getreporforium();
         // preven update
-        $("#form-update-reporforium").on("submit", function(e) {
-                e.preventDefault();
-                updatereporforium();
-        });
+        // $("#form-update-reporforium").on("submit", function(e) {
+        //         e.preventDefault();
+        //         updatereporforium();
+        // });
     })
     $('#btnSearchDate').on('click', function(){
         // getreporforium();
@@ -469,6 +471,12 @@
                 else{
                     $('#modal-update-reporforium').find("input[name='password']").prop('checked', false);
                 }
+                var url = 'Reporforium/file/'+result['data']['berkas'];
+                var lama = "<a href="+url+" download="+url+">"+result['data']['berkas']+"</a>";
+                var input_lama = "<input type='hidden' name='file_lama' value="+result['data']['berkas']+" />";
+                $('#modal-update-reporforium .file_lama').empty();
+                $('#modal-update-reporforium .file_lama').append(lama);
+                $('#modal-update-reporforium .file_lama').append(input_lama);
             },
             error(xhr, status, error) {
                 var err = eval('(' + xhr.responseText + ')');
@@ -554,15 +562,20 @@
         });
     }
     // proses update
-    function updatereporforium()
+    $(document).on("submit", "#form-update-reporforium", function(e)
     {
-        var formData = $("#form-update-reporforium").serialize();
-
+        // var formData = $("#form-update-reporforium").serialize();
+        var form=$("body");
+        form.find('.help-block').remove();
+        form.find('.form-group').removeClass('has-error');
+        e.preventDefault();
         $.ajax({
             url: "{{route('reporforium')}}",
             type: "POST",
             dataType: "json",
-            data: formData,
+            data: new FormData(this),
+            processData: false,
+            contentType: false,
             beforeSend() {
                 $("#btn-update-kwintansi").addClass('btn-progress');
                 $("input").attr('disabled', 'disabled');
@@ -600,11 +613,10 @@
                 })
             }
         });
-    }
+    });
     // $('.form-add-detail-reporforium').submit(function()
     $(document).on("submit", ".form-add-detail-reporforium", function(e)
     {
-        console.log('dasd');
         e.preventDefault();
             var form=$("body");
                 form.find('.help-block').remove();

@@ -247,6 +247,22 @@ class ReporforiumController extends Controller
             'sifat_akta.min'=>'Sifat Akta minimal 2 character',
            
        ]);
+       // untuk untuk berkas pdf
+        $this->validate($request,[
+            'berkas' => 'max:10000|mimes:pdf'
+        ],[
+            'berkas.mimes' => 'Format harus pdf'
+        ]);
+        // return $request->berkas;
+        $nama_file = $request->file_lama;
+        if ($request->has('berkas')){
+            $scan = $request->berkas;
+
+            $text_scan = str_replace(' ', '',$scan->getClientOriginalName());
+
+            $nama_file = time()."_".$text_scan;
+            $scan->move(public_path('Reporforium/file'),$nama_file);
+        }        
         DB::beginTransaction();
         try{
             
@@ -256,7 +272,7 @@ class ReporforiumController extends Controller
                 'no_bulanan' => $request->no_bulanan,
                 'tanggal' => \Carbon\Carbon::parse($request->tanggal)->format('Y-m-d'),
                 'sifat_akta' => $request->sifat_akta,
-                // 'berkas' => $request->berkas,
+                'berkas' => $nama_file,
                 'sk_kemenhumkam' => $request->sk_kemenhumkam,
             ]);
 

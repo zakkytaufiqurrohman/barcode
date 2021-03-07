@@ -67,7 +67,7 @@ class Berkas extends Model
 
     public function kwitansi()
     {
-        return $this->hasOne(kwitansi::class,'id_berkas','id_berkas');
+        return $this->hasOne(Kwitansi::class,'id_berkas','id_berkas');
     }
 
     public function reporforium()

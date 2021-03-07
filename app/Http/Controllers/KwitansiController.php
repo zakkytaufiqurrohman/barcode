@@ -48,10 +48,12 @@ class KwitansiController extends Controller
             ->addColumn('action', function ($data) {
                
                 $action = '';
+                $id_berkas = $data->berkas->id_user;
+                if ($id_berkas ==  Auth::user()->id_user ||  Auth::user()->level_user == 'Admin' || Auth::user()->level_user == 'Superadmin') {
                 $action .= "<a href='" . route('kwitansi.print',$data->id_kwitansi) . "' class='btn btn-icon btn-success'><i class='fa fa-print'></i></a>&nbsp;"; 
                 $action .= "<a href='javascript:void(0)' class='btn btn-icon btn-primary' data-id='{$data->id_kwitansi}' onclick='showKwitansi(this);'><i class='fa fa-edit'></i></a>&nbsp;";
                 $action .= "<a href='javascript:void(0)' class='btn btn-icon btn-danger'  data-id='{$data->id_kwitansi}' onclick='deleteKwitansi(this);'><i class='fa fa-trash'></i></a>&nbsp;";
-
+                }
                 return $action;
             })
             ->addColumn('tanggal', function ($data) {

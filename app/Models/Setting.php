@@ -6,6 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Setting extends Model
 {
-    protected $fillable = ['header','nama'];
+    protected $fillable = ['header','nama','footer'];
     protected $table = 'setting';
 }

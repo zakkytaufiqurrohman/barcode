@@ -103,8 +103,7 @@
             </div>
               <div class="row">
               	<div class="col-12">
-              		<p class="">Info : Info : Kantor Jl. Sesama No.1 Kepanjen Kab. Malang
-                    Telp/Fax (024) XXXXX e-mail : email@mail.co.id</p>
+              		<p class="">{{ $setting->footer }}</p>
               	</div>
               </div>
             </div>

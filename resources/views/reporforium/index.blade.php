@@ -831,9 +831,7 @@
     $(".addRowJumlah").click(function () {
         var html = '';      
         html += '<div class="inputFormRow">'
-        html += `<form method="POST" action="javascript:void(0)" class="form-add-detail-reporforium" id="form-add-detail-reporforium" enctype="multipart/form-data">
-                    @csrf
-                    <div class="form-group">
+        html += `<div class="form-group">
                         <label>NIK</label>
                         <input type="text" class="form-control m-input" name="nik[]" placeholder="NIK" >
                     </div>
@@ -847,9 +845,7 @@
                     </div>
                     <div class="input-group-append">
                         <button id="removeRow" type="button" class="btn btn-danger"><span class="fa fa-trash"></span>Hapus</button>
-                    </div>
-                    <br>
-                </form>`;
+                    </div>`;
         
         $('.newRowJumlah').append(html);
     });

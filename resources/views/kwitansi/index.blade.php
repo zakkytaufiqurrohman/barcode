@@ -221,7 +221,7 @@
 <script src="//cdn.ckeditor.com/4.14.0/standard/ckeditor.js"></script>
 <script type="text/javascript">
     $( function() {
-        $( ".datepicker" ).datepicker({  format: 'yyyy-mm-dd'});
+        $( ".datepicker" ).datepicker({  format: 'dd-mm-yyyy'});
     } );
 </script>
 <script>
@@ -340,7 +340,7 @@
 
                 $('#modal-update-kwitansi').find("input[name='id']").val(result['data']['id_kwitansi']);
                 $('#modal-update-kwitansi').find("input[name='nomor']").val(result['data']['nomor']);
-                $('#modal-update-kwitansi').find("input[name='tanggal']").datepicker("setDate",result['data']['tanggal']);
+                $('#modal-update-kwitansi').find("input[name='tanggal']").datepicker("setDate",new Date(result['data']['tanggal']));
                 $('#modal-update-kwitansi').find("input[name='terima']").val(result['data']['terima']);
                 $('#modal-update-kwitansi').find("input[name='catatan']").val(result['data']['catatan']);
                 $('#modal-update-kwitansi').find("input[name='penyetor']").val(result['data']['penyetor']);

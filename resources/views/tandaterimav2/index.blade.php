@@ -178,7 +178,7 @@
         $('.ckeditor').ckeditor();
     });
     $( function() {
-        $( ".datepicker" ).datepicker({  format: 'yyyy-mm-dd'});
+        $( ".datepicker" ).datepicker({  format: 'dd-mm-yyyy'});
     } );
 </script>
 <script>
@@ -301,7 +301,7 @@
                 $('#modal-update-tandaterima').find("input[name='terima']").val(result['data']['terima']);
                 $('#modal-update-tandaterima').find("input[name='keperluan']").val(result['data']['keperluan']);
                 $('#modal-update-tandaterima').find("input[name='penerima']").val(result['data']['penerima']);
-                $('#modal-update-tandaterima').find("input[name='tanggal']").datepicker("setDate",result['data']['tanggal']);
+                $('#modal-update-tandaterima').find("input[name='tanggal']").datepicker("setDate",new Date(result['data']['tanggal']));
                 $('#modal-update-tandaterima').find("input[name='penyerah']").val(result['data']['penyerah']);
 
                 CKEDITOR.instances.updateberupa.setData(result['data']['berupa']);

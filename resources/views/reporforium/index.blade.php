@@ -299,7 +299,7 @@
 <script src="//cdn.ckeditor.com/4.14.0/standard/ckeditor.js"></script>
 <script type="text/javascript">
     $( function() {
-        $( ".datepicker" ).datepicker({  format: 'yyyy-mm-dd'});
+        $( ".datepicker" ).datepicker({  format: 'dd-mm-yyyy'});
     } );
 </script>
 <script>
@@ -460,7 +460,7 @@
                 $('#modal-update-reporforium').find("input[name='id']").val(result['data']['id_reporforium']);
                 $('#modal-update-reporforium').find("input[name='nomor']").val(result['data']['nomor']);
                 $('#modal-update-reporforium').find("input[name='no_bulanan']").val(result['data']['no_bulanan']);
-                $('#modal-update-reporforium').find("input[name='tanggal']").datepicker("setDate",result['data']['tanggal']);
+                $('#modal-update-reporforium').find("input[name='tanggal']").datepicker("setDate",new Date(result['data']['tanggal']));
                 $('#modal-update-reporforium').find("input[name='sifat_akta']").val(result['data']['sifat_akta']);
                 // $('#modal-update-reporforium').find("input[name='penyetor']").val(result['data']['berkas']);
                 $('#modal-update-reporforium').find("input[name='sk_kemenhumkam']").val(result['data']['sk_kemenhumkam']);

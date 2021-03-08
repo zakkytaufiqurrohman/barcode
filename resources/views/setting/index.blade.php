@@ -31,6 +31,10 @@
                       <label for="addheader">Nama Header</label>  
                       <textarea class="ckeditor form-control" name="nama" id="addheader">{!! $data->nama !!}</textarea>
                     </div>
+                    <div class="form-group">
+                        <label for="addfooter">Footer</label>
+                        <input type="text" name="footer" class="form-control" id="update-addfooter" value="{{ old('footer', $data->footer) }}" placeholder="Masukan footer">
+                    </div>
 
                 </div>
                 <div class="box-footer">

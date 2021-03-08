@@ -167,7 +167,7 @@
         $('.ckeditor').ckeditor();
     });
     $( function() {
-        $( ".datepicker" ).datepicker({  format: 'yyyy-mm-dd'});
+        $( ".datepicker" ).datepicker({  format: 'dd-mm-yyyy'});
     } );
 </script>
 <script>
@@ -286,7 +286,7 @@
             success(result) {
                 $('#modal-update-legalisasi').find("input[name='id']").val(result['data']['id_legalisasi']);
                 $('#modal-update-legalisasi').find("input[name='nomor']").val(result['data']['nomor']);
-                $('#modal-update-legalisasi').find("input[name='tanggal']").datepicker("setDate",result['data']['tanggal']);
+                $('#modal-update-legalisasi').find("input[name='tanggal']").datepicker("setDate",new Date(result['data']['tanggal']));
                 $('#modal-update-legalisasi').find("input[name='pihak1']").val(result['data']['pihak1']);
                 $('#modal-update-legalisasi').find("input[name='pihak2']").val(result['data']['pihak2']);
                 CKEDITOR.instances.updateisi.setData(result['data']['isi']);

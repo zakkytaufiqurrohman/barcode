@@ -177,7 +177,7 @@
         $('.ckeditor').ckeditor();
     });
     $( function() {
-        $( ".datepicker" ).datepicker({  format: 'yyyy-mm-dd'});
+        $( ".datepicker" ).datepicker({  format: 'dd-mm-yyyy'});
     } );
 </script>
 <script>
@@ -297,7 +297,7 @@
                 $('#modal-update-aktajaminanfidusia').find("input[name='id']").val(result['data']['id_aktajaminanfidusia']);
                 $('#modal-update-aktajaminanfidusia').find("input[name='judul']").val(result['data']['judul']);
                 $('#modal-update-aktajaminanfidusia').find("input[name='nomor']").val(result['data']['nomor']);
-                $('#modal-update-aktajaminanfidusia').find("input[name='tanggal']").datepicker("setDate",result['data']['tanggal']);
+                $('#modal-update-aktajaminanfidusia').find("input[name='tanggal']").datepicker("setDate",new Date(result['data']['tanggal']));
                 $('#modal-update-aktajaminanfidusia').find("input[name='pihak1']").val(result['data']['pihak1']);
                 $('#modal-update-aktajaminanfidusia').find("input[name='pihak2']").val(result['data']['pihak2']);
                 CKEDITOR.instances.updateisi.setData(result['data']['isi']);

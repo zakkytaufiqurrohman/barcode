@@ -44,12 +44,14 @@ class SettingController extends Controller
             Setting::create([
                 'header' => $nama_file,
                 'nama' => $request->nama,
+                'footer' => $request->footer,
             ]);
         }
         else {
             $update->update([
                 'header' => $nama_file,
                 'nama' => $request->nama,
+                'footer' => $request->footer,
             ]);
            
         }

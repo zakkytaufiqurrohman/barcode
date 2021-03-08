@@ -47,10 +47,12 @@ class PpatController extends Controller
             ->addColumn('action', function ($data) {
                
                 $action = '';
-                $action .= "<a href='" . route('ppat.detail', $data->id_ppat) ."' class='btn btn-icon btn-success'><i class='fa fa-eye'></i></a>&nbsp;";
-                $action .= "<a href='javascript:void(0)' class='btn btn-icon btn-primary' data-id='{$data->id_ppat}' onclick='showPpat(this);'><i class='fa fa-edit'></i></a>&nbsp;";
-                $action .= "<a href='javascript:void(0)' class='btn btn-icon btn-danger'  data-id='{$data->id_ppat}' onclick='deletePpat(this);'><i class='fa fa-trash'></i></a>&nbsp;";
-
+                $id_berkas = $data->berkas->id_user;
+                if ($id_berkas ==  Auth::user()->id_user ||  Auth::user()->level_user == 'Admin' || Auth::user()->level_user == 'Superadmin') {
+                    $action .= "<a href='" . route('ppat.detail', $data->id_ppat) ."' class='btn btn-icon btn-success'><i class='fa fa-eye'></i></a>&nbsp;";
+                    $action .= "<a href='javascript:void(0)' class='btn btn-icon btn-primary' data-id='{$data->id_ppat}' onclick='showPpat(this);'><i class='fa fa-edit'></i></a>&nbsp;";
+                    $action .= "<a href='javascript:void(0)' class='btn btn-icon btn-danger'  data-id='{$data->id_ppat}' onclick='deletePpat(this);'><i class='fa fa-trash'></i></a>&nbsp;";
+                }
                 return $action;
             })
             ->addColumn('tanggal_akta', function ($data) {

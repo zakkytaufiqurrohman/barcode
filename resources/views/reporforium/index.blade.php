@@ -344,13 +344,15 @@
         form.find('.form-group').removeClass('has-error');
     })
     $('#modal-update-reporforium').on('hidden.bs.modal', function () {
-        $(".kotak").remove();
+        // $(".kotak").remove();
+        // $(".row-detail-reporforium").empty();
         var form=$("body");
         form.find('.help-block').remove();
         form.find('.form-group').removeClass('has-error');
     })
     $('#modal-update-detail-reporforium').on('hidden.bs.modal', function () {
-        $(".kotak").remove();
+        // $(".kotak").remove();
+        $(".row-detail-reporforium").empty();
         var form=$("body");
         form.find('.help-block').remove();
         form.find('.form-group').removeClass('has-error');
@@ -360,7 +362,8 @@
         var id_rp = $("#id").val();
         $('#modal-update-reporforium').modal('hide');
         $('#modal-update-detail-reporforium').modal('show');
-        $(".kotak").remove();
+        $('.inputFormRow').empty();
+        $(".row-detail-reporforium").empty();
         var form=$("body");
         form.find('.help-block').remove();
         form.find('.form-group').removeClass('has-error');
@@ -487,7 +490,8 @@
     }
 
     function detailRepo(id){
-        $(".kotak").remove();
+        $(".row-detail-reporforium").empty();
+        // $(".kotak").remove();
         $.ajax({
             url: "{{route('reporforium.show_detail')}}",
             type: "GET",
@@ -831,15 +835,15 @@
                     @csrf
                     <div class="form-group">
                         <label>NIK</label>
-                        <input type="text" class="form-control m-input" name="nik" placeholder="NIK" >
+                        <input type="text" class="form-control m-input" name="nik[]" placeholder="NIK" >
                     </div>
                     <div class="form-group">
                         <label>Nama Penghadap</label>
-                        <input type="text" class="form-control m-input" name="nama" placeholder="Nama Penghadap">
+                        <input type="text" class="form-control m-input" name="nama[]" placeholder="Nama Penghadap">
                     </div>
                     <div class="form-group">
                         <label>Foto</label>
-                        <input type="file" class="form-control m-input" name="foto" placeholder="foto" autocomplete="off">
+                        <input type="file" class="form-control m-input" name="foto[]" placeholder="foto" autocomplete="off">
                     </div>
                     <div class="input-group-append">
                         <button id="removeRow" type="button" class="btn btn-danger"><span class="fa fa-trash"></span>Hapus</button>

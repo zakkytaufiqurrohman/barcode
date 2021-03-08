@@ -289,7 +289,7 @@
                 $('#modal-update-tandaterima').find("input[name='judul']").val(result['data']['judul']);
                 $('#modal-update-tandaterima').find("input[name='pembuat']").val(result['data']['pembuat']);
                 $('#modal-update-tandaterima').find("input[name='nomor']").val(result['data']['nomor']);
-                $('#modal-update-tandaterima').find("input[name='tanggal']").datepicker("setDate",result['data']['tanggal']);
+                $('#modal-update-tandaterima').find("input[name='tanggal']").datepicker("setDate",new Date(result['data']['tanggal']));
                 CKEDITOR.instances.updateisi.setData(result['data']['isi']);
                 if (result['data']['password'] == 'ON'){
                     $('#modal-update-tandaterima').find("input[name='password']").prop('checked', true);

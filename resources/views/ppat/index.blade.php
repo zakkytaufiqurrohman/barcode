@@ -528,7 +528,7 @@
                 $('#modal-update-ppat').find("input[name='id']").val(result['data']['id_ppat']);
                 $('#modal-update-ppat').find("input[name='no_urut']").val(result['data']['no_urut']);
                 $('#modal-update-ppat').find("input[name='no_akta']").val(result['data']['no_akta']);
-                $('#modal-update-ppat').find("input[name='tanggal_akta']").datepicker("setDate",result['data']['tanggal_akta']);
+                $('#modal-update-ppat').find("input[name='tanggal_akta']").datepicker("setDate",new Date(result['data']['tanggal_akta']));
                 $('#modal-update-ppat').find("input[name='bentuk_hukum']").val(result['data']['bentuk_hukum']);
                 $('#modal-update-ppat').find("input[name='pihak1']").val(result['data']['pihak1']);
                 $('#modal-update-ppat').find("input[name='pihak2']").val(result['data']['pihak2']);
@@ -539,17 +539,17 @@
                 $('#modal-update-ppat').find("input[name='harga_transaksi']").val(result['data']['harga_transaksi']);
                 $('#modal-update-ppat').find("input[name='nop_tahun']").val(result['data']['nop_tahun']);
                 $('#modal-update-ppat').find("input[name='nilai_njop']").val(result['data']['nilai_njop']);
-                $('#modal-update-ppat').find("input[name='tanggal_ssp']").datepicker("setDate",result['data']['tanggal_ssp']);
+                $('#modal-update-ppat').find("input[name='tanggal_ssp']").datepicker("setDate",new Date(result['data']['tanggal_ssp']));
 
                 $('#modal-update-ppat').find("input[name='nilai_ssp']").val(result['data']['nilai_ssp']);
-                $('#modal-update-ppat').find("input[name='tanggal_ssb']").datepicker("setDate",result['data']['tanggal_ssb']);
+                $('#modal-update-ppat').find("input[name='tanggal_ssb']").datepicker("setDate",new Date(result['data']['tanggal_ssb']));
 
                 $('#modal-update-ppat').find("input[name='nilai_ssb']").val(result['data']['nilai_ssb']);
-                $('#modal-update-ppat').find("input[name='tgl_masuk_bpn']").datepicker("setDate",result['data']['tanggal_ssp']);
+                $('#modal-update-ppat').find("input[name='tgl_masuk_bpn']").datepicker("setDate",new Date(result['data']['tgl_masuk_bpn']));
 
-                $('#modal-update-ppat').find("input[name='tgl_selesai_bpn']").datepicker("setDate",result['data']['tgl_selesai_bpn']);
+                $('#modal-update-ppat').find("input[name='tgl_selesai_bpn']").datepicker("setDate",new Date(result['data']['tgl_selesai_bpn']));
 
-                $('#modal-update-ppat').find("input[name='tgl_penyerahan_clien']").datepicker("setDate",result['data']['tgl_penyerahan_clien']);
+                $('#modal-update-ppat').find("input[name='tgl_penyerahan_clien']").datepicker("setDate",new Date(result['data']['tgl_penyerahan_clien']));
 
 
                 $('#modal-update-ppat').find("input[name='no_ktp']").val(result['data']['no_ktp']);

@@ -268,7 +268,7 @@
             success(result) {
                 $('#modal-update-covernot').find("input[name='id']").val(result['data']['id_covernot']);
                 $('#modal-update-covernot').find("input[name='nomor']").val(result['data']['nomor']);
-                $('#modal-update-covernot').find("input[name='tanggal']").val(result['data']['tanggal']);
+                $('#modal-update-covernot').find("input[name='tanggal']").datepicker("setDate",new Date(result['data']['tanggal']));
                 CKEDITOR.instances.updateisi.setData(result['data']['isi']);
                 if (result['data']['password'] == 'ON'){
                     $('#modal-update-covernot').find("input[name='password']").prop('checked', true);

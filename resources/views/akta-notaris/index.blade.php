@@ -297,7 +297,7 @@
                 $('#modal-update-aktanotaris').find("input[name='id']").val(result['data']['id_aktanotaris']);
                 $('#modal-update-aktanotaris').find("input[name='judul']").val(result['data']['judul']);
                 $('#modal-update-aktanotaris').find("input[name='nomor']").val(result['data']['nomor']);
-                $('#modal-update-aktanotaris').find("input[name='tanggal']").datepicker("setDate",result['data']['tanggal']);
+                $('#modal-update-aktanotaris').find("input[name='tanggal']").datepicker("setDate",new Date(result['data']['tanggal']));
                 $('#modal-update-aktanotaris').find("input[name='pihak1']").val(result['data']['pihak1']);
                 $('#modal-update-aktanotaris').find("input[name='pihak2']").val(result['data']['pihak2']);
                 CKEDITOR.instances.updateisi.setData(result['data']['isi']);

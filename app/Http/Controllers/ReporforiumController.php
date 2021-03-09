@@ -388,13 +388,13 @@ class ReporforiumController extends Controller
         $this->validate($request,[
             'nama' => 'required',
             'nik' => 'required|int',
-            'foto' => 'max:2048|mimes:jpeg,jpg,png',
+            // 'foto' => 'max:2048|mimes:jpeg,jpg,png',
         ],[
             'nama.required'=>'nama Tidak Boleh Kosong',
             'nik.required'=>'nik Tidak Boleh Kosong',
             'nik.integer' => 'NIK Tidak boleh mengandung huruf/karakter',   
             'foto.mimes' => 'Format foto salah, upload foto jpg,jpeg,png',
-            'foto.max' => 'Max foto berukuran 2048 Mb'     
+            // 'foto.max' => 'Max foto berukuran 2048 Mb'     
         ]);
 
         DB::beginTransaction();
@@ -417,6 +417,7 @@ class ReporforiumController extends Controller
                 }
 
                 $namaFoto = $nama_file_foto;
+                $foto->move(public_path('Reporforium/foto'),$nama_file_foto);
             }
             
             $data->update([
@@ -424,7 +425,6 @@ class ReporforiumController extends Controller
                 'nama' => $request->nama,
                 'foto' => $namaFoto
             ]);
-            $foto->move(public_path('Reporforium/foto'),$nama_file_foto);
 
             DB::commit();
             return response()->json(['status' => 'success', 'message' => 'Berhasil mengubah detail reporforium', 'id' => $id_reporforium]);

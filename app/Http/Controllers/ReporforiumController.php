@@ -388,13 +388,13 @@ class ReporforiumController extends Controller
         $this->validate($request,[
             'nama' => 'required',
             'nik' => 'required|int',
-            // 'foto' => 'max:2048|mimes:jpeg,jpg,png',
+            'foto' => 'max:2048|mimes:jpeg,jpg,png',
         ],[
             'nama.required'=>'nama Tidak Boleh Kosong',
             'nik.required'=>'nik Tidak Boleh Kosong',
             'nik.integer' => 'NIK Tidak boleh mengandung huruf/karakter',   
             'foto.mimes' => 'Format foto salah, upload foto jpg,jpeg,png',
-            // 'foto.max' => 'Max foto berukuran 2048 Mb'     
+            'foto.max' => 'Max foto berukuran 2048 Mb'     
         ]);
 
         DB::beginTransaction();

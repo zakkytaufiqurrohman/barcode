@@ -173,26 +173,20 @@ class ReporforiumController extends Controller
             $nik = $request->nik;
             $fotos = $request->foto;
            
-            $i = 0;
+            for($i=0;$i<count($nama);$i++){
 
-            foreach(array_combine($nama,$nik) as $niks => $name)
-            {
-                if(! empty([$niks,$name]))
-                {
-                    $foto = $fotos[$i];
-                    $text_foto = str_replace(' ', '',$foto->getClientOriginalName());
-        
-                    $nama_file_foto = time()."_".$text_foto;
-                    
-                    $foto->move(public_path('Reporforium/foto'),$nama_file_foto);
-                    $temp[] = [
-                        'id_reporforium' => $reporforium->id_reporforium,
-                        'foto' => $nama_file_foto,
-                        'nik' => $niks,
-                        'nama' => $name,
-                    ];
-                }
-                $i++;
+                $foto = $fotos[$i];
+                $text_foto = str_replace(' ', '',$foto->getClientOriginalName());
+    
+                $nama_file_foto = time()."_".$text_foto;
+                
+                $foto->move(public_path('Reporforium/foto'),$nama_file_foto);
+                $temp[] = [
+                    'id_reporforium' => $reporforium->id_reporforium,
+                    'foto' => $nama_file_foto,
+                    'nik' => $nik[$i],
+                    'nama' => $nama[$i],
+                ];
             }
             
             DetailReporforium::insert($temp);

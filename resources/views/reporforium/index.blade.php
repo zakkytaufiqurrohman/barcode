@@ -116,8 +116,8 @@
                             <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="add-uraian">Nama Penghadap, NIK & FOTO</label>
-                                        <input type="text" name="nama[]" class="form-control" id="add-nama" placeholder="Nama">
                                         <input type="text" name="nik[]" class="form-control" id="add-nik" placeholder="Nik">
+                                        <input type="text" name="nama[]" class="form-control" id="add-nama" placeholder="Nama">
                                         <input type="file" name="foto[]" class="form-control" id="add-foto" placeholder="Foto">
                                     </div>
                                 

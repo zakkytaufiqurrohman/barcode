@@ -138,13 +138,13 @@
                         <tr>
                           <td>Pas Foto</td>
                           <td>:</td>
-                          <td><img src="{{asset('GambarFotoAkad/'.$ppat->pas_foto)}}" alt="logo" width=400px heigth=400px></td>
+                          <td><img src="{{asset('GambarPasFoto/'.$ppat->pas_foto)}}" alt="Foto" width=80px heigth=80px></td>
                         </tr>
                         <tr>
                           <tr>
                             <td>Fota Akad</td>
                             <td>:</td>
-                            <td><img src="{{asset('GambarPasFoto/'.$ppat->foto_akad)}}" alt="logo" width=400px heigth=400px></td>
+                            <td><img src="{{asset('GambarFotoAkad/'.$ppat->foto_akad)}}" alt="Foto akad" width=80px heigth=80px></td>
                           </tr>
                           <tr>
                     </div>

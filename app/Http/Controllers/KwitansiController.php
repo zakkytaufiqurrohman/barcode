@@ -152,24 +152,17 @@ class KwitansiController extends Controller
             $jumlah = $request->jumlah;
 
             $uraian_records = [];
-
-            foreach(array_combine($uraian,$jumlah) as $urai => $jml)
-            {
-                if(! empty([$urai,$jml]))
-                {
-                    // Get the current time
-                    $now = \Carbon\Carbon::now();
-
-                    // Formulate record that will be saved
-                    $uraian_records[] = [
-                        'id_kwitansi' => $kwitansi->id_kwitansi,
-                        'uraian' => $urai,
-                        'jumlah' => $jml,
-                        'updated_at' => $now,  // remove if not using timestamps
-                        'created_at' => $now   // remove if not using timestamps
-                    ];
-                }
-            }           
+            for($i=0;$i<count($uraian);$i++){
+                $now = \Carbon\Carbon::now();
+                // Formulate record that will be saved
+                $uraian_records[] = [
+                    'id_kwitansi' => $kwitansi->id_kwitansi,
+                    'uraian' => $uraian[$i],
+                    'jumlah' => $jumlah[$i],
+                    'updated_at' => $now,  // remove if not using timestamps
+                    'created_at' => $now   // remove if not using timestamps
+                ];
+            }
             Uraian::insert($uraian_records);
             DB::commit();
             return response()->json(['status' => 'success', 'message' => 'Berhasil menambahkan kwitansi']);
@@ -201,7 +194,7 @@ class KwitansiController extends Controller
         DB::beginTransaction();
         try {
             $kwitansi = Kwitansi::find($request->id);
-            $uraian = Uraian::find($kwitansi->id_kwitansi);
+            $uraian = Uraian::where('id_kwitansi',$kwitansi->id_kwitansi);
             $berkas = Berkas::find($kwitansi->id_berkas);
             if (!$berkas) {
                 DB::rollback();

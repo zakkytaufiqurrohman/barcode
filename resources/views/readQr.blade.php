@@ -77,6 +77,10 @@
 					@include('tandaterimav2.scan')
 				@elseif($nama == 'kwitansi')
 					@include('kwitansi.scan')
+				@elseif($nama == 'ppat')
+					@include('ppat.scan')
+				@elseif($nama == 'aktaPpat')
+					@include('akta-ppat.scan')
 				@else
                 <table class="table table-striped">
                   <tbody>

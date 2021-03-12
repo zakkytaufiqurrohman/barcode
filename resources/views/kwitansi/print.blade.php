@@ -59,7 +59,7 @@
             <td>nomor : {{$data->nomor}}</td>
         </tr>
         <tr>
-            <td>tanggal : {{$data->tanggal}}</td>
+            <td>tanggal : {{ Carbon\Carbon::parse($data->tanggal)->isoFormat('D MMMM Y') }}</td>
         </tr>
         <tr>
            <?php $row = count($data->urai) + 1?>

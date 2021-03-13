@@ -25,8 +25,10 @@ class TandaTerimav2Controller extends Controller
 
         $data = Tandaterimav2::query();
         $data->orderBy('id_tandaterima','DESC');
+        $nameImage = '';
         return DataTables::eloquent($data)
             ->addColumn('barcode',function ($data) {
+                global $nameImage;
                 // get kode berkas from table berkas
                 $kode = $data->berkas->kode_berkas;
                 $kode = str_replace("/", "", $kode);
@@ -37,18 +39,19 @@ class TandaTerimav2Controller extends Controller
                 $nameImage = str_replace("\\", "", $images);
                 $nameImage = str_replace("/barcode", "", $nameImage);
                 $url= asset("barcode/$nameImage");
-
+                
                 $barcode = '';
                 $barcode .= "<a href='tandaterimas/download$nameImage'><img src=".$url." border='0' width='100' class='img' align='center' />'</a>" ;
 
                 return $barcode;
             })
             ->addColumn('action', function ($data) {
-               
+                global $nameImage;
+                $qr = str_replace('/',"",$nameImage);
                 $action = '';
                 $id_berkas = $data->berkas->id_user;
                 if ($id_berkas ==  Auth::user()->id_user ||  Auth::user()->level_user == 'Admin' || Auth::user()->level_user == 'Superadmin') {
-                    $action .= "<a href='" . route('tandaterima.print',$data->id_tandaterima) . "' class='btn btn-icon btn-success' target='_blank'><i class='fa fa-print'></i></a>&nbsp;"; 
+                    $action .= "<a href='" . route('tandaterima.print',$data->id_tandaterima.'@'.$qr) . "' class='btn btn-icon btn-success' target='_blank'><i class='fa fa-print'></i></a>&nbsp;"; 
                     $action .= "<a href='javascript:void(0)' class='btn btn-icon btn-primary' data-id='{$data->id_tandaterima}' onclick='showTandaTerima(this);'><i class='fa fa-edit'></i></a>&nbsp;";
                     $action .= "<a href='javascript:void(0)' class='btn btn-icon btn-danger'  data-id='{$data->id_tandaterima}' onclick='deleteTandaTerima(this);'><i class='fa fa-trash'></i></a>&nbsp;";
                 }
@@ -258,10 +261,11 @@ class TandaTerimav2Controller extends Controller
     }
 
     public function print($id)
-    {
-        $data = TandaTerimav2::find($id);
+    {   
+        $id = explode('@',$id);
+        $data = TandaTerimav2::find($id[0]);
         $setting = Setting::first();
-        $pdf = PDF::loadview('tandaterimav2.print',['data'=>$data,'setting'=>$setting]);
+        $pdf = PDF::loadview('tandaterimav2.print',['data'=>$data,'setting'=>$setting,'qr'=>$id[1]]);
         return $pdf->stream('tandaterima.pdf');
     }
 

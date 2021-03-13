@@ -93,10 +93,12 @@
             <td>{{$data->mengetahui}}</td>
             <td>{{$data->penerima}}</td>
         </tr>
-        <?php
-            $kode =  config('app.url').'/berkas/kwitansi/'.$data->berkas->kode_berkas; 
-            echo DNS2D::getBarcodeHTML(strval($kode), 'QRCODE',3,3); 
-        ?>
+        <tr>
+            <td>
+                <img src="{{asset('barcode/'.$qr)}}" alt="oke" width="100px" heigth="100px"> 
+
+            </td>
+        </tr>   
     </table>
 </body>
 </html>

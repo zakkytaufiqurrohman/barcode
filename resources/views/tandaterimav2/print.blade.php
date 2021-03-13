@@ -86,12 +86,11 @@
         <tr>
             <td>tidak diambil, maka kehilangan/kerusakan diluar tanggung jawab kami.</td><br>
         </tr>
-       
-    </table><br><br>
-        <?php
-            $kode =  config('app.url').'/berkas/tandaterima/'.$data->berkas->kode_berkas; 
-            echo DNS2D::getBarcodeHTML(strval($kode), 'QRCODE',3,3); 
-        ?>
+        <tr>
+            <td>
+                <img src="{{asset('barcode/'.$qr)}}" alt="oke" width="100px" heigth="100px"> 
 
+            </td>
+        </tr>   
+    </table>
 </body>
-</html>

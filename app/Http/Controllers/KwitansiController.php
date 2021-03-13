@@ -27,8 +27,10 @@ class KwitansiController extends Controller
 
         $data = Kwitansi::query();
         $data->orderBy('id_kwitansi','DESC');
+        $nameImage = '';
         return DataTables::eloquent($data)
             ->addColumn('barcode',function ($data) {
+                global $nameImage;
                 // get kode berkas from table berkas
                 $kode = $data->berkas->kode_berkas;
                 $kode = str_replace("/", "", $kode);
@@ -46,11 +48,12 @@ class KwitansiController extends Controller
                 return $barcode;
             })
             ->addColumn('action', function ($data) {
-               
+                global $nameImage;
+                $qr = str_replace('/',"",$nameImage);
                 $action = '';
                 $id_berkas = $data->berkas->id_user;
                 if ($id_berkas ==  Auth::user()->id_user ||  Auth::user()->level_user == 'Admin' || Auth::user()->level_user == 'Superadmin') {
-                    $action .= "<a href='" . route('kwitansi.print',$data->id_kwitansi) . "' class='btn btn-icon btn-success' target='_blank'><i class='fa fa-print'></i></a>&nbsp;"; 
+                    $action .= "<a href='" . route('kwitansi.print',$data->id_kwitansi.'@'.$qr) . "' class='btn btn-icon btn-success' target='_blank'><i class='fa fa-print'></i></a>&nbsp;"; 
                     $action .= "<a href='javascript:void(0)' class='btn btn-icon btn-primary' data-id='{$data->id_kwitansi}' onclick='showKwitansi(this);'><i class='fa fa-edit'></i></a>&nbsp;";
                     $action .= "<a href='javascript:void(0)' class='btn btn-icon btn-danger'  data-id='{$data->id_kwitansi}' onclick='deleteKwitansi(this);'><i class='fa fa-trash'></i></a>&nbsp;";
                 }
@@ -322,9 +325,10 @@ class KwitansiController extends Controller
 
     public function print($id)
     {
-        $data = Kwitansi::with('urai','berkas')->find($id);
+        $id = explode('@',$id);
+        $data = Kwitansi::with('urai','berkas')->find($id[0]);
         $setting = Setting::first();
-        $pdf = PDF::loadview('kwitansi.print',['data'=>$data,'setting'=>$setting]);
+        $pdf = PDF::loadview('kwitansi.print',['data'=>$data,'setting'=>$setting,'qr'=>$id[1]]);
         return $pdf->stream('kwitansi.pdf');
     }
 

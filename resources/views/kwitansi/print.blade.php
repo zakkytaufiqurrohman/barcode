@@ -54,8 +54,8 @@
     ?>
     <table class='table table-bordered'>
         <tr>
-            <td rowspan = 2 colspan="3"><center>{!! $setting->nama !!}</center></td>
-            <td rowspan = 2 colspan="1"><center><h6><b>BUKTI PEMBAYARAN</b></h6></center></td>
+            <td rowspan = 2 colspan="3" ><center>{!! $setting->nama !!}</center></td>
+            <td rowspan = 2><center><h6><b>BUKTI PEMBAYARAN</b></h6></center></td>
             <td>nomor : {{$data->nomor}}</td>
         </tr>
         <tr>
@@ -82,23 +82,17 @@
             <td><b>total:</b> {{number_format($total)}} </td>
         </tr>
         <tr>
-            <td colspan = 2 rowspan="1">Catatan: {{$data->catatan}}</td>
+            <td  rowspan="2" colspan = 2>Catatan: {{$data->catatan}}</td>
             <td>Penyetor</td>
             <td>Mengetahui</td>
             <td>Penerima</td>
         </tr>
         <tr>
-            <td colspan = 2 style="height:40"></td>
-            <td>{{$data->penyetor}}</td>
+            <td style="height:40">{{$data->penyetor}}</td>
             <td>{{$data->mengetahui}}</td>
             <td>{{$data->penerima}}</td>
         </tr>
-        <tr>
-            <td>
-                <img src="{{asset('barcode/'.$qr)}}" alt="oke" width="100px" heigth="100px"> 
-
-            </td>
-        </tr>   
+        <img src="{{asset('barcode/'.$qr)}}" alt="oke" width="100px" heigth="100px"> 
     </table>
 </body>
 </html>

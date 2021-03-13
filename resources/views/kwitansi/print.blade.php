@@ -54,8 +54,8 @@
     ?>
     <table class='table table-bordered'>
         <tr>
-            <td rowspan = 2 colspan="3"><p>{!! $setting->nama !!}</p></td>
-            <td rowspan = 2 colspan="1"><h5><b>BUKTI PEMBAYARAN</b></h5></td>
+            <td rowspan = 2 colspan="3"><center>{!! $setting->nama !!}</center></td>
+            <td rowspan = 2 colspan="1"><center><h6><b>BUKTI PEMBAYARAN</b></h6></center></td>
             <td>nomor : {{$data->nomor}}</td>
         </tr>
         <tr>
@@ -64,14 +64,14 @@
         <tr>
            <?php $row = count($data->urai) + 1?>
             <td rowspan = "{{$row}}">Terima dari : {{$data->terima}}</td>
-            <td colspan="3">Uraian</td>
-            <td >Jumlah</td>
+            <td colspan="3"><b>Uraian<b></td>
+            <td><b>Jumlah</b></td>
         </tr>
         <?php $total = 0?>
         @foreach($data->urai as $uraian)
             <tr>
                 <td colspan="3">{{$uraian->uraian}}</td>
-                <td>{{$uraian->jumlah}}</td>
+                <td>{{number_format($uraian->jumlah)}}</td>
             </tr>
             <?php
                 $total += intval($uraian->jumlah);
@@ -79,7 +79,7 @@
         @endforeach
         <tr>
             <td colspan = 4> <b>Terbilang:</b> {{terbilang($total)}}</td>
-            <td><b>total:</b> {{$total}} </td>
+            <td><b>total:</b> {{number_format($total)}} </td>
         </tr>
         <tr>
             <td colspan = 2 rowspan="1">Catatan: {{$data->catatan}}</td>

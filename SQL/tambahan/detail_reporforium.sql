@@ -2,10 +2,10 @@
 -- version 5.0.4
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Jan 16, 2021 at 03:51 AM
--- Server version: 10.4.17-MariaDB
--- PHP Version: 7.3.25
+-- Host: mysql
+-- Generation Time: Mar 13, 2021 at 06:45 AM
+-- Server version: 8.0.22
+-- PHP Version: 7.4.11
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -28,14 +28,14 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `detail_reporforium` (
-  `id` int(11) NOT NULL,
-  `id_reporforium` int(11) NOT NULL,
-  `foto` varchar(200) NOT NULL,
-  `nik` varchar(100) NOT NULL,
+  `id_detail_reporforium` int NOT NULL,
+  `id_reporforium` int NOT NULL,
+  `foto` varchar(200) DEFAULT NULL,
+  `nik` varchar(100) DEFAULT NULL,
   `nama` varchar(200) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `updated_at` int DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Indexes for dumped tables
@@ -45,7 +45,7 @@ CREATE TABLE `detail_reporforium` (
 -- Indexes for table `detail_reporforium`
 --
 ALTER TABLE `detail_reporforium`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id_detail_reporforium`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -55,7 +55,7 @@ ALTER TABLE `detail_reporforium`
 -- AUTO_INCREMENT for table `detail_reporforium`
 --
 ALTER TABLE `detail_reporforium`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_detail_reporforium` int NOT NULL AUTO_INCREMENT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

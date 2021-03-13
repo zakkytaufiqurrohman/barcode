@@ -1,0 +1,56 @@
+ALTER TABLE tbl_waarmeking
+ADD created_at timestamp NULL DEFAULT NULL AFTER id_berkas,
+ADD updated_at timestamp NULL DEFAULT NULL AFTER created_at,
+ADD deleted_at datetime NULL DEFAULT NULL AFTER updated_at;
+-- tanda terima
+ALTER TABLE tbl_tandaterima
+ADD created_at timestamp NULL DEFAULT NULL AFTER id_berkas,
+ADD updated_at timestamp NULL DEFAULT NULL AFTER created_at,
+ADD deleted_at datetime NULL DEFAULT NULL AFTER updated_at;
+-- tbl_legalisasi
+ALTER TABLE tbl_legalisasi
+ADD created_at timestamp NULL DEFAULT NULL AFTER id_berkas,
+ADD updated_at timestamp NULL DEFAULT NULL AFTER created_at,
+ADD deleted_at datetime NULL DEFAULT NULL AFTER updated_at;
+-- tbl_covernot
+ALTER TABLE tbl_covernot
+ADD created_at timestamp NULL DEFAULT NULL AFTER id_berkas,
+ADD updated_at timestamp NULL DEFAULT NULL AFTER created_at,
+ADD deleted_at datetime NULL DEFAULT NULL AFTER updated_at;
+-- tbl_aktappat 
+ALTER TABLE tbl_aktappat
+ADD created_at timestamp NULL DEFAULT NULL AFTER id_berkas,
+ADD updated_at timestamp NULL DEFAULT NULL AFTER created_at,
+ADD deleted_at datetime NULL DEFAULT NULL AFTER updated_at;
+-- tbl aktanotaris
+ALTER TABLE tbl_aktanotaris
+ADD created_at timestamp NULL DEFAULT NULL AFTER id_berkas,
+ADD updated_at timestamp NULL DEFAULT NULL AFTER created_at,
+ADD deleted_at datetime NULL DEFAULT NULL AFTER updated_at;
+-- tbl aktajaminan
+ALTER TABLE tbl_aktajaminanfidusia
+ADD created_at timestamp NULL DEFAULT NULL AFTER id_berkas,
+ADD updated_at timestamp NULL DEFAULT NULL AFTER created_at,
+ADD deleted_at datetime NULL DEFAULT NULL AFTER updated_at;
+-- tbl password
+
+ALTER TABLE tbl_password_berkas
+ADD created_at timestamp NULL DEFAULT NULL AFTER v,
+ADD updated_at timestamp NULL DEFAULT NULL AFTER created_at;
+
+-- alter berkas enum
+ALTER TABLE
+    `tbl_berkas`
+MODIFY COLUMN
+    `tipe_berkas` enum(
+        'waarmeking',
+        'tandaterima',
+        'aktappat',
+        'legalisasi',
+        'covernot',
+        'aktanotaris',
+        'aktajaminanfidusia',
+        'ppat','kwitansi',
+        'reporforium'
+    )
+NOT NULL AFTER `id_berkas`;

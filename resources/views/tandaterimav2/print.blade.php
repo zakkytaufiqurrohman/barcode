@@ -12,7 +12,21 @@
 		table tr td,
 		table tr th{
 			font-size: 9pt;
-		}
+		},
+        .berupa {
+            word-wrap: break-word;
+            margin:0px 50px;
+            border-collapse: collapse; 
+            width:100%;
+        }
+        .berupa p {
+            margin-left: -1px;
+            margin-top: 1px;
+        }
+        .berupa ol li {
+            margin-left: -20px;
+            margin-top: 2px;
+        }
     </style>
     
     <table align="center" width="100%" >
@@ -34,20 +48,26 @@
             </td>
         </tr>
     </table><br>
-    <table style="margin-left:40%">
+    <table class="berupa">
         <tr>
-            <td>Telah terima dari : {{$data->terima}}</td>
+            <td width="20%">Telah terima dari</td>
+            <td width="0px">:</td>
+            <td>{{$data->terima}}</td>
+        </tr>
+        <tr class="berupa">
+            <td style="vertical-align: top">Berupa </td>
+            <td style="vertical-align: top">:</td>
+            <td style="vertical-align: top">{!!$data->berupa!!}</td>
         </tr>
         <tr>
-            <td>Berupa : {!!$data->berupa!!}</td>
-        </tr>
-        <tr>
-            <td>Untuk Proses : {{$data->penerima}}</td>
+            <td>Untuk Proses </td>
+            <td>:</td>
+            <td>{{$data->penerima}}</td>
         </tr>
         
-    </table><br><br>
+    </table><br><br><br><br><br><br>
 
-    <table align="right" width="60%" margin-left="40%"  >
+    <table align="right" width="40%" margin-left="60%"  >
         <tr>
             <td><center>Karangayar, Tgl {{ Carbon\Carbon::parse($data->tanggal)->isoFormat('D MMMM Y') }}</center></td>
         </tr>
@@ -67,7 +87,7 @@
         
     </table>
 
-    <table align="right" width="60%" margin-left="40%" >
+    <table align="right" width="40%" margin-left="60%"  >
         <tr>
             <td><center>Yang Menerima</center></td>
         </tr>
@@ -79,7 +99,7 @@
         </tr>
     </table><br><br><br><br><br><br><br>
 
-    <table style="margin-left:40%">
+    <table style="margin-left:40%; margin-top:20px;">
         <tr>
             <td>Apabila sertifikat yang telah jadi lebih dari 3 (tiga) bulan</td><br>
         </tr>

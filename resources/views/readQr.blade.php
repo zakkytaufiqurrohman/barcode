@@ -73,13 +73,13 @@
             </div>
             <div class="row" style="margin-top: 10px">
               <div class="col-12 table-responsive">
-                @if($nama == 'tandaterima')
+                @if($nama == 'tandaterimav2')
 					@include('tandaterimav2.scan')
 				@elseif($nama == 'kwitansi')
 					@include('kwitansi.scan')
 				@elseif($nama == 'ppat')
 					@include('ppat.scan')
-				@elseif($nama == 'aktaPpat')
+				@elseif($nama == 'aktappat')
 					@include('akta-ppat.scan')
 				@else
                 <table class="table table-striped">

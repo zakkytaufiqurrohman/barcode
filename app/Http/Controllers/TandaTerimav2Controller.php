@@ -32,7 +32,7 @@ class TandaTerimav2Controller extends Controller
                 // get kode berkas from table berkas
                 $kode = $data->berkas->kode_berkas;
                 $kode = str_replace("/", "", $kode);
-                $kode =  config('app.url').'/berkas/tandaterima/'.$kode;
+                $kode =  config('app.url').'/berkas/tandaterimav2/'.$kode;
                 // generate barcode
                 $images = \DNS2D::getBarcodePNGPath(strval($kode), 'QRCODE',5,5);
                 // get image patch

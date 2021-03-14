@@ -35,22 +35,26 @@ class Berkas extends Model
         return $this->hasOne(Legalisasi::class,'id_berkas','id_berkas');
     }
 
-    public function aktaPpat()
+    // public function aktaPpat()
+    // {
+    //     return $this->hasOne(AktaPpat::class,'id_berkas','id_berkas');
+    // }
+    public function aktappat()
     {
         return $this->hasOne(AktaPpat::class,'id_berkas','id_berkas');
     }
-
-    public function aktaNotaris()
+    
+    public function aktanotaris()
     {
         return $this->hasOne(AktaNotaris::class,'id_berkas','id_berkas');
     }
-
-    public function aktaJaminanFidusia()
+    // 
+    public function aktajaminanfidusia()
     {
         return $this->hasOne(AktaJaminanFidusia::class,'id_berkas','id_berkas');
     }
-
-    public function tandaTerima()
+    // 
+    public function tandaterima()
     {
         return $this->hasOne(TandaTerima::class,'id_berkas','id_berkas');
     }

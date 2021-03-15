@@ -34,7 +34,6 @@
                     <div class="form-group">
                         <label for="addfooter">Footer</label>
                         <textarea class="ckeditor form-control" name="footer" id="addfooter">{!! $data->footer !!}</textarea>
-                        {{-- <input type="text" name="footer" class="form-control" id="update-addfooter" value="{{ old('footer', $data->footer) }}" placeholder="Masukan footer"> --}}
                     </div>
 
                 </div>

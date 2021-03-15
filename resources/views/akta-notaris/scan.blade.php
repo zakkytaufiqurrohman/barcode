@@ -26,9 +26,9 @@
         <td>{{$berkas->$nama->pihak2}}</td>
     </tr>
     <tr>
-        <td width="20%">Objek</td>
+        <td width="20%">Isi</td>
         <td width="20%">:</td>
-        <td>{!! $berkas->$nama->objek !!}</td>
+        <td>{!! $berkas->$nama->isi !!}</td>
       </tr>
     </tbody>
 </table>

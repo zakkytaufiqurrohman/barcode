@@ -146,7 +146,7 @@
                             <td>:</td>
                             <td><img src="{{asset('GambarFotoAkad/'.$ppat->foto_akad)}}" alt="Foto akad" width=80px heigth=80px></td>
                           </tr>
-                          <tr>
+                        <tr>
                     </div>
                 </div>
               </table>

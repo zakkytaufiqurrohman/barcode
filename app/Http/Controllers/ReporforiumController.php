@@ -126,7 +126,7 @@ class ReporforiumController extends Controller
         ]); 
         // untuk untuk berkas pdf
         $this->validate($request,[
-            'berkas' => 'required|max:10000|mimes:pdf'
+            'berkas' => 'required|max:20000|mimes:pdf'
         ],[
             'berkas.mimes' => 'Format harus pdf'
         ]);

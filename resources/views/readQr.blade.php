@@ -107,7 +107,7 @@
             </div>
               <div class="row">
               	<div class="col-12">
-              		<p class="">{{ $setting->footer }}</p>
+              		<p class="">{!! $setting->footer !!}</p>
               	</div>
               </div>
             </div>

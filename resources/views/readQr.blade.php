@@ -81,8 +81,16 @@
 					@include('ppat.scan')
 				@elseif($nama == 'aktappat')
 					@include('akta-ppat.scan')
-          @elseif($nama == 'reporforium')
-					@include('reporforium.scan')
+          @elseif($nama == 'tandaterima')
+					@include('tanda-terima.scan')
+          @elseif($nama == 'aktajaminanfidusia')
+					@include('akta-jaminan-fidusia.scan')
+          @elseif($nama == 'aktanotaris')
+					@include('akta-notaris.scan')
+          @elseif($nama == 'legalisasi')
+					@include('legalisasi.scan')
+          @elseif($nama == 'waarmeking')
+					@include('waarmeking.scan')
 				@else
                 <table class="table table-striped">
                   <tbody>

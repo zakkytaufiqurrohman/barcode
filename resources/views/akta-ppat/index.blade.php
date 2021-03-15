@@ -3,7 +3,7 @@
 @section('title','Akta PPAT')
 @section('breadcrumb')
     <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-    <li class="active">Akta PPAT</li>
+    <li class="active">Akta PPAT Lama</li>
 @endsection
 @section('content')
 <!-- Main content -->

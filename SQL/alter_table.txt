@@ -54,3 +54,14 @@ MODIFY COLUMN
         'reporforium'
     )
 NOT NULL AFTER `id_berkas`;
+-- user 
+ALTER TABLE tbl_user
+ADD created_at timestamp NULL DEFAULT NULL AFTER reset,
+ADD updated_at timestamp NULL DEFAULT NULL AFTER created_at,
+ADD deleted_at datetime NULL DEFAULT NULL AFTER updated_at;
+
+-- berkas
+ALTER TABLE tbl_berkas
+ADD created_at timestamp NULL DEFAULT NULL AFTER kode_berkas,
+ADD updated_at timestamp NULL DEFAULT NULL AFTER created_at,
+ADD deleted_at datetime NULL DEFAULT NULL AFTER updated_at;

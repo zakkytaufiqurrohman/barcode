@@ -81,6 +81,8 @@
 					@include('ppat.scan')
 				@elseif($nama == 'aktappat')
 					@include('akta-ppat.scan')
+          @elseif($nama == 'reporforium')
+					@include('reporforium.scan')
 				@else
                 <table class="table table-striped">
                   <tbody>

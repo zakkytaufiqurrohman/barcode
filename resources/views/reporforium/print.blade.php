@@ -23,7 +23,7 @@
         <tr>
             <th>Nomor Urut</th>
             <th>Nomor Bulanan</th>
-            <th>Nomor Tanggal Ata</th>
+            <th>Nomor Tanggal Akta</th>
             <th>Sifat Akta</th>
             <th>Nama Penghapan dan atau kuasa</th>
         </tr>

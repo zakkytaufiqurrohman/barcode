@@ -51,17 +51,27 @@
     <tr>
         <td width="20%">Penyetor</td>
         <td width="20%">:</td>
-        <td>{!! $berkas->$nama->penyetor !!}</td>
+        <td>{{ $berkas->$nama->penyetor }}</td>
     </tr>
     <tr>
         <td width="20%">Penerima</td>
         <td width="20%">:</td>
-        <td>{!! $berkas->$nama->penerima !!}</td>
+        <td>{{ $berkas->$nama->penerima }}</td>
+    </tr>
+    <tr>
+        <td width="20%">Catatan</td>
+        <td width="20%">:</td>
+        <td>{{$berkas->$nama->catatan }}</td>
+    </tr>
+    <tr>
+        <td width="20%">Terima</td>
+        <td width="20%">:</td>
+        <td>{{ $berkas->$nama->terima }}</td>
     </tr>
     <tr>
         <td width="20%">Mengetahui</td>
         <td width="20%">:</td>
-        <td>{!! $berkas->$nama->mengetahui !!}</td>
+        <td>{{ $berkas->$nama->mengetahui }}</td>
     </tr>
     <tr>
         <td>Uraian/ Jumlah</td>

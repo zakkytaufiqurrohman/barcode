@@ -91,6 +91,8 @@
 					@include('legalisasi.scan')
           @elseif($nama == 'waarmeking')
 					@include('waarmeking.scan')
+				@elseif($nama == 'reporforium')
+					@include('reporforium.scan')
 				@else
                 <table class="table table-striped">
                   <tbody>

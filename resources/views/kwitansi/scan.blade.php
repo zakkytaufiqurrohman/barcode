@@ -40,37 +40,37 @@
     <tbody>
     <tr>
         <td width="20%">Nomor</td>
-        <td width="20%">:</td>
+        <td>:</td>
         <td>{{$berkas->$nama->nomor}}</td>
     </tr>
     <tr>
         <td width="20%">Tanggal</td>
-        <td width="20%">:</td>
+        <td>:</td>
         <td>{{ \Carbon\Carbon::parse($berkas->tanggal)->isoFormat('D MMMM Y') }}</td>
     </tr>
     <tr>
         <td width="20%">Penyetor</td>
-        <td width="20%">:</td>
+        <td>:</td>
         <td>{{ $berkas->$nama->penyetor }}</td>
     </tr>
     <tr>
         <td width="20%">Penerima</td>
-        <td width="20%">:</td>
+        <td>:</td>
         <td>{{ $berkas->$nama->penerima }}</td>
     </tr>
     <tr>
         <td width="20%">Catatan</td>
-        <td width="20%">:</td>
+        <td>:</td>
         <td>{{$berkas->$nama->catatan }}</td>
     </tr>
     <tr>
         <td width="20%">Terima</td>
-        <td width="20%">:</td>
+        <td>:</td>
         <td>{{ $berkas->$nama->terima }}</td>
     </tr>
     <tr>
         <td width="20%">Mengetahui</td>
-        <td width="20%">:</td>
+        <td>:</td>
         <td>{{ $berkas->$nama->mengetahui }}</td>
     </tr>
     <tr>

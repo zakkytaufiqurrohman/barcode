@@ -34,7 +34,7 @@ CREATE TABLE `detail_reporforium` (
   `nik` varchar(100) DEFAULT NULL,
   `nama` varchar(200) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` int DEFAULT NULL
+  `updated_at`timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
